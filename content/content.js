@@ -294,7 +294,10 @@ html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] :is([data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"], [data-chatskin-projects-new-button]) {
+html[data-gptskins-theme] :is(
+  [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+) {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
   background-image: none !important;
@@ -302,13 +305,19 @@ html[data-gptskins-theme] :is([data-testid="artifacts-surface-library-search-con
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] :is([data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"], [data-chatskin-projects-new-button]):is(:hover, :focus-visible, [data-state="open"]) {
+html[data-gptskins-theme] :is(
+  [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+):is(:hover, :focus-visible, [data-state="open"]) {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] :is([data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"], [data-chatskin-projects-new-button]) :is(span, div, svg) {
+html[data-gptskins-theme] :is(
+  [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+) :is(span, div, svg) {
   color: inherit !important;
 }
 
@@ -1211,7 +1220,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action], [data-chatskin-projects-new-button]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
@@ -1226,7 +1235,6 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
         item.removeAttribute("data-chatskin-plan-disabled");
         item.removeAttribute("data-chatskin-suggestion-layer");
         item.removeAttribute("data-chatskin-sidebar-action");
-        item.removeAttribute("data-chatskin-projects-new-button");
       });
   }
 
@@ -1246,32 +1254,6 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
         item.setAttribute("data-chatskin-sidebar-action", "library");
       } else if (isSearchChats) {
         item.setAttribute("data-chatskin-sidebar-action", "search");
-      }
-    });
-  }
-
-  function tagProjectsNewButton() {
-    if (location.pathname !== "/projects") {
-      return;
-    }
-
-    const main = document.querySelector("main, [role='main']");
-    if (!main || !Array.from(main.querySelectorAll("h1, h2")).some((item) => normalizedText(item) === "Projects")) {
-      return;
-    }
-
-    Array.from(main.querySelectorAll("button")).forEach((button) => {
-      if (normalizedText(button) !== "New") {
-        return;
-      }
-
-      for (let node = button.parentElement, depth = 0; node && depth < 6; node = node.parentElement, depth += 1) {
-        const hasProjectsHeading = Array.from(node.querySelectorAll("h1, h2")).some((item) => normalizedText(item) === "Projects");
-        const hasProjectSearch = Boolean(node.querySelector("input[placeholder*='Search projects' i], [aria-label*='Search projects' i], [role='searchbox']"));
-        if (hasProjectsHeading && hasProjectSearch) {
-          button.setAttribute("data-chatskin-projects-new-button", "true");
-          break;
-        }
       }
     });
   }
@@ -1367,7 +1349,6 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
     document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
     document.querySelectorAll("[data-chatskin-sidebar-action]").forEach((item) => item.removeAttribute("data-chatskin-sidebar-action"));
-    document.querySelectorAll("[data-chatskin-projects-new-button]").forEach((item) => item.removeAttribute("data-chatskin-projects-new-button"));
     document.querySelectorAll("[data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled]").forEach((item) => {
       item.removeAttribute("data-chatskin-plan-toggle");
       item.removeAttribute("data-chatskin-plan-toggle-option");
@@ -1376,7 +1357,6 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
       item.removeAttribute("data-chatskin-plan-disabled");
     });
     tagSidebarActions();
-    tagProjectsNewButton();
     const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
     const composerRect = composer ? composer.getBoundingClientRect() : null;
     if (composerRect) {
