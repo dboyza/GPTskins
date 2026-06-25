@@ -702,6 +702,11 @@ html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="o
   box-shadow: none !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] .pe-11.pt-3 .cm-editor[class*="cm-"] {
+  border-color: transparent !important;
+  outline-color: transparent !important;
+}
+
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar:horizontal {
   display: block !important;
   height: 12px !important;
