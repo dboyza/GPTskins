@@ -434,6 +434,18 @@ html[data-gptskins-theme] [data-chatskin-suggestion-layer] :is(hr, [class*="bord
   border-color: var(--gptskins-border) !important;
 }
 
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) :is([class*="top-full"], ul[class*="divide-token-border"]) {
+  background: var(--gptskins-composer) !important;
+  background-image: none !important;
+  border-color: var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) ul[class*="divide-token-border"] > li {
+  background: transparent !important;
+  color: var(--gptskins-text) !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
@@ -947,7 +959,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     const composerRect = composer ? composer.getBoundingClientRect() : null;
     if (composerRect) {
       document.querySelectorAll("body *").forEach((item) => {
-        if (item.closest("[data-testid='composer'], form[class*='composer'], [class*='group/composer'], [data-message-author-role], pre, code")) {
+        if (item.closest("[data-message-author-role], pre, code")) {
           return;
         }
 
