@@ -33,6 +33,7 @@
 - Sidebar `Pinned`/`Recents` headers should not get hover pills. Keep section-header controls and `data-trailing-button` / `__menu-item-trailing-btn` icon actions transparent; include `[class*="sidebar"]` because the live sidebar may not be a `nav`/`aside`.
 - Keep the sidebar trailing-button transparent rule after the generic `main :is(button, a, [role="button"]):hover` rule, otherwise the later main hover rule repaints the square.
 - If `data-trailing-button` computes transparent but the hover square remains, clear the direct flex wrapper `:has(> [data-trailing-button])` and trailing-button pseudo-elements too.
+- Do not use broad `[class*="sidebar"]` in rules that paint backgrounds. ChatGPT uses classes like `group/sidebar-expando-section-header`, and broad paint selectors create the fake hover square.
 - Settings sidebar rows are dialog buttons/tabs. Keep default dialog buttons transparent and style only hover/active states, otherwise OG makes every sidebar row look selected and bubbly.
 
 ## Verification

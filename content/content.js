@@ -129,7 +129,8 @@ html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*
 
 html[data-themegpt-theme] nav,
 html[data-themegpt-theme] aside,
-html[data-themegpt-theme] [class*="sidebar"],
+html[data-themegpt-theme] [class*="bg-token-sidebar"],
+html[data-themegpt-theme] [id*="sidebar"],
 html[data-themegpt-theme] [data-testid="history-panel"],
 html[data-themegpt-theme] [data-testid="left-sidebar"] {
   --text-primary: var(--themegpt-sidebarText) !important;
