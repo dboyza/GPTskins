@@ -441,6 +441,24 @@ html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] .top-full .bg-surface-primary,
+html[data-gptskins-theme] .top-full .bg-surface-primary > ul {
+  background: var(--gptskins-composer) !important;
+  background-color: var(--gptskins-composer) !important;
+  background-image: none !important;
+  border-color: var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] .top-full .bg-surface-primary :is(li, button, span) {
+  background-color: transparent !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] .top-full .bg-surface-primary li:hover button {
+  background-color: var(--gptskins-surfaceStrong) !important;
+}
+
 html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) ul[class*="divide-token-border"] > li {
   background: transparent !important;
   color: var(--gptskins-text) !important;
