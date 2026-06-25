@@ -49,6 +49,7 @@ ${cssVariables(theme)}
   --composer-surface: var(--gptskins-composer) !important;
   --composer-surface-primary: var(--gptskins-composer) !important;
   --composer-surface-secondary: var(--gptskins-surfaceStrong) !important;
+  --gptskins-menuHover: color-mix(in srgb, var(--gptskins-text) 12%, var(--gptskins-composer)) !important;
   --code-block-bg: var(--gptskins-surfaceStrong) !important;
   --code-block-header: color-mix(in srgb, var(--gptskins-surfaceStrong) 82%, var(--gptskins-background)) !important;
   --code-block-border: var(--gptskins-border) !important;
@@ -505,8 +506,8 @@ html[data-gptskins-theme] [data-radix-menu-content] .__menu-item:is(:hover, :foc
 html[data-gptskins-theme] [data-radix-menu-content] [data-radix-collection-item]:is(:hover, :focus, :focus-visible, [data-highlighted]),
 html[data-gptskins-theme] [data-radix-popper-content-wrapper] [role="menu"] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
 html[data-gptskins-theme] [data-radix-popper-content-wrapper] [role="menu"] [data-radix-collection-item]:is(:hover, :focus, :focus-visible, [data-highlighted]) {
-  background: var(--gptskins-surfaceStrong) !important;
-  background-color: var(--gptskins-surfaceStrong) !important;
+  background: var(--gptskins-menuHover) !important;
+  background-color: var(--gptskins-menuHover) !important;
   background-image: none !important;
   color: var(--gptskins-text) !important;
 }
