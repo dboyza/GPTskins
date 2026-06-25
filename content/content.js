@@ -529,6 +529,17 @@ html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class
   background-image: none !important;
 }
 
+html[data-themegpt-theme] [data-testid="writing-block-container"] {
+  background-color: var(--themegpt-surface) !important;
+  background-image: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-testid="writing-block-container"] :is([data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"]) {
+  background-color: var(--themegpt-surface) !important;
+  background-image: none !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-code-block] {
   background: transparent !important;
   border: 0 !important;
