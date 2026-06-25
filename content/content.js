@@ -756,6 +756,15 @@ html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visibl
   box-shadow: none !important;
   overflow: hidden !important;
 }
+
+html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"]:has([class*="border-token-border-light"][class*="rounded"]),
+html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"]:has([class*="overflow-clip"][class*="rounded"]) {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
 `;
   }
 

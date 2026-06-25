@@ -17,6 +17,7 @@
 - Code block headers can have a sticky wrapper plus an inner `bg-token-bg-elevated-secondary` flex row. Round the inner painted row too; otherwise the word `Python` sits on a square strip.
 - If an early header patch does not work, check later broad token rules like `pre [class*="bg-token-bg-elevated-secondary"]`; later rules must carry the same radius/overflow or they win the cascade.
 - The desired shape is the whole code card, not just the header/body. For `pre.overflow-visible.px-0` blocks, round the inner `border-token-border-light ... rounded` / `overflow-clip ... rounded` card itself.
+- If the rounded card is nested below a wrapper inside `pre`, make the outer `pre.overflow-visible.px-0:has(...)` transparent; otherwise it paints a square rectangle behind the rounded card.
 - For normal code snippets, only the real `pre` should get `data-chatskin-code-body`. Parent wrappers should use `data-chatskin-code-body-shell` so they clip/clear backgrounds without drawing a second rectangular border around the rounded snippet.
 - Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as ChatSkin code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
 - Writing/edit blocks use `data-testid="writing-block-container"`, `data-testid="writing-block-header-surface"`, `.writing-block-editor`, `.ProseMirror`, and `[contenteditable="true"]`.
