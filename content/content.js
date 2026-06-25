@@ -472,6 +472,11 @@ html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-stat
 html[data-gptskins-theme] [aria-modal="true"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
 html[data-gptskins-theme] [role="menu"] [role="menuitem"]:hover,
 html[data-gptskins-theme] [role="listbox"] [role="option"]:hover,
+html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"]):hover,
+html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[data-state="open"],
+html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[aria-expanded="true"],
+html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[aria-selected="true"],
+html[data-gptskins-theme] [aria-modal="true"] [role="menu"] :is(button, a, [role="button"]):hover,
 html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
