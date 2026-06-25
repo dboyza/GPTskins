@@ -170,19 +170,21 @@ html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="but
   color: var(--themegpt-sidebarText) !important;
 }
 
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]),
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]),
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"],
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child) {
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]),
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]),
+html[data-themegpt-theme] [class*="group-hover/sidebar-section-header"],
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"],
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child) {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
 }
 
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):hover,
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):hover,
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"]:hover,
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child):hover {
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):hover,
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):hover,
+html[data-themegpt-theme] [class*="group-hover/sidebar-section-header"]:hover,
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"]:hover,
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child):hover {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
