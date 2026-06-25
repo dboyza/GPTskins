@@ -648,20 +648,23 @@ html[data-themegpt-theme] [data-chatskin-code-body] code {
 }
 
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller {
-  overflow-x: auto !important;
+  overflow-x: scroll !important;
+  scrollbar-gutter: stable !important;
   scrollbar-color: var(--themegpt-mutedText) color-mix(in srgb, var(--code-block-bg) 78%, var(--themegpt-border)) !important;
-  scrollbar-width: thin !important;
+  scrollbar-width: auto !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar {
-  height: 10px !important;
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar:horizontal {
+  display: block !important;
+  height: 12px !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-track {
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-track:horizontal {
   background: color-mix(in srgb, var(--code-block-bg) 78%, var(--themegpt-border)) !important;
+  border-radius: 999px !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-thumb {
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-thumb:horizontal {
   background: var(--themegpt-mutedText) !important;
   border-radius: 999px !important;
 }
