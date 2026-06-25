@@ -29,11 +29,18 @@ Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or 
 
 ## Load in Chrome or Edge
 
-1. Open `chrome://extensions` or `edge://extensions`.
-2. Enable **Developer mode**.
-3. Choose **Load unpacked**.
-4. Select this folder: `C:\Users\Dylan\Documents\extension`.
-5. Open ChatGPT, click the GPTskins toolbar icon, and pick a theme.
+1. Clone or download the extension to a folder on your computer.
+
+   ```powershell
+   git clone https://github.com/dboyza/ChatSkin.git
+   ```
+
+   You can also use GitHub's **Code** > **Download ZIP** option and unzip it anywhere you like.
+2. Open `chrome://extensions` or `edge://extensions`.
+3. Enable **Developer mode**.
+4. Choose **Load unpacked**.
+5. Select the folder you cloned or unzipped.
+6. Open ChatGPT, click the GPTskins toolbar icon, and pick a theme.
 
 ## Project Layout
 
