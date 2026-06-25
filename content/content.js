@@ -307,8 +307,15 @@ html[data-themegpt-theme] [aria-modal="true"] :is(hr, [class*="border-token"], [
   border-color: var(--themegpt-border) !important;
 }
 
-html[data-themegpt-theme] [role="dialog"] :is(button, [role="button"], [role="tab"], select),
-html[data-themegpt-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"], select),
+html[data-themegpt-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]),
+html[data-themegpt-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]) {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [role="dialog"] select,
+html[data-themegpt-theme] [aria-modal="true"] select,
 html[data-themegpt-theme] [role="menu"],
 html[data-themegpt-theme] [role="listbox"] {
   background-color: var(--themegpt-composer) !important;
