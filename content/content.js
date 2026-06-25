@@ -634,9 +634,20 @@ html[data-themegpt-theme] [data-chatskin-code-body] {
   border-top: 0 !important;
   border-radius: 0 0 12px 12px !important;
   box-shadow: none !important;
+  clip-path: inset(0 round 0 0 12px 12px) !important;
   margin: 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-body-shell] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: none !important;
+  clip-path: inset(0 round 0 0 12px 12px) !important;
+  outline: 0 !important;
+  overflow: hidden !important;
 }
 
 html[data-themegpt-theme] [data-chatskin-code-body] :is(pre, code),
@@ -742,12 +753,13 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-plan-layer]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
         item.removeAttribute("data-chatskin-code-header");
         item.removeAttribute("data-chatskin-code-body");
+        item.removeAttribute("data-chatskin-code-body-shell");
         item.removeAttribute("data-chatskin-plan-layer");
       });
   }
@@ -790,7 +802,7 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
       pre.setAttribute("data-chatskin-code-body", "true");
 
       if (pre.parentElement && pre.parentElement !== block) {
-        pre.parentElement.setAttribute("data-chatskin-code-body", "true");
+        pre.parentElement.setAttribute("data-chatskin-code-body-shell", "true");
       }
 
       const header = pre.previousElementSibling || block.firstElementChild;
