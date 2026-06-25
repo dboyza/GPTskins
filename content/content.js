@@ -310,21 +310,56 @@ html[data-themegpt-theme] [role="listbox"] [role="option"]:hover {
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [role="switch"],
-html[data-themegpt-theme] button[role="switch"],
-html[data-themegpt-theme] [role="dialog"] [aria-checked],
-html[data-themegpt-theme] [aria-modal="true"] [aria-checked] {
+html[data-themegpt-theme] [role="dialog"] :is([aria-pressed="true"], [data-selected="true"]),
+html[data-themegpt-theme] [aria-modal="true"] :is([aria-pressed="true"], [data-selected="true"]) {
   background-color: var(--themegpt-surfaceStrong) !important;
   border: 1px solid var(--themegpt-border) !important;
-  color: var(--themegpt-accentText) !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [role="dialog"] [role="switch"],
+html[data-themegpt-theme] [aria-modal="true"] [role="switch"] {
+  background-color: var(--themegpt-composer) !important;
+  border: 1px solid var(--themegpt-border) !important;
+  box-shadow: none !important;
 }
 
 html[data-themegpt-theme] [role="switch"][aria-checked="true"],
-html[data-themegpt-theme] button[role="switch"][aria-checked="true"],
-html[data-themegpt-theme] [role="dialog"] [aria-checked="true"],
-html[data-themegpt-theme] [aria-modal="true"] [aria-checked="true"] {
-  background-color: var(--themegpt-accent) !important;
+html[data-themegpt-theme] button[role="switch"][aria-checked="true"] {
+  background-color: color-mix(in srgb, var(--themegpt-accent) 28%, var(--themegpt-composer)) !important;
   border-color: var(--themegpt-accent) !important;
+}
+
+html[data-themegpt-theme] [role="dialog"] [role="switch"] :is(span, div),
+html[data-themegpt-theme] [aria-modal="true"] [role="switch"] :is(span, div),
+html[data-themegpt-theme] [role="dialog"] [role="switch"]::before,
+html[data-themegpt-theme] [role="dialog"] [role="switch"]::after,
+html[data-themegpt-theme] [aria-modal="true"] [role="switch"]::before,
+html[data-themegpt-theme] [aria-modal="true"] [role="switch"]::after {
+  background-color: var(--themegpt-surface) !important;
+  border-color: var(--themegpt-border) !important;
+}
+
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[class*="dot"],
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[aria-label*="slide" i],
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[aria-label*="page" i],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[class*="dot"],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="slide" i],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="page" i] {
+  background-color: var(--themegpt-mutedText) !important;
+  border-color: transparent !important;
+  color: transparent !important;
+  opacity: 0.45 !important;
+}
+
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[class*="dot"][aria-current="true"],
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[aria-label*="slide" i][aria-current="true"],
+html[data-themegpt-theme] [role="dialog"] :is(button, span)[aria-label*="page" i][aria-current="true"],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[class*="dot"][aria-current="true"],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="slide" i][aria-current="true"],
+html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="page" i][aria-current="true"] {
+  background-color: var(--themegpt-accent) !important;
+  opacity: 1 !important;
 }
 
 html[data-themegpt-theme] .text-token-text-secondary,

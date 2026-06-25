@@ -181,6 +181,55 @@
         background: #4a7df0;
         border: 0;
         border-radius: 999px;
+        padding: 2px;
+      }
+
+      .settings-switch span {
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin-left: auto;
+        background: #050505;
+        border-radius: 999px;
+      }
+
+      .settings-switch[aria-checked="false"] span {
+        margin-left: 0;
+      }
+
+      .settings-carousel {
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .settings-preset {
+        width: 192px;
+        padding: 10px 16px;
+        color: #fff;
+        background: #43a585;
+        border: 0;
+        font-weight: 700;
+      }
+
+      .settings-preset small {
+        display: block;
+        font-weight: 500;
+      }
+
+      .settings-dots {
+        display: flex;
+        gap: 12px;
+      }
+
+      .settings-dot {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        background: #333744;
+        border: 0;
+        border-radius: 999px;
       }
 
       .empty {
@@ -350,14 +399,23 @@
               <div class="settings-label text-token-text-primary">Higher intelligence</div>
               <p class="settings-description text-token-text-secondary">ChatGPT can automatically use a higher intelligence setting when you ask a complex question.</p>
             </div>
-            <button class="settings-switch" role="switch" aria-checked="true" aria-label="Higher intelligence"></button>
+            <button class="settings-switch" role="switch" aria-checked="true" aria-label="Higher intelligence"><span></span></button>
           </div>
           <div class="settings-row border-token-border-light">
             <div>
               <div class="settings-label text-token-text-primary">Separate Voice</div>
               <p class="settings-description text-token-text-secondary">Keep ChatGPT Voice in a separate full screen, without real time transcripts and visuals.</p>
             </div>
-            <button class="settings-switch" role="switch" aria-checked="false" aria-label="Separate Voice"></button>
+            <button class="settings-switch" role="switch" aria-checked="false" aria-label="Separate Voice"><span></span></button>
+          </div>
+          <div class="settings-carousel">
+            <button class="settings-preset" type="button" aria-pressed="true">Sol<small>Savvy and relaxed</small></button>
+            <div class="settings-dots" aria-label="Preset pages">
+              <button class="settings-dot" type="button" aria-label="slide 1"></button>
+              <button class="settings-dot" type="button" aria-label="slide 2" aria-current="true"></button>
+              <button class="settings-dot" type="button" aria-label="slide 3"></button>
+              <button class="settings-dot" type="button" aria-label="slide 4"></button>
+            </div>
           </div>
         </div>
       </section>
