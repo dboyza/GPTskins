@@ -5,7 +5,7 @@
     {
       id: "default",
       name: "Default",
-      description: "ChatGPT's native look.",
+      description: "Native look.",
       swatches: ["#ffffff", "#f4f4f5", "#10a37f"],
       colors: {
         background: "",
@@ -29,7 +29,7 @@
     {
       id: "og",
       name: "OG",
-      description: "Charcoal ChatGPT dark mode.",
+      description: "Classic charcoal.",
       swatches: ["#212121", "#171717", "#303030"],
       colors: {
         background: "#212121",
@@ -53,7 +53,7 @@
     {
       id: "midnight",
       name: "Midnight",
-      description: "Deep neutral dark with electric teal accents.",
+      description: "Teal dark.",
       swatches: ["#0b1020", "#151b2e", "#38d6b3"],
       colors: {
         background: "#0b1020",
@@ -77,7 +77,7 @@
     {
       id: "one-dark",
       name: "One Dark",
-      description: "Atom-inspired charcoal with crisp blue accents.",
+      description: "Atom dark.",
       swatches: ["#282c34", "#21252b", "#61afef"],
       colors: {
         background: "#282c34",
@@ -101,7 +101,7 @@
     {
       id: "dracula",
       name: "Dracula",
-      description: "Iconic purple dark mode with candy accents.",
+      description: "Purple dark.",
       swatches: ["#282a36", "#44475a", "#bd93f9"],
       colors: {
         background: "#282a36",
@@ -125,7 +125,7 @@
     {
       id: "catppuccin",
       name: "Catppuccin",
-      description: "Soothing pastel dark with mocha surfaces.",
+      description: "Pastel mocha.",
       swatches: ["#1e1e2e", "#313244", "#cba6f7"],
       colors: {
         background: "#1e1e2e",
@@ -149,7 +149,7 @@
     {
       id: "tokyo-night",
       name: "Tokyo Night",
-      description: "Deep blue city-night theme with neon violet.",
+      description: "Neon night.",
       swatches: ["#1a1b26", "#24283b", "#7aa2f7"],
       colors: {
         background: "#1a1b26",
@@ -173,7 +173,7 @@
     {
       id: "nord",
       name: "Nord",
-      description: "Cool arctic blues for a quiet workspace.",
+      description: "Arctic blue.",
       swatches: ["#2e3440", "#3b4252", "#88c0d0"],
       colors: {
         background: "#2e3440",
@@ -197,7 +197,7 @@
     {
       id: "gruvbox",
       name: "Gruvbox",
-      description: "Warm retro terminal colors with soft contrast.",
+      description: "Retro warm.",
       swatches: ["#282828", "#3c3836", "#fabd2f"],
       colors: {
         background: "#282828",
@@ -221,7 +221,7 @@
     {
       id: "forest",
       name: "Forest",
-      description: "Soft greens with warm paper surfaces.",
+      description: "Soft green.",
       swatches: ["#10251d", "#f4f0df", "#3f8f63"],
       colors: {
         background: "#f4f0df",
@@ -245,7 +245,7 @@
     {
       id: "solar",
       name: "Solar",
-      description: "Warm light workspace with amber highlights.",
+      description: "Warm light.",
       swatches: ["#fff6df", "#f2c14e", "#243447"],
       colors: {
         background: "#fff6df",
@@ -269,7 +269,7 @@
     {
       id: "rose",
       name: "Rose",
-      description: "Calm rose and plum tones.",
+      description: "Rose plum.",
       swatches: ["#fff1f5", "#8a2c58", "#f47ca5"],
       colors: {
         background: "#fff1f5",
@@ -293,7 +293,7 @@
     {
       id: "contrast",
       name: "High Contrast",
-      description: "Black, white, and yellow for maximum separation.",
+      description: "Max contrast.",
       swatches: ["#000000", "#ffffff", "#ffe600"],
       colors: {
         background: "#000000",
