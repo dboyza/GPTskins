@@ -42,13 +42,17 @@ ${cssVariables(theme)}
   --sidebar-surface-secondary: var(--themegpt-sidebarHover) !important;
   --sidebar-surface-tertiary: var(--themegpt-sidebarHover) !important;
   --message-surface: var(--themegpt-assistantBubble) !important;
+  --surface-hover: var(--themegpt-surfaceStrong) !important;
   --composer-surface: var(--themegpt-composer) !important;
+  --composer-surface-primary: var(--themegpt-composer) !important;
+  --composer-surface-secondary: var(--themegpt-surfaceStrong) !important;
   --text-primary: var(--themegpt-text) !important;
   --text-secondary: var(--themegpt-mutedText) !important;
   --text-tertiary: var(--themegpt-mutedText) !important;
   --border-light: var(--themegpt-border) !important;
   --border-medium: var(--themegpt-border) !important;
   --border-heavy: var(--themegpt-border) !important;
+  --sharp-edge-bottom-shadow: none !important;
   color-scheme: ${["contrast", "midnight", "og"].includes(theme.id) ? "dark" : "light"};
 }
 
@@ -67,6 +71,23 @@ html[data-themegpt-theme] [class*="bg-token-main-surface-tertiary"],
 html[data-themegpt-theme] [class*="bg-token-message-surface"] {
   background-color: var(--themegpt-surface) !important;
   color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] header[class*="bg-token-main-surface-primary"],
+html[data-themegpt-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
+  background-color: var(--themegpt-background) !important;
+}
+
+html[data-themegpt-theme] [class*="thread-bottom-container"],
+html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"] {
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    var(--themegpt-background) 34%,
+    var(--themegpt-background) 100%
+  ) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 html[data-themegpt-theme] nav,
@@ -102,16 +123,27 @@ html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="but
   color: var(--themegpt-sidebarText) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role="user"],
-html[data-themegpt-theme] [data-message-author-role="user"] > div {
-  background-color: var(--themegpt-userBubble) !important;
+html[data-themegpt-theme] [data-message-author-role="user"] {
+  background: transparent !important;
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role="assistant"],
-html[data-themegpt-theme] [data-message-author-role="assistant"] > div {
-  background-color: var(--themegpt-assistantBubble) !important;
+html[data-themegpt-theme] [data-message-author-role="assistant"] {
+  background: transparent !important;
   color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is(p, li, h1, h2, h3, h4, h5, h6, blockquote, strong, em),
+html[data-themegpt-theme] [data-message-author-role] .markdown,
+html[data-themegpt-theme] [data-message-author-role] [class*="text-token-text-primary"],
+html[data-themegpt-theme] main [class*="text-token-text-primary"] {
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] [class*="text-token-text-secondary"],
+html[data-themegpt-theme] main [class*="text-token-text-secondary"],
+html[data-themegpt-theme] main [class*="text-token-text-tertiary"] {
+  color: var(--themegpt-mutedText) !important;
 }
 
 html[data-themegpt-theme] textarea,
@@ -161,11 +193,7 @@ html[data-themegpt-theme] small {
 html[data-themegpt-theme] pre,
 html[data-themegpt-theme] code {
   background-color: var(--themegpt-surfaceStrong) !important;
-}
-
-html[data-themegpt-theme] [class*="shadow"],
-html[data-themegpt-theme] [class*="drop-shadow"] {
-  box-shadow: 0 10px 30px var(--themegpt-shadow) !important;
+  color: var(--themegpt-text) !important;
 }
 `;
   }

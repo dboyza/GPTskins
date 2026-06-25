@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ThemeGPT Preview</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font: 14px/1.5 Arial, sans-serif;
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        overflow: auto;
+        padding: 12px;
+        border-right: 1px solid var(--border-light, #333);
+      }
+
+      .sidebar a,
+      .sidebar button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 8px;
+        margin: 3px 0;
+        padding: 9px 10px;
+        color: inherit;
+        background: transparent;
+        border: 0;
+        border-radius: 8px;
+        font: inherit;
+        text-align: left;
+        text-decoration: none;
+      }
+
+      .sidebar a:hover,
+      .sidebar button:hover {
+        background: var(--surface-hover, #222);
+      }
+
+      .section {
+        margin: 22px 0 8px;
+        font-weight: 700;
+      }
+
+      .main {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--border-light, #333);
+      }
+
+      .preview-controls {
+        position: fixed;
+        z-index: 5;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 6px;
+        padding: 6px;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 8px;
+      }
+
+      .preview-controls button {
+        padding: 6px 8px;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      .empty {
+        display: grid;
+        min-height: 390px;
+        place-items: center;
+      }
+
+      .message-pane {
+        width: min(820px, calc(100vw - 340px));
+        margin: 40px auto 150px;
+      }
+
+      .user-row {
+        display: flex;
+        justify-content: flex-end;
+        margin: 24px 0;
+      }
+
+      .user-bubble {
+        max-width: 70%;
+        padding: 10px 16px;
+        color: #fff;
+        background: #5c35a3;
+        border-radius: 22px;
+      }
+
+      .assistant {
+        padding: 16px 0;
+      }
+
+      .assistant h2 {
+        font-size: 22px;
+      }
+
+      .assistant p {
+        font-size: 16px;
+      }
+
+      .assistant pre {
+        padding: 14px;
+        border-radius: 8px;
+      }
+
+      .source {
+        display: inline-flex;
+        padding: 2px 7px;
+        color: #fff;
+        background: #222;
+        border-radius: 999px;
+        font-size: 11px;
+      }
+
+      .thread-bottom-container {
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+        padding: 36px 0 16px;
+        background: #000;
+        box-shadow: 0 -20px 55px rgba(0, 0, 0, 0.95);
+      }
+
+      .composer {
+        display: flex;
+        align-items: center;
+        width: min(760px, calc(100vw - 340px));
+        gap: 14px;
+        margin: auto;
+        padding: 14px 18px;
+        background: var(--composer-surface-primary, #222);
+        border: 1px solid var(--border-light, #333);
+        border-radius: 999px;
+      }
+
+      .composer .input {
+        flex: 1;
+      }
+
+      .footer {
+        margin-top: 8px;
+        text-align: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-controls" aria-label="Preview themes">
+      <button type="button" data-preview-theme="og">OG</button>
+      <button type="button" data-preview-theme="midnight">Midnight</button>
+      <button type="button" data-preview-theme="forest">Forest</button>
+      <button type="button" data-preview-theme="solar">Solar</button>
+      <button type="button" data-preview-theme="rose">Rose</button>
+      <button type="button" data-preview-theme="contrast">Contrast</button>
+    </div>
+
+    <div class="app">
+      <aside class="sidebar bg-token-sidebar-surface-primary">
+        <h2 class="text-token-text-primary">ChatGPT</h2>
+        <button class="text-token-text-primary">○ New chat</button>
+        <button class="text-token-text-primary">⌕ Search chats</button>
+        <button class="text-token-text-primary">▥ Library</button>
+        <div class="section text-token-text-secondary">Pinned</div>
+        <a class="text-token-text-primary">○ Bitcoin app</a>
+        <a class="text-token-text-primary">○ Windows 11 Backup SSD</a>
+        <div class="section text-token-text-secondary">Recents</div>
+        <a class="text-token-text-primary">Code Snippet Example</a>
+        <a class="text-token-text-primary">R's in Strawberry</a>
+        <a class="text-token-text-primary">Learning Kubernetes Step-by-Step</a>
+      </aside>
+
+      <main class="main bg-token-main-surface-primary">
+        <header class="header bg-token-main-surface-primary dark:bg-token-bg-secondary-surface text-token-text-primary">
+          ThemeGPT preview
+        </header>
+
+        <section class="empty">
+          <h1 class="text-token-text-primary">Where should we begin?</h1>
+        </section>
+
+        <section class="message-pane">
+          <div data-message-author-role="user" class="user-row">
+            <div class="user-bubble">how many R's are in the word strawberry</div>
+          </div>
+
+          <article data-message-author-role="assistant" class="assistant">
+            <p class="text-token-text-secondary">Thought for a couple of seconds ›</p>
+            <p class="text-token-text-primary">There are <strong>3 R’s in strawberry.</strong></p>
+            <h2 class="text-token-text-primary">The uncomfortable reality</h2>
+            <p class="text-token-text-primary">
+              This paragraph should stay readable in both light and dark themes, even when ChatGPT keeps token text classes around.
+            </p>
+            <pre><code>const readable = true;</code></pre>
+            <span class="source">CoinGecko +1</span>
+          </article>
+        </section>
+
+        <div class="thread-bottom-container sticky bottom-0">
+          <form class="group/composer composer">
+            <span>＋</span>
+            <div class="input text-token-text-primary">Ask anything</div>
+            <button type="button" class="composer-btn text-token-text-primary">High⌄</button>
+            <button type="button" class="composer-submit-btn text-token-text-primary">🎙</button>
+          </form>
+          <div class="footer text-token-text-secondary">ChatGPT can make mistakes. Check important info.</div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const listeners = [];
+      let selectedTheme = location.hash.replace("#", "") || "og";
+
+      globalThis.chrome = {
+        storage: {
+          sync: {
+            get(key, callback) {
+              callback({ [key]: selectedTheme });
+            }
+          },
+          onChanged: {
+            addListener(callback) {
+              listeners.push(callback);
+            }
+          }
+        },
+        runtime: {
+          onMessage: {
+            addListener() {}
+          }
+        }
+      };
+
+      globalThis.applyPreviewTheme = function applyPreviewTheme(themeId) {
+        selectedTheme = themeId;
+        location.hash = themeId;
+        listeners.forEach((callback) => {
+          callback({ "themegpt.theme": { newValue: themeId } }, "sync");
+        });
+      };
+    </script>
+    <script src="../shared/themes.js"></script>
+    <script src="../content/content.js"></script>
+    <script>
+      document.querySelectorAll("[data-preview-theme]").forEach((button) => {
+        button.addEventListener("click", () => {
+          globalThis.applyPreviewTheme(button.dataset.previewTheme);
+        });
+      });
+    </script>
+  </body>
+</html>
