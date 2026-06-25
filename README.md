@@ -2,9 +2,21 @@
 
 GPTskins is a dependency-free Manifest V3 browser extension that applies built-in themes to ChatGPT.
 
+Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or switch into popular editor-inspired themes like One Dark, Dracula, and Tokyo Night.
+
+## Preview
+
+<p>
+  <img src="docs/screenshots/og-theme.png" width="240" alt="GPTskins OG ChatGPT theme preview">
+  <img src="docs/screenshots/midnight-theme.png" width="240" alt="GPTskins Midnight theme preview">
+  <img src="docs/screenshots/one-dark-theme.png" width="240" alt="GPTskins One Dark theme preview">
+  <img src="docs/screenshots/dracula-theme.png" width="240" alt="GPTskins Dracula theme preview">
+</p>
+
 ## Features
 
 - Popup-only theme picker.
+- Includes the **OG ChatGPT charcoal theme** for the classic gray ChatGPT feel.
 - Built-in themes: Default, OG, Midnight, One Dark, Dracula, Catppuccin, Tokyo Night, Nord, Gruvbox, Forest, Solar, Rose, and High Contrast.
 - Saved selection with `chrome.storage.sync`.
 - Automatic theme loading on `chatgpt.com` and `chat.openai.com`.
