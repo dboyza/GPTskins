@@ -5,9 +5,44 @@
   const styleId = "gptskins-style";
   const darkThemeIds = new Set(["contrast", "dracula", "catppuccin", "gruvbox", "midnight", "nord", "og", "one-dark", "tokyo-night"]);
   const root = document.documentElement;
+  const themeBypassExactPaths = new Set([
+    "/overview",
+    "/atlas",
+    "/parent-resources",
+    "/college-students",
+    "/contact-sales",
+    "/merchants",
+    "/pricing",
+    "/download"
+  ]);
+  const themeBypassPrefixPaths = ["/features", "/use-cases", "/apps", "/codex", "/business", "/plans"];
+  let selectedThemeId = "default";
+  let routeThemeTimer = 0;
+  let routeThemeObserverStarted = false;
+  let lastThemeRoute = location.href;
 
   function isDefaultTheme(theme) {
     return !theme || theme.id === "default";
+  }
+
+  function normalizePath(pathname) {
+    return pathname.replace(/\/+$/, "") || "/";
+  }
+
+  function shouldBypassThemeForUrl(url = location.href) {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(url, location.origin);
+    } catch {
+      return false;
+    }
+
+    if (parsedUrl.hostname !== "chatgpt.com") {
+      return false;
+    }
+
+    const path = normalizePath(parsedUrl.pathname);
+    return themeBypassExactPaths.has(path) || themeBypassPrefixPaths.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
   }
 
   function cssVariables(theme) {
@@ -1193,7 +1228,13 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   }
 
   function applyTheme(themeId) {
-    const theme = themeApi.getTheme(themeId);
+    const theme = themeApi.getTheme(themeId || "default");
+    selectedThemeId = theme.id;
+    if (shouldBypassThemeForUrl()) {
+      removeTheme();
+      return;
+    }
+
     if (isDefaultTheme(theme)) {
       removeTheme();
       return;
@@ -1203,6 +1244,47 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     ensureThemeStyle(theme);
     startPageMarkerObserver();
     schedulePageMarker();
+  }
+
+  function scheduleRouteThemeSync() {
+    clearTimeout(routeThemeTimer);
+    routeThemeTimer = setTimeout(() => {
+      applyTheme(selectedThemeId);
+    }, 80);
+  }
+
+  function startRouteThemeObserver() {
+    if (routeThemeObserverStarted) {
+      return;
+    }
+    routeThemeObserverStarted = true;
+
+    const notifyRouteChange = () => {
+      lastThemeRoute = location.href;
+      scheduleRouteThemeSync();
+    };
+    ["pushState", "replaceState"].forEach((method) => {
+      const original = history[method];
+      if (typeof original !== "function") {
+        return;
+      }
+
+      history[method] = function (...args) {
+        const result = original.apply(this, args);
+        notifyRouteChange();
+        return result;
+      };
+    });
+
+    window.addEventListener("popstate", notifyRouteChange);
+    window.addEventListener("hashchange", notifyRouteChange);
+    window.addEventListener("pageshow", notifyRouteChange);
+    window.setInterval(() => {
+      if (location.href === lastThemeRoute) {
+        return;
+      }
+      notifyRouteChange();
+    }, 500);
   }
 
   let pageMarkerTimer = 0;
@@ -1539,6 +1621,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     }
   });
 
+  startRouteThemeObserver();
   startPageMarkerObserver();
 
   loadStoredTheme();
