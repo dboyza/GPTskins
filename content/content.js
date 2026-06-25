@@ -118,6 +118,17 @@ html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom
   box-shadow: none !important;
 }
 
+html[data-gptskins-theme][data-chatskin-plan-page="true"] {
+  --bg-primary: var(--gptskins-background) !important;
+  --bg-elevated-secondary: var(--gptskins-background) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] :is([class*="bg-token-bg-primary"], [class*="bg-token-bg-elevated-secondary!"]) {
+  background: var(--gptskins-background) !important;
+  background-color: var(--gptskins-background) !important;
+  background-image: none !important;
+}
+
 html[data-gptskins-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="bg-black"],
 html[data-gptskins-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="from-black"],
 html[data-gptskins-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="to-black"],
@@ -901,8 +912,11 @@ html[data-gptskins-theme] [data-message-author-role] .cm-scroller::-webkit-scrol
   border-radius: 999px !important;
 }
 
-html[data-gptskins-theme] [data-chatskin-plan-layer] {
+html[data-gptskins-theme] [data-chatskin-plan-layer],
+html[data-gptskins-theme] [data-chatskin-plan-layer]::before,
+html[data-gptskins-theme] [data-chatskin-plan-layer]::after {
   background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
@@ -964,25 +978,70 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
     root.setAttribute("data-gptskins-theme", theme.id);
     ensureThemeStyle(theme);
+    startPageMarkerObserver();
     schedulePageMarker();
   }
 
   let pageMarkerTimer = 0;
+  let pageMarkerObserver = null;
+  let bodyReadyObserver = null;
+  let bodyReadyListenerAdded = false;
+
+  function isPlanPage() {
+    const pageText = document.body ? document.body.innerText : "";
+    const hasPlanHeading = pageText.includes("Choose your plan");
+    const hasPlanAction =
+      pageText.includes("Switch to Plus") ||
+      pageText.includes("Upgrade to Pro") ||
+      pageText.includes("ChatGPT Enterprise") ||
+      pageText.includes("Manage my subscription");
+    const hasPlanToggle = Boolean(
+      document.querySelector('[aria-label*="Personal" i], [aria-label*="Business" i], [aria-label*="plan" i] [role="radio"]')
+    );
+
+    return hasPlanHeading && (hasPlanAction || hasPlanToggle || location.hash === "#pricing");
+  }
 
   function syncPageMarker() {
-    const pageText = document.body ? document.body.innerText : "";
-    const isPlanPage = pageText.includes("Choose your plan") && pageText.includes("Personal") && pageText.includes("Business");
-    if (root.hasAttribute("data-gptskins-theme") && isPlanPage) {
+    const planPage = isPlanPage();
+    if (root.hasAttribute("data-gptskins-theme") && planPage) {
       root.setAttribute("data-chatskin-plan-page", "true");
     } else {
       root.removeAttribute("data-chatskin-plan-page");
     }
-    syncSurfaceTags(isPlanPage);
+    syncSurfaceTags(planPage);
   }
 
   function schedulePageMarker() {
     clearTimeout(pageMarkerTimer);
     pageMarkerTimer = setTimeout(syncPageMarker, 150);
+  }
+
+  function startPageMarkerObserver() {
+    if (pageMarkerObserver) {
+      return;
+    }
+
+    if (document.body) {
+      pageMarkerObserver = new MutationObserver(schedulePageMarker);
+      pageMarkerObserver.observe(document.body, { childList: true, subtree: true });
+      if (bodyReadyObserver) {
+        bodyReadyObserver.disconnect();
+        bodyReadyObserver = null;
+      }
+      schedulePageMarker();
+      return;
+    }
+
+    if (!bodyReadyObserver && document.documentElement) {
+      bodyReadyObserver = new MutationObserver(startPageMarkerObserver);
+      bodyReadyObserver.observe(document.documentElement, { childList: true, subtree: true });
+    }
+
+    if (!bodyReadyListenerAdded) {
+      bodyReadyListenerAdded = true;
+      document.addEventListener("DOMContentLoaded", startPageMarkerObserver, { once: true });
+    }
   }
 
   function clearSurfaceTags() {
@@ -1097,9 +1156,18 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
     document.querySelectorAll("body *").forEach((item) => {
       const styles = getComputedStyle(item);
+      const beforeStyles = getComputedStyle(item, "::before");
+      const afterStyles = getComputedStyle(item, "::after");
       const rect = item.getBoundingClientRect();
+      const hasBlackPaint = (style) =>
+        style.backgroundColor === "rgb(0, 0, 0)" ||
+        style.backgroundImage.includes("gradient") ||
+        style.boxShadow.includes("rgb(0, 0, 0)");
+      const hasVisiblePseudo = (style) => style.content !== "none" && style.display !== "none";
       const isBlackLayer =
-        (styles.backgroundColor === "rgb(0, 0, 0)" || styles.backgroundImage.includes("gradient")) &&
+        (hasBlackPaint(styles) ||
+          (hasVisiblePseudo(beforeStyles) && hasBlackPaint(beforeStyles)) ||
+          (hasVisiblePseudo(afterStyles) && hasBlackPaint(afterStyles))) &&
         rect.width > window.innerWidth * 0.5 &&
         rect.height > 20 &&
         rect.top > window.innerHeight * 0.45;
@@ -1128,9 +1196,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     }
   });
 
-  if (document.body) {
-    new MutationObserver(schedulePageMarker).observe(document.body, { childList: true, subtree: true });
-  }
+  startPageMarkerObserver();
 
   loadStoredTheme();
 })();
