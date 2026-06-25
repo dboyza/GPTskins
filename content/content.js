@@ -538,6 +538,20 @@ html[data-themegpt-theme] [data-chatskin-code-block] {
   overflow: hidden !important;
 }
 
+html[data-themegpt-theme] [data-chatskin-code-frame] {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-frame]::before,
+html[data-themegpt-theme] [data-chatskin-code-frame]::after {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-code-block] :is([class*="border"], [class*="ring"], [class*="shadow"]) {
   border-color: transparent !important;
   box-shadow: none !important;
@@ -612,8 +626,9 @@ html[data-themegpt-theme] [data-chatskin-plan-layer] {
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-plan-layer]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-plan-layer]")
       .forEach((item) => {
+        item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
         item.removeAttribute("data-chatskin-code-header");
         item.removeAttribute("data-chatskin-code-body");
@@ -628,15 +643,30 @@ html[data-themegpt-theme] [data-chatskin-plan-layer] {
     }
 
     document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
-      const block =
+      let block =
         pre.closest("[data-testid*='code'], [class*='group/code'], [class*='not-prose'], [class*='overflow-hidden'], [class*='contain-inline-size']") ||
         pre.parentElement;
+
+      for (let candidate = pre.parentElement; candidate && !candidate.matches("[data-message-author-role]"); candidate = candidate.parentElement) {
+        const first = candidate.firstElementChild;
+        if (first && !first.contains(pre) && (first.querySelector("button, svg") || first.textContent.trim().length < 120)) {
+          block = candidate;
+          break;
+        }
+      }
 
       if (!block || block.matches("[data-message-author-role]")) {
         return;
       }
 
       block.setAttribute("data-chatskin-code-block", "true");
+
+      const frame = block.parentElement;
+      const frameClass = frame ? frame.getAttribute("class") || "" : "";
+      if (frame && !frame.matches("[data-message-author-role]") && /(bg-|border|rounded|ring|shadow|overflow)/.test(frameClass)) {
+        frame.setAttribute("data-chatskin-code-frame", "true");
+      }
+
       pre.setAttribute("data-chatskin-code-body", "true");
 
       if (pre.parentElement && pre.parentElement !== block) {
