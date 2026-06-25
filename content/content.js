@@ -329,6 +329,13 @@ html[data-gptskins-theme] [data-testid="accounts-profile-button"] [data-trailing
   background-color: var(--gptskins-sidebarHover) !important;
 }
 
+html[data-gptskins-theme] [data-testid="accounts-profile-button"]:not(:hover):not(:focus-visible) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme] [class*="border-token"],
 html[data-gptskins-theme] [class*="divide-token"] > :not([hidden]) ~ :not([hidden]),
 html[data-gptskins-theme] textarea,
@@ -491,6 +498,16 @@ html[data-gptskins-theme] [aria-modal="true"] [role="menu"] :is(button, a, [role
 html[data-gptskins-theme] :is([role="menuitem"].__menu-item, [role="menuitem"][data-radix-collection-item], [data-testid$="-menu-item"]):is(:hover, :focus-visible, [data-highlighted], [data-state="open"]),
 html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-radix-menu-content] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
+html[data-gptskins-theme] [data-radix-menu-content] [data-radix-collection-item]:is(:hover, :focus, :focus-visible, [data-highlighted]),
+html[data-gptskins-theme] [data-radix-popper-content-wrapper] [role="menu"] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
+html[data-gptskins-theme] [data-radix-popper-content-wrapper] [role="menu"] [data-radix-collection-item]:is(:hover, :focus, :focus-visible, [data-highlighted]) {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
   color: var(--gptskins-text) !important;
 }
 
