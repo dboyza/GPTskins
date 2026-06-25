@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "ChatSkin",
+  "name": "GPTskins",
   "description": "Apply polished built-in themes to the ChatGPT website.",
   "version": "1.0.0",
   "icons": {
@@ -10,7 +10,7 @@
     "128": "icons/icon-128.png"
   },
   "action": {
-    "default_title": "ChatSkin",
+    "default_title": "GPTskins",
     "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",

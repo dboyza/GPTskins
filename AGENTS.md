@@ -1,7 +1,7 @@
 # Codex Agent Notes
 
 ## Project
-- ChatSkin is a dependency-free Manifest V3 extension for theming ChatGPT.
+- GPTskins is a dependency-free Manifest V3 extension for theming ChatGPT.
 - Keep changes surgical. Prefer one targeted selector or tag over broad CSS guesses.
 - No build step. Validate content script syntax with `node --check content/content.js`.
 
@@ -20,7 +20,7 @@
 - The desired shape is the whole code card, not just the header/body. For `pre.overflow-visible.px-0` blocks, round the inner `border-token-border-light ... rounded` / `overflow-clip ... rounded` card itself.
 - If the rounded card is nested below a wrapper inside `pre`, make the outer `pre.overflow-visible.px-0:has(...)` transparent; otherwise it paints a square rectangle behind the rounded card.
 - For normal code snippets, only the real `pre` should get `data-chatskin-code-body`. Parent wrappers should use `data-chatskin-code-body-shell` so they clip/clear backgrounds without drawing a second rectangular border around the rounded snippet.
-- Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as ChatSkin code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
+- Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as GPTskins code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
 - CodeMirror email/message snippets should not draw their own inner rounded border. Keep `.cm-editor`, `.cm-scroller`, and `.cm-content` transparent, borderless, radiusless, and outline-free; the outer shell owns the shape.
 - If CodeMirror still shows an inner line, hide the `.pe-11.pt-3 .cm-editor[class*="cm-"]` `border-color` and `outline-color`; do not change snippet layout.
 - Markdown tables need explicit primary text, opaque header/cell descendants, and a stronger border mix. Light themes can leave table headers, copy icons, and row dividers on near-white ChatGPT token colors.
