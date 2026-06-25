@@ -193,6 +193,24 @@ html[data-themegpt-theme] main [class*="text-token-text-tertiary"] {
   color: var(--themegpt-mutedText) !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] table,
+html[data-themegpt-theme] [data-message-author-role] :is(thead, tbody, tr, th, td) {
+  border-color: color-mix(in srgb, var(--themegpt-border) 65%, var(--themegpt-text) 35%) !important;
+  color: var(--themegpt-text) !important;
+  opacity: 1 !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] table :is(th, td, span, div, p, strong) {
+  color: var(--themegpt-text) !important;
+  opacity: 1 !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is(div, section):has(table) :is(button, svg) {
+  color: var(--themegpt-mutedText) !important;
+  opacity: 1 !important;
+  stroke: currentColor !important;
+}
+
 html[data-themegpt-theme] textarea,
 html[data-themegpt-theme] input,
 html[data-themegpt-theme] [contenteditable="true"],
