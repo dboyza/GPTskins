@@ -380,6 +380,39 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   stroke: none !important;
 }
 
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button, [role="button"]) svg[stroke]:not([stroke="none"]),
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button, [role="button"]) svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor !important;
+  stroke-width: 1.75 !important;
+}
+
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button, [role="button"]) svg[fill]:not([fill="none"]),
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button, [role="button"]) svg [fill]:not([fill="none"]) {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button[class*="composer-submit"], [data-testid*="send" i], [aria-label*="send" i], [aria-label*="submit" i]):not(:disabled):not([disabled]):not([aria-disabled="true"]):not([data-disabled="true"]):not([data-state="disabled"]) {
+  background: var(--gptskins-accent) !important;
+  background-color: var(--gptskins-accent) !important;
+  background-image: none !important;
+  border-color: var(--gptskins-accent) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  color: var(--gptskins-accentText) !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button[class*="composer-submit"], [data-testid*="send" i], [aria-label*="send" i], [aria-label*="submit" i]):is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"], [data-state="disabled"]) {
+  background: color-mix(in srgb, var(--gptskins-mutedText) 28%, var(--gptskins-composer)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-mutedText) 28%, var(--gptskins-composer)) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  border-radius: 999px !important;
+  color: var(--gptskins-mutedText) !important;
+  opacity: 1 !important;
+}
+
 html[data-gptskins-theme] [role="dialog"],
 html[data-gptskins-theme] [aria-modal="true"],
 html[data-gptskins-theme] [class*="modal"],
