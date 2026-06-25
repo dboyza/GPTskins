@@ -1,6 +1,6 @@
-# ThemeGPT
+# ChatSkin
 
-ThemeGPT is a dependency-free Manifest V3 browser extension that applies built-in themes to ChatGPT.
+ChatSkin is a dependency-free Manifest V3 browser extension that applies built-in themes to ChatGPT.
 
 ## Features
 
@@ -16,7 +16,7 @@ ThemeGPT is a dependency-free Manifest V3 browser extension that applies built-i
 2. Enable **Developer mode**.
 3. Choose **Load unpacked**.
 4. Select this folder: `C:\Users\Dylan\Documents\extension`.
-5. Open ChatGPT, click the ThemeGPT toolbar icon, and pick a theme.
+5. Open ChatGPT, click the ChatSkin toolbar icon, and pick a theme.
 
 ## Project Layout
 
