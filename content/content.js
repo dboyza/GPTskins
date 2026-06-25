@@ -669,7 +669,7 @@ html[data-gptskins-theme] [aria-modal="true"] :is([aria-pressed="true"], [data-s
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle] {
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [role="group"]:has([data-chatskin-plan-toggle]) {
   background: color-mix(in srgb, var(--gptskins-mutedText) 16%, var(--gptskins-surface)) !important;
   background-color: color-mix(in srgb, var(--gptskins-mutedText) 16%, var(--gptskins-surface)) !important;
   background-image: none !important;
@@ -677,6 +677,22 @@ html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-to
   border-radius: 999px !important;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gptskins-text) 4%, transparent) !important;
   color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] :is([role="group"], div):has(> :is(div, section) > [data-chatskin-plan-toggle]) > :is(div, section):first-child [class*="bg-token-bg-primary"][class*="absolute"][class*="inset-0"] {
+  background: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
+  background-image: none !important;
+  box-shadow: 0 2px 8px var(--gptskins-shadow) !important;
 }
 
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option] {
@@ -697,11 +713,11 @@ html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-to
 
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option]:is([aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]),
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option][data-chatskin-plan-active="true"] {
-  background: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
-  background-color: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
-  box-shadow: 0 2px 8px var(--gptskins-shadow) !important;
+  box-shadow: none !important;
   color: var(--gptskins-text) !important;
 }
 
