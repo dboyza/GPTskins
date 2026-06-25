@@ -270,8 +270,8 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]),
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]),
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"],
 html[data-gptskins-theme] [class*="group-hover/sidebar-expand-section-header"],
 html[data-gptskins-theme] [class*="group-hover/sidebar-expando-section-header"],
@@ -298,8 +298,8 @@ html[data-gptskins-theme] [class*="menu-item-trailing-btn"]::after {
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):hover,
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):hover,
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):hover,
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"]:hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-expand-section-header"]:hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-expando-section-header"]:hover,
