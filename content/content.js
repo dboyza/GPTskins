@@ -605,6 +605,17 @@ html[data-themegpt-theme] [data-chatskin-code-frame] {
   padding: 0 !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] pre[data-chatskin-code-frame] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  outline: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-code-frame]::before,
 html[data-themegpt-theme] [data-chatskin-code-frame]::after {
   background: transparent !important;
@@ -772,6 +783,24 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
 
     document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
       if (pre.closest(".cm-editor, .cm-scroller")) {
+        return;
+      }
+
+      const embeddedBlock = pre.firstElementChild;
+      const embeddedClass = embeddedBlock ? embeddedBlock.getAttribute("class") || "" : "";
+      if (embeddedBlock && /(contain-inline-size|group\/code|rounded)/.test(embeddedClass)) {
+        pre.setAttribute("data-chatskin-code-frame", "true");
+        embeddedBlock.setAttribute("data-chatskin-code-block", "true");
+
+        const header = embeddedBlock.firstElementChild;
+        if (header) {
+          header.setAttribute("data-chatskin-code-header", "true");
+        }
+
+        const body = Array.from(embeddedBlock.children).find((child) => /(^|\s)(relative|overflow)/.test(child.getAttribute("class") || ""));
+        if (body) {
+          body.setAttribute("data-chatskin-code-body", "true");
+        }
         return;
       }
 
