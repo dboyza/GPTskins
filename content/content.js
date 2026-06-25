@@ -411,6 +411,25 @@ html[data-gptskins-theme] [data-radix-popper-content-wrapper] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] [data-radix-popper-content-wrapper] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-gptskins-theme] :is([data-radix-menu-content], [data-radix-popper-content-wrapper] [role="menu"]) {
+  background: var(--gptskins-composer) !important;
+  background-color: var(--gptskins-composer) !important;
+  background-image: none !important;
+  border: 1px solid var(--gptskins-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 48px var(--gptskins-shadow) !important;
+  color: var(--gptskins-text) !important;
+  overflow: hidden !important;
+}
+
 html[data-gptskins-theme] [role="dialog"],
 html[data-gptskins-theme] [aria-modal="true"] {
   border: 1px solid var(--gptskins-border) !important;

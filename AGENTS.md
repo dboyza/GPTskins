@@ -53,6 +53,7 @@
 - Account/profile menus use `[role="menu"]` but not always `[role="menuitem"]`; hover styles must include menu-local `button`, `a`, and `[role="button"]` without touching sidebar section headers.
 - Account/profile menu rows can also be direct Radix items like `role="menuitem" data-radix-collection-item data-testid="settings-menu-item"` without a useful `[role="menu"]` ancestor; style those directly.
 - Account dropdowns are Radix portals (`data-radix-menu-content` / `data-radix-popper-content-wrapper`). Use portal-scoped `.__menu-item` / `[data-radix-collection-item]` hover rules for profile menu rows, not broad sidebar selectors.
+- Radix submenu squared corners usually mean the outer `data-radix-popper-content-wrapper` is painted. Keep that wrapper transparent and put background, border, radius, shadow, and overflow on `data-radix-menu-content` / the inner `[role="menu"]`.
 - If the bottom account row stays highlighted after closing the menu, reset `data-testid="accounts-profile-button"` when it is not `:hover` or `:focus-visible`; do not use `[data-state="open"]` as a paint trigger.
 - If account/profile menu hover appears broken, compare computed menu background against the hover token. OG uses `#303030` for both composer/menu surfaces, so reuse of `surfaceStrong` can make hover invisible.
 
