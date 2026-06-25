@@ -287,8 +287,8 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
   background-color: var(--gptskins-surfaceStrong) !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]),
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]),
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"],
 html[data-gptskins-theme] [class*="group-hover/sidebar-expand-section-header"],
 html[data-gptskins-theme] [class*="group-hover/sidebar-expando-section-header"],
@@ -315,8 +315,8 @@ html[data-gptskins-theme] [class*="menu-item-trailing-btn"]::after {
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):hover,
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):hover,
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]):hover,
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]):hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"]:hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-expand-section-header"]:hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-expando-section-header"]:hover,
@@ -333,6 +333,21 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   background-color: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
+}
+
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action][data-chatskin-sidebar-action]:is(:hover, :focus-visible) {
+  background: var(--gptskins-sidebarHover) !important;
+  background-color: var(--gptskins-sidebarHover) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--gptskins-sidebarText) !important;
+}
+
+html[data-gptskins-theme] [data-chatskin-sidebar-action]:is(:hover, :focus-visible) :is(div, span) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: inherit !important;
 }
 
 html[data-gptskins-theme] [data-testid="accounts-profile-button"]:is(:hover, :focus-visible) {
@@ -1166,7 +1181,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
@@ -1180,7 +1195,25 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
         item.removeAttribute("data-chatskin-plan-cta");
         item.removeAttribute("data-chatskin-plan-disabled");
         item.removeAttribute("data-chatskin-suggestion-layer");
+        item.removeAttribute("data-chatskin-sidebar-action");
       });
+  }
+
+  function tagSidebarActions() {
+    const sidebarActions = document.querySelectorAll(
+      "nav a, nav button, aside a, aside button, [data-testid='history-panel'] a, [data-testid='history-panel'] button, [data-testid='left-sidebar'] a, [data-testid='left-sidebar'] button"
+    );
+
+    sidebarActions.forEach((item) => {
+      const text = normalizedText(item);
+      const href = item.getAttribute("href") || "";
+      const isLibrary = item.matches("a") && (/^Library$/i.test(text) || /\/library(?:[/?#]|$)/.test(href));
+      const isSearchChats = item.matches("button") && /^Search chats$/i.test(text);
+
+      if (isLibrary || isSearchChats) {
+        item.setAttribute("data-chatskin-sidebar-action", "true");
+      }
+    });
   }
 
   function tagPlanControls() {
@@ -1273,6 +1306,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     });
 
     document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
+    document.querySelectorAll("[data-chatskin-sidebar-action]").forEach((item) => item.removeAttribute("data-chatskin-sidebar-action"));
     document.querySelectorAll("[data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled]").forEach((item) => {
       item.removeAttribute("data-chatskin-plan-toggle");
       item.removeAttribute("data-chatskin-plan-toggle-option");
@@ -1280,6 +1314,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
       item.removeAttribute("data-chatskin-plan-cta");
       item.removeAttribute("data-chatskin-plan-disabled");
     });
+    tagSidebarActions();
     const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
     const composerRect = composer ? composer.getBoundingClientRect() : null;
     if (composerRect) {
