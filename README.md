@@ -27,12 +27,27 @@ Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or 
 - Automatic theme loading on `chatgpt.com` and `chat.openai.com`.
 - No backend, login, external API, or build step.
 
+## Available Themes
+
+- OG
+- Midnight
+- One Dark
+- Dracula
+- Catppuccin
+- Tokyo Night
+- Nord
+- Gruvbox
+- Forest
+- Solar
+- Rose
+- High Contrast
+
 ## Load in Chrome or Edge
 
 1. Clone or download the extension to a folder on your computer.
 
    ```powershell
-   git clone https://github.com/dboyza/ChatSkin.git
+   git clone https://github.com/dboyza/GPTskins.git
    ```
 
    You can also use GitHub's **Code** > **Download ZIP** option and unzip it anywhere you like.
