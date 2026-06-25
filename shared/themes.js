@@ -6,7 +6,7 @@
       id: "default",
       name: "Default",
       description: "Native look.",
-      swatches: ["#ffffff", "#f4f4f5", "#10a37f"],
+      swatches: ["#000000", "#ffffff"],
       colors: {
         background: "",
         surface: "",

@@ -13,6 +13,7 @@
 - After content script edits, reload the unpacked extension and refresh ChatGPT before judging visuals.
 
 ## Known Surfaces
+- Default is a pass-through theme. Its popup swatches should stay simple black/white, but do not make Default inject CSS unless Dylan explicitly asks.
 - Code blocks are nested inside `pre`; the visible frame may be a parent wrapper. Use `syncSurfaceTags()` and the `data-chatskin-code-frame`, `data-chatskin-code-block`, `data-chatskin-code-header`, and `data-chatskin-code-body` attributes instead of piling on more generic code selectors.
 - Never let headings/paragraphs/hr become `data-chatskin-code-header`. Theme switches can leave stale tags, so `syncSurfaceTags()` must strip that attribute from `h1`-`h6`, `p`, and `hr`.
 - Code body/draft snippets need horizontal scrolling. Do not leave every code wrapper on `overflow: hidden`; ensure `data-chatskin-code-body` keeps `overflow-x: auto`.
