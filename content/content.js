@@ -46,6 +46,8 @@ ${cssVariables(theme)}
   --composer-surface: var(--themegpt-composer) !important;
   --composer-surface-primary: var(--themegpt-composer) !important;
   --composer-surface-secondary: var(--themegpt-surfaceStrong) !important;
+  --code-block-bg: var(--themegpt-surfaceStrong) !important;
+  --code-block-border: var(--themegpt-border) !important;
   --text-primary: var(--themegpt-text) !important;
   --text-secondary: var(--themegpt-mutedText) !important;
   --text-tertiary: var(--themegpt-mutedText) !important;
@@ -90,29 +92,58 @@ html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"] {
   box-shadow: none !important;
 }
 
+html[data-themegpt-theme] [class*="thread-bottom-container"]::before,
+html[data-themegpt-theme] [class*="thread-bottom-container"]::after,
+html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"]::before,
+html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"]::after {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="bg-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="from-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="to-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:bg-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:from-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:to-black"] {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 html[data-themegpt-theme] nav,
 html[data-themegpt-theme] aside,
 html[data-themegpt-theme] [class*="sidebar"],
 html[data-themegpt-theme] [data-testid="history-panel"],
 html[data-themegpt-theme] [data-testid="left-sidebar"] {
+  --text-primary: var(--themegpt-sidebarText) !important;
+  --text-secondary: var(--themegpt-sidebarMuted) !important;
+  --text-tertiary: var(--themegpt-sidebarMuted) !important;
+  --surface-hover: var(--themegpt-sidebarHover) !important;
   background-color: var(--themegpt-sidebar) !important;
   color: var(--themegpt-sidebarText) !important;
 }
 
-html[data-themegpt-theme] nav :is(a, button, [role="button"], span, p, div),
-html[data-themegpt-theme] aside :is(a, button, [role="button"], span, p, div),
-html[data-themegpt-theme] [data-testid="history-panel"] :is(a, button, [role="button"], span, p, div),
-html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="button"], span, p, div) {
+html[data-themegpt-theme] nav :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
+html[data-themegpt-theme] aside :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
+html[data-themegpt-theme] [data-testid="history-panel"] :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
+html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6) {
   color: inherit !important;
+  opacity: 1 !important;
 }
 
 html[data-themegpt-theme] nav .text-token-text-secondary,
 html[data-themegpt-theme] nav [class*="text-token-text-secondary"],
+html[data-themegpt-theme] nav [class*="text-token-text-tertiary"],
 html[data-themegpt-theme] aside .text-token-text-secondary,
 html[data-themegpt-theme] aside [class*="text-token-text-secondary"],
+html[data-themegpt-theme] aside [class*="text-token-text-tertiary"],
 html[data-themegpt-theme] [data-testid="history-panel"] [class*="text-token-text-secondary"],
-html[data-themegpt-theme] [data-testid="left-sidebar"] [class*="text-token-text-secondary"] {
+html[data-themegpt-theme] [data-testid="history-panel"] [class*="text-token-text-tertiary"],
+html[data-themegpt-theme] [data-testid="left-sidebar"] [class*="text-token-text-secondary"],
+html[data-themegpt-theme] [data-testid="left-sidebar"] [class*="text-token-text-tertiary"] {
   color: var(--themegpt-sidebarMuted) !important;
+  opacity: 1 !important;
 }
 
 html[data-themegpt-theme] nav :is(a, button, [role="button"]):hover,
@@ -149,11 +180,28 @@ html[data-themegpt-theme] main [class*="text-token-text-tertiary"] {
 html[data-themegpt-theme] textarea,
 html[data-themegpt-theme] input,
 html[data-themegpt-theme] [contenteditable="true"],
-html[data-themegpt-theme] [data-testid="composer"],
-html[data-themegpt-theme] [class*="composer"] {
+html[data-themegpt-theme] [data-testid="composer"] {
   background-color: var(--themegpt-composer) !important;
   color: var(--themegpt-text) !important;
   border-color: var(--themegpt-border) !important;
+}
+
+html[data-themegpt-theme] form[class*="composer"],
+html[data-themegpt-theme] [class*="group/composer"],
+html[data-themegpt-theme] [class*="bg-(--composer-surface-primary)"],
+html[data-themegpt-theme] [data-testid="composer"] {
+  background-color: var(--themegpt-composer) !important;
+  border: 1px solid var(--themegpt-border) !important;
+  box-shadow: 0 10px 28px var(--themegpt-shadow) !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] button[class*="composer"],
+html[data-themegpt-theme] [class*="composer-btn"],
+html[data-themegpt-theme] [class*="composer-submit"] {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 html[data-themegpt-theme] textarea::placeholder,
@@ -192,8 +240,38 @@ html[data-themegpt-theme] small {
 
 html[data-themegpt-theme] pre,
 html[data-themegpt-theme] code {
-  background-color: var(--themegpt-surfaceStrong) !important;
+  background-color: var(--code-block-bg) !important;
   color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown pre,
+html[data-themegpt-theme] [data-message-author-role] div:has(> pre) {
+  background-color: var(--code-block-bg) !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px var(--themegpt-shadow) !important;
+  overflow: hidden !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] div:has(> pre) > pre {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre,
+html[data-themegpt-theme] [data-message-author-role] pre *,
+html[data-themegpt-theme] [data-message-author-role] code,
+html[data-themegpt-theme] [data-message-author-role] code * {
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre code,
+html[data-themegpt-theme] [data-message-author-role] pre span,
+html[data-themegpt-theme] [data-message-author-role] code span {
+  background: transparent !important;
 }
 `;
   }

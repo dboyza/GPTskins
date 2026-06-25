@@ -52,6 +52,7 @@
 
       .section {
         margin: 22px 0 8px;
+        color: #14211a;
         font-weight: 700;
       }
 
@@ -151,6 +152,12 @@
         box-shadow: 0 -20px 55px rgba(0, 0, 0, 0.95);
       }
 
+      .bottom-black-layer {
+        padding: 12px 0;
+        background: #000;
+        box-shadow: 0 -18px 42px #000;
+      }
+
       .composer {
         display: flex;
         align-items: center;
@@ -159,7 +166,7 @@
         margin: auto;
         padding: 14px 18px;
         background: var(--composer-surface-primary, #222);
-        border: 1px solid var(--border-light, #333);
+        border: 0;
         border-radius: 999px;
       }
 
@@ -190,10 +197,10 @@
         <button class="text-token-text-primary">○ New chat</button>
         <button class="text-token-text-primary">⌕ Search chats</button>
         <button class="text-token-text-primary">▥ Library</button>
-        <div class="section text-token-text-secondary">Pinned</div>
+        <div class="section text-token-text-tertiary">Pinned</div>
         <a class="text-token-text-primary">○ Bitcoin app</a>
         <a class="text-token-text-primary">○ Windows 11 Backup SSD</a>
-        <div class="section text-token-text-secondary">Recents</div>
+        <div class="section text-token-text-tertiary">Recents</div>
         <a class="text-token-text-primary">Code Snippet Example</a>
         <a class="text-token-text-primary">R's in Strawberry</a>
         <a class="text-token-text-primary">Learning Kubernetes Step-by-Step</a>
@@ -220,19 +227,25 @@
             <p class="text-token-text-primary">
               This paragraph should stay readable in both light and dark themes, even when ChatGPT keeps token text classes around.
             </p>
-            <pre><code>const readable = true;</code></pre>
+            <div class="code-card">
+              <pre><code><span style="color: #ffedf4">function</span> <span style="color: #e8d8ff">findMax</span><span style="color: #f9e7cf">(numbers)</span> {
+  <span style="color: #e8d8ff">return</span> <span style="color: #ffedf4">Math</span>.<span style="color: #e8d8ff">max</span>(...numbers);
+}</code></pre>
+            </div>
             <span class="source">CoinGecko +1</span>
           </article>
         </section>
 
         <div class="thread-bottom-container sticky bottom-0">
-          <form class="group/composer composer">
-            <span>＋</span>
-            <div class="input text-token-text-primary">Ask anything</div>
-            <button type="button" class="composer-btn text-token-text-primary">High⌄</button>
-            <button type="button" class="composer-submit-btn text-token-text-primary">🎙</button>
-          </form>
-          <div class="footer text-token-text-secondary">ChatGPT can make mistakes. Check important info.</div>
+          <div class="bottom-black-layer bg-black from-black to-black dark:bg-black">
+            <form class="group/composer composer bg-(--composer-surface-primary)">
+              <span>＋</span>
+              <div class="input text-token-text-primary">Ask anything</div>
+              <button type="button" class="composer-btn text-token-text-primary">High⌄</button>
+              <button type="button" class="composer-submit-btn text-token-text-primary">🎙</button>
+            </form>
+            <div class="footer text-token-text-secondary">ChatGPT can make mistakes. Check important info.</div>
+          </div>
         </div>
       </main>
     </div>
