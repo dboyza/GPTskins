@@ -301,6 +301,30 @@
         border-radius: 8px;
       }
 
+      .chat-code-block {
+        overflow: hidden;
+        color: #fff;
+        background: #2f3030;
+        border: 1px solid #575757;
+        border-radius: 12px;
+      }
+
+      .chat-code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 18px;
+        color: #fff;
+        background: #000;
+      }
+
+      .chat-code-header button {
+        color: inherit;
+        background: transparent;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+      }
+
       .artifact-card {
         margin: 24px 0;
         padding: 20px;
@@ -488,9 +512,12 @@
             </p>
             <div class="code-answer text-token-text-primary">
               <p>Sure — here's a simple JavaScript snippet:</p>
-              <pre><code><span style="color: #ffedf4">function</span> <span style="color: #e8d8ff">findMax</span><span style="color: #f9e7cf">(numbers)</span> {
+              <div class="chat-code-block overflow-hidden" data-testid="code-block">
+                <div class="chat-code-header bg-black"><strong>JavaScript</strong><button type="button">Run</button></div>
+                <pre><code><span style="color: #ffedf4">function</span> <span style="color: #e8d8ff">findMax</span><span style="color: #f9e7cf">(numbers)</span> {
   <span style="color: #e8d8ff">return</span> <span style="color: #ffedf4">Math</span>.<span style="color: #e8d8ff">max</span>(...numbers);
 }</code></pre>
+              </div>
               <p>For interview practice, keep it short.</p>
             </div>
             <div class="artifact-card" data-testid="canvas-artifact">

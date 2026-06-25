@@ -396,10 +396,36 @@ html[data-themegpt-theme] :not(pre) > code {
 html[data-themegpt-theme] [data-message-author-role] pre,
 html[data-themegpt-theme] [data-message-author-role] .markdown pre {
   background-color: var(--code-block-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: auto !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) {
+  background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
   border-radius: 12px !important;
   box-shadow: none !important;
-  overflow: auto !important;
+  overflow: hidden !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) > :not(pre):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) > :not(:has(pre)):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) > :not(pre):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-sidebar"], [class*="bg-token-main"]):has(+ pre) {
+  background-color: color-mix(in srgb, var(--themegpt-surfaceStrong) 82%, var(--themegpt-background)) !important;
+  border-color: var(--code-block-border) !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) pre {
+  border-radius: 0 !important;
+  margin: 0 !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role] pre,
