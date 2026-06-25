@@ -335,11 +335,12 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action][data-chatskin-sidebar-action]:is(:hover, :focus-visible) {
-  background: var(--gptskins-sidebarHover) !important;
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action] {
+  border-radius: 10px !important;
+}
+
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action]:focus-visible {
   background-color: var(--gptskins-sidebarHover) !important;
-  background-image: none !important;
-  box-shadow: none !important;
   color: var(--gptskins-sidebarText) !important;
 }
 
@@ -1206,9 +1207,10 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
     sidebarActions.forEach((item) => {
       const text = normalizedText(item);
+      const lowerText = text.toLowerCase();
       const href = item.getAttribute("href") || "";
-      const isLibrary = item.matches("a") && (/^Library$/i.test(text) || /\/library(?:[/?#]|$)/.test(href));
-      const isSearchChats = item.matches("button") && /^Search chats$/i.test(text);
+      const isLibrary = item.matches("a") && (lowerText.startsWith("library") || /\/library(?:[/?#]|$)/.test(href));
+      const isSearchChats = item.matches("button") && lowerText.startsWith("search chats");
 
       if (isLibrary || isSearchChats) {
         item.setAttribute("data-chatskin-sidebar-action", "true");
