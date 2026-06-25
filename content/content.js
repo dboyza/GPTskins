@@ -318,13 +318,13 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] [data-testid="accounts-profile-button"]:is(:hover, :focus-visible, [data-state="open"]) {
+html[data-gptskins-theme] [data-testid="accounts-profile-button"]:is(:hover, :focus-visible) {
   background: var(--gptskins-sidebarHover) !important;
   background-color: var(--gptskins-sidebarHover) !important;
   color: var(--gptskins-sidebarText) !important;
 }
 
-html[data-gptskins-theme] [data-testid="accounts-profile-button"] [data-trailing-button]:is(:hover, :focus-visible, [data-state="open"]) > div {
+html[data-gptskins-theme] [data-testid="accounts-profile-button"] [data-trailing-button]:is(:hover, :focus-visible) > div {
   background: var(--gptskins-sidebarHover) !important;
   background-color: var(--gptskins-sidebarHover) !important;
 }
