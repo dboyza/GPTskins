@@ -318,6 +318,17 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   box-shadow: none !important;
 }
 
+html[data-gptskins-theme] [data-testid="accounts-profile-button"]:is(:hover, :focus-visible, [data-state="open"]) {
+  background: var(--gptskins-sidebarHover) !important;
+  background-color: var(--gptskins-sidebarHover) !important;
+  color: var(--gptskins-sidebarText) !important;
+}
+
+html[data-gptskins-theme] [data-testid="accounts-profile-button"] [data-trailing-button]:is(:hover, :focus-visible, [data-state="open"]) > div {
+  background: var(--gptskins-sidebarHover) !important;
+  background-color: var(--gptskins-sidebarHover) !important;
+}
+
 html[data-gptskins-theme] [class*="border-token"],
 html[data-gptskins-theme] [class*="divide-token"] > :not([hidden]) ~ :not([hidden]),
 html[data-gptskins-theme] textarea,
