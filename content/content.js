@@ -47,6 +47,7 @@ ${cssVariables(theme)}
   --composer-surface-primary: var(--themegpt-composer) !important;
   --composer-surface-secondary: var(--themegpt-surfaceStrong) !important;
   --code-block-bg: var(--themegpt-surfaceStrong) !important;
+  --code-block-header: color-mix(in srgb, var(--themegpt-surfaceStrong) 82%, var(--themegpt-background)) !important;
   --code-block-border: var(--themegpt-border) !important;
   --text-primary: var(--themegpt-text) !important;
   --text-secondary: var(--themegpt-mutedText) !important;
@@ -80,7 +81,7 @@ html[data-themegpt-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
   background-color: var(--themegpt-background) !important;
 }
 
-html[data-themegpt-theme] [class*="thread-bottom-container"] {
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) {
   background: linear-gradient(
     to bottom,
     transparent 0,
@@ -91,18 +92,18 @@ html[data-themegpt-theme] [class*="thread-bottom-container"] {
   box-shadow: none !important;
 }
 
-html[data-themegpt-theme] [class*="thread-bottom-container"]::before,
-html[data-themegpt-theme] [class*="thread-bottom-container"]::after {
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"]))::before,
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"]))::after {
   background: transparent !important;
   box-shadow: none !important;
 }
 
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="bg-black"],
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="from-black"],
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="to-black"],
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:bg-black"],
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:from-black"],
-html[data-themegpt-theme] [class*="thread-bottom-container"] [class*="dark:to-black"] {
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="bg-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="from-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="to-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="dark:bg-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="dark:from-black"],
+html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="dark:to-black"] {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
@@ -404,7 +405,7 @@ html[data-themegpt-theme] [data-message-author-role] .markdown pre {
 
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)),
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)),
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) {
   background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
   border-radius: 12px !important;
@@ -414,17 +415,30 @@ html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidde
 
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) > :not(pre):first-child,
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) > :not(:has(pre)):first-child,
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) > :not(pre):first-child,
-html[data-themegpt-theme] [data-message-author-role] :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-sidebar"], [class*="bg-token-main"]):has(+ pre) {
-  background-color: color-mix(in srgb, var(--themegpt-surfaceStrong) 82%, var(--themegpt-background)) !important;
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) > :not(:is(pre, code)):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-sidebar"], [class*="bg-token-main"]):has(+ :is(pre, code)) {
+  background-color: var(--code-block-header) !important;
   border-color: var(--code-block-border) !important;
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"]):has(pre) pre,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"]) {
+  background-color: var(--code-block-header) !important;
+  background-image: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="border-token"], [class*="border-["], [class*="ring-"]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) pre,
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) pre,
 html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) pre {
+  background-color: var(--code-block-bg) !important;
+  border: 0 !important;
   border-radius: 0 !important;
+  box-shadow: none !important;
   margin: 0 !important;
 }
 
@@ -459,6 +473,12 @@ html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) :is(article, section, [class*="document"], [class*="preview"], [class*="editor"], [class*="ProseMirror"], [contenteditable="true"]) :is(div, article, section, main):is([class*="bg-"], [style*="background"]),
+html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) :is(article, section, [class*="document"], [class*="preview"], [class*="editor"], [class*="ProseMirror"], [contenteditable="true"]):is([class*="bg-"], [style*="background"]) {
+  background-color: transparent !important;
+  background-image: none !important;
 }
 `;
   }

@@ -355,6 +355,11 @@
         background: #111;
       }
 
+      .artifact-inner-panel {
+        padding: 1px 0;
+        background: #0d1117;
+      }
+
       .artifact-document h2 {
         margin-top: 0;
       }
@@ -375,6 +380,14 @@
         padding: 36px 0 16px;
         background: #000;
         box-shadow: 0 -20px 55px rgba(0, 0, 0, 0.95);
+      }
+
+      .upgrade-plan-footer {
+        position: static;
+        height: 72px;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
       }
 
       .bottom-black-layer {
@@ -526,19 +539,23 @@
                 <span>Copy Download Expand</span>
               </div>
               <article class="artifact-document">
-                <h2>Dylan Boyza</h2>
-                <p>AWS-certified platform engineer focused on secure cloud automation, Kubernetes, and AI-assisted engineering.</p>
-                <h3>Focus Areas</h3>
-                <ul>
-                  <li>Cloud infrastructure and automation</li>
-                  <li>Infrastructure as code and CI/CD</li>
-                  <li>Python, Terraform, and Jenkins automation</li>
-                </ul>
+                <div class="artifact-inner-panel bg-white dark:bg-gray-950" style="background: #111;">
+                  <h2>Dylan Boyza</h2>
+                  <p>AWS-certified platform engineer focused on secure cloud automation, Kubernetes, and AI-assisted engineering.</p>
+                  <h3>Focus Areas</h3>
+                  <ul>
+                    <li>Cloud infrastructure and automation</li>
+                    <li>Infrastructure as code and CI/CD</li>
+                    <li>Python, Terraform, and Jenkins automation</li>
+                  </ul>
+                </div>
               </article>
             </div>
             <span class="source">CoinGecko +1</span>
           </article>
         </section>
+
+        <div class="thread-bottom-container upgrade-plan-footer" aria-label="Upgrade page footer should stay transparent"></div>
 
         <div class="thread-bottom-container sticky bottom-0">
           <div class="bottom-black-layer bg-black from-black to-black dark:bg-black">
