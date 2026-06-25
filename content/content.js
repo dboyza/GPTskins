@@ -100,6 +100,15 @@ html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*
   box-shadow: none !important;
 }
 
+html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"],
+html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::before,
+html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::after {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="bg-black"],
 html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="from-black"],
 html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) [class*="to-black"],
@@ -663,7 +672,7 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
 
   function syncPageMarker() {
     const pageText = document.body ? document.body.innerText : "";
-    const isPlanPage = pageText.includes("Choose your plan") && pageText.includes("ChatGPT Enterprise");
+    const isPlanPage = pageText.includes("Choose your plan") && pageText.includes("Personal") && pageText.includes("Business");
     if (root.hasAttribute("data-themegpt-theme") && isPlanPage) {
       root.setAttribute("data-chatskin-plan-page", "true");
     } else {
@@ -746,7 +755,7 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
         rect.height > 20 &&
         rect.top > window.innerHeight * 0.45;
 
-      if (isBlackLayer && !item.closest("[role='dialog'], button, a")) {
+      if (isBlackLayer && !item.closest("button, a")) {
         item.setAttribute("data-chatskin-plan-layer", "true");
       }
     });
