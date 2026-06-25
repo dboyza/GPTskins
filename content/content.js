@@ -308,6 +308,23 @@ html[data-gptskins-theme] main:has(input[aria-label="Search GPTs"], input[placeh
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] [data-testid="mattress-onboarding-widget-cell"] button {
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="mattress-onboarding-widget-cell"] button::before {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border-color: var(--gptskins-border) !important;
+}
+
+html[data-gptskins-theme] [data-testid="mattress-onboarding-widget-cell"] button::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
   main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
