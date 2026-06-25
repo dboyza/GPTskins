@@ -447,7 +447,9 @@ html[data-gptskins-theme] .top-full .bg-surface-primary > ul {
   background-color: var(--gptskins-composer) !important;
   background-image: none !important;
   border-color: var(--gptskins-border) !important;
+  border-radius: 12px !important;
   color: var(--gptskins-text) !important;
+  overflow: hidden !important;
 }
 
 html[data-gptskins-theme] .top-full .bg-surface-primary :is(li, button, span) {
