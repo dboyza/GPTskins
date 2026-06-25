@@ -687,9 +687,12 @@ html[data-themegpt-theme] [data-message-author-role] .cm-scroller {
 html[data-themegpt-theme] [data-message-author-role] .cm-editor,
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller,
 html[data-themegpt-theme] [data-message-author-role] .cm-content {
+  background: transparent !important;
   border: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
   color: var(--themegpt-text) !important;
+  outline: 0 !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="overflow-clip"], [class*="bg-token-bg-elevated-secondary"]):has(.cm-editor) {
@@ -697,11 +700,6 @@ html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="o
   background-image: none !important;
   border-color: var(--code-block-border) !important;
   box-shadow: none !important;
-}
-
-html[data-themegpt-theme] [data-message-author-role] .pe-11.pt-3:has(.cm-editor) .cm-editor {
-  max-width: none !important;
-  width: calc(100% + 2.75rem) !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar:horizontal {
