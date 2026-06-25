@@ -274,10 +274,22 @@ html[data-themegpt-theme] [class*="group-hover/sidebar-section-header"],
 html[data-themegpt-theme] [class*="group-hover/sidebar-expand-section-header"],
 html[data-themegpt-theme] [data-trailing-button],
 html[data-themegpt-theme] [class*="menu-item-trailing-btn"],
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, span):has(> [data-trailing-button]),
 html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"],
 html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child) {
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-trailing-button]::before,
+html[data-themegpt-theme] [data-trailing-button]::after,
+html[data-themegpt-theme] [class*="menu-item-trailing-btn"]::before,
+html[data-themegpt-theme] [class*="menu-item-trailing-btn"]::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
 }
 
@@ -289,10 +301,12 @@ html[data-themegpt-theme] [data-trailing-button]:hover,
 html[data-themegpt-theme] [class*="menu-item-trailing-btn"]:hover,
 html[data-themegpt-theme] [data-trailing-button][data-state="open"],
 html[data-themegpt-theme] [class*="menu-item-trailing-btn"][data-state="open"],
+html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, span):has(> [data-trailing-button]):hover,
 html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"]:hover,
 html[data-themegpt-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(a, button, [role="button"], div, span):has(> svg:only-child):hover {
   background: transparent !important;
   background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
 }
 
