@@ -50,7 +50,7 @@ Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or 
    git clone https://github.com/dboyza/GPTskins.git
    ```
 
-   You can also use GitHub's **Code** > **Download ZIP** option and unzip it anywhere you like.
+   You can also download `dist/GPTskins.zip` from this repo, or use GitHub's **Code** > **Download ZIP** option and unzip it anywhere you like.
 2. Open `chrome://extensions` or `edge://extensions`.
 3. Enable **Developer mode**.
 4. Choose **Load unpacked**.
