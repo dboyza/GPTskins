@@ -403,7 +403,7 @@ html[data-themegpt-theme] small {
   color: var(--themegpt-mutedText) !important;
 }
 
-html[data-themegpt-theme] pre {
+html[data-themegpt-theme] pre:not(.cm-content) {
   background-color: var(--code-block-bg) !important;
   color: var(--themegpt-text) !important;
 }
@@ -419,8 +419,8 @@ html[data-themegpt-theme] :not(pre) > code {
   padding: 0.1em 0.35em !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] pre,
-html[data-themegpt-theme] [data-message-author-role] .markdown pre {
+html[data-themegpt-theme] [data-message-author-role] pre:not(.cm-content),
+html[data-themegpt-theme] [data-message-author-role] .markdown pre:not(.cm-content) {
   background-color: var(--code-block-bg) !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -428,9 +428,9 @@ html[data-themegpt-theme] [data-message-author-role] .markdown pre {
   overflow: auto !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)),
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)),
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) {
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) {
   background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
   border-radius: 12px !important;
@@ -438,28 +438,28 @@ html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidde
   overflow: hidden !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) > :not(pre):first-child,
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) > :not(:has(pre)):first-child,
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) > :not(:is(pre, code)):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)) > :not(pre):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)) > :not(:has(pre)):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) > :not(:is(pre, code)):first-child,
 html[data-themegpt-theme] [data-message-author-role] :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-sidebar"], [class*="bg-token-main"]):has(+ :is(pre, code)) {
   background-color: var(--code-block-header) !important;
   border-color: var(--code-block-border) !important;
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"]) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"]) {
   background-color: var(--code-block-header) !important;
   background-image: none !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="border-token"], [class*="border-["], [class*="ring-"]) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) :is([class*="border-token"], [class*="border-["], [class*="ring-"]) {
   border-color: transparent !important;
   box-shadow: none !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) pre,
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(:has(> p)) pre,
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(> p)) pre {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)) pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)) pre {
   background-color: var(--code-block-bg) !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -514,9 +514,9 @@ html[data-themegpt-theme][data-chatskin-plan-page="true"] main :is([class*="bg-b
   box-shadow: none !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)),
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(> p)),
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(> p)) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)):not(:has(.cm-editor)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(.cm-editor)):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(.cm-editor)):not(:has(> p)) {
   background-color: var(--code-block-bg) !important;
   background-image: none !important;
   border: 1px solid var(--code-block-border) !important;
@@ -525,16 +525,16 @@ html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section)
   overflow: hidden !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)) > :is(div, header):first-child,
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(> p)) > :is(div, header):first-child,
-html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(> p)) > :is(div, header):first-child,
-html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-main"], [class*="bg-token-sidebar"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"], [style*="background"]) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)):not(:has(.cm-editor)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(.cm-editor)):not(:has(> p)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(.cm-editor)):not(:has(> p)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-main"], [class*="bg-token-sidebar"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"], [style*="background"]) {
   background-color: var(--code-block-header) !important;
   background-image: none !important;
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is(pre, code, [class*="overflow-y-auto"], [class*="p-4"]) {
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) :is(pre, code, [class*="overflow-y-auto"], [class*="p-4"]) {
   background-color: var(--code-block-bg) !important;
   border-color: transparent !important;
   border-radius: 0 !important;
@@ -654,6 +654,21 @@ html[data-themegpt-theme] [data-message-author-role] .cm-scroller {
   scrollbar-width: auto !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] .cm-editor,
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller,
+html[data-themegpt-theme] [data-message-author-role] .cm-content {
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="overflow-clip"], [class*="bg-token-bg-elevated-secondary"]):has(.cm-editor) {
+  background-color: var(--code-block-bg) !important;
+  background-image: none !important;
+  border-color: var(--code-block-border) !important;
+  box-shadow: none !important;
+}
+
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar:horizontal {
   display: block !important;
   height: 12px !important;
@@ -744,6 +759,10 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] 
     }
 
     document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
+      if (pre.closest(".cm-editor, .cm-scroller")) {
+        return;
+      }
+
       let block =
         pre.closest("[data-testid*='code'], [class*='group/code'], [class*='not-prose'], [class*='overflow-hidden'], [class*='contain-inline-size']") ||
         pre.parentElement;
