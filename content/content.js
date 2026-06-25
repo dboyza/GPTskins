@@ -267,9 +267,8 @@ html[data-gptskins-theme] [data-testid="composer"] {
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] button[class*="composer"],
-html[data-gptskins-theme] [class*="composer-btn"],
-html[data-gptskins-theme] [class*="composer-submit"] {
+html[data-gptskins-theme] button[class*="composer"]:not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]),
+html[data-gptskins-theme] [class*="composer-btn"]:not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
   background-color: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
@@ -280,11 +279,11 @@ html[data-gptskins-theme] input::placeholder {
   color: var(--gptskins-mutedText) !important;
 }
 
-html[data-gptskins-theme] main :is(button, a, [role="button"]) {
+html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
   color: inherit !important;
 }
 
-html[data-gptskins-theme] main :is(button, a, [role="button"]):hover {
+html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
 }
 
@@ -390,27 +389,6 @@ html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]
 html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button, [role="button"]) svg [fill]:not([fill="none"]) {
   fill: currentColor !important;
   stroke: none !important;
-}
-
-html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button[class*="composer-submit"], [data-testid*="send" i], [aria-label*="send" i], [aria-label*="submit" i]):not(:disabled):not([disabled]):not([aria-disabled="true"]):not([data-disabled="true"]):not([data-state="disabled"]) {
-  background: var(--gptskins-accent) !important;
-  background-color: var(--gptskins-accent) !important;
-  background-image: none !important;
-  border-color: var(--gptskins-accent) !important;
-  border-radius: 999px !important;
-  box-shadow: none !important;
-  color: var(--gptskins-accentText) !important;
-  opacity: 1 !important;
-}
-
-html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(button[class*="composer-submit"], [data-testid*="send" i], [aria-label*="send" i], [aria-label*="submit" i]):is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"], [data-state="disabled"]) {
-  background: color-mix(in srgb, var(--gptskins-mutedText) 28%, var(--gptskins-composer)) !important;
-  background-color: color-mix(in srgb, var(--gptskins-mutedText) 28%, var(--gptskins-composer)) !important;
-  background-image: none !important;
-  border-color: transparent !important;
-  border-radius: 999px !important;
-  color: var(--gptskins-mutedText) !important;
-  opacity: 1 !important;
 }
 
 html[data-gptskins-theme] [role="dialog"],
