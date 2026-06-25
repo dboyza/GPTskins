@@ -294,9 +294,24 @@ html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] main:has(input[aria-label="Search GPTs"], input[placeholder*="Search GPTs" i]) :is(div, section)[class*="bg-token-bg-primary"][class*="dark:bg-token-bg-secondary-surface"][class*="sticky"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html[data-gptskins-theme] main:has(input[aria-label="Search GPTs"], input[placeholder*="Search GPTs" i]) input:is(#search, [aria-label="Search GPTs"], [placeholder*="Search GPTs" i]) {
+  --main-surface-primary: var(--gptskins-surfaceStrong) !important;
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  color: var(--gptskins-text) !important;
+}
+
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
   main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  [data-testid="create-gpt-discovery-button"],
   main:has(.pulse-card-body) button.btn
 ) {
   background: var(--gptskins-surfaceStrong) !important;
@@ -309,6 +324,7 @@ html[data-gptskins-theme] :is(
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
   main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  [data-testid="create-gpt-discovery-button"],
   main:has(.pulse-card-body) button.btn
 ):is(:hover, :focus-visible, [data-state="open"]) {
   background: var(--gptskins-surfaceStrong) !important;
@@ -319,6 +335,7 @@ html[data-gptskins-theme] :is(
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
   main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  [data-testid="create-gpt-discovery-button"],
   main:has(.pulse-card-body) button.btn
 ) :is(span, div, svg) {
   color: inherit !important;
