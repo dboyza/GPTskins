@@ -18,6 +18,7 @@
 
   function removeTheme() {
     root.removeAttribute("data-themegpt-theme");
+    root.removeAttribute("data-chatskin-plan-page");
     const existingStyle = document.getElementById(styleId);
     if (existingStyle) {
       existingStyle.remove();
@@ -480,6 +481,52 @@ html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact
   background-color: transparent !important;
   background-image: none !important;
 }
+
+html[data-themegpt-theme] main :is([class*="sticky"], [class*="fixed"])[class*="bottom-0"]:not(:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"]))),
+html[data-themegpt-theme][data-chatskin-plan-page="true"] main :is([class*="bg-black"], [class*="from-black"], [class*="to-black"], [class*="dark:bg-black"], [class*="dark:from-black"], [class*="dark:to-black"], [style*="background: black"], [style*="background-color: black"], [style*="background-color: rgb(0, 0, 0)"]) {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(> p)),
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(> p)) {
+  background-color: var(--code-block-bg) !important;
+  background-image: none !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"], [class*="bg-token-main-surface-secondary"], [class*="bg-token-main-surface-tertiary"]):has(:is(pre, code)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + pre):not(:has(> p)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] .markdown :is(div, section):has(> :is(div, header) + div code):not(:has(> p)) > :is(div, header):first-child,
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-main"], [class*="bg-token-sidebar"], [class*="dark:bg-black"], [class*="dark:bg-gray-950"], [style*="background"]) {
+  background-color: var(--code-block-header) !important;
+  background-image: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([class*="not-prose"], [class*="group/code"], [class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)) :is(pre, code, [class*="overflow-y-auto"], [class*="p-4"]) {
+  background-color: var(--code-block-bg) !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class*="rounded"], [class*="border"], [class*="bg-"], [style*="border-radius"], [style*="background"]):has(:is([aria-label*="edit" i], [data-testid*="edit" i], button[class*="edit" i])):has(:is(article, [class*="document"], [class*="preview"], [class*="ProseMirror"], [contenteditable="true"], h1, h2, h3)) {
+  background-color: var(--themegpt-surface) !important;
+  background-image: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class*="rounded"], [class*="border"], [class*="bg-"], [style*="border-radius"], [style*="background"]):has(:is([aria-label*="edit" i], [data-testid*="edit" i], button[class*="edit" i])):has(:is(article, [class*="document"], [class*="preview"], [class*="ProseMirror"], [contenteditable="true"], h1, h2, h3)) :is(article, section, main, div):is([class*="bg-"], [style*="background"]) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
 `;
   }
 
@@ -492,6 +539,24 @@ html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact
 
     root.setAttribute("data-themegpt-theme", theme.id);
     ensureThemeStyle(theme);
+    schedulePageMarker();
+  }
+
+  let pageMarkerTimer = 0;
+
+  function syncPageMarker() {
+    const pageText = document.body ? document.body.innerText : "";
+    const isPlanPage = pageText.includes("Choose your plan") && pageText.includes("ChatGPT Enterprise");
+    if (root.hasAttribute("data-themegpt-theme") && isPlanPage) {
+      root.setAttribute("data-chatskin-plan-page", "true");
+    } else {
+      root.removeAttribute("data-chatskin-plan-page");
+    }
+  }
+
+  function schedulePageMarker() {
+    clearTimeout(pageMarkerTimer);
+    pageMarkerTimer = setTimeout(syncPageMarker, 150);
   }
 
   function loadStoredTheme() {
@@ -511,6 +576,10 @@ html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact
       applyTheme(changes[themeApi.storageKey].newValue);
     }
   });
+
+  if (document.body) {
+    new MutationObserver(schedulePageMarker).observe(document.body, { childList: true, subtree: true });
+  }
 
   loadStoredTheme();
 })();
