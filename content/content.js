@@ -488,6 +488,7 @@ html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[data-sta
 html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[aria-expanded="true"],
 html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"])[aria-selected="true"],
 html[data-gptskins-theme] [aria-modal="true"] [role="menu"] :is(button, a, [role="button"]):hover,
+html[data-gptskins-theme] :is([role="menuitem"].__menu-item, [role="menuitem"][data-radix-collection-item], [data-testid$="-menu-item"]):is(:hover, :focus-visible, [data-highlighted], [data-state="open"]),
 html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
