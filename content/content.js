@@ -546,6 +546,7 @@ html[data-themegpt-theme] [data-chatskin-code-block] {
   border: 0 !important;
   border-radius: 12px !important;
   box-shadow: none !important;
+  clip-path: inset(0 round 12px) !important;
   outline: 0 !important;
   overflow: hidden !important;
 }
@@ -553,8 +554,11 @@ html[data-themegpt-theme] [data-chatskin-code-block] {
 html[data-themegpt-theme] [data-chatskin-code-frame] {
   background: transparent !important;
   border: 0 !important;
+  border-radius: 12px !important;
   box-shadow: none !important;
+  clip-path: inset(0 round 12px) !important;
   outline: 0 !important;
+  overflow: hidden !important;
   padding: 0 !important;
 }
 
