@@ -402,12 +402,28 @@ html[data-gptskins-theme] [role="listbox"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] :is([role="listbox"], [class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) {
+  background-color: var(--gptskins-composer) !important;
+  border-color: var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is([role="listbox"], [class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, span, p, button, [role="option"]) {
+  background-color: transparent !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is([role="listbox"], [class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(hr, [class*="border"], [class*="divide"] > :not([hidden]) ~ :not([hidden])) {
+  border-color: var(--gptskins-border) !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
 html[data-gptskins-theme] [aria-modal="true"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
 html[data-gptskins-theme] [role="menu"] [role="menuitem"]:hover,
-html[data-gptskins-theme] [role="listbox"] [role="option"]:hover {
+html[data-gptskins-theme] [role="listbox"] [role="option"]:hover,
+html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
 }
