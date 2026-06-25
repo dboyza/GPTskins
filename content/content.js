@@ -562,7 +562,7 @@ html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-to
   color: var(--gptskins-mutedText) !important;
 }
 
-html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option]:is([aria-pressed="true"], [aria-selected="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]),
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option]:is([aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]),
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option][data-chatskin-plan-active="true"] {
   background: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
   background-color: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
@@ -1142,15 +1142,22 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   }
 
   function tagPlanControls() {
-    const interactiveItems = Array.from(document.querySelectorAll("button, [role='button']"));
-    const toggleOptions = interactiveItems.filter((item) => /^(5x|20x)$/i.test(normalizedText(item)));
+    const planControlSelector = "button, [role='button'], [role='tab'], [role='radio']";
+    const interactiveItems = Array.from(document.querySelectorAll(planControlSelector));
+    const toggleSets = [
+      { labels: ["5x", "20x"], fallbackActive: (text) => (/\$\s*200\b/.test(text) ? "20x" : "") },
+      { labels: ["Personal", "Business"], fallbackActive: () => "Personal" }
+    ];
+    const toggleOptions = interactiveItems.filter((item) =>
+      toggleSets.some((set) => set.labels.some((label) => normalizedText(item).toLowerCase() === label.toLowerCase()))
+    );
     const toggleGroups = new Set();
 
     toggleOptions.forEach((item) => {
       item.setAttribute("data-chatskin-plan-toggle-option", "true");
 
       const selected =
-        item.matches('[aria-pressed="true"], [aria-selected="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]') ||
+        item.matches('[aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]') ||
         /\b(active|selected|checked)\b/i.test(typeof item.className === "string" ? item.className : "");
 
       if (selected) {
@@ -1158,8 +1165,9 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
       }
 
       for (let node = item.parentElement, depth = 0; node && depth < 4; node = node.parentElement, depth += 1) {
-        const optionLabels = Array.from(node.querySelectorAll("button, [role='button']")).map((button) => normalizedText(button));
-        if (optionLabels.includes("5x") && optionLabels.includes("20x")) {
+        const optionLabels = Array.from(node.querySelectorAll(planControlSelector)).map((button) => normalizedText(button));
+        const lowerOptionLabels = optionLabels.map((label) => label.toLowerCase());
+        if (toggleSets.some((set) => set.labels.every((label) => lowerOptionLabels.includes(label.toLowerCase())))) {
           toggleGroups.add(node);
           break;
         }
@@ -1171,16 +1179,20 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
       const options = Array.from(group.querySelectorAll("[data-chatskin-plan-toggle-option]"));
       const hasSelectedOption = options.some((item) => item.hasAttribute("data-chatskin-plan-active"));
       if (!hasSelectedOption) {
+        const optionLabels = options.map((item) => normalizedText(item));
+        const lowerOptionLabels = optionLabels.map((label) => label.toLowerCase());
+        const toggleSet = toggleSets.find((set) => set.labels.every((label) => lowerOptionLabels.includes(label.toLowerCase())));
         let planCard = document.body;
         for (let node = group.parentElement, depth = 0; node && depth < 8; node = node.parentElement, depth += 1) {
           const nodeText = normalizedText(node);
-          if (/\$\s*\d/.test(nodeText) && nodeText.includes("5x") && nodeText.includes("20x")) {
+          const lowerNodeText = nodeText.toLowerCase();
+          if (toggleSet && toggleSet.labels.every((label) => lowerNodeText.includes(label.toLowerCase())) && (/\$\s*\d/.test(nodeText) || lowerNodeText.includes("choose your plan"))) {
             planCard = node;
             break;
           }
         }
         const planText = normalizedText(planCard);
-        const activeLabel = /\$\s*200\b/.test(planText) ? "20x" : "";
+        const activeLabel = toggleSet ? toggleSet.fallbackActive(planText) : "";
         options.forEach((item) => {
           if (activeLabel && normalizedText(item) === activeLabel) {
             item.setAttribute("data-chatskin-plan-active", "true");
