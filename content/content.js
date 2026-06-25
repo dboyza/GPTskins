@@ -109,7 +109,13 @@ html[data-gptskins-theme] [class*="thread-bottom-container"]::after {
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"],
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"] {
+  background: var(--gptskins-surface) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::before,
 html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::after {
   background: transparent !important;
@@ -119,13 +125,13 @@ html[data-gptskins-theme][data-chatskin-plan-page="true"] [class*="thread-bottom
 }
 
 html[data-gptskins-theme][data-chatskin-plan-page="true"] {
-  --bg-primary: var(--gptskins-background) !important;
-  --bg-elevated-secondary: var(--gptskins-background) !important;
+  --bg-primary: var(--gptskins-surface) !important;
+  --bg-elevated-secondary: var(--gptskins-surface) !important;
 }
 
 html[data-gptskins-theme][data-chatskin-plan-page="true"] :is([class*="bg-token-bg-primary"], [class*="bg-token-bg-elevated-secondary!"]) {
-  background: var(--gptskins-background) !important;
-  background-color: var(--gptskins-background) !important;
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
   background-image: none !important;
 }
 
@@ -915,8 +921,8 @@ html[data-gptskins-theme] [data-message-author-role] .cm-scroller::-webkit-scrol
 html[data-gptskins-theme] [data-chatskin-plan-layer],
 html[data-gptskins-theme] [data-chatskin-plan-layer]::before,
 html[data-gptskins-theme] [data-chatskin-plan-layer]::after {
-  background: transparent !important;
-  background-color: transparent !important;
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
   background-image: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
