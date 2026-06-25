@@ -736,6 +736,15 @@ html[data-themegpt-theme] [data-message-author-role] pre [class*="sticky"] > [cl
 html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] [class*="bg-token-bg-elevated-secondary"] {
   background: var(--code-block-header) !important;
   background-image: none !important;
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"] [class*="select-none"][class*="sticky"] {
+  background: var(--code-block-header) !important;
+  background-image: none !important;
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden !important;
 }
 `;
   }

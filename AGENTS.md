@@ -15,6 +15,7 @@
 - Code body/draft snippets need horizontal scrolling. Do not leave every code wrapper on `overflow: hidden`; ensure `data-chatskin-code-body` keeps `overflow-x: auto`.
 - Newer ChatGPT code blocks may put the whole rounded code card as the first child inside `pre`. In that case the outer `pre` is only a transparent frame; tag the inner rounded card/header/body instead or the theme paints a square rectangle behind it.
 - Code block headers can have a sticky wrapper plus an inner `bg-token-bg-elevated-secondary` flex row. Round the inner painted row too; otherwise the word `Python` sits on a square strip.
+- If an early header patch does not work, check later broad token rules like `pre [class*="bg-token-bg-elevated-secondary"]`; later rules must carry the same radius/overflow or they win the cascade.
 - For normal code snippets, only the real `pre` should get `data-chatskin-code-body`. Parent wrappers should use `data-chatskin-code-body-shell` so they clip/clear backgrounds without drawing a second rectangular border around the rounded snippet.
 - Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as ChatSkin code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
 - Writing/edit blocks use `data-testid="writing-block-container"`, `data-testid="writing-block-header-surface"`, `.writing-block-editor`, `.ProseMirror`, and `[contenteditable="true"]`.
