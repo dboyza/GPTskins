@@ -532,6 +532,7 @@ html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class
 html[data-themegpt-theme] [data-testid="writing-block-container"] {
   background-color: var(--themegpt-surface) !important;
   background-image: none !important;
+  border: 1px solid color-mix(in srgb, var(--themegpt-border) 72%, var(--themegpt-text) 28%) !important;
   color: var(--themegpt-text) !important;
 }
 
