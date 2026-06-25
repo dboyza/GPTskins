@@ -434,7 +434,7 @@ html[data-gptskins-theme] [data-chatskin-suggestion-layer] :is(hr, [class*="bord
   border-color: var(--gptskins-border) !important;
 }
 
-html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) :is([class*="top-full"], ul[class*="divide-token-border"]) {
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) :is([class*="top-full"], [class*="bg-surface-primary"]:has(> ul[class*="divide-token-border"]), ul[class*="divide-token-border"]) {
   background: var(--gptskins-composer) !important;
   background-image: none !important;
   border-color: var(--gptskins-border) !important;
