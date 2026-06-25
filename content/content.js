@@ -647,6 +647,25 @@ html[data-themegpt-theme] [data-chatskin-code-body] code {
   white-space: pre !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller {
+  overflow-x: auto !important;
+  scrollbar-color: var(--themegpt-mutedText) color-mix(in srgb, var(--code-block-bg) 78%, var(--themegpt-border)) !important;
+  scrollbar-width: thin !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar {
+  height: 10px !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--code-block-bg) 78%, var(--themegpt-border)) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar-thumb {
+  background: var(--themegpt-mutedText) !important;
+  border-radius: 999px !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-plan-layer] {
   background: transparent !important;
   background-image: none !important;
