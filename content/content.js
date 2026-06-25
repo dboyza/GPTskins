@@ -541,6 +541,26 @@ html[data-themegpt-theme] [data-testid="writing-block-container"] :is([data-test
   background-image: none !important;
 }
 
+html[data-themegpt-theme] [data-testid="writing-block-container"] [data-testid="writing-block-header-magic-edit-button"],
+html[data-themegpt-theme] [data-testid="writing-block-container"] button[aria-label="Edit"] {
+  background: var(--themegpt-surfaceStrong) !important;
+  border: 1px solid color-mix(in srgb, var(--themegpt-border) 70%, var(--themegpt-text) 30%) !important;
+  box-shadow: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-testid="writing-block-container"] [data-testid="writing-block-header-magic-edit-button"] :is(svg, span),
+html[data-themegpt-theme] [data-testid="writing-block-container"] button[aria-label="Edit"] :is(svg, span) {
+  color: inherit !important;
+  opacity: 1 !important;
+  stroke: currentColor !important;
+}
+
+html[data-themegpt-theme] [data-testid="writing-block-container"] [data-testid="writing-block-header-magic-edit-button"]:hover,
+html[data-themegpt-theme] [data-testid="writing-block-container"] button[aria-label="Edit"]:hover {
+  background: color-mix(in srgb, var(--themegpt-surfaceStrong) 82%, var(--themegpt-accent) 18%) !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-code-block] {
   background: transparent !important;
   border: 0 !important;
