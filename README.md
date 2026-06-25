@@ -46,7 +46,7 @@ Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or 
 
 1. Clone or download the extension to a folder on your computer.
 
-   ```powershell
+   ```
    git clone https://github.com/dboyza/GPTskins.git
    ```
 
