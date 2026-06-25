@@ -339,6 +339,10 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   border-radius: 10px !important;
 }
 
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action="library"]:is(:hover, :focus-visible) {
+  z-index: 21 !important;
+}
+
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action]:focus-visible {
   background-color: var(--gptskins-sidebarHover) !important;
   color: var(--gptskins-sidebarText) !important;
@@ -1212,8 +1216,10 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
       const isLibrary = item.matches("a") && (lowerText.startsWith("library") || /\/library(?:[/?#]|$)/.test(href));
       const isSearchChats = item.matches("button") && lowerText.startsWith("search chats");
 
-      if (isLibrary || isSearchChats) {
-        item.setAttribute("data-chatskin-sidebar-action", "true");
+      if (isLibrary) {
+        item.setAttribute("data-chatskin-sidebar-action", "library");
+      } else if (isSearchChats) {
+        item.setAttribute("data-chatskin-sidebar-action", "search");
       }
     });
   }
