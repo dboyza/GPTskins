@@ -211,6 +211,17 @@ html[data-themegpt-theme] [data-message-author-role] :is(div, section):has(table
   stroke: currentColor !important;
 }
 
+html[data-themegpt-theme] [data-message-author-role] .recharts-wrapper :is(.recharts-text, .recharts-label, .recharts-cartesian-axis-tick-value, text) {
+  color: var(--themegpt-mutedText) !important;
+  fill: var(--themegpt-mutedText) !important;
+  opacity: 1 !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] .recharts-wrapper :is(.recharts-cartesian-grid line, .recharts-cartesian-axis-line, .recharts-cartesian-axis-tick-line) {
+  opacity: 1 !important;
+  stroke: color-mix(in srgb, var(--themegpt-border) 60%, var(--themegpt-text) 40%) !important;
+}
+
 html[data-themegpt-theme] textarea,
 html[data-themegpt-theme] input,
 html[data-themegpt-theme] [contenteditable="true"],
