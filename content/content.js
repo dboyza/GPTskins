@@ -417,6 +417,23 @@ html[data-gptskins-theme] :is([role="listbox"], [class*="suggest" i], [data-test
   border-color: var(--gptskins-border) !important;
 }
 
+html[data-gptskins-theme] [data-chatskin-suggestion-layer] {
+  background: var(--gptskins-composer) !important;
+  background-image: none !important;
+  border: 1px solid var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+  box-shadow: 0 12px 30px var(--gptskins-shadow) !important;
+}
+
+html[data-gptskins-theme] [data-chatskin-suggestion-layer] :is(div, span, p, button) {
+  background-color: transparent !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-chatskin-suggestion-layer] :is(hr, [class*="border"], [class*="divide"] > :not([hidden]) ~ :not([hidden])) {
+  border-color: var(--gptskins-border) !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
@@ -903,7 +920,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-suggestion-layer]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
@@ -911,6 +928,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
         item.removeAttribute("data-chatskin-code-body");
         item.removeAttribute("data-chatskin-code-body-shell");
         item.removeAttribute("data-chatskin-plan-layer");
+        item.removeAttribute("data-chatskin-suggestion-layer");
       });
   }
 
@@ -923,6 +941,28 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     document.querySelectorAll(":is(h1, h2, h3, h4, h5, h6, p, hr)[data-chatskin-code-header]").forEach((item) => {
       item.removeAttribute("data-chatskin-code-header");
     });
+
+    document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
+    const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
+    const composerRect = composer ? composer.getBoundingClientRect() : null;
+    if (composerRect) {
+      document.querySelectorAll("body *").forEach((item) => {
+        if (item.closest("[data-testid='composer'], form[class*='composer'], [class*='group/composer'], [data-message-author-role], pre, code")) {
+          return;
+        }
+
+        const rect = item.getBoundingClientRect();
+        if (rect.width < composerRect.width * 0.65 || rect.height < 45) {
+          return;
+        }
+
+        const nearComposer = rect.top >= composerRect.top - 8 && rect.top <= composerRect.bottom + 16;
+        const hasBlackBackground = getComputedStyle(item).backgroundColor === "rgb(0, 0, 0)";
+        if (nearComposer && hasBlackBackground) {
+          item.setAttribute("data-chatskin-suggestion-layer", "true");
+        }
+      });
+    }
 
     document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
       if (pre.closest(".cm-editor, .cm-scroller")) {

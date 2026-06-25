@@ -33,6 +33,7 @@
 - The global `[contenteditable="true"]` composer rule can accidentally recolor writing/edit blocks. Put writing-block overrides later and make the outer and inner surfaces the same color.
 - The writing-block Edit button uses `data-testid="writing-block-header-magic-edit-button"` and can keep a dark token background in light themes. Set its background, text, border, icon, and hover colors explicitly.
 - Composer suggestions can render outside normal popovers. Cover ARIA/listbox plus `suggest`/`autocomplete` class and test-id hooks so they do not stay hardcoded black.
+- If composer suggestions still stay black, they may have no stable class/role. Use `data-chatskin-suggestion-layer` from a computed-style scan near the composer instead of broad page-wide black overrides.
 - The upgrade-plan black bar can be `.thread-bottom-container::after`, not a real div. Keep thread-bottom pseudo-elements transparent for all themed pages; use `data-chatskin-plan-layer` only as a fallback and do not exclude `[role="dialog"]` because the plan page itself is dialog-like.
 - Settings and voice UI live under `[role="dialog"]` or `[aria-modal="true"]`; switches and carousel dots need explicit contrast checks in light and dark themes.
 - Sidebar `Pinned`/`Recents` headers should not get hover pills. Keep section-header controls and `data-trailing-button` / `__menu-item-trailing-btn` icon actions transparent; include `[class*="sidebar"]` because the live sidebar may not be a `nav`/`aside`.
