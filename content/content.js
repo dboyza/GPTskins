@@ -368,6 +368,18 @@ html[data-gptskins-theme] svg {
   stroke: currentColor !important;
 }
 
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) svg[stroke]:not([stroke="none"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor !important;
+  stroke-width: 1.75 !important;
+}
+
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) svg[fill]:not([fill="none"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) svg [fill]:not([fill="none"]) {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
 html[data-gptskins-theme] [role="dialog"],
 html[data-gptskins-theme] [aria-modal="true"],
 html[data-gptskins-theme] [class*="modal"],
