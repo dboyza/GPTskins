@@ -638,6 +638,14 @@ html[data-themegpt-theme] [data-chatskin-code-header] {
   color: var(--themegpt-text) !important;
 }
 
+html[data-themegpt-theme] [data-chatskin-code-header] > [class*="bg-token-bg-elevated-secondary"],
+html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"][class*="sticky"] > [class*="bg-token-bg-elevated-secondary"] {
+  background: var(--code-block-header) !important;
+  background-image: none !important;
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden !important;
+}
+
 html[data-themegpt-theme] [data-chatskin-code-body] {
   background: var(--code-block-bg) !important;
   background-image: none !important;
