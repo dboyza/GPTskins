@@ -296,7 +296,8 @@ html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
 
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
-  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  main:has(.pulse-card-body) button.btn
 ) {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
@@ -307,7 +308,8 @@ html[data-gptskins-theme] :is(
 
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
-  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  main:has(.pulse-card-body) button.btn
 ):is(:hover, :focus-visible, [data-state="open"]) {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
@@ -316,7 +318,8 @@ html[data-gptskins-theme] :is(
 
 html[data-gptskins-theme] :is(
   [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"],
-  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label])
+  main :is(div, section):has(> :is(h1, h2)):has(input[placeholder*="Search projects" i], [aria-label*="Search projects" i]) > :is(div, form) button:not([aria-label]),
+  main:has(.pulse-card-body) button.btn
 ) :is(span, div, svg) {
   color: inherit !important;
 }
