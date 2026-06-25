@@ -665,13 +665,8 @@ html[data-themegpt-theme] [data-message-author-role] .cm-content {
 html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="overflow-clip"], [class*="bg-token-bg-elevated-secondary"]):has(.cm-editor) {
   background-color: var(--code-block-bg) !important;
   background-image: none !important;
-  border-color: transparent !important;
+  border-color: var(--code-block-border) !important;
   box-shadow: none !important;
-}
-
-html[data-themegpt-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="overflow-clip"], [class*="bg-token-bg-elevated-secondary"]):has(.cm-editor) > :not(.pointer-events-none) {
-  background-color: var(--code-block-bg) !important;
-  background-image: none !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role] .cm-scroller::-webkit-scrollbar:horizontal {
