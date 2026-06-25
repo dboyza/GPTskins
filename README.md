@@ -1,6 +1,6 @@
 # GPTskins
 
-GPTskins is a dependency-free Manifest V3 browser extension that adds 12 built-in themes to ChatGPT.
+GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 12 built-in themes to ChatGPT.
 
 Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or switch into popular editor-inspired themes like One Dark, Dracula, and Tokyo Night.
 
