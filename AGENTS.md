@@ -12,6 +12,7 @@
 
 ## Known Surfaces
 - Code blocks are nested inside `pre`; the visible frame may be a parent wrapper. Use `syncSurfaceTags()` and the `data-chatskin-code-frame`, `data-chatskin-code-block`, `data-chatskin-code-header`, and `data-chatskin-code-body` attributes instead of piling on more generic code selectors.
+- Never let headings/paragraphs/hr become `data-chatskin-code-header`. Theme switches can leave stale tags, so `syncSurfaceTags()` must strip that attribute from `h1`-`h6`, `p`, and `hr`.
 - Code body/draft snippets need horizontal scrolling. Do not leave every code wrapper on `overflow: hidden`; ensure `data-chatskin-code-body` keeps `overflow-x: auto`.
 - Newer ChatGPT code blocks may put the whole rounded code card as the first child inside `pre`. In that case the outer `pre` is only a transparent frame; tag the inner rounded card/header/body instead or the theme paints a square rectangle behind it.
 - Code block headers can have a sticky wrapper plus an inner `bg-token-bg-elevated-secondary` flex row. Round the inner painted row too; otherwise the word `Python` sits on a square strip.

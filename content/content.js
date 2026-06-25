@@ -825,6 +825,10 @@ html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visibl
       return;
     }
 
+    document.querySelectorAll(":is(h1, h2, h3, h4, h5, h6, p, hr)[data-chatskin-code-header]").forEach((item) => {
+      item.removeAttribute("data-chatskin-code-header");
+    });
+
     document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
       if (pre.closest(".cm-editor, .cm-scroller")) {
         return;
@@ -837,7 +841,7 @@ html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visibl
         embeddedBlock.setAttribute("data-chatskin-code-block", "true");
 
         const header = embeddedBlock.firstElementChild;
-        if (header) {
+        if (header && !header.matches("h1, h2, h3, h4, h5, h6, p, hr")) {
           header.setAttribute("data-chatskin-code-header", "true");
         }
 
@@ -879,7 +883,7 @@ html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visibl
       }
 
       const header = pre.previousElementSibling || block.firstElementChild;
-      if (header && header !== pre && !header.contains(pre)) {
+      if (header && header !== pre && !header.contains(pre) && !header.matches("h1, h2, h3, h4, h5, h6, p, hr")) {
         header.setAttribute("data-chatskin-code-header", "true");
       }
     });
