@@ -334,27 +334,29 @@ html[data-themegpt-theme] small {
   color: var(--themegpt-mutedText) !important;
 }
 
-html[data-themegpt-theme] pre,
-html[data-themegpt-theme] code {
+html[data-themegpt-theme] pre {
   background-color: var(--code-block-bg) !important;
   color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] pre,
-html[data-themegpt-theme] [data-message-author-role] .markdown pre,
-html[data-themegpt-theme] [data-message-author-role] div:has(> pre) {
-  background-color: var(--code-block-bg) !important;
-  border: 1px solid var(--code-block-border) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 24px var(--themegpt-shadow) !important;
-  overflow: hidden !important;
+html[data-themegpt-theme] code {
+  color: var(--themegpt-text) !important;
 }
 
-html[data-themegpt-theme] [data-message-author-role] div:has(> pre) > pre {
-  border: 0 !important;
-  border-radius: 0 !important;
+html[data-themegpt-theme] :not(pre) > code {
+  background-color: var(--themegpt-surfaceStrong) !important;
+  border: 1px solid var(--themegpt-border) !important;
+  border-radius: 6px !important;
+  padding: 0.1em 0.35em !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre,
+html[data-themegpt-theme] [data-message-author-role] .markdown pre {
+  background-color: var(--code-block-bg) !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-radius: 12px !important;
   box-shadow: none !important;
-  margin: 0 !important;
+  overflow: auto !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role] pre,
@@ -368,6 +370,25 @@ html[data-themegpt-theme] [data-message-author-role] pre code,
 html[data-themegpt-theme] [data-message-author-role] pre span,
 html[data-themegpt-theme] [data-message-author-role] code span {
   background: transparent !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) {
+  background-color: var(--themegpt-surface) !important;
+  border: 1px solid var(--themegpt-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 28px var(--themegpt-shadow) !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) * {
+  color: var(--themegpt-text) !important;
+  border-color: var(--themegpt-border) !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) :is(article, section, [class*="document"], [class*="preview"]) {
+  background-color: var(--themegpt-surfaceStrong) !important;
+  border: 1px solid var(--themegpt-border) !important;
+  border-radius: 12px !important;
 }
 `;
   }

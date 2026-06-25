@@ -96,9 +96,13 @@
         position: fixed;
         inset: 0;
         z-index: 4;
-        display: grid;
+        display: none;
         place-items: center;
         background: rgba(0, 0, 0, 0.45);
+      }
+
+      body[data-settings-preview] .settings-backdrop {
+        display: grid;
       }
 
       .settings-dialog {
@@ -216,9 +220,47 @@
         font-size: 16px;
       }
 
+      .code-answer {
+        margin: 12px 0;
+      }
+
       .assistant pre {
         padding: 14px;
         border-radius: 8px;
+      }
+
+      .artifact-card {
+        margin: 24px 0;
+        padding: 20px;
+        color: #fff;
+        background: #292929;
+        border-radius: 24px;
+      }
+
+      .artifact-toolbar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+
+      .artifact-toolbar button {
+        color: inherit;
+        background: transparent;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        padding: 6px 12px;
+      }
+
+      .artifact-document {
+        width: min(640px, 100%);
+        margin: auto;
+        padding: 24px;
+        color: #fff;
+        background: #111;
+      }
+
+      .artifact-document h2 {
+        margin-top: 0;
       }
 
       .source {
@@ -357,10 +399,28 @@
             <p class="text-token-text-primary">
               This paragraph should stay readable in both light and dark themes, even when ChatGPT keeps token text classes around.
             </p>
-            <div class="code-card">
+            <div class="code-answer text-token-text-primary">
+              <p>Sure — here's a simple JavaScript snippet:</p>
               <pre><code><span style="color: #ffedf4">function</span> <span style="color: #e8d8ff">findMax</span><span style="color: #f9e7cf">(numbers)</span> {
   <span style="color: #e8d8ff">return</span> <span style="color: #ffedf4">Math</span>.<span style="color: #e8d8ff">max</span>(...numbers);
 }</code></pre>
+              <p>For interview practice, keep it short.</p>
+            </div>
+            <div class="artifact-card" data-testid="canvas-artifact">
+              <div class="artifact-toolbar">
+                <button type="button">Edit</button>
+                <span>Copy Download Expand</span>
+              </div>
+              <article class="artifact-document">
+                <h2>Dylan Boyza</h2>
+                <p>AWS-certified platform engineer focused on secure cloud automation, Kubernetes, and AI-assisted engineering.</p>
+                <h3>Focus Areas</h3>
+                <ul>
+                  <li>Cloud infrastructure and automation</li>
+                  <li>Infrastructure as code and CI/CD</li>
+                  <li>Python, Terraform, and Jenkins automation</li>
+                </ul>
+              </article>
             </div>
             <span class="source">CoinGecko +1</span>
           </article>
@@ -384,7 +444,10 @@
 
     <script>
       const listeners = [];
-      let selectedTheme = location.hash.replace("#", "") || "og";
+      const hash = location.hash.replace("#", "");
+      const settingsPrefix = "settings-";
+      let selectedTheme = hash.startsWith(settingsPrefix) ? hash.slice(settingsPrefix.length) : hash || "og";
+      document.body.toggleAttribute("data-settings-preview", hash.startsWith(settingsPrefix));
 
       globalThis.chrome = {
         storage: {
