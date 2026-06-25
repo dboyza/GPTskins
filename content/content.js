@@ -19,6 +19,7 @@
   function removeTheme() {
     root.removeAttribute("data-themegpt-theme");
     root.removeAttribute("data-chatskin-plan-page");
+    clearSurfaceTags();
     const existingStyle = document.getElementById(styleId);
     if (existingStyle) {
       existingStyle.remove();
@@ -527,6 +528,55 @@ html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class
   background-color: transparent !important;
   background-image: none !important;
 }
+
+html[data-themegpt-theme] [data-chatskin-code-block] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  overflow: hidden !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-block] :is([class*="border"], [class*="ring"], [class*="shadow"]) {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-header] {
+  background: var(--code-block-header) !important;
+  background-image: none !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-bottom: 0 !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-shadow: none !important;
+  color: var(--themegpt-text) !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-body] {
+  background: var(--code-block-bg) !important;
+  background-image: none !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-top: 0 !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-code-body] :is(pre, code),
+html[data-themegpt-theme] [data-chatskin-code-body] code {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] [data-chatskin-plan-layer] {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
 `;
   }
 
@@ -552,11 +602,71 @@ html[data-themegpt-theme] [data-message-author-role] :is(div, section):is([class
     } else {
       root.removeAttribute("data-chatskin-plan-page");
     }
+    syncSurfaceTags(isPlanPage);
   }
 
   function schedulePageMarker() {
     clearTimeout(pageMarkerTimer);
     pageMarkerTimer = setTimeout(syncPageMarker, 150);
+  }
+
+  function clearSurfaceTags() {
+    document
+      .querySelectorAll("[data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-plan-layer]")
+      .forEach((item) => {
+        item.removeAttribute("data-chatskin-code-block");
+        item.removeAttribute("data-chatskin-code-header");
+        item.removeAttribute("data-chatskin-code-body");
+        item.removeAttribute("data-chatskin-plan-layer");
+      });
+  }
+
+  function syncSurfaceTags(isPlanPage) {
+    if (!root.hasAttribute("data-themegpt-theme")) {
+      clearSurfaceTags();
+      return;
+    }
+
+    document.querySelectorAll("[data-message-author-role] pre").forEach((pre) => {
+      const block =
+        pre.closest("[data-testid*='code'], [class*='group/code'], [class*='not-prose'], [class*='overflow-hidden'], [class*='contain-inline-size']") ||
+        pre.parentElement;
+
+      if (!block || block.matches("[data-message-author-role]")) {
+        return;
+      }
+
+      block.setAttribute("data-chatskin-code-block", "true");
+      pre.setAttribute("data-chatskin-code-body", "true");
+
+      if (pre.parentElement && pre.parentElement !== block) {
+        pre.parentElement.setAttribute("data-chatskin-code-body", "true");
+      }
+
+      const header = pre.previousElementSibling || block.firstElementChild;
+      if (header && header !== pre && !header.contains(pre)) {
+        header.setAttribute("data-chatskin-code-header", "true");
+      }
+    });
+
+    document.querySelectorAll("[data-chatskin-plan-layer]").forEach((item) => item.removeAttribute("data-chatskin-plan-layer"));
+    if (!isPlanPage) {
+      return;
+    }
+
+    document.querySelectorAll("body *").forEach((item) => {
+      const styles = getComputedStyle(item);
+      const rect = item.getBoundingClientRect();
+      const isBlackLayer =
+        (styles.backgroundColor === "rgb(0, 0, 0)" || styles.backgroundImage.includes("gradient")) &&
+        rect.width > window.innerWidth * 0.5 &&
+        rect.height > 20 &&
+        rect.top > window.innerHeight * 0.45;
+
+      if (isBlackLayer && !item.closest("[role='dialog'], button, a")) {
+        item.setAttribute("data-chatskin-plan-layer", "true");
+      }
+    });
   }
 
   function loadStoredTheme() {
