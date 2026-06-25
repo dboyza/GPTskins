@@ -5,7 +5,7 @@ GPTskins is a dependency-free Manifest V3 browser extension that applies built-i
 ## Features
 
 - Popup-only theme picker.
-- Built-in themes: Default, OG, Midnight, Forest, Solar, Rose, and High Contrast.
+- Built-in themes: Default, OG, Midnight, One Dark, Dracula, Catppuccin, Tokyo Night, Nord, Gruvbox, Forest, Solar, Rose, and High Contrast.
 - Saved selection with `chrome.storage.sync`.
 - Automatic theme loading on `chatgpt.com` and `chat.openai.com`.
 - No backend, login, external API, or build step.

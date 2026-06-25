@@ -25,6 +25,7 @@
 - If CodeMirror still shows an inner line, hide the `.pe-11.pt-3 .cm-editor[class*="cm-"]` `border-color` and `outline-color`; do not change snippet layout.
 - Markdown tables need explicit primary text, opaque header/cell descendants, and a stronger border mix. Light themes can leave table headers, copy icons, and row dividers on near-white ChatGPT token colors.
 - Recharts axes and grid lines are SVG attributes/classes, not normal text tokens. Set `.recharts-text`/axis tick `fill` plus grid/axis `stroke` for light theme contrast.
+- When adding dark themes in `shared/themes.js`, also add their ids to `darkThemeIds` in `content/content.js` so browser-native controls and scrollbars use dark color-scheme.
 - Writing/edit blocks use `data-testid="writing-block-container"`, `data-testid="writing-block-header-surface"`, `.writing-block-editor`, `.ProseMirror`, and `[contenteditable="true"]`.
 - The global `[contenteditable="true"]` composer rule can accidentally recolor writing/edit blocks. Put writing-block overrides later and make the outer and inner surfaces the same color.
 - The writing-block Edit button uses `data-testid="writing-block-header-magic-edit-button"` and can keep a dark token background in light themes. Set its background, text, border, icon, and hover colors explicitly.

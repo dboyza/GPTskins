@@ -3,6 +3,7 @@
 
   const themeApi = globalThis.ThemeGPTThemes;
   const styleId = "themegpt-style";
+  const darkThemeIds = new Set(["contrast", "dracula", "catppuccin", "gruvbox", "midnight", "nord", "og", "one-dark", "tokyo-night"]);
   const root = document.documentElement;
 
   function isDefaultTheme(theme) {
@@ -58,7 +59,7 @@ ${cssVariables(theme)}
   --border-medium: var(--themegpt-border) !important;
   --border-heavy: var(--themegpt-border) !important;
   --sharp-edge-bottom-shadow: none !important;
-  color-scheme: ${["contrast", "midnight", "og"].includes(theme.id) ? "dark" : "light"};
+  color-scheme: ${darkThemeIds.has(theme.id) ? "dark" : "light"};
 }
 
 html[data-themegpt-theme],
