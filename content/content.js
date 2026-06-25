@@ -455,9 +455,10 @@ html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact
 }
 
 html[data-themegpt-theme] [data-message-author-role] :is([data-testid*="artifact"], [data-testid*="canvas"], [class*="artifact"], [class*="canvas"]) :is(article, section, [class*="document"], [class*="preview"]) {
-  background-color: var(--themegpt-surfaceStrong) !important;
-  border: 1px solid var(--themegpt-border) !important;
-  border-radius: 12px !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 `;
   }
