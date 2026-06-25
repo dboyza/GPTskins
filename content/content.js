@@ -100,6 +100,13 @@ html[data-themegpt-theme] [class*="thread-bottom-container"]:has(:is(form[class*
   box-shadow: none !important;
 }
 
+html[data-themegpt-theme] [class*="thread-bottom-container"]::before,
+html[data-themegpt-theme] [class*="thread-bottom-container"]::after {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"],
 html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::before,
 html[data-themegpt-theme][data-chatskin-plan-page="true"] [class*="thread-bottom-container"]::after {
