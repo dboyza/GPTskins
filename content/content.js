@@ -339,7 +339,7 @@ html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="hist
   border-radius: 10px !important;
 }
 
-html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action="library"]:is(:hover, :focus-visible) {
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) [data-chatskin-sidebar-action="library"]:is(:hover, :focus-visible, [data-active]) {
   z-index: 21 !important;
 }
 
