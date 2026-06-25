@@ -536,6 +536,74 @@ html[data-gptskins-theme] [aria-modal="true"] :is([aria-pressed="true"], [data-s
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle] {
+  background: color-mix(in srgb, var(--gptskins-mutedText) 16%, var(--gptskins-surface)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-mutedText) 16%, var(--gptskins-surface)) !important;
+  background-image: none !important;
+  border: 1px solid color-mix(in srgb, var(--gptskins-border) 36%, transparent) !important;
+  border-radius: 999px !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gptskins-text) 4%, transparent) !important;
+  color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--gptskins-mutedText) !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option]:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option]:is([aria-pressed="true"], [aria-selected="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]),
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option][data-chatskin-plan-active="true"] {
+  background: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-text) 5%, var(--gptskins-surface)) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px var(--gptskins-shadow) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-toggle-option] :is(span, div) {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-cta] {
+  background: var(--gptskins-accent) !important;
+  background-color: var(--gptskins-accent) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--gptskins-accentText) !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-cta]:is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"]),
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-cta][data-chatskin-plan-disabled="true"] {
+  background: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: color-mix(in srgb, var(--gptskins-text) 42%, var(--gptskins-surface)) !important;
+  cursor: not-allowed !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme][data-chatskin-plan-page="true"] [data-chatskin-plan-cta] :is(span, div) {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] [role="switch"],
 html[data-gptskins-theme] [aria-modal="true"] [role="switch"] {
   background-color: var(--gptskins-composer) !important;
@@ -703,7 +771,7 @@ html[data-gptskins-theme] [data-message-author-role] :is([data-testid*="artifact
 }
 
 html[data-gptskins-theme] main :is([class*="sticky"], [class*="fixed"])[class*="bottom-0"]:not(:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"]))),
-html[data-gptskins-theme][data-chatskin-plan-page="true"] main :is([class*="bg-black"], [class*="from-black"], [class*="to-black"], [class*="dark:bg-black"], [class*="dark:from-black"], [class*="dark:to-black"], [style*="background: black"], [style*="background-color: black"], [style*="background-color: rgb(0, 0, 0)"]) {
+html[data-gptskins-theme][data-chatskin-plan-page="true"] main :is([class*="bg-black"], [class*="from-black"], [class*="to-black"], [class*="dark:bg-black"], [class*="dark:from-black"], [class*="dark:to-black"], [style*="background: black"], [style*="background-color: black"], [style*="background-color: rgb(0, 0, 0)"]):not([data-chatskin-plan-toggle]):not([data-chatskin-plan-toggle-option]):not([data-chatskin-plan-cta]) {
   background: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
@@ -1050,9 +1118,13 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     }
   }
 
+  function normalizedText(item) {
+    return (item.textContent || "").replace(/\s+/g, " ").trim();
+  }
+
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-suggestion-layer]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
@@ -1060,8 +1132,80 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
         item.removeAttribute("data-chatskin-code-body");
         item.removeAttribute("data-chatskin-code-body-shell");
         item.removeAttribute("data-chatskin-plan-layer");
+        item.removeAttribute("data-chatskin-plan-toggle");
+        item.removeAttribute("data-chatskin-plan-toggle-option");
+        item.removeAttribute("data-chatskin-plan-active");
+        item.removeAttribute("data-chatskin-plan-cta");
+        item.removeAttribute("data-chatskin-plan-disabled");
         item.removeAttribute("data-chatskin-suggestion-layer");
       });
+  }
+
+  function tagPlanControls() {
+    const interactiveItems = Array.from(document.querySelectorAll("button, [role='button']"));
+    const toggleOptions = interactiveItems.filter((item) => /^(5x|20x)$/i.test(normalizedText(item)));
+    const toggleGroups = new Set();
+
+    toggleOptions.forEach((item) => {
+      item.setAttribute("data-chatskin-plan-toggle-option", "true");
+
+      const selected =
+        item.matches('[aria-pressed="true"], [aria-selected="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]') ||
+        /\b(active|selected|checked)\b/i.test(typeof item.className === "string" ? item.className : "");
+
+      if (selected) {
+        item.setAttribute("data-chatskin-plan-active", "true");
+      }
+
+      for (let node = item.parentElement, depth = 0; node && depth < 4; node = node.parentElement, depth += 1) {
+        const optionLabels = Array.from(node.querySelectorAll("button, [role='button']")).map((button) => normalizedText(button));
+        if (optionLabels.includes("5x") && optionLabels.includes("20x")) {
+          toggleGroups.add(node);
+          break;
+        }
+      }
+    });
+
+    toggleGroups.forEach((group) => {
+      group.setAttribute("data-chatskin-plan-toggle", "true");
+      const options = Array.from(group.querySelectorAll("[data-chatskin-plan-toggle-option]"));
+      const hasSelectedOption = options.some((item) => item.hasAttribute("data-chatskin-plan-active"));
+      if (!hasSelectedOption) {
+        let planCard = document.body;
+        for (let node = group.parentElement, depth = 0; node && depth < 8; node = node.parentElement, depth += 1) {
+          const nodeText = normalizedText(node);
+          if (/\$\s*\d/.test(nodeText) && nodeText.includes("5x") && nodeText.includes("20x")) {
+            planCard = node;
+            break;
+          }
+        }
+        const planText = normalizedText(planCard);
+        const activeLabel = /\$\s*200\b/.test(planText) ? "20x" : "";
+        options.forEach((item) => {
+          if (activeLabel && normalizedText(item) === activeLabel) {
+            item.setAttribute("data-chatskin-plan-active", "true");
+          }
+        });
+      }
+    });
+
+    interactiveItems.forEach((item) => {
+      const text = normalizedText(item);
+      if (!/^(Upgrade to|Switch to|Get|Continue|Start)/i.test(text) || /^(5x|20x)$/i.test(text)) {
+        return;
+      }
+
+      item.setAttribute("data-chatskin-plan-cta", "true");
+
+      const className = typeof item.className === "string" ? item.className : "";
+      const disabled =
+        item.matches(":disabled, [disabled], [aria-disabled='true'], [data-disabled='true']") ||
+        /\b(disabled|cursor-not-allowed|opacity-\d+)\b/i.test(className);
+
+      if (disabled) {
+        item.setAttribute("data-chatskin-plan-disabled", "true");
+      }
+    });
   }
 
   function syncSurfaceTags(isPlanPage) {
@@ -1075,6 +1219,13 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     });
 
     document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
+    document.querySelectorAll("[data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled]").forEach((item) => {
+      item.removeAttribute("data-chatskin-plan-toggle");
+      item.removeAttribute("data-chatskin-plan-toggle-option");
+      item.removeAttribute("data-chatskin-plan-active");
+      item.removeAttribute("data-chatskin-plan-cta");
+      item.removeAttribute("data-chatskin-plan-disabled");
+    });
     const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
     const composerRect = composer ? composer.getBoundingClientRect() : null;
     if (composerRect) {
@@ -1159,6 +1310,8 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
     if (!isPlanPage) {
       return;
     }
+
+    tagPlanControls();
 
     document.querySelectorAll("body *").forEach((item) => {
       const styles = getComputedStyle(item);
