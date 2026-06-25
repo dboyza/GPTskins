@@ -287,6 +287,31 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
   background-color: var(--gptskins-surfaceStrong) !important;
 }
 
+html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
+  background-image: none !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"] {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border-color: var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"]:is(:hover, :focus-visible, [data-state="open"]) {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="artifacts-surface-library-search-controls"] button[aria-haspopup="menu"] :is(span, div, svg) {
+  color: inherit !important;
+}
+
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]),
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]),
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"],
