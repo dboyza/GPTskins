@@ -80,8 +80,7 @@ html[data-themegpt-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
   background-color: var(--themegpt-background) !important;
 }
 
-html[data-themegpt-theme] [class*="thread-bottom-container"],
-html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"] {
+html[data-themegpt-theme] [class*="thread-bottom-container"] {
   background: linear-gradient(
     to bottom,
     transparent 0,
@@ -93,9 +92,7 @@ html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"] {
 }
 
 html[data-themegpt-theme] [class*="thread-bottom-container"]::before,
-html[data-themegpt-theme] [class*="thread-bottom-container"]::after,
-html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"]::before,
-html[data-themegpt-theme] [class*="sticky"][class*="bottom-0"]::after {
+html[data-themegpt-theme] [class*="thread-bottom-container"]::after {
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -358,6 +355,17 @@ html[data-themegpt-theme] [role="dialog"] :is(button, span)[aria-label*="page" i
 html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[class*="dot"][aria-current="true"],
 html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="slide" i][aria-current="true"],
 html[data-themegpt-theme] [aria-modal="true"] :is(button, span)[aria-label*="page" i][aria-current="true"] {
+  background-color: var(--themegpt-accent) !important;
+  opacity: 1 !important;
+}
+
+html[data-themegpt-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]) {
+  background-color: var(--themegpt-mutedText) !important;
+  border-color: transparent !important;
+  opacity: 0.45 !important;
+}
+
+html[data-themegpt-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="bg-token-text-primary"], [class~="bg-white"], [data-active="true"], [data-state="active"]) {
   background-color: var(--themegpt-accent) !important;
   opacity: 1 !important;
 }

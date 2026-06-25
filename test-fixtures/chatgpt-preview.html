@@ -223,6 +223,29 @@
         gap: 12px;
       }
 
+      .voice-dots {
+        display: flex;
+        gap: 12px;
+      }
+
+      .rounded-full {
+        border-radius: 999px;
+      }
+
+      .h-2 {
+        height: 8px;
+      }
+
+      .w-2 {
+        width: 8px;
+      }
+
+      .bg-token-text-primary,
+      .bg-token-text-tertiary {
+        display: block;
+        background: #fff;
+      }
+
       .settings-dot {
         width: 8px;
         height: 8px;
@@ -415,6 +438,12 @@
               <button class="settings-dot" type="button" aria-label="slide 2" aria-current="true"></button>
               <button class="settings-dot" type="button" aria-label="slide 3"></button>
               <button class="settings-dot" type="button" aria-label="slide 4"></button>
+            </div>
+            <div class="voice-dots" aria-label="Voice options">
+              <span class="rounded-full h-2 w-2 bg-token-text-tertiary"></span>
+              <span class="rounded-full h-2 w-2 bg-token-text-tertiary"></span>
+              <span class="rounded-full h-2 w-2 bg-token-text-primary"></span>
+              <span class="rounded-full h-2 w-2 bg-token-text-tertiary"></span>
             </div>
           </div>
         </div>
