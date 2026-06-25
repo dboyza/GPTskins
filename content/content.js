@@ -591,6 +591,23 @@ html[data-themegpt-theme] [data-chatskin-plan-layer] {
   border-color: transparent !important;
   box-shadow: none !important;
 }
+
+html[data-themegpt-theme] [data-message-author-role] pre [class*="border-token-border-light"] {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre [class*="bg-token-bg-elevated-secondary"] {
+  background: var(--code-block-bg) !important;
+  background-image: none !important;
+}
+
+html[data-themegpt-theme] [data-message-author-role] pre [class*="sticky"] > [class*="bg-token-bg-elevated-secondary"],
+html[data-themegpt-theme] [data-message-author-role] pre [class*="select-none"] [class*="bg-token-bg-elevated-secondary"] {
+  background: var(--code-block-header) !important;
+  background-image: none !important;
+}
 `;
   }
 
