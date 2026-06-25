@@ -8,12 +8,12 @@ Bring back the classic **OG ChatGPT** look with the charcoal gray interface, or 
 
 <table>
   <tr>
-    <td><strong>OG</strong><br><img src="docs/screenshots/og-theme.png" width="240" alt="GPTskins OG ChatGPT theme preview"></td>
-    <td><strong>Midnight</strong><br><img src="docs/screenshots/midnight-theme.png" width="240" alt="GPTskins Midnight theme preview"></td>
+    <td><strong>OG</strong><br><img src="docs/screenshots/og-theme.png" width="1000" alt="GPTskins OG ChatGPT theme preview"></td>
+    <td><strong>Midnight</strong><br><img src="docs/screenshots/midnight-theme.png" width="1000" alt="GPTskins Midnight theme preview"></td>
   </tr>
   <tr>
-    <td><strong>One Dark</strong><br><img src="docs/screenshots/one-dark-theme.png" width="240" alt="GPTskins One Dark theme preview"></td>
-    <td><strong>Dracula</strong><br><img src="docs/screenshots/dracula-theme.png" width="240" alt="GPTskins Dracula theme preview"></td>
+    <td><strong>One Dark</strong><br><img src="docs/screenshots/one-dark-theme.png" width="1000" alt="GPTskins One Dark theme preview"></td>
+    <td><strong>Dracula</strong><br><img src="docs/screenshots/dracula-theme.png" width="1000" alt="GPTskins Dracula theme preview"></td>
   </tr>
 </table>
 
