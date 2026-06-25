@@ -35,12 +35,28 @@
     style.textContent = `
 html[data-themegpt-theme] {
 ${cssVariables(theme)}
-  color-scheme: ${theme.id === "contrast" || theme.id === "midnight" ? "dark" : "light"};
+  --main-surface-primary: var(--themegpt-background) !important;
+  --main-surface-secondary: var(--themegpt-surface) !important;
+  --main-surface-tertiary: var(--themegpt-surfaceStrong) !important;
+  --sidebar-surface-primary: var(--themegpt-sidebar) !important;
+  --sidebar-surface-secondary: var(--themegpt-sidebarHover) !important;
+  --sidebar-surface-tertiary: var(--themegpt-sidebarHover) !important;
+  --message-surface: var(--themegpt-assistantBubble) !important;
+  --composer-surface: var(--themegpt-composer) !important;
+  --text-primary: var(--themegpt-text) !important;
+  --text-secondary: var(--themegpt-mutedText) !important;
+  --text-tertiary: var(--themegpt-mutedText) !important;
+  --border-light: var(--themegpt-border) !important;
+  --border-medium: var(--themegpt-border) !important;
+  --border-heavy: var(--themegpt-border) !important;
+  color-scheme: ${["contrast", "midnight", "og"].includes(theme.id) ? "dark" : "light"};
 }
 
 html[data-themegpt-theme],
 html[data-themegpt-theme] body,
-html[data-themegpt-theme] main {
+html[data-themegpt-theme] #root,
+html[data-themegpt-theme] main,
+html[data-themegpt-theme] [role="main"] {
   background: var(--themegpt-background) !important;
   color: var(--themegpt-text) !important;
 }
@@ -48,12 +64,7 @@ html[data-themegpt-theme] main {
 html[data-themegpt-theme] [class*="bg-token-main-surface-primary"],
 html[data-themegpt-theme] [class*="bg-token-main-surface-secondary"],
 html[data-themegpt-theme] [class*="bg-token-main-surface-tertiary"],
-html[data-themegpt-theme] [class*="bg-token-sidebar-surface-primary"],
-html[data-themegpt-theme] [class*="bg-token-sidebar-surface-secondary"],
-html[data-themegpt-theme] [class*="bg-token-message-surface"],
-html[data-themegpt-theme] [class*="dark:bg-"],
-html[data-themegpt-theme] [data-testid*="conversation-turn"],
-html[data-themegpt-theme] article {
+html[data-themegpt-theme] [class*="bg-token-message-surface"] {
   background-color: var(--themegpt-surface) !important;
   color: var(--themegpt-text) !important;
 }
@@ -64,7 +75,31 @@ html[data-themegpt-theme] [class*="sidebar"],
 html[data-themegpt-theme] [data-testid="history-panel"],
 html[data-themegpt-theme] [data-testid="left-sidebar"] {
   background-color: var(--themegpt-sidebar) !important;
-  color: var(--themegpt-text) !important;
+  color: var(--themegpt-sidebarText) !important;
+}
+
+html[data-themegpt-theme] nav :is(a, button, [role="button"], span, p, div),
+html[data-themegpt-theme] aside :is(a, button, [role="button"], span, p, div),
+html[data-themegpt-theme] [data-testid="history-panel"] :is(a, button, [role="button"], span, p, div),
+html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="button"], span, p, div) {
+  color: inherit !important;
+}
+
+html[data-themegpt-theme] nav .text-token-text-secondary,
+html[data-themegpt-theme] nav [class*="text-token-text-secondary"],
+html[data-themegpt-theme] aside .text-token-text-secondary,
+html[data-themegpt-theme] aside [class*="text-token-text-secondary"],
+html[data-themegpt-theme] [data-testid="history-panel"] [class*="text-token-text-secondary"],
+html[data-themegpt-theme] [data-testid="left-sidebar"] [class*="text-token-text-secondary"] {
+  color: var(--themegpt-sidebarMuted) !important;
+}
+
+html[data-themegpt-theme] nav :is(a, button, [role="button"]):hover,
+html[data-themegpt-theme] aside :is(a, button, [role="button"]):hover,
+html[data-themegpt-theme] [data-testid="history-panel"] :is(a, button, [role="button"]):hover,
+html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="button"]):hover {
+  background-color: var(--themegpt-sidebarHover) !important;
+  color: var(--themegpt-sidebarText) !important;
 }
 
 html[data-themegpt-theme] [data-message-author-role="user"],
@@ -82,7 +117,6 @@ html[data-themegpt-theme] [data-message-author-role="assistant"] > div {
 html[data-themegpt-theme] textarea,
 html[data-themegpt-theme] input,
 html[data-themegpt-theme] [contenteditable="true"],
-html[data-themegpt-theme] form,
 html[data-themegpt-theme] [data-testid="composer"],
 html[data-themegpt-theme] [class*="composer"] {
   background-color: var(--themegpt-composer) !important;
@@ -90,45 +124,31 @@ html[data-themegpt-theme] [class*="composer"] {
   border-color: var(--themegpt-border) !important;
 }
 
-html[data-themegpt-theme] button,
-html[data-themegpt-theme] a,
-html[data-themegpt-theme] [role="button"] {
-  color: var(--themegpt-text) !important;
+html[data-themegpt-theme] textarea::placeholder,
+html[data-themegpt-theme] input::placeholder {
+  color: var(--themegpt-mutedText) !important;
 }
 
-html[data-themegpt-theme] button:hover,
-html[data-themegpt-theme] a:hover,
-html[data-themegpt-theme] [role="button"]:hover {
+html[data-themegpt-theme] main :is(button, a, [role="button"]) {
+  color: inherit !important;
+}
+
+html[data-themegpt-theme] main :is(button, a, [role="button"]):hover {
   background-color: var(--themegpt-surfaceStrong) !important;
 }
 
-html[data-themegpt-theme] button[aria-pressed="true"],
-html[data-themegpt-theme] [aria-selected="true"],
-html[data-themegpt-theme] [data-state="checked"],
-html[data-themegpt-theme] [class*="bg-token-text-primary"] {
-  background-color: var(--themegpt-accent) !important;
-  color: var(--themegpt-accentText) !important;
-}
-
-html[data-themegpt-theme] *,
-html[data-themegpt-theme] ::before,
-html[data-themegpt-theme] ::after {
+html[data-themegpt-theme] [class*="border-token"],
+html[data-themegpt-theme] [class*="divide-token"] > :not([hidden]) ~ :not([hidden]),
+html[data-themegpt-theme] textarea,
+html[data-themegpt-theme] input,
+html[data-themegpt-theme] [contenteditable="true"],
+html[data-themegpt-theme] [data-testid="composer"] {
   border-color: var(--themegpt-border) !important;
 }
 
-html[data-themegpt-theme] p,
-html[data-themegpt-theme] span,
-html[data-themegpt-theme] li,
-html[data-themegpt-theme] h1,
-html[data-themegpt-theme] h2,
-html[data-themegpt-theme] h3,
-html[data-themegpt-theme] h4,
-html[data-themegpt-theme] h5,
-html[data-themegpt-theme] h6,
-html[data-themegpt-theme] code,
-html[data-themegpt-theme] pre,
-html[data-themegpt-theme] label {
+html[data-themegpt-theme] svg {
   color: inherit !important;
+  stroke: currentColor !important;
 }
 
 html[data-themegpt-theme] .text-token-text-secondary,
