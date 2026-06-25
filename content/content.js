@@ -746,6 +746,16 @@ html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visibl
   border-radius: 12px 12px 0 0 !important;
   overflow: hidden !important;
 }
+
+html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"] [class*="border-token-border-light"][class*="rounded"],
+html[data-themegpt-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"] [class*="overflow-clip"][class*="rounded"] {
+  background: var(--code-block-bg) !important;
+  background-image: none !important;
+  border-color: var(--code-block-border) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
 `;
   }
 
