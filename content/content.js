@@ -635,6 +635,8 @@ html[data-themegpt-theme] [data-chatskin-code-body] {
   border-radius: 0 0 12px 12px !important;
   box-shadow: none !important;
   margin: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 html[data-themegpt-theme] [data-chatskin-code-body] :is(pre, code),
@@ -642,6 +644,7 @@ html[data-themegpt-theme] [data-chatskin-code-body] code {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  white-space: pre !important;
 }
 
 html[data-themegpt-theme] [data-chatskin-plan-layer] {
