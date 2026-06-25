@@ -187,7 +187,13 @@ html[data-themegpt-theme] [data-testid="composer"] {
 }
 
 html[data-themegpt-theme] form[class*="composer"],
-html[data-themegpt-theme] [class*="group/composer"],
+html[data-themegpt-theme] [class*="group/composer"] {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-themegpt-theme] form[class*="composer"] > [class*="bg-(--composer-surface-primary)"],
 html[data-themegpt-theme] [class*="bg-(--composer-surface-primary)"],
 html[data-themegpt-theme] [data-testid="composer"] {
   background-color: var(--themegpt-composer) !important;
