@@ -2,6 +2,7 @@
 
 ## Project
 - GPTskins is a dependency-free Manifest V3 extension for theming ChatGPT.
+- Use `GPTskins`, `GPTSKINS`, and `gptskins` for APIs, message types, storage keys, attributes, and CSS variables.
 - Keep changes surgical. Prefer one targeted selector or tag over broad CSS guesses.
 - No build step. Validate content script syntax with `node --check content/content.js`.
 

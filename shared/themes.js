@@ -325,8 +325,8 @@
     return themeMap[id] || themeMap.default;
   }
 
-  globalThis.ThemeGPTThemes = {
-    storageKey: "themegpt.theme",
+  globalThis.GPTskinsThemes = {
+    storageKey: "gptskins.theme",
     themes,
     getTheme
   };

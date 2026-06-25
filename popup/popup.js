@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const themeApi = globalThis.ThemeGPTThemes;
+  const themeApi = globalThis.GPTskinsThemes;
   const list = document.getElementById("theme-list");
   const status = document.getElementById("status");
   let selectedThemeId = "default";
@@ -64,7 +64,7 @@
         return;
       }
 
-      chrome.tabs.sendMessage(tab.id, { type: "THEMEGPT_APPLY_THEME", themeId }, () => {
+      chrome.tabs.sendMessage(tab.id, { type: "GPTSKINS_APPLY_THEME", themeId }, () => {
         if (chrome.runtime.lastError) {
           setStatus("Saved. Refresh ChatGPT if it was already open.");
           return;

@@ -610,7 +610,7 @@
         selectedTheme = themeId;
         location.hash = themeId;
         listeners.forEach((callback) => {
-          callback({ "themegpt.theme": { newValue: themeId } }, "sync");
+          callback({ "gptskins.theme": { newValue: themeId } }, "sync");
         });
       };
     </script>
