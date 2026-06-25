@@ -172,14 +172,16 @@ html[data-themegpt-theme] [data-testid="left-sidebar"] :is(a, button, [role="but
 
 html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]),
 html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]),
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"] {
+html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"],
+html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(button, [role="button"]):has(> svg:only-child) {
   background-color: transparent !important;
   box-shadow: none !important;
 }
 
 html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):hover,
 html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):hover,
-html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"]:hover {
+html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) [class*="group-hover/sidebar-section-header"]:hover,
+html[data-themegpt-theme] :is(nav, aside, [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(button, [role="button"]):has(> svg:only-child):hover {
   background-color: transparent !important;
   box-shadow: none !important;
 }

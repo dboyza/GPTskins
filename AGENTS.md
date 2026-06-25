@@ -30,7 +30,7 @@
 - The writing-block Edit button uses `data-testid="writing-block-header-magic-edit-button"` and can keep a dark token background in light themes. Set its background, text, border, icon, and hover colors explicitly.
 - The upgrade-plan black bar can be `.thread-bottom-container::after`, not a real div. Keep thread-bottom pseudo-elements transparent for all themed pages; use `data-chatskin-plan-layer` only as a fallback and do not exclude `[role="dialog"]` because the plan page itself is dialog-like.
 - Settings and voice UI live under `[role="dialog"]` or `[aria-modal="true"]`; switches and carousel dots need explicit contrast checks in light and dark themes.
-- Sidebar `Pinned`/`Recents` headers should not get hover pills. Keep section-header controls and their small sibling action buttons transparent; normal chat rows can still hover.
+- Sidebar `Pinned`/`Recents` headers should not get hover pills. Keep section-header controls and icon-only sibling action buttons transparent; normal chat rows can still hover.
 - Settings sidebar rows are dialog buttons/tabs. Keep default dialog buttons transparent and style only hover/active states, otherwise OG makes every sidebar row look selected and bubbly.
 
 ## Verification
