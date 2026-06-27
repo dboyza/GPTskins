@@ -1315,6 +1315,19 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   overflow: visible !important;
 }
 
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-block] [data-chatskin-code-body] :is(.cm-editor, .cm-scroller, .cm-content) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-block] [data-chatskin-code-body] .cm-content {
+  padding-top: 4px !important;
+  padding-bottom: 8px !important;
+}
+
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"]),
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="writing-block-editor"][class*="markdown"],
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="ProseMirror"][class*="markdown"],
