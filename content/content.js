@@ -79,6 +79,12 @@ ${cssVariables(theme)}
   --main-surface-primary: var(--gptskins-background) !important;
   --main-surface-secondary: var(--gptskins-surface) !important;
   --main-surface-tertiary: var(--gptskins-surfaceStrong) !important;
+  --surface-primary: var(--gptskins-surface) !important;
+  --surface-secondary: var(--gptskins-surfaceStrong) !important;
+  --surface-tertiary: var(--gptskins-surfaceStrong) !important;
+  --bg-primary: var(--gptskins-surface) !important;
+  --bg-secondary: var(--gptskins-surfaceStrong) !important;
+  --bg-tertiary: var(--gptskins-surfaceStrong) !important;
   --sidebar-surface-primary: var(--gptskins-sidebar) !important;
   --sidebar-surface-secondary: var(--gptskins-sidebarHover) !important;
   --sidebar-surface-tertiary: var(--gptskins-sidebarHover) !important;
@@ -125,6 +131,28 @@ html[data-gptskins-theme] [class*="bg-token-main-surface-secondary"],
 html[data-gptskins-theme] [class*="bg-token-main-surface-tertiary"],
 html[data-gptskins-theme] [class*="bg-token-message-surface"] {
   background-color: var(--gptskins-surface) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="stage-thread-flyout"] {
+  --main-surface-primary: var(--gptskins-surface) !important;
+  --main-surface-secondary: var(--gptskins-surface) !important;
+  --main-surface-tertiary: var(--gptskins-surfaceStrong) !important;
+  --surface-primary: var(--gptskins-surface) !important;
+  --surface-secondary: var(--gptskins-surfaceStrong) !important;
+  --surface-tertiary: var(--gptskins-surfaceStrong) !important;
+  --bg-primary: var(--gptskins-surface) !important;
+  --bg-secondary: var(--gptskins-surfaceStrong) !important;
+  --bg-tertiary: var(--gptskins-surfaceStrong) !important;
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="stage-thread-flyout"] :is([class*="bg-surface-primary"], [class*="bg-token-main-surface-primary"], [class*="bg-token-bg-primary"], [class*="bg-[var(--main-surface-primary)]"]) {
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
+  background-image: none !important;
   color: var(--gptskins-text) !important;
 }
 
