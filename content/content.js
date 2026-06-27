@@ -308,6 +308,14 @@ html[data-gptskins-theme] [data-testid="composer"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"], [data-testid="composer"]) :is(textarea, input, [contenteditable="true"], [class*="ProseMirror"]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme] button[class*="composer"]:not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]),
 html[data-gptskins-theme] [class*="composer-btn"]:not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
   background-color: transparent !important;
