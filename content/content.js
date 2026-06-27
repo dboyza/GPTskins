@@ -1147,6 +1147,13 @@ html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"
   stroke: none !important;
 }
 
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"])[aria-label*="run" i] {
+  background: transparent !important;
+  border: 1px solid var(--code-block-border) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme] [data-chatskin-code-body] {
   background: var(--code-block-bg) !important;
   background-image: none !important;
