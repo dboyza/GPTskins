@@ -58,6 +58,7 @@
     root.removeAttribute("data-gptskins-switching");
     root.removeAttribute("data-gptskins-theme");
     root.removeAttribute("data-chatskin-plan-page");
+    root.removeAttribute("data-chatskin-finance-page");
     clearSurfaceTags();
     const existingStyle = document.getElementById(styleId);
     if (existingStyle) {
@@ -469,6 +470,37 @@ html[data-gptskins-theme] :is(
   [data-testid="create-gpt-discovery-button"],
   main:has(.pulse-card-body) button.btn
 ) :is(span, div, svg) {
+  color: inherit !important;
+}
+
+html[data-gptskins-theme][data-chatskin-finance-page="true"] main {
+  --main-surface-primary: var(--gptskins-background) !important;
+  --main-surface-secondary: var(--gptskins-surface) !important;
+  --main-surface-tertiary: var(--gptskins-surfaceStrong) !important;
+  --text-primary: var(--gptskins-text) !important;
+  --text-secondary: var(--gptskins-mutedText) !important;
+  --text-tertiary: var(--gptskins-mutedText) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-finance-page="true"] main :is(h2, p, a):is([class*="text-[#000000]"], [class*="text-[#5d5d5d]"]) {
+  color: var(--gptskins-text) !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme][data-chatskin-finance-page="true"] main :is(p, a):is([class*="text-[#5d5d5d]"]) {
+  color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-finance-page="true"] main button.btn {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border: 1px solid var(--gptskins-border) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme][data-chatskin-finance-page="true"] main button.btn :is(div, span, svg) {
   color: inherit !important;
 }
 
@@ -1507,6 +1539,10 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     return hasPlanHeading && (hasPlanAction || hasPlanToggle || location.hash === "#pricing");
   }
 
+  function isFinancePage() {
+    return location.hostname === "chatgpt.com" && normalizePath(location.pathname) === "/finances";
+  }
+
   function syncPageMarker() {
     const planPage = isPlanPage();
     if (root.hasAttribute("data-gptskins-theme") && planPage) {
@@ -1514,6 +1550,13 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     } else {
       root.removeAttribute("data-chatskin-plan-page");
     }
+
+    if (root.hasAttribute("data-gptskins-theme") && isFinancePage()) {
+      root.setAttribute("data-chatskin-finance-page", "true");
+    } else {
+      root.removeAttribute("data-chatskin-finance-page");
+    }
+
     syncSurfaceTags(planPage);
   }
 
