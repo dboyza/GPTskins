@@ -1334,6 +1334,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   let pageMarkerObserver = null;
   let bodyReadyObserver = null;
   let bodyReadyListenerAdded = false;
+  let pageMarkerEventListenersAdded = false;
 
   function isPlanPage() {
     const pageText = document.body ? document.body.innerText : "";
@@ -1365,7 +1366,19 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     pageMarkerTimer = setTimeout(syncPageMarker, 150);
   }
 
+  function ensurePageMarkerEventListeners() {
+    if (pageMarkerEventListenersAdded) {
+      return;
+    }
+
+    pageMarkerEventListenersAdded = true;
+    document.addEventListener("scroll", schedulePageMarker, { passive: true });
+    window.addEventListener("resize", schedulePageMarker, { passive: true });
+  }
+
   function startPageMarkerObserver() {
+    ensurePageMarkerEventListeners();
+
     if (pageMarkerObserver) {
       return;
     }
@@ -1525,7 +1538,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       return;
     }
 
-    document.querySelectorAll("button, [role='button']").forEach((item) => {
+    document.querySelectorAll("button, [role='button'], :is(div, span)[class*='cursor-pointer']").forEach((item) => {
       if (item.closest("[data-testid='composer'], form[class*='composer'], [class*='group/composer']")) {
         return;
       }
@@ -1537,9 +1550,10 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       const label = `${item.getAttribute("aria-label") || ""} ${item.getAttribute("data-testid") || ""} ${item.getAttribute("title") || ""} ${normalizedText(item)}`.toLowerCase();
       const isCompact = width >= 24 && width <= 54 && height >= 24 && height <= 54;
       const isRoundIcon = item.querySelector("svg") && /rounded-full|size-8|h-8|w-8|cursor-pointer/.test(className);
+      const isViewportCenter = rect.left >= window.innerWidth * 0.25 && rect.right <= window.innerWidth * 0.75;
       const isAboveComposer =
-        rect.left >= composerRect.left &&
-        rect.right <= composerRect.right &&
+        (rect.left >= composerRect.left || isViewportCenter) &&
+        (rect.right <= composerRect.right || isViewportCenter) &&
         rect.bottom <= composerRect.top + 24 &&
         rect.bottom >= composerRect.top - 180;
 
