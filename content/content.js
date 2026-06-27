@@ -1426,6 +1426,14 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
         item.removeAttribute("data-chatskin-plan-disabled");
         item.removeAttribute("data-chatskin-suggestion-layer");
         item.removeAttribute("data-chatskin-sidebar-action");
+        if (item.hasAttribute("data-chatskin-scroll-button")) {
+          item.style.removeProperty("background");
+          item.style.removeProperty("background-color");
+          item.style.removeProperty("background-image");
+          item.style.removeProperty("border-color");
+          item.style.removeProperty("box-shadow");
+          item.style.removeProperty("color");
+        }
         item.removeAttribute("data-chatskin-scroll-button");
       });
   }
@@ -1532,6 +1540,12 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   function tagFloatingScrollButtons(composerRect) {
     document.querySelectorAll("[data-chatskin-scroll-button]").forEach((item) => {
       item.removeAttribute("data-chatskin-scroll-button");
+      item.style.removeProperty("background");
+      item.style.removeProperty("background-color");
+      item.style.removeProperty("background-image");
+      item.style.removeProperty("border-color");
+      item.style.removeProperty("box-shadow");
+      item.style.removeProperty("color");
     });
 
     if (!composerRect) {
@@ -1549,16 +1563,24 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       const className = typeof item.className === "string" ? item.className : "";
       const label = `${item.getAttribute("aria-label") || ""} ${item.getAttribute("data-testid") || ""} ${item.getAttribute("title") || ""} ${normalizedText(item)}`.toLowerCase();
       const isCompact = width >= 24 && width <= 54 && height >= 24 && height <= 54;
-      const isRoundIcon = item.querySelector("svg") && /rounded-full|size-8|h-8|w-8|cursor-pointer/.test(className);
+      const hasIcon = Boolean(item.querySelector("svg"));
       const isViewportCenter = rect.left >= window.innerWidth * 0.25 && rect.right <= window.innerWidth * 0.75;
+      const hasScrollSignal = /(scroll|bottom|down)/.test(label) || /(scroll-root|thread-scroll|bottom-\[|start-1\/2|translate-x-1\/2)/.test(className);
+      const isFloatingRoundIcon = hasIcon && /rounded-full/.test(className) && /(absolute|fixed|sticky|bottom|start-1\/2|translate-x-1\/2)/.test(className);
       const isAboveComposer =
         (rect.left >= composerRect.left || isViewportCenter) &&
         (rect.right <= composerRect.right || isViewportCenter) &&
         rect.bottom <= composerRect.top + 24 &&
         rect.bottom >= composerRect.top - 180;
 
-      if (isCompact && isRoundIcon && (/(scroll|bottom|down)/.test(label) || isAboveComposer)) {
+      if (isCompact && hasIcon && (hasScrollSignal || (isAboveComposer && isFloatingRoundIcon))) {
         item.setAttribute("data-chatskin-scroll-button", "true");
+        item.style.setProperty("background", "var(--gptskins-surfaceStrong)", "important");
+        item.style.setProperty("background-color", "var(--gptskins-surfaceStrong)", "important");
+        item.style.setProperty("background-image", "none", "important");
+        item.style.setProperty("border-color", "var(--gptskins-border)", "important");
+        item.style.setProperty("box-shadow", "0 6px 18px var(--gptskins-shadow)", "important");
+        item.style.setProperty("color", "var(--gptskins-text)", "important");
       }
     });
   }
