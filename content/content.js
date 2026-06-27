@@ -117,7 +117,9 @@ html[data-gptskins-theme] [class*="bg-token-message-surface"] {
 
 html[data-gptskins-theme] header[class*="bg-token-main-surface-primary"],
 html[data-gptskins-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
-  background-color: var(--gptskins-background) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 html[data-gptskins-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) {
@@ -240,6 +242,10 @@ html[data-gptskins-theme] [data-message-author-role] .markdown,
 html[data-gptskins-theme] [data-message-author-role] [class*="text-token-text-primary"],
 html[data-gptskins-theme] main [class*="text-token-text-primary"] {
   color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-message-author-role] :is(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: calc(var(--header-height, 52px) + 12px) !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] [class*="text-token-text-secondary"],
