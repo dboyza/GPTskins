@@ -324,15 +324,26 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
 
 html[data-gptskins-theme] main button[class*="btn-secondary"][class*="bg-token-bg-primary"][class*="backdrop-blur"][class*="rounded-full"],
 html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"],
-html[data-gptskins-theme] :is(button, [role="button"])[class*="cursor-pointer"][class*="rounded-full"][class*="h-8"][class*="w-8"]:has(svg),
-html[data-gptskins-theme] :is(button, [role="button"])[class*="bg-token"][class*="rounded-full"][class*="h-8"][class*="w-8"]:has(svg),
-html[data-gptskins-theme] :is(button, [role="button"])[class*="bg-token"][class*="rounded-full"][class*="size-8"]:has(svg) {
+html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"],
+html[data-gptskins-theme] [data-chatskin-scroll-button] {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
   background-image: none !important;
   border: 1px solid var(--gptskins-border) !important;
   box-shadow: 0 6px 18px var(--gptskins-shadow) !important;
   color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"]::before,
+html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"]::after,
+html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"] > :is(div, span),
+html[data-gptskins-theme] [data-chatskin-scroll-button]::before,
+html[data-gptskins-theme] [data-chatskin-scroll-button]::after,
+html[data-gptskins-theme] [data-chatskin-scroll-button] > :is(div, span) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
 }
 
 html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
@@ -1387,7 +1398,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 
   function clearSurfaceTags() {
     document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action]")
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action], [data-chatskin-scroll-button]")
       .forEach((item) => {
         item.removeAttribute("data-chatskin-code-frame");
         item.removeAttribute("data-chatskin-code-block");
@@ -1402,6 +1413,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
         item.removeAttribute("data-chatskin-plan-disabled");
         item.removeAttribute("data-chatskin-suggestion-layer");
         item.removeAttribute("data-chatskin-sidebar-action");
+        item.removeAttribute("data-chatskin-scroll-button");
       });
   }
 
@@ -1504,6 +1516,39 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     });
   }
 
+  function tagFloatingScrollButtons(composerRect) {
+    document.querySelectorAll("[data-chatskin-scroll-button]").forEach((item) => {
+      item.removeAttribute("data-chatskin-scroll-button");
+    });
+
+    if (!composerRect) {
+      return;
+    }
+
+    document.querySelectorAll("button, [role='button']").forEach((item) => {
+      if (item.closest("[data-testid='composer'], form[class*='composer'], [class*='group/composer']")) {
+        return;
+      }
+
+      const rect = item.getBoundingClientRect();
+      const width = Math.max(rect.width, item.clientWidth, item.offsetWidth);
+      const height = Math.max(rect.height, item.clientHeight, item.offsetHeight);
+      const className = typeof item.className === "string" ? item.className : "";
+      const label = `${item.getAttribute("aria-label") || ""} ${item.getAttribute("data-testid") || ""} ${item.getAttribute("title") || ""} ${normalizedText(item)}`.toLowerCase();
+      const isCompact = width >= 24 && width <= 54 && height >= 24 && height <= 54;
+      const isRoundIcon = item.querySelector("svg") && /rounded-full|size-8|h-8|w-8|cursor-pointer/.test(className);
+      const isAboveComposer =
+        rect.left >= composerRect.left &&
+        rect.right <= composerRect.right &&
+        rect.bottom <= composerRect.top + 24 &&
+        rect.bottom >= composerRect.top - 180;
+
+      if (isCompact && isRoundIcon && (/(scroll|bottom|down)/.test(label) || isAboveComposer)) {
+        item.setAttribute("data-chatskin-scroll-button", "true");
+      }
+    });
+  }
+
   function syncSurfaceTags(isPlanPage) {
     if (!root.hasAttribute("data-gptskins-theme")) {
       clearSurfaceTags();
@@ -1516,6 +1561,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 
     document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
     document.querySelectorAll("[data-chatskin-sidebar-action]").forEach((item) => item.removeAttribute("data-chatskin-sidebar-action"));
+    document.querySelectorAll("[data-chatskin-scroll-button]").forEach((item) => item.removeAttribute("data-chatskin-scroll-button"));
     document.querySelectorAll("[data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled]").forEach((item) => {
       item.removeAttribute("data-chatskin-plan-toggle");
       item.removeAttribute("data-chatskin-plan-toggle-option");
@@ -1526,6 +1572,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     tagSidebarActions();
     const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
     const composerRect = composer ? composer.getBoundingClientRect() : null;
+    tagFloatingScrollButtons(composerRect);
     if (composerRect) {
       document.querySelectorAll("body *").forEach((item) => {
         if (item.closest("[data-message-author-role], pre, code")) {
