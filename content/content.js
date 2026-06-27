@@ -323,7 +323,10 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
 }
 
 html[data-gptskins-theme] main button[class*="btn-secondary"][class*="bg-token-bg-primary"][class*="backdrop-blur"][class*="rounded-full"],
-html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"] {
+html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"],
+html[data-gptskins-theme] :is(button, [role="button"])[class*="cursor-pointer"][class*="rounded-full"][class*="h-8"][class*="w-8"]:has(svg),
+html[data-gptskins-theme] :is(button, [role="button"])[class*="bg-token"][class*="rounded-full"][class*="h-8"][class*="w-8"]:has(svg),
+html[data-gptskins-theme] :is(button, [role="button"])[class*="bg-token"][class*="rounded-full"][class*="size-8"]:has(svg) {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
   background-image: none !important;
