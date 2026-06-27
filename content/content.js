@@ -1224,6 +1224,16 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   box-shadow: none !important;
   overflow: visible !important;
 }
+
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"]),
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="writing-block-editor"][class*="markdown"],
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="ProseMirror"][class*="markdown"],
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [contenteditable="true"][class*="ProseMirror"] {
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
+  background-image: none !important;
+  color: var(--gptskins-text) !important;
+}
 `;
   }
 
