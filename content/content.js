@@ -326,11 +326,11 @@ html[data-gptskins-theme] main button[class*="btn-secondary"][class*="bg-token-b
 html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"],
 html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"],
 html[data-gptskins-theme] [data-chatskin-scroll-button] {
-  background: var(--gptskins-surfaceStrong) !important;
-  background-color: var(--gptskins-surfaceStrong) !important;
+  background: color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent) !important;
+  background-color: color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent) !important;
   background-image: none !important;
-  border: 1px solid var(--gptskins-border) !important;
-  box-shadow: 0 6px 18px var(--gptskins-shadow) !important;
+  border: 1px solid color-mix(in srgb, var(--gptskins-border) 72%, transparent) !important;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--gptskins-shadow) 72%, transparent) !important;
   color: var(--gptskins-text) !important;
 }
 
@@ -1575,11 +1575,11 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 
       if (isCompact && hasIcon && (hasScrollSignal || (isAboveComposer && isFloatingRoundIcon))) {
         item.setAttribute("data-chatskin-scroll-button", "true");
-        item.style.setProperty("background", "var(--gptskins-surfaceStrong)", "important");
-        item.style.setProperty("background-color", "var(--gptskins-surfaceStrong)", "important");
+        item.style.setProperty("background", "color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent)", "important");
+        item.style.setProperty("background-color", "color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent)", "important");
         item.style.setProperty("background-image", "none", "important");
-        item.style.setProperty("border-color", "var(--gptskins-border)", "important");
-        item.style.setProperty("box-shadow", "0 6px 18px var(--gptskins-shadow)", "important");
+        item.style.setProperty("border-color", "color-mix(in srgb, var(--gptskins-border) 72%, transparent)", "important");
+        item.style.setProperty("box-shadow", "0 6px 18px color-mix(in srgb, var(--gptskins-shadow) 72%, transparent)", "important");
         item.style.setProperty("color", "var(--gptskins-text)", "important");
       }
     });
