@@ -1139,6 +1139,11 @@ html[data-gptskins-theme] [data-message-author-role] pre[data-chatskin-code-fram
   padding: 0 !important;
 }
 
+html[data-gptskins-theme] [data-message-author-role] :is([data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-body], [data-chatskin-code-body-shell]):has([role="dialog"][aria-label*="code" i]) {
+  clip-path: none !important;
+  overflow: visible !important;
+}
+
 html[data-gptskins-theme] [data-chatskin-code-frame]::before,
 html[data-gptskins-theme] [data-chatskin-code-frame]::after {
   background: transparent !important;
