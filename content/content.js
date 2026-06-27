@@ -1118,6 +1118,9 @@ html[data-gptskins-theme] [data-chatskin-code-header] {
   border-radius: 12px 12px 0 0 !important;
   box-shadow: none !important;
   color: var(--gptskins-text) !important;
+  position: relative !important;
+  top: auto !important;
+  z-index: 1 !important;
 }
 
 html[data-gptskins-theme] [data-chatskin-code-header] > [class*="bg-token-bg-elevated-secondary"],
@@ -1409,6 +1412,18 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     return (item.textContent || "").replace(/\s+/g, " ").trim();
   }
 
+  function clearCodeSurfaceTags() {
+    document
+      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell]")
+      .forEach((item) => {
+        item.removeAttribute("data-chatskin-code-frame");
+        item.removeAttribute("data-chatskin-code-block");
+        item.removeAttribute("data-chatskin-code-header");
+        item.removeAttribute("data-chatskin-code-body");
+        item.removeAttribute("data-chatskin-code-body-shell");
+      });
+  }
+
   function clearSurfaceTags() {
     document
       .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action], [data-chatskin-scroll-button]")
@@ -1594,6 +1609,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     document.querySelectorAll(":is(h1, h2, h3, h4, h5, h6, p, hr)[data-chatskin-code-header]").forEach((item) => {
       item.removeAttribute("data-chatskin-code-header");
     });
+    clearCodeSurfaceTags();
 
     document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
     document.querySelectorAll("[data-chatskin-sidebar-action]").forEach((item) => item.removeAttribute("data-chatskin-sidebar-action"));
@@ -1635,6 +1651,30 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 
       const embeddedBlock = pre.firstElementChild;
       const embeddedClass = embeddedBlock ? embeddedBlock.getAttribute("class") || "" : "";
+      const preClass = pre.getAttribute("class") || "";
+      const nestedRoundedBlock =
+        /(?:^|\s)(overflow-visible!?|px-0!?)(?:\s|$)/.test(preClass) &&
+        pre.querySelector("[class*='border-token-border-light'][class*='rounded'], [class*='overflow-clip'][class*='rounded']");
+      if (nestedRoundedBlock) {
+        const paintedBlock =
+          nestedRoundedBlock.firstElementChild && /(bg-token-bg-elevated-secondary|overflow-clip|rounded)/.test(nestedRoundedBlock.firstElementChild.getAttribute("class") || "")
+            ? nestedRoundedBlock.firstElementChild
+            : nestedRoundedBlock;
+        const children = Array.from(paintedBlock.children);
+        const header = children.find((child) => /(^|\s)(select-none|sticky)(\s|$)/.test(child.getAttribute("class") || ""));
+        const body = children.find((child) => child !== header && (child.querySelector("pre, code, .cm-editor, .cm-scroller") || /(^|\s)(relative|overflow|pe-11|pt-3)(\s|$)/.test(child.getAttribute("class") || "")));
+
+        pre.setAttribute("data-chatskin-code-frame", "true");
+        nestedRoundedBlock.setAttribute("data-chatskin-code-block", "true");
+        if (header && !header.matches("h1, h2, h3, h4, h5, h6, p, hr")) {
+          header.setAttribute("data-chatskin-code-header", "true");
+        }
+        if (body) {
+          body.setAttribute("data-chatskin-code-body", "true");
+        }
+        return;
+      }
+
       if (embeddedBlock && /(contain-inline-size|group\/code|rounded)/.test(embeddedClass)) {
         pre.setAttribute("data-chatskin-code-frame", "true");
         embeddedBlock.setAttribute("data-chatskin-code-block", "true");
@@ -1651,13 +1691,14 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
         return;
       }
 
+      const isMessageMarkdownContainer = (item) => item && item.matches(".markdown, [class*='markdown-new-styling']");
       let block =
         pre.closest("[data-testid*='code'], [class*='group/code'], [class*='not-prose'], [class*='overflow-hidden'], [class*='contain-inline-size']") ||
-        pre.parentElement;
+        (isMessageMarkdownContainer(pre.parentElement) ? null : pre.parentElement);
 
       for (let candidate = pre.parentElement; candidate && !candidate.matches("[data-message-author-role]"); candidate = candidate.parentElement) {
         const first = candidate.firstElementChild;
-        if (first && !first.contains(pre) && (first.querySelector("button, svg") || first.textContent.trim().length < 120)) {
+        if (!isMessageMarkdownContainer(candidate) && first && !first.contains(pre) && (first.querySelector("button, svg") || first.textContent.trim().length < 120)) {
           block = candidate;
           break;
         }
