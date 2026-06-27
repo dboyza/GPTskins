@@ -1130,6 +1130,23 @@ html[data-gptskins-theme] [data-message-author-role] pre [class*="select-none"][
   overflow: hidden !important;
 }
 
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg,
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg * {
+  color: var(--gptskins-mutedText) !important;
+}
+
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg[stroke]:not([stroke="none"]),
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor !important;
+  stroke-width: 1.75 !important;
+}
+
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg[fill]:not([fill="none"]),
+html[data-gptskins-theme] [data-chatskin-code-header] :is(button, [role="button"]) svg [fill]:not([fill="none"]) {
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
 html[data-gptskins-theme] [data-chatskin-code-body] {
   background: var(--code-block-bg) !important;
   background-image: none !important;
