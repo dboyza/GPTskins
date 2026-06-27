@@ -20,6 +20,7 @@
   let routeThemeTimer = 0;
   let routeThemeObserverStarted = false;
   let lastThemeRoute = location.href;
+  let themeSwitchTimer = 0;
 
   function isDefaultTheme(theme) {
     return !theme || theme.id === "default";
@@ -53,6 +54,8 @@
   }
 
   function removeTheme() {
+    clearTimeout(themeSwitchTimer);
+    root.removeAttribute("data-gptskins-switching");
     root.removeAttribute("data-gptskins-theme");
     root.removeAttribute("data-chatskin-plan-page");
     clearSurfaceTags();
@@ -96,6 +99,16 @@ ${cssVariables(theme)}
   --border-heavy: var(--gptskins-border) !important;
   --sharp-edge-bottom-shadow: none !important;
   color-scheme: ${darkThemeIds.has(theme.id) ? "dark" : "light"};
+}
+
+html[data-gptskins-switching],
+html[data-gptskins-switching] *,
+html[data-gptskins-switching] *::before,
+html[data-gptskins-switching] *::after {
+  transition: none !important;
+  transition-delay: 0s !important;
+  transition-duration: 0s !important;
+  animation: none !important;
 }
 
 html[data-gptskins-theme],
@@ -1349,6 +1362,14 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 `;
   }
 
+  function markThemeSwitching() {
+    clearTimeout(themeSwitchTimer);
+    root.setAttribute("data-gptskins-switching", "true");
+    themeSwitchTimer = setTimeout(() => {
+      root.removeAttribute("data-gptskins-switching");
+    }, 180);
+  }
+
   function applyTheme(themeId) {
     const theme = themeApi.getTheme(themeId || "default");
     selectedThemeId = theme.id;
@@ -1363,6 +1384,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     }
 
     ensureThemeStyle(theme);
+    markThemeSwitching();
     const planPage = isPlanPage();
     syncSurfaceTags(planPage, true);
     if (planPage) {
