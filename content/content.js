@@ -472,6 +472,21 @@ html[data-gptskins-theme] [class*="menu-item-trailing-btn"]::after {
   box-shadow: none !important;
 }
 
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], [class*="sidebar-expando-section-header"], [class*="group/sidebar-expando-section-header"]) {
+  font-weight: 700 !important;
+}
+
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="group-hover/sidebar-section-header"], [class*="group-hover/sidebar-expand-section-header"], [class*="group-hover/sidebar-expando-section-header"]) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="group/sidebar-section-header"], [class*="group/sidebar-expand-section-header"], [class*="group/sidebar-expando-section-header"]):is(:hover, :focus-within) :is([class*="group-hover/sidebar-section-header"], [class*="group-hover/sidebar-expand-section-header"], [class*="group-hover/sidebar-expando-section-header"]),
+html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="group-hover/sidebar-section-header"], [class*="group-hover/sidebar-expand-section-header"], [class*="group-hover/sidebar-expando-section-header"]):is(:hover, :focus-visible, [data-state="open"]) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls], [role="button"][aria-expanded]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]):hover,
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) :is(div, section):has(:is([class*="sidebar-section-header"], button[aria-expanded], button[aria-controls])) :is(button, [role="button"]):not([data-testid="accounts-profile-button"]):not([data-chatskin-sidebar-action]):hover,
 html[data-gptskins-theme] [class*="group-hover/sidebar-section-header"]:hover,
