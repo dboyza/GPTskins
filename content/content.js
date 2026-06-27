@@ -1168,13 +1168,21 @@ html[data-gptskins-theme] [data-message-author-role] .cm-scroller {
   scrollbar-width: auto !important;
 }
 
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]),
 html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]) :is(.cm-scroller, .cm-content) {
   scrollbar-width: none !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]),
 html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]) :is(.cm-editor, .cm-scroller, .cm-content) {
-  border-bottom-color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]) {
+  overflow-x: hidden !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] .cm-editor,
@@ -1215,6 +1223,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-scrolla
   border-radius: 999px !important;
 }
 
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable])::-webkit-scrollbar:horizontal,
 html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]) :is(.cm-scroller, .cm-content)::-webkit-scrollbar:horizontal {
   display: none !important;
   height: 0 !important;
