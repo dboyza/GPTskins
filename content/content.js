@@ -1195,6 +1195,15 @@ html[data-gptskins-theme] [data-message-author-role] .cm-content {
   outline: 0 !important;
 }
 
+html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-block] [class*="sticky"][class*="bg-token-border-light"],
+html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"] [class*="sticky"][class*="bg-token-border-light"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="overflow-clip"], [class*="bg-token-bg-elevated-secondary"]):has(.cm-editor) {
   background-color: var(--code-block-bg) !important;
   background-image: none !important;
