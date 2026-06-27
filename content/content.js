@@ -322,6 +322,16 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
   background-color: var(--gptskins-surfaceStrong) !important;
 }
 
+html[data-gptskins-theme] main button[class*="btn-secondary"][class*="bg-token-bg-primary"][class*="backdrop-blur"][class*="rounded-full"],
+html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"] {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border: 1px solid var(--gptskins-border) !important;
+  box-shadow: 0 6px 18px var(--gptskins-shadow) !important;
+  color: var(--gptskins-text) !important;
+}
+
 html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
   background: var(--gptskins-surface) !important;
   background-color: var(--gptskins-surface) !important;
@@ -667,6 +677,16 @@ html[data-gptskins-theme] .top-full .bg-surface-primary li:hover button {
 
 html[data-gptskins-theme] :is(form[class*="composer"], [class*="group/composer"]) ul[class*="divide-token-border"] > li {
   background: transparent !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [role="tooltip"] [class*="bg-token-bg-tooltip"],
+html[data-gptskins-theme] [class*="bg-token-bg-tooltip"] {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border: 1px solid var(--gptskins-border) !important;
+  box-shadow: 0 10px 28px var(--gptskins-shadow) !important;
   color: var(--gptskins-text) !important;
 }
 
