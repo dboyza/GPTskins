@@ -1126,8 +1126,7 @@ html[data-gptskins-theme] [data-chatskin-code-body] code {
 }
 
 html[data-gptskins-theme] [data-message-author-role] .cm-scroller {
-  overflow-x: scroll !important;
-  scrollbar-gutter: stable !important;
+  overflow-x: auto !important;
   scrollbar-color: var(--gptskins-mutedText) color-mix(in srgb, var(--code-block-bg) 78%, var(--gptskins-border)) !important;
   scrollbar-width: auto !important;
 }
