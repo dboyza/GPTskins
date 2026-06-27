@@ -1354,8 +1354,15 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       return;
     }
 
-    root.setAttribute("data-gptskins-theme", theme.id);
     ensureThemeStyle(theme);
+    const planPage = isPlanPage();
+    syncSurfaceTags(planPage, true);
+    if (planPage) {
+      root.setAttribute("data-chatskin-plan-page", "true");
+    } else {
+      root.removeAttribute("data-chatskin-plan-page");
+    }
+    root.setAttribute("data-gptskins-theme", theme.id);
     startPageMarkerObserver();
     schedulePageMarker();
   }
@@ -1685,8 +1692,8 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     });
   }
 
-  function syncSurfaceTags(isPlanPage) {
-    if (!root.hasAttribute("data-gptskins-theme")) {
+  function syncSurfaceTags(isPlanPage, force = false) {
+    if (!force && !root.hasAttribute("data-gptskins-theme")) {
       clearSurfaceTags();
       return;
     }
