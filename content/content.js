@@ -514,7 +514,6 @@ html[data-gptskins-theme] [data-testid="composer"] {
 
 html[data-gptskins-theme] svg {
   color: inherit !important;
-  stroke: currentColor !important;
 }
 
 html[data-gptskins-theme] :is(nav, aside, [class*="sidebar"], [data-testid="history-panel"], [data-testid="left-sidebar"]) svg[stroke]:not([stroke="none"]),
