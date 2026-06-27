@@ -1172,7 +1172,6 @@ html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:n
   scrollbar-width: none !important;
 }
 
-html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]),
 html[data-gptskins-theme] [data-message-author-role] [data-chatskin-code-body]:not([data-chatskin-code-scrollable]) :is(.cm-editor, .cm-scroller, .cm-content) {
   background: transparent !important;
   border-color: transparent !important;
