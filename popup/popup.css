@@ -124,14 +124,15 @@ h1 {
   white-space: nowrap;
 }
 
-.selected-dot {
+.theme-button::after {
+  content: "";
   width: 14px;
   height: 14px;
   border: 2px solid var(--border);
   border-radius: 999px;
 }
 
-.theme-button[aria-pressed="true"] .selected-dot {
+.theme-button[aria-pressed="true"]::after {
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(82, 224, 189, 0.18);

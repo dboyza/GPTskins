@@ -7,24 +7,7 @@
       name: "Default",
       description: "Native look.",
       swatches: ["#000000", "#ffffff"],
-      colors: {
-        background: "",
-        surface: "",
-        surfaceStrong: "",
-        sidebar: "",
-        sidebarText: "",
-        sidebarMuted: "",
-        sidebarHover: "",
-        text: "",
-        mutedText: "",
-        border: "",
-        accent: "",
-        accentText: "",
-        userBubble: "",
-        assistantBubble: "",
-        composer: "",
-        shadow: ""
-      }
+      colors: {}
     },
     {
       id: "og",
@@ -316,13 +299,8 @@
     }
   ];
 
-  const themeMap = themes.reduce((items, theme) => {
-    items[theme.id] = theme;
-    return items;
-  }, {});
-
   function getTheme(id) {
-    return themeMap[id] || themeMap.default;
+    return themes.find((theme) => theme.id === id) || themes[0];
   }
 
   globalThis.GPTskinsThemes = {

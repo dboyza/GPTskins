@@ -5,6 +5,24 @@
   const styleId = "gptskins-style";
   const darkThemeIds = new Set(["contrast", "dracula", "catppuccin", "gruvbox", "midnight", "nord", "og", "one-dark", "tokyo-night"]);
   const root = document.documentElement;
+  const codeSurfaceTags = [
+    "data-chatskin-code-frame",
+    "data-chatskin-code-block",
+    "data-chatskin-code-header",
+    "data-chatskin-code-body",
+    "data-chatskin-code-body-shell",
+    "data-chatskin-code-scrollable"
+  ];
+  const dynamicSurfaceTags = [
+    "data-chatskin-suggestion-layer",
+    "data-chatskin-sidebar-action",
+    "data-chatskin-scroll-button",
+    "data-chatskin-plan-toggle",
+    "data-chatskin-plan-toggle-option",
+    "data-chatskin-plan-active",
+    "data-chatskin-plan-cta",
+    "data-chatskin-plan-disabled"
+  ];
   const themeBypassExactPaths = new Set([
     "/overview",
     "/atlas",
@@ -1521,7 +1539,6 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   let pageMarkerTimer = 0;
   let pageMarkerObserver = null;
   let bodyReadyObserver = null;
-  let bodyReadyListenerAdded = false;
   let pageMarkerEventListenersAdded = false;
 
   function isPlanPage() {
@@ -1597,58 +1614,24 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       bodyReadyObserver = new MutationObserver(startPageMarkerObserver);
       bodyReadyObserver.observe(document.documentElement, { childList: true, subtree: true });
     }
-
-    if (!bodyReadyListenerAdded) {
-      bodyReadyListenerAdded = true;
-      document.addEventListener("DOMContentLoaded", startPageMarkerObserver, { once: true });
-    }
   }
 
   function normalizedText(item) {
     return (item.textContent || "").replace(/\s+/g, " ").trim();
   }
 
-  function clearCodeSurfaceTags() {
-    document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-code-scrollable]")
-      .forEach((item) => {
-        item.removeAttribute("data-chatskin-code-frame");
-        item.removeAttribute("data-chatskin-code-block");
-        item.removeAttribute("data-chatskin-code-header");
-        item.removeAttribute("data-chatskin-code-body");
-        item.removeAttribute("data-chatskin-code-body-shell");
-        item.removeAttribute("data-chatskin-code-scrollable");
-      });
+  function attributeSelector(names) {
+    return names.map((name) => `[${name}]`).join(", ");
+  }
+
+  function clearTags(names) {
+    document.querySelectorAll(attributeSelector(names)).forEach((item) => {
+      names.forEach((name) => item.removeAttribute(name));
+    });
   }
 
   function clearSurfaceTags() {
-    document
-      .querySelectorAll("[data-chatskin-code-frame], [data-chatskin-code-block], [data-chatskin-code-header], [data-chatskin-code-body], [data-chatskin-code-body-shell], [data-chatskin-code-scrollable], [data-chatskin-plan-layer], [data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled], [data-chatskin-suggestion-layer], [data-chatskin-sidebar-action], [data-chatskin-scroll-button]")
-      .forEach((item) => {
-        item.removeAttribute("data-chatskin-code-frame");
-        item.removeAttribute("data-chatskin-code-block");
-        item.removeAttribute("data-chatskin-code-header");
-        item.removeAttribute("data-chatskin-code-body");
-        item.removeAttribute("data-chatskin-code-body-shell");
-        item.removeAttribute("data-chatskin-code-scrollable");
-        item.removeAttribute("data-chatskin-plan-layer");
-        item.removeAttribute("data-chatskin-plan-toggle");
-        item.removeAttribute("data-chatskin-plan-toggle-option");
-        item.removeAttribute("data-chatskin-plan-active");
-        item.removeAttribute("data-chatskin-plan-cta");
-        item.removeAttribute("data-chatskin-plan-disabled");
-        item.removeAttribute("data-chatskin-suggestion-layer");
-        item.removeAttribute("data-chatskin-sidebar-action");
-        if (item.hasAttribute("data-chatskin-scroll-button")) {
-          item.style.removeProperty("background");
-          item.style.removeProperty("background-color");
-          item.style.removeProperty("background-image");
-          item.style.removeProperty("border-color");
-          item.style.removeProperty("box-shadow");
-          item.style.removeProperty("color");
-        }
-        item.removeAttribute("data-chatskin-scroll-button");
-      });
+    clearTags([...codeSurfaceTags, "data-chatskin-plan-layer", ...dynamicSurfaceTags]);
   }
 
   function tagCodeBody(item) {
@@ -1766,16 +1749,6 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   }
 
   function tagFloatingScrollButtons(composerRect) {
-    document.querySelectorAll("[data-chatskin-scroll-button]").forEach((item) => {
-      item.removeAttribute("data-chatskin-scroll-button");
-      item.style.removeProperty("background");
-      item.style.removeProperty("background-color");
-      item.style.removeProperty("background-image");
-      item.style.removeProperty("border-color");
-      item.style.removeProperty("box-shadow");
-      item.style.removeProperty("color");
-    });
-
     if (!composerRect) {
       return;
     }
@@ -1803,12 +1776,6 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 
       if (isCompact && hasIcon && (hasScrollSignal || (isAboveComposer && isFloatingRoundIcon))) {
         item.setAttribute("data-chatskin-scroll-button", "true");
-        item.style.setProperty("background", "color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent)", "important");
-        item.style.setProperty("background-color", "color-mix(in srgb, var(--gptskins-surfaceStrong) 65%, transparent)", "important");
-        item.style.setProperty("background-image", "none", "important");
-        item.style.setProperty("border-color", "color-mix(in srgb, var(--gptskins-border) 72%, transparent)", "important");
-        item.style.setProperty("box-shadow", "0 6px 18px color-mix(in srgb, var(--gptskins-shadow) 72%, transparent)", "important");
-        item.style.setProperty("color", "var(--gptskins-text)", "important");
       }
     });
   }
@@ -1822,18 +1789,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     document.querySelectorAll(":is(h1, h2, h3, h4, h5, h6, p, hr)[data-chatskin-code-header]").forEach((item) => {
       item.removeAttribute("data-chatskin-code-header");
     });
-    clearCodeSurfaceTags();
-
-    document.querySelectorAll("[data-chatskin-suggestion-layer]").forEach((item) => item.removeAttribute("data-chatskin-suggestion-layer"));
-    document.querySelectorAll("[data-chatskin-sidebar-action]").forEach((item) => item.removeAttribute("data-chatskin-sidebar-action"));
-    document.querySelectorAll("[data-chatskin-scroll-button]").forEach((item) => item.removeAttribute("data-chatskin-scroll-button"));
-    document.querySelectorAll("[data-chatskin-plan-toggle], [data-chatskin-plan-toggle-option], [data-chatskin-plan-active], [data-chatskin-plan-cta], [data-chatskin-plan-disabled]").forEach((item) => {
-      item.removeAttribute("data-chatskin-plan-toggle");
-      item.removeAttribute("data-chatskin-plan-toggle-option");
-      item.removeAttribute("data-chatskin-plan-active");
-      item.removeAttribute("data-chatskin-plan-cta");
-      item.removeAttribute("data-chatskin-plan-disabled");
-    });
+    clearTags([...codeSurfaceTags, ...dynamicSurfaceTags]);
     tagSidebarActions();
     const composer = document.querySelector("[data-testid='composer'], form[class*='composer'], [class*='group/composer']");
     const composerRect = composer ? composer.getBoundingClientRect() : null;

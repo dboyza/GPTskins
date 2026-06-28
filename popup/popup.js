@@ -39,12 +39,8 @@
     description.className = "theme-description";
     description.textContent = theme.description;
 
-    const selectedDot = document.createElement("span");
-    selectedDot.className = "selected-dot";
-    selectedDot.setAttribute("aria-hidden", "true");
-
     copy.append(name, description);
-    button.append(swatches, copy, selectedDot);
+    button.append(swatches, copy);
     button.addEventListener("click", () => selectTheme(theme.id));
 
     return button;
