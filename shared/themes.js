@@ -320,30 +320,6 @@
       })
     },
     {
-      id: "github-light",
-      name: "GitHub Light",
-      description: "GitHub light.",
-      swatches: ["#ffffff", "#f6f8fa", "#0969da"],
-      colors: colors({
-        background: "#ffffff",
-        surface: "#ffffff",
-        surfaceStrong: "#f6f8fa",
-        sidebar: "#f6f8fa",
-        sidebarText: "#24292f",
-        sidebarMuted: "#57606a",
-        sidebarHover: "#eaeef2",
-        text: "#24292f",
-        mutedText: "#57606a",
-        border: "#d0d7de",
-        accent: "#0969da",
-        accentText: "#ffffff",
-        userBubble: "#ddf4ff",
-        assistantBubble: "#ffffff",
-        composer: "#f6f8fa",
-        shadow: "rgba(31, 35, 40, 0.18)"
-      })
-    },
-    {
       id: "github-dark",
       name: "GitHub Dark",
       description: "GitHub dark.",
@@ -495,30 +471,6 @@
         accent: "#88c0d0",
         accentText: "#142027",
         userBubble: "#3f5669"
-      })
-    },
-    {
-      id: "notion-light",
-      name: "Notion Light",
-      description: "Paper light.",
-      swatches: ["#ffffff", "#f7f6f3", "#2f3437"],
-      colors: colors({
-        background: "#ffffff",
-        surface: "#ffffff",
-        surfaceStrong: "#f7f6f3",
-        sidebar: "#f7f6f3",
-        sidebarText: "#2f3437",
-        sidebarMuted: "#6f6f6f",
-        sidebarHover: "#ededeb",
-        text: "#2f3437",
-        mutedText: "#6f6f6f",
-        border: "#dededc",
-        accent: "#2f3437",
-        accentText: "#ffffff",
-        userBubble: "#efefed",
-        assistantBubble: "#ffffff",
-        composer: "#f7f6f3",
-        shadow: "rgba(15, 15, 15, 0.14)"
       })
     },
     {
@@ -787,30 +739,6 @@
         accent: "#ffffff",
         accentText: "#000000",
         userBubble: "#1a1a1a"
-      })
-    },
-    {
-      id: "xcode-light",
-      name: "Xcode Light",
-      description: "Mac editor light.",
-      swatches: ["#ffffff", "#eef4ff", "#006ee6"],
-      colors: colors({
-        background: "#ffffff",
-        surface: "#ffffff",
-        surfaceStrong: "#eef4ff",
-        sidebar: "#f5f7fb",
-        sidebarText: "#1f2328",
-        sidebarMuted: "#69717d",
-        sidebarHover: "#e8edf7",
-        text: "#1f2328",
-        mutedText: "#69717d",
-        border: "#d7dde8",
-        accent: "#006ee6",
-        accentText: "#ffffff",
-        userBubble: "#ddecff",
-        assistantBubble: "#ffffff",
-        composer: "#f5f7fb",
-        shadow: "rgba(31, 35, 40, 0.16)"
       })
     },
     {
