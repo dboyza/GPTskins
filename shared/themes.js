@@ -320,6 +320,50 @@
       })
     },
     {
+      id: "github-light",
+      name: "GitHub Light",
+      description: "GitHub light.",
+      swatches: ["#ffffff", "#f6f8fa", "#0969da"],
+      colors: colors({
+        background: "#ffffff",
+        surface: "#ffffff",
+        surfaceStrong: "#f6f8fa",
+        sidebar: "#f6f8fa",
+        sidebarText: "#24292f",
+        sidebarMuted: "#57606a",
+        sidebarHover: "#eaeef2",
+        text: "#24292f",
+        mutedText: "#57606a",
+        border: "#d0d7de",
+        accent: "#0969da",
+        accentText: "#ffffff",
+        userBubble: "#ddf4ff",
+        assistantBubble: "#ffffff",
+        composer: "#f6f8fa",
+        shadow: "rgba(31, 35, 40, 0.18)"
+      })
+    },
+    {
+      id: "github-dark",
+      name: "GitHub Dark",
+      description: "GitHub dark.",
+      dark: true,
+      swatches: ["#0d1117", "#161b22", "#2f81f7"],
+      colors: colors({
+        background: "#0d1117",
+        surface: "#0d1117",
+        surfaceStrong: "#161b22",
+        sidebar: "#010409",
+        text: "#c9d1d9",
+        mutedText: "#8b949e",
+        border: "#30363d",
+        accent: "#2f81f7",
+        accentText: "#ffffff",
+        userBubble: "#1f2d3d",
+        composer: "#161b22"
+      })
+    },
+    {
       id: "linear",
       name: "Linear",
       description: "Focused violet.",
@@ -451,6 +495,50 @@
         accent: "#88c0d0",
         accentText: "#142027",
         userBubble: "#3f5669"
+      })
+    },
+    {
+      id: "notion-light",
+      name: "Notion Light",
+      description: "Paper light.",
+      swatches: ["#ffffff", "#f7f6f3", "#2f3437"],
+      colors: colors({
+        background: "#ffffff",
+        surface: "#ffffff",
+        surfaceStrong: "#f7f6f3",
+        sidebar: "#f7f6f3",
+        sidebarText: "#2f3437",
+        sidebarMuted: "#6f6f6f",
+        sidebarHover: "#ededeb",
+        text: "#2f3437",
+        mutedText: "#6f6f6f",
+        border: "#dededc",
+        accent: "#2f3437",
+        accentText: "#ffffff",
+        userBubble: "#efefed",
+        assistantBubble: "#ffffff",
+        composer: "#f7f6f3",
+        shadow: "rgba(15, 15, 15, 0.14)"
+      })
+    },
+    {
+      id: "notion-dark",
+      name: "Notion Dark",
+      description: "Paper dark.",
+      dark: true,
+      swatches: ["#191919", "#202020", "#9b9a97"],
+      colors: colors({
+        background: "#191919",
+        surface: "#1f1f1f",
+        surfaceStrong: "#2a2a2a",
+        sidebar: "#151515",
+        text: "#f1f1ef",
+        mutedText: "#9b9a97",
+        border: "#373737",
+        accent: "#9b9a97",
+        accentText: "#191919",
+        userBubble: "#303030",
+        composer: "#252525"
       })
     },
     {
@@ -738,6 +826,50 @@
         accent: "#007acc",
         accentText: "#ffffff",
         userBubble: "#26384a"
+      })
+    },
+    {
+      id: "xcode-light",
+      name: "Xcode Light",
+      description: "Mac editor light.",
+      swatches: ["#ffffff", "#eef4ff", "#006ee6"],
+      colors: colors({
+        background: "#ffffff",
+        surface: "#ffffff",
+        surfaceStrong: "#eef4ff",
+        sidebar: "#f5f7fb",
+        sidebarText: "#1f2328",
+        sidebarMuted: "#69717d",
+        sidebarHover: "#e8edf7",
+        text: "#1f2328",
+        mutedText: "#69717d",
+        border: "#d7dde8",
+        accent: "#006ee6",
+        accentText: "#ffffff",
+        userBubble: "#ddecff",
+        assistantBubble: "#ffffff",
+        composer: "#f5f7fb",
+        shadow: "rgba(31, 35, 40, 0.16)"
+      })
+    },
+    {
+      id: "xcode-dark",
+      name: "Xcode Dark",
+      description: "Mac editor dark.",
+      dark: true,
+      swatches: ["#1f1f24", "#2d2d34", "#4da3ff"],
+      colors: colors({
+        background: "#1f1f24",
+        surface: "#24242a",
+        surfaceStrong: "#2d2d34",
+        sidebar: "#19191e",
+        text: "#f5f5f7",
+        mutedText: "#aaaab3",
+        border: "#42424a",
+        accent: "#4da3ff",
+        accentText: "#061426",
+        userBubble: "#26364c",
+        composer: "#2a2a31"
       })
     }
   ];
