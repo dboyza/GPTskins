@@ -723,25 +723,6 @@
       })
     },
     {
-      id: "vercel",
-      name: "Vercel",
-      description: "Black and white.",
-      dark: true,
-      swatches: ["#000000", "#111111", "#ffffff"],
-      colors: colors({
-        background: "#000000",
-        surface: "#080808",
-        surfaceStrong: "#111111",
-        sidebar: "#000000",
-        text: "#fafafa",
-        mutedText: "#a1a1a1",
-        border: "#2a2a2a",
-        accent: "#ffffff",
-        accentText: "#000000",
-        userBubble: "#1a1a1a"
-      })
-    },
-    {
       id: "xcode-dark",
       name: "Xcode Dark",
       description: "Mac editor dark.",
