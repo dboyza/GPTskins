@@ -40,10 +40,6 @@
   let lastThemeRoute = location.href;
   let themeSwitchTimer = 0;
 
-  function isDefaultTheme(theme) {
-    return !theme || theme.id === "default";
-  }
-
   function normalizePath(pathname) {
     return pathname.replace(/\/+$/, "") || "/";
   }
@@ -1476,7 +1472,7 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
       return;
     }
 
-    if (isDefaultTheme(theme)) {
+    if (theme.id === "default") {
       removeTheme();
       return;
     }
@@ -1620,12 +1616,8 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     return (item.textContent || "").replace(/\s+/g, " ").trim();
   }
 
-  function attributeSelector(names) {
-    return names.map((name) => `[${name}]`).join(", ");
-  }
-
   function clearTags(names) {
-    document.querySelectorAll(attributeSelector(names)).forEach((item) => {
+    document.querySelectorAll(names.map((name) => `[${name}]`).join(", ")).forEach((item) => {
       names.forEach((name) => item.removeAttribute(name));
     });
   }

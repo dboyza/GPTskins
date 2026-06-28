@@ -6,10 +6,6 @@
   const status = document.getElementById("status");
   let selectedThemeId = "default";
 
-  function setStatus(message) {
-    status.textContent = message;
-  }
-
   function renderThemeButton(theme) {
     const button = document.createElement("button");
     button.type = "button";
@@ -56,17 +52,17 @@
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       if (!tab || !tab.id || !tab.url || !/^https:\/\/(chatgpt\.com|chat\.openai\.com)\//.test(tab.url)) {
-        setStatus("Saved. Open ChatGPT to see this theme.");
+        status.textContent = "Saved. Open ChatGPT to see this theme.";
         return;
       }
 
       chrome.tabs.sendMessage(tab.id, { type: "GPTSKINS_APPLY_THEME", themeId }, () => {
         if (chrome.runtime.lastError) {
-          setStatus("Saved. Refresh ChatGPT if it was already open.");
+          status.textContent = "Saved. Refresh ChatGPT if it was already open.";
           return;
         }
 
-        setStatus("Theme applied.");
+        status.textContent = "Theme applied.";
       });
     });
   }
@@ -81,15 +77,12 @@
   }
 
   function renderThemes() {
-    list.textContent = "";
-    themeApi.themes.forEach((theme) => {
-      list.appendChild(renderThemeButton(theme));
-    });
+    list.replaceChildren(...themeApi.themes.map(renderThemeButton));
   }
 
   chrome.storage.sync.get(themeApi.storageKey, (result) => {
     selectedThemeId = themeApi.getTheme(result[themeApi.storageKey] || "default").id;
     renderThemes();
-    setStatus("Pick a theme for ChatGPT.");
+    status.textContent = "Pick a theme for ChatGPT.";
   });
 })();
