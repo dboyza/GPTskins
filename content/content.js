@@ -3,7 +3,6 @@
 
   const themeApi = globalThis.GPTskinsThemes;
   const styleId = "gptskins-style";
-  const darkThemeIds = new Set(["contrast", "dracula", "catppuccin", "gruvbox", "midnight", "nord", "og", "one-dark", "tokyo-night"]);
   const root = document.documentElement;
   const codeSurfaceTags = [
     "data-gptskins-code-frame",
@@ -119,7 +118,7 @@ ${cssVariables(theme)}
   --border-medium: var(--gptskins-border) !important;
   --border-heavy: var(--gptskins-border) !important;
   --sharp-edge-bottom-shadow: none !important;
-  color-scheme: ${darkThemeIds.has(theme.id) ? "dark" : "light"};
+  color-scheme: ${themeApi.darkThemeIds.has(theme.id) ? "dark" : "light"};
 }
 
 html[data-gptskins-switching],
