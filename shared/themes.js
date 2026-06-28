@@ -758,28 +758,40 @@
       stack: ""
     },
     {
-      id: "system",
-      name: "System",
-      description: "Clean OS sans.",
-      stack: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+      id: "inter",
+      name: "Inter",
+      description: "Modern app text.",
+      stack: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
     },
     {
-      id: "serif",
-      name: "Serif",
-      description: "Article-style text.",
-      stack: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif'
+      id: "helvetica",
+      name: "Helvetica",
+      description: "Crisp neutral sans.",
+      stack: 'Helvetica, Arial, ui-sans-serif, system-ui, sans-serif'
+    },
+    {
+      id: "verdana",
+      name: "Verdana",
+      description: "Wide and readable.",
+      stack: 'Verdana, Geneva, ui-sans-serif, system-ui, sans-serif'
+    },
+    {
+      id: "georgia",
+      name: "Georgia",
+      description: "Polished serif text.",
+      stack: 'Georgia, Cambria, "Times New Roman", Times, serif'
+    },
+    {
+      id: "trebuchet",
+      name: "Trebuchet",
+      description: "Friendly sans.",
+      stack: '"Trebuchet MS", Trebuchet, ui-sans-serif, system-ui, sans-serif'
     },
     {
       id: "mono",
       name: "Mono",
       description: "Terminal-style text.",
       stack: 'ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace'
-    },
-    {
-      id: "rounded",
-      name: "Rounded",
-      description: "Soft system sans.",
-      stack: 'ui-rounded, "SF Pro Rounded", "Segoe UI", ui-sans-serif, system-ui, sans-serif'
     }
   ];
 
