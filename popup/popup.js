@@ -82,7 +82,7 @@
   }
 
   function isVisibleTheme(theme) {
-    return theme.id === "default" || themeMode === (theme.dark ? "dark" : "light");
+    return theme.id !== "default" && themeMode === (theme.dark ? "dark" : "light");
   }
 
   function renderThemes() {
