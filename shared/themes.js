@@ -181,27 +181,27 @@
       })
     },
     {
-      id: "github",
-      name: "GitHub",
-      description: "Clean light.",
-      swatches: ["#ffffff", "#f6f8fa", "#0969da"],
+      id: "forest",
+      name: "Forest",
+      description: "Soft green.",
+      swatches: ["#10251d", "#f4f0df", "#3f8f63"],
       colors: colors({
-        background: "#ffffff",
-        surface: "#ffffff",
-        surfaceStrong: "#f6f8fa",
-        sidebar: "#f6f8fa",
-        sidebarText: "#24292f",
-        sidebarMuted: "#57606a",
-        sidebarHover: "#eaeef2",
-        text: "#24292f",
-        mutedText: "#57606a",
-        border: "#d0d7de",
-        accent: "#0969da",
+        background: "#f4f0df",
+        surface: "#fffaf0",
+        surfaceStrong: "#e7dfc6",
+        sidebar: "#10251d",
+        sidebarText: "#f7fff7",
+        sidebarMuted: "#b8cbbf",
+        sidebarHover: "#1a3529",
+        text: "#18231d",
+        mutedText: "#58685e",
+        border: "#c9c0a6",
+        accent: "#3f8f63",
         accentText: "#ffffff",
-        userBubble: "#ddf4ff",
-        assistantBubble: "#ffffff",
-        composer: "#f6f8fa",
-        shadow: "rgba(31, 35, 40, 0.18)"
+        userBubble: "#dcebd9",
+        assistantBubble: "#fffaf0",
+        composer: "#fffdf6",
+        shadow: "rgba(31, 43, 34, 0.18)"
       })
     },
     {
@@ -358,30 +358,6 @@
       })
     },
     {
-      id: "notion",
-      name: "Notion",
-      description: "Paper light.",
-      swatches: ["#ffffff", "#f7f6f3", "#2f3437"],
-      colors: colors({
-        background: "#ffffff",
-        surface: "#ffffff",
-        surfaceStrong: "#f7f6f3",
-        sidebar: "#f7f6f3",
-        sidebarText: "#2f3437",
-        sidebarMuted: "#787774",
-        sidebarHover: "#efeeeb",
-        text: "#2f3437",
-        mutedText: "#787774",
-        border: "#dedbd6",
-        accent: "#2f3437",
-        accentText: "#ffffff",
-        userBubble: "#efeeeb",
-        assistantBubble: "#ffffff",
-        composer: "#f7f6f3",
-        shadow: "rgba(15, 15, 15, 0.14)"
-      })
-    },
-    {
       id: "one",
       name: "One",
       description: "Atom dark.",
@@ -458,6 +434,30 @@
       })
     },
     {
+      id: "rose",
+      name: "Rose",
+      description: "Rose plum.",
+      swatches: ["#fff1f5", "#8a2c58", "#f47ca5"],
+      colors: colors({
+        background: "#fff1f5",
+        surface: "#fffafd",
+        surfaceStrong: "#f8d5e2",
+        sidebar: "#301525",
+        sidebarText: "#fff2f7",
+        sidebarMuted: "#d3aabb",
+        sidebarHover: "#462035",
+        text: "#2b1420",
+        mutedText: "#725568",
+        border: "#e9b7ca",
+        accent: "#c94679",
+        accentText: "#ffffff",
+        userBubble: "#f8d5e2",
+        assistantBubble: "#fffafd",
+        composer: "#fff8fb",
+        shadow: "rgba(94, 25, 58, 0.18)"
+      })
+    },
+    {
       id: "sentry",
       name: "Sentry",
       description: "Purple signal.",
@@ -493,6 +493,30 @@
         accent: "#b58900",
         accentText: "#161100",
         userBubble: "#164b4f"
+      })
+    },
+    {
+      id: "solar",
+      name: "Solar",
+      description: "Warm light.",
+      swatches: ["#fff6df", "#f2c14e", "#243447"],
+      colors: colors({
+        background: "#fff6df",
+        surface: "#fffdf7",
+        surfaceStrong: "#f7e3aa",
+        sidebar: "#243447",
+        sidebarText: "#fff8e8",
+        sidebarMuted: "#d4c7a7",
+        sidebarHover: "#314258",
+        text: "#271f14",
+        mutedText: "#6f604c",
+        border: "#e0c783",
+        accent: "#d89519",
+        accentText: "#1d1405",
+        userBubble: "#f8e7b6",
+        assistantBubble: "#fffdf7",
+        composer: "#fffaf0",
+        shadow: "rgba(96, 70, 15, 0.2)"
       })
     },
     {
@@ -571,40 +595,13 @@
         accentText: "#ffffff",
         userBubble: "#26384a"
       })
-    },
-    {
-      id: "xcode",
-      name: "Xcode",
-      description: "Mac editor light.",
-      swatches: ["#ffffff", "#eef4ff", "#006ee6"],
-      colors: colors({
-        background: "#ffffff",
-        surface: "#fbfdff",
-        surfaceStrong: "#eef4ff",
-        sidebar: "#f5f8fc",
-        sidebarText: "#1f2937",
-        sidebarMuted: "#667085",
-        sidebarHover: "#e8f1ff",
-        text: "#1f2937",
-        mutedText: "#667085",
-        border: "#c9d7eb",
-        accent: "#006ee6",
-        accentText: "#ffffff",
-        userBubble: "#dcecff",
-        assistantBubble: "#fbfdff",
-        composer: "#f5f8fc",
-        shadow: "rgba(31, 41, 55, 0.16)"
-      })
     }
   ];
 
   const themeAliases = {
     contrast: "temple",
-    forest: "everforest",
     midnight: "night-owl",
-    "one-dark": "one",
-    rose: "rose-pine",
-    solar: "solarized"
+    "one-dark": "one"
   };
   const darkThemeIds = new Set(themes.filter((theme) => theme.dark).map((theme) => theme.id));
 

@@ -2,7 +2,7 @@
 
 GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 28 custom themes to ChatGPT.
 
-Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tokyo Night, Rose Pine, and VS Code Plus.
+Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tokyo Night, Rose, and VS Code Plus.
 
 ## Preview
 
@@ -21,7 +21,7 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 
 - Popup-only theme picker.
 - Adds 28 custom themes while preserving ChatGPT's Default look.
-- Built-in themes: Default, OG, Absolutely, Ayu, Catppuccin, Codex, Dracula, Everforest, GitHub, Gruvbox, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, Notion, One, Oscurange, Raycast, Rose Pine, Sentry, Solarized, Temple, Tokyo Night, Vercel, VS Code Plus, and Xcode.
+- Built-in themes: Default, OG, Absolutely, Ayu, Catppuccin, Codex, Dracula, Everforest, Forest, Gruvbox, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Sentry, Solarized, Solar, Temple, Tokyo Night, Vercel, and VS Code Plus.
 - Saved selection with `chrome.storage.sync`.
 - Automatic theme loading on `chatgpt.com` and `chat.openai.com`.
 - No backend, login, external API, or build step.
@@ -35,7 +35,7 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 - Codex
 - Dracula
 - Everforest
-- GitHub
+- Forest
 - Gruvbox
 - Linear
 - Lobster
@@ -44,18 +44,18 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 - Monokai
 - Night Owl
 - Nord
-- Notion
 - One
 - Oscurange
 - Raycast
 - Rose Pine
+- Rose
 - Sentry
 - Solarized
+- Solar
 - Temple
 - Tokyo Night
 - Vercel
 - VS Code Plus
-- Xcode
 
 ## Load in Chrome or Edge
 
