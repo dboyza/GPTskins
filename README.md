@@ -2,7 +2,7 @@
 
 GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 34 custom themes and simple font switching to ChatGPT.
 
-Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub Dark, Tokyo Night Day, and Xcode Dark, or choose a different local font style.
+Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub Dark, Tokyo Day, and Xcode Dark, or choose a different local font style.
 
 ## Preview
 
@@ -21,7 +21,7 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub
 
 - Popup-only style picker with Theme and Font panels.
 - Adds 34 custom themes while preserving ChatGPT's Default look.
-- Built-in themes: Default, OG, Absolutely, Ayu, Ayu Light, Catppuccin, Catppuccin Latte, Codex, Dracula, Everforest, Forest, Everforest Light, Gruvbox, Gruvbox Light, GitHub Dark, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Rose Pine Dawn, Sentry, Solarized, Solar, Temple, Tokyo Night, Tokyo Night Day, and Xcode Dark.
+- Built-in themes: Default, OG, Absolutely, Ayu, Ayu Light, Catppuccin, Catppuccin Latte, Codex, Dracula, Everforest, Forest, Everforest Light, Gruvbox, Gruvbox Light, GitHub Dark, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Rose Pine Dawn, Sentry, Solarized, Solar, Temple, Tokyo Night, Tokyo Day, and Xcode Dark.
 - Built-in fonts: Default, Verdana, Georgia, and Mono.
 - Saved selection with `chrome.storage.sync`.
 - Automatic theme and font loading on `chatgpt.com` and `chat.openai.com`.
@@ -61,7 +61,7 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub
 - Solar
 - Temple
 - Tokyo Night
-- Tokyo Night Day
+- Tokyo Day
 - Xcode Dark
 
 ## Available Fonts

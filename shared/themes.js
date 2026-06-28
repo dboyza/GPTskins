@@ -700,7 +700,7 @@
     },
     {
       id: "tokyo-night-day",
-      name: "Tokyo Night Day",
+      name: "Tokyo Day",
       description: "Bright Tokyo.",
       swatches: ["#e1e2e7", "#d5d6db", "#2e7de9"],
       colors: colors({
