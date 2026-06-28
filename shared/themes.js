@@ -522,26 +522,6 @@
       })
     },
     {
-      id: "notion-dark",
-      name: "Notion Dark",
-      description: "Paper dark.",
-      dark: true,
-      swatches: ["#191919", "#202020", "#9b9a97"],
-      colors: colors({
-        background: "#191919",
-        surface: "#1f1f1f",
-        surfaceStrong: "#2a2a2a",
-        sidebar: "#151515",
-        text: "#f1f1ef",
-        mutedText: "#9b9a97",
-        border: "#373737",
-        accent: "#9b9a97",
-        accentText: "#191919",
-        userBubble: "#303030",
-        composer: "#252525"
-      })
-    },
-    {
       id: "one",
       name: "One",
       description: "Atom dark.",
@@ -807,25 +787,6 @@
         accent: "#ffffff",
         accentText: "#000000",
         userBubble: "#1a1a1a"
-      })
-    },
-    {
-      id: "vs-code-plus",
-      name: "VS Code Plus",
-      description: "Editor blue.",
-      dark: true,
-      swatches: ["#1e1e1e", "#252526", "#007acc"],
-      colors: colors({
-        background: "#1e1e1e",
-        surface: "#1f1f1f",
-        surfaceStrong: "#252526",
-        sidebar: "#181818",
-        text: "#d4d4d4",
-        mutedText: "#a6a6a6",
-        border: "#3c3c3c",
-        accent: "#007acc",
-        accentText: "#ffffff",
-        userBubble: "#26384a"
       })
     },
     {
