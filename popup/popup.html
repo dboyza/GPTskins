@@ -12,24 +12,31 @@
         <div>
           <p class="eyebrow">GPTskins</p>
           <h1>Choose a style</h1>
+          <p class="tagline">Customize the look and feel.</p>
         </div>
-        <img src="../icons/icon-48.png" alt="" width="40" height="40">
+        <img src="../icons/icon-48.png" alt="" width="64" height="64">
       </header>
 
+      <p class="section-label">Style</p>
       <div class="style-filter" role="group" aria-label="Style type">
         <button type="button" class="filter-button" data-style-mode="theme" aria-pressed="true" aria-controls="theme-panel">Theme</button>
         <button type="button" class="filter-button" data-style-mode="font" aria-pressed="false" aria-controls="font-panel">Font</button>
       </div>
 
       <section class="theme-panel" id="theme-panel" aria-label="Themes">
+        <p class="section-label">Mode</p>
         <div class="theme-filter" role="group" aria-label="Theme type">
           <button type="button" class="filter-button" data-theme-mode="dark" aria-pressed="true">Dark</button>
           <button type="button" class="filter-button" data-theme-mode="light" aria-pressed="false">Light</button>
         </div>
+        <p class="section-label" id="option-title">Themes</p>
         <div class="theme-list" id="theme-list"></div>
       </section>
 
-      <section class="font-list" id="font-panel" aria-label="Fonts" hidden></section>
+      <section class="font-panel" id="font-panel" aria-label="Fonts" hidden>
+        <p class="section-label">Fonts</p>
+        <div class="font-list" id="font-list"></div>
+      </section>
 
       <p class="status" id="status" role="status" aria-live="polite"></p>
     </main>

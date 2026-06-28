@@ -3,7 +3,8 @@
 
   const themeApi = globalThis.GPTskinsThemes;
   const list = document.getElementById("theme-list");
-  const fontList = document.getElementById("font-panel");
+  const fontList = document.getElementById("font-list");
+  const fontPanel = document.getElementById("font-panel");
   const themePanel = document.getElementById("theme-panel");
   const status = document.getElementById("status");
   const styleButtons = Array.from(document.querySelectorAll("[data-style-mode]"));
@@ -54,6 +55,7 @@
     button.type = "button";
     button.className = "font-button";
     button.dataset.fontId = font.id;
+    button.style.fontFamily = font.stack || "";
     button.setAttribute("aria-pressed", String(font.id === selectedFontId));
 
     const name = document.createElement("span");
@@ -139,7 +141,7 @@
   function showPanel(mode) {
     styleMode = mode;
     themePanel.hidden = styleMode !== "theme";
-    fontList.hidden = styleMode !== "font";
+    fontPanel.hidden = styleMode !== "font";
     status.textContent = styleMode === "theme" ? "Pick a theme for ChatGPT." : "Pick a font for ChatGPT.";
     updatePressedStates();
   }
