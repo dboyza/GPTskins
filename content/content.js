@@ -2,7 +2,8 @@
   "use strict";
 
   const themeApi = globalThis.GPTskinsThemes;
-  const styleId = "gptskins-style";
+  const themeStyleId = "gptskins-style";
+  const fontStyleId = "gptskins-font-style";
   const root = document.documentElement;
   const codeSurfaceTags = [
     "data-gptskins-code-frame",
@@ -34,6 +35,7 @@
   ]);
   const themeBypassPrefixPaths = ["/features", "/use-cases", "/apps", "/codex", "/business", "/plans"];
   let selectedThemeId = "default";
+  let selectedFontId = "default";
   let routeThemeTimer = 0;
   let routeThemeObserverStarted = false;
   let lastThemeRoute = location.href;
@@ -73,17 +75,25 @@
     root.removeAttribute("data-gptskins-plan-page");
     root.removeAttribute("data-gptskins-finance-page");
     clearSurfaceTags();
-    const existingStyle = document.getElementById(styleId);
+    const existingStyle = document.getElementById(themeStyleId);
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+  }
+
+  function removeFont() {
+    root.removeAttribute("data-gptskins-font");
+    const existingStyle = document.getElementById(fontStyleId);
     if (existingStyle) {
       existingStyle.remove();
     }
   }
 
   function ensureThemeStyle(theme) {
-    let style = document.getElementById(styleId);
+    let style = document.getElementById(themeStyleId);
     if (!style) {
       style = document.createElement("style");
-      style.id = styleId;
+      style.id = themeStyleId;
       document.documentElement.appendChild(style);
     }
 
@@ -1455,6 +1465,26 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 `;
   }
 
+  function ensureFontStyle(font) {
+    let style = document.getElementById(fontStyleId);
+    if (!style) {
+      style = document.createElement("style");
+      style.id = fontStyleId;
+      document.documentElement.appendChild(style);
+    }
+
+    style.textContent = `
+html[data-gptskins-font] {
+  --gptskins-font-family: ${font.stack};
+}
+
+html[data-gptskins-font] body,
+html[data-gptskins-font] body * {
+  font-family: var(--gptskins-font-family) !important;
+}
+`;
+  }
+
   function markThemeSwitching() {
     clearTimeout(themeSwitchTimer);
     root.setAttribute("data-gptskins-switching", "true");
@@ -1490,10 +1520,23 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     schedulePageMarker();
   }
 
+  function applyFont(fontId) {
+    const font = themeApi.getFont(fontId || "default");
+    selectedFontId = font.id;
+    if (shouldBypassThemeForUrl() || font.id === "default") {
+      removeFont();
+      return;
+    }
+
+    ensureFontStyle(font);
+    root.setAttribute("data-gptskins-font", font.id);
+  }
+
   function scheduleRouteThemeSync() {
     clearTimeout(routeThemeTimer);
     routeThemeTimer = setTimeout(() => {
       applyTheme(selectedThemeId);
+      applyFont(selectedFontId);
     }, 80);
   }
 
@@ -1915,9 +1958,10 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     });
   }
 
-  function loadStoredTheme() {
-    chrome.storage.sync.get(themeApi.storageKey, (result) => {
+  function loadStoredSettings() {
+    chrome.storage.sync.get([themeApi.storageKey, themeApi.fontStorageKey], (result) => {
       applyTheme(result[themeApi.storageKey] || "default");
+      applyFont(result[themeApi.fontStorageKey] || "default");
     });
   }
 
@@ -1925,16 +1969,22 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
     if (message && message.type === "GPTSKINS_APPLY_THEME") {
       applyTheme(message.themeId);
     }
+    if (message && message.type === "GPTSKINS_APPLY_FONT") {
+      applyFont(message.fontId);
+    }
   });
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName === "sync" && changes[themeApi.storageKey]) {
       applyTheme(changes[themeApi.storageKey].newValue);
     }
+    if (areaName === "sync" && changes[themeApi.fontStorageKey]) {
+      applyFont(changes[themeApi.fontStorageKey].newValue);
+    }
   });
 
   startRouteThemeObserver();
   startPageMarkerObserver();
 
-  loadStoredTheme();
+  loadStoredSettings();
 })();

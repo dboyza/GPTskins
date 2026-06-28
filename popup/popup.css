@@ -14,7 +14,7 @@
 
 body {
   width: 340px;
-  min-height: 460px;
+  min-height: 560px;
   margin: 0;
   background: var(--background);
   color: var(--text);
@@ -27,9 +27,9 @@ button {
 
 .popup-shell {
   display: flex;
-  min-height: 460px;
+  min-height: 560px;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
   padding: 18px;
 }
 
@@ -59,9 +59,22 @@ h1 {
   line-height: 1.15;
 }
 
-.theme-list {
+h2 {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.theme-list,
+.font-list {
   display: grid;
   gap: 10px;
+}
+
+.font-list {
+  grid-template-columns: 1fr 1fr;
 }
 
 .theme-filter {
@@ -97,13 +110,12 @@ h1 {
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-.theme-button {
+.theme-button,
+.font-button {
   display: grid;
-  grid-template-columns: 54px 1fr 22px;
   align-items: center;
   gap: 12px;
   width: 100%;
-  min-height: 66px;
   padding: 10px;
   cursor: pointer;
   color: var(--text);
@@ -113,14 +125,28 @@ h1 {
   text-align: left;
 }
 
+.theme-button {
+  grid-template-columns: 54px 1fr 22px;
+  min-height: 66px;
+}
+
+.font-button {
+  grid-template-columns: 1fr;
+  min-height: 62px;
+  gap: 2px;
+}
+
 .theme-button:hover,
-.theme-button:focus-visible {
+.theme-button:focus-visible,
+.font-button:hover,
+.font-button:focus-visible {
   border-color: var(--accent);
   background: var(--surface-strong);
   outline: none;
 }
 
-.theme-button[aria-pressed="true"] {
+.theme-button[aria-pressed="true"],
+.font-button[aria-pressed="true"] {
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--accent);
 }
@@ -142,13 +168,15 @@ h1 {
   min-width: 0;
 }
 
-.theme-name {
+.theme-name,
+.font-name {
   display: block;
   margin-bottom: 2px;
   font-weight: 700;
 }
 
-.theme-description {
+.theme-description,
+.font-description {
   display: block;
   overflow: hidden;
   color: var(--muted);

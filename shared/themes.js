@@ -750,16 +750,55 @@
     "one-dark": "one"
   };
   const darkThemeIds = new Set(themes.filter((theme) => theme.dark).map((theme) => theme.id));
+  const fonts = [
+    {
+      id: "default",
+      name: "Default",
+      description: "Native ChatGPT font.",
+      stack: ""
+    },
+    {
+      id: "system",
+      name: "System",
+      description: "Clean OS sans.",
+      stack: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+    },
+    {
+      id: "serif",
+      name: "Serif",
+      description: "Article-style text.",
+      stack: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif'
+    },
+    {
+      id: "mono",
+      name: "Mono",
+      description: "Terminal-style text.",
+      stack: 'ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace'
+    },
+    {
+      id: "rounded",
+      name: "Rounded",
+      description: "Soft system sans.",
+      stack: 'ui-rounded, "SF Pro Rounded", "Segoe UI", ui-sans-serif, system-ui, sans-serif'
+    }
+  ];
 
   function getTheme(id) {
     const themeId = themeAliases[id] || id;
     return themes.find((theme) => theme.id === themeId) || themes[0];
   }
 
+  function getFont(id) {
+    return fonts.find((font) => font.id === id) || fonts[0];
+  }
+
   globalThis.GPTskinsThemes = {
     storageKey: "gptskins.theme",
+    fontStorageKey: "gptskins.font",
     themes,
+    fonts,
     darkThemeIds,
-    getTheme
+    getTheme,
+    getFont
   };
 })();
