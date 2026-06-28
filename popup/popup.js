@@ -4,7 +4,9 @@
   const themeApi = globalThis.GPTskinsThemes;
   const list = document.getElementById("theme-list");
   const status = document.getElementById("status");
+  const filterButtons = Array.from(document.querySelectorAll("[data-theme-mode]"));
   let selectedThemeId = "default";
+  let themeMode = "dark";
 
   function renderThemeButton(theme) {
     const button = document.createElement("button");
@@ -46,6 +48,9 @@
     document.querySelectorAll(".theme-button").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.themeId === selectedThemeId));
     });
+    filterButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.themeMode === themeMode));
+    });
   }
 
   function sendThemeToActiveTab(themeId) {
@@ -76,12 +81,25 @@
     });
   }
 
-  function renderThemes() {
-    list.replaceChildren(...themeApi.themes.map(renderThemeButton));
+  function isVisibleTheme(theme) {
+    return theme.id === "default" || themeMode === (theme.dark ? "dark" : "light");
   }
+
+  function renderThemes() {
+    list.replaceChildren(...themeApi.themes.filter(isVisibleTheme).map(renderThemeButton));
+    updatePressedStates();
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      themeMode = button.dataset.themeMode;
+      renderThemes();
+    });
+  });
 
   chrome.storage.sync.get(themeApi.storageKey, (result) => {
     selectedThemeId = themeApi.getTheme(result[themeApi.storageKey] || "default").id;
+    themeMode = selectedThemeId !== "default" && !themeApi.darkThemeIds.has(selectedThemeId) ? "light" : "dark";
     renderThemes();
     status.textContent = "Pick a theme for ChatGPT.";
   });
