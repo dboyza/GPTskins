@@ -14,7 +14,7 @@
 
 body {
   width: 340px;
-  min-height: 560px;
+  min-height: 500px;
   margin: 0;
   background: var(--background);
   color: var(--text);
@@ -27,7 +27,7 @@ button {
 
 .popup-shell {
   display: flex;
-  min-height: 560px;
+  min-height: 500px;
   flex-direction: column;
   gap: 14px;
   padding: 18px;
@@ -59,12 +59,13 @@ h1 {
   line-height: 1.15;
 }
 
-h2 {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0;
-  text-transform: uppercase;
+[hidden] {
+  display: none !important;
+}
+
+.theme-panel {
+  display: grid;
+  gap: 12px;
 }
 
 .theme-list,
@@ -77,6 +78,7 @@ h2 {
   grid-template-columns: 1fr 1fr;
 }
 
+.style-filter,
 .theme-filter {
   display: grid;
   grid-template-columns: 1fr 1fr;

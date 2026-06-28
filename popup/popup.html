@@ -16,17 +16,20 @@
         <img src="../icons/icon-48.png" alt="" width="40" height="40">
       </header>
 
-      <div class="theme-filter" role="group" aria-label="Theme type">
-        <button type="button" class="filter-button" data-theme-mode="dark" aria-pressed="true">Dark</button>
-        <button type="button" class="filter-button" data-theme-mode="light" aria-pressed="false">Light</button>
+      <div class="style-filter" role="group" aria-label="Style type">
+        <button type="button" class="filter-button" data-style-mode="theme" aria-pressed="true" aria-controls="theme-panel">Theme</button>
+        <button type="button" class="filter-button" data-style-mode="font" aria-pressed="false" aria-controls="font-panel">Font</button>
       </div>
 
-      <section class="font-section" aria-labelledby="font-title">
-        <h2 id="font-title">Font</h2>
-        <div class="font-list" id="font-list"></div>
+      <section class="theme-panel" id="theme-panel" aria-label="Themes">
+        <div class="theme-filter" role="group" aria-label="Theme type">
+          <button type="button" class="filter-button" data-theme-mode="dark" aria-pressed="true">Dark</button>
+          <button type="button" class="filter-button" data-theme-mode="light" aria-pressed="false">Light</button>
+        </div>
+        <div class="theme-list" id="theme-list"></div>
       </section>
 
-      <section class="theme-list" id="theme-list" aria-label="Themes"></section>
+      <section class="font-list" id="font-panel" aria-label="Fonts" hidden></section>
 
       <p class="status" id="status" role="status" aria-live="polite"></p>
     </main>

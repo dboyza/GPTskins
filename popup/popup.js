@@ -3,11 +3,14 @@
 
   const themeApi = globalThis.GPTskinsThemes;
   const list = document.getElementById("theme-list");
-  const fontList = document.getElementById("font-list");
+  const fontList = document.getElementById("font-panel");
+  const themePanel = document.getElementById("theme-panel");
   const status = document.getElementById("status");
+  const styleButtons = Array.from(document.querySelectorAll("[data-style-mode]"));
   const filterButtons = Array.from(document.querySelectorAll("[data-theme-mode]"));
   let selectedThemeId = "default";
   let selectedFontId = "default";
+  let styleMode = "theme";
   let themeMode = "dark";
 
   function renderThemeButton(theme) {
@@ -74,6 +77,9 @@
     document.querySelectorAll(".font-button").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.fontId === selectedFontId));
     });
+    styleButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.styleMode === styleMode));
+    });
     filterButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.themeMode === themeMode));
     });
@@ -130,6 +136,18 @@
     updatePressedStates();
   }
 
+  function showPanel(mode) {
+    styleMode = mode;
+    themePanel.hidden = styleMode !== "theme";
+    fontList.hidden = styleMode !== "font";
+    status.textContent = styleMode === "theme" ? "Pick a theme for ChatGPT." : "Pick a font for ChatGPT.";
+    updatePressedStates();
+  }
+
+  styleButtons.forEach((button) => {
+    button.addEventListener("click", () => showPanel(button.dataset.styleMode));
+  });
+
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       themeMode = button.dataset.themeMode;
@@ -143,6 +161,6 @@
     themeMode = selectedThemeId !== "default" && !themeApi.darkThemeIds.has(selectedThemeId) ? "light" : "dark";
     renderThemes();
     renderFonts();
-    status.textContent = "Pick a theme or font for ChatGPT.";
+    showPanel("theme");
   });
 })();
