@@ -48,6 +48,25 @@
       colors: {}
     },
     {
+      id: "og",
+      name: "OG",
+      description: "Classic charcoal.",
+      dark: true,
+      swatches: ["#212121", "#171717", "#303030"],
+      colors: colors({
+        background: "#212121",
+        surface: "#212121",
+        surfaceStrong: "#303030",
+        sidebar: "#171717",
+        text: "#f7f7f7",
+        mutedText: "#b4b4b4",
+        border: "#444444",
+        accent: "#8ab4f8",
+        accentText: "#ffffff",
+        userBubble: "#303030"
+      })
+    },
+    {
       id: "absolutely",
       name: "Absolutely",
       description: "Warm charcoal.",
@@ -583,7 +602,6 @@
     contrast: "temple",
     forest: "everforest",
     midnight: "night-owl",
-    og: "codex",
     "one-dark": "one",
     rose: "rose-pine",
     solar: "solarized"
