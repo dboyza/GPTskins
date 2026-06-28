@@ -1,8 +1,8 @@
 # GPTskins
 
-GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 28 custom themes to ChatGPT.
+GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 34 custom themes to ChatGPT.
 
-Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tokyo Night, Rose, and VS Code Plus.
+Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, Dracula, Tokyo Night Day, Rose Pine Dawn, and VS Code Plus.
 
 ## Preview
 
@@ -20,8 +20,8 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 ## Features
 
 - Popup-only theme picker.
-- Adds 28 custom themes while preserving ChatGPT's Default look.
-- Built-in themes: Default, OG, Absolutely, Ayu, Catppuccin, Codex, Dracula, Everforest, Forest, Gruvbox, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Sentry, Solarized, Solar, Temple, Tokyo Night, Vercel, and VS Code Plus.
+- Adds 34 custom themes while preserving ChatGPT's Default look.
+- Built-in themes: Default, OG, Absolutely, Ayu, Ayu Light, Catppuccin, Catppuccin Latte, Codex, Dracula, Everforest, Forest, Everforest Light, Gruvbox, Gruvbox Light, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Rose Pine Dawn, Sentry, Solarized, Solar, Temple, Tokyo Night, Tokyo Night Day, Vercel, and VS Code Plus.
 - Saved selection with `chrome.storage.sync`.
 - Automatic theme loading on `chatgpt.com` and `chat.openai.com`.
 - No backend, login, external API, or build step.
@@ -31,12 +31,16 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 - OG
 - Absolutely
 - Ayu
+- Ayu Light
 - Catppuccin
+- Catppuccin Latte
 - Codex
 - Dracula
 - Everforest
 - Forest
+- Everforest Light
 - Gruvbox
+- Gruvbox Light
 - Linear
 - Lobster
 - Material
@@ -49,11 +53,13 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin, Dracula, Tok
 - Raycast
 - Rose Pine
 - Rose
+- Rose Pine Dawn
 - Sentry
 - Solarized
 - Solar
 - Temple
 - Tokyo Night
+- Tokyo Night Day
 - Vercel
 - VS Code Plus
 

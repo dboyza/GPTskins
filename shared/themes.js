@@ -105,6 +105,30 @@
       })
     },
     {
+      id: "ayu-light",
+      name: "Ayu Light",
+      description: "Golden light.",
+      swatches: ["#fafafa", "#f3f4f5", "#ffaa33"],
+      colors: colors({
+        background: "#fafafa",
+        surface: "#ffffff",
+        surfaceStrong: "#f3f4f5",
+        sidebar: "#f4f5f6",
+        sidebarText: "#5c6773",
+        sidebarMuted: "#8a9199",
+        sidebarHover: "#e9ecef",
+        text: "#5c6773",
+        mutedText: "#7d8790",
+        border: "#d9dde1",
+        accent: "#ffaa33",
+        accentText: "#241400",
+        userBubble: "#fff0d6",
+        assistantBubble: "#ffffff",
+        composer: "#f7f8f9",
+        shadow: "rgba(92, 103, 115, 0.16)"
+      })
+    },
+    {
       id: "catppuccin",
       name: "Catppuccin",
       description: "Pastel mocha.",
@@ -121,6 +145,30 @@
         accent: "#cba6f7",
         accentText: "#1e132d",
         userBubble: "#45475a"
+      })
+    },
+    {
+      id: "catppuccin-latte",
+      name: "Catppuccin Latte",
+      description: "Pastel light.",
+      swatches: ["#eff1f5", "#e6e9ef", "#8839ef"],
+      colors: colors({
+        background: "#eff1f5",
+        surface: "#ffffff",
+        surfaceStrong: "#e6e9ef",
+        sidebar: "#e6e9ef",
+        sidebarText: "#4c4f69",
+        sidebarMuted: "#7c7f93",
+        sidebarHover: "#dce0e8",
+        text: "#4c4f69",
+        mutedText: "#6c6f85",
+        border: "#ccd0da",
+        accent: "#8839ef",
+        accentText: "#ffffff",
+        userBubble: "#e4d8fb",
+        assistantBubble: "#ffffff",
+        composer: "#f7f8fb",
+        shadow: "rgba(76, 79, 105, 0.16)"
       })
     },
     {
@@ -205,6 +253,30 @@
       })
     },
     {
+      id: "everforest-light",
+      name: "Everforest Light",
+      description: "Calm green light.",
+      swatches: ["#fdf6e3", "#efebd4", "#8da101"],
+      colors: colors({
+        background: "#fdf6e3",
+        surface: "#fff9e8",
+        surfaceStrong: "#efebd4",
+        sidebar: "#ede6cf",
+        sidebarText: "#5c6a72",
+        sidebarMuted: "#829181",
+        sidebarHover: "#e0dcc7",
+        text: "#5c6a72",
+        mutedText: "#708073",
+        border: "#d3c6aa",
+        accent: "#8da101",
+        accentText: "#202500",
+        userBubble: "#e7edc1",
+        assistantBubble: "#fff9e8",
+        composer: "#f8f1dc",
+        shadow: "rgba(92, 106, 114, 0.16)"
+      })
+    },
+    {
       id: "gruvbox",
       name: "Gruvbox",
       description: "Retro warm.",
@@ -221,6 +293,30 @@
         accent: "#fabd2f",
         accentText: "#1d2021",
         userBubble: "#504945"
+      })
+    },
+    {
+      id: "gruvbox-light",
+      name: "Gruvbox Light",
+      description: "Retro warm light.",
+      swatches: ["#fbf1c7", "#ebdbb2", "#b57614"],
+      colors: colors({
+        background: "#fbf1c7",
+        surface: "#fff7d6",
+        surfaceStrong: "#ebdbb2",
+        sidebar: "#ebdbb2",
+        sidebarText: "#3c3836",
+        sidebarMuted: "#7c6f64",
+        sidebarHover: "#d5c4a1",
+        text: "#3c3836",
+        mutedText: "#665c54",
+        border: "#d5c4a1",
+        accent: "#b57614",
+        accentText: "#fff7d6",
+        userBubble: "#ead8a1",
+        assistantBubble: "#fff7d6",
+        composer: "#f4e6b7",
+        shadow: "rgba(60, 56, 54, 0.16)"
       })
     },
     {
@@ -458,6 +554,30 @@
       })
     },
     {
+      id: "rose-pine-dawn",
+      name: "Rose Pine Dawn",
+      description: "Soft dawn.",
+      swatches: ["#faf4ed", "#fffaf3", "#b4637a"],
+      colors: colors({
+        background: "#faf4ed",
+        surface: "#fffaf3",
+        surfaceStrong: "#f2e9e1",
+        sidebar: "#f2e9e1",
+        sidebarText: "#575279",
+        sidebarMuted: "#797593",
+        sidebarHover: "#e8dfd8",
+        text: "#575279",
+        mutedText: "#797593",
+        border: "#dfdad9",
+        accent: "#b4637a",
+        accentText: "#ffffff",
+        userBubble: "#f4dce4",
+        assistantBubble: "#fffaf3",
+        composer: "#f7efe8",
+        shadow: "rgba(87, 82, 121, 0.16)"
+      })
+    },
+    {
       id: "sentry",
       name: "Sentry",
       description: "Purple signal.",
@@ -556,6 +676,30 @@
         accent: "#7aa2f7",
         accentText: "#101521",
         userBubble: "#283457"
+      })
+    },
+    {
+      id: "tokyo-night-day",
+      name: "Tokyo Night Day",
+      description: "Bright Tokyo.",
+      swatches: ["#e1e2e7", "#d5d6db", "#2e7de9"],
+      colors: colors({
+        background: "#e1e2e7",
+        surface: "#f2f3f7",
+        surfaceStrong: "#d5d6db",
+        sidebar: "#dfe0e5",
+        sidebarText: "#3760bf",
+        sidebarMuted: "#6172b0",
+        sidebarHover: "#cfd1d8",
+        text: "#3760bf",
+        mutedText: "#6172b0",
+        border: "#c4c8d4",
+        accent: "#2e7de9",
+        accentText: "#ffffff",
+        userBubble: "#d5e4ff",
+        assistantBubble: "#f2f3f7",
+        composer: "#eaebf0",
+        shadow: "rgba(55, 96, 191, 0.14)"
       })
     },
     {
