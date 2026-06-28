@@ -758,18 +758,6 @@
       stack: ""
     },
     {
-      id: "inter",
-      name: "Inter",
-      description: "Modern app text.",
-      stack: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-    },
-    {
-      id: "helvetica",
-      name: "Helvetica",
-      description: "Crisp neutral sans.",
-      stack: 'Helvetica, Arial, ui-sans-serif, system-ui, sans-serif'
-    },
-    {
       id: "verdana",
       name: "Verdana",
       description: "Wide and readable.",
@@ -780,12 +768,6 @@
       name: "Georgia",
       description: "Polished serif text.",
       stack: 'Georgia, Cambria, "Times New Roman", Times, serif'
-    },
-    {
-      id: "trebuchet",
-      name: "Trebuchet",
-      description: "Friendly sans.",
-      stack: '"Trebuchet MS", Trebuchet, ui-sans-serif, system-ui, sans-serif'
     },
     {
       id: "mono",
