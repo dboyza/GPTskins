@@ -502,6 +502,13 @@ html[data-gptskins-theme] :is(
   color: inherit !important;
 }
 
+html[data-gptskins-theme] .artifacts-surface-library-selectable-row :is(button[class*="text-token-text-primary"], span[class*="items-baseline"], .sr-only) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme][data-gptskins-finance-page="true"] main {
   --main-surface-primary: var(--gptskins-background) !important;
   --main-surface-secondary: var(--gptskins-surface) !important;
