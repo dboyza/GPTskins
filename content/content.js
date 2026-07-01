@@ -33,7 +33,7 @@
     "/pricing",
     "/download"
   ]);
-  const themeBypassPrefixPaths = ["/features", "/use-cases", "/apps", "/codex", "/business", "/plans"];
+  const themeBypassPrefixPaths = ["/features", "/use-cases", "/codex", "/business", "/plans"];
   let selectedThemeId = "default";
   let selectedFontId = "default";
   let routeThemeTimer = 0;
