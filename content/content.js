@@ -1176,6 +1176,13 @@ html[data-gptskins-theme] [data-testid="writing-block-container"] :is([data-test
   background-image: none !important;
 }
 
+html[data-gptskins-theme] [role="dialog"][aria-label="Writing block editor"] [class*="writing-block-editor"],
+html[data-gptskins-theme] [role="dialog"][aria-label="Writing block editor"] [class*="writing-block-editor"] :is([class*="ProseMirror"], [contenteditable="true"]) {
+  background: var(--gptskins-surface) !important;
+  background-color: var(--gptskins-surface) !important;
+  background-image: none !important;
+}
+
 html[data-gptskins-theme] [data-testid="writing-block-container"] [data-testid="writing-block-header-magic-edit-button"],
 html[data-gptskins-theme] [data-testid="writing-block-container"] button[aria-label="Edit"] {
   background: var(--gptskins-surfaceStrong) !important;
