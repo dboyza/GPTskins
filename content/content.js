@@ -131,6 +131,12 @@ ${cssVariables(theme)}
   color-scheme: ${themeApi.darkThemeIds.has(theme.id) ? "dark" : "light"};
 }
 
+html[data-gptskins-theme]::selection,
+html[data-gptskins-theme] *::selection {
+  background-color: #0a84ff !important;
+  color: #ffffff !important;
+}
+
 html[data-gptskins-switching],
 html[data-gptskins-switching] *,
 html[data-gptskins-switching] *::before,
