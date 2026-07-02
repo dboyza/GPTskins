@@ -403,10 +403,6 @@ html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="comp
   color: inherit !important;
 }
 
-html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]):hover {
-  background-color: var(--gptskins-surfaceStrong) !important;
-}
-
 html[data-gptskins-theme] main button[class*="btn-secondary"][class*="bg-token-bg-primary"][class*="backdrop-blur"][class*="rounded-full"],
 html[data-gptskins-theme] main button[class*="shadow-short"][class*="backdrop-blur"][class*="rounded-full"],
 html[data-gptskins-theme] :is(button, [role="button"]):is([aria-label*="scroll" i], [data-testid*="scroll" i])[class*="rounded-full"],
@@ -500,13 +496,6 @@ html[data-gptskins-theme] :is(
   main:has(.pulse-card-body) button.btn
 ) :is(span, div, svg) {
   color: inherit !important;
-}
-
-html[data-gptskins-theme] .artifacts-surface-library-selectable-row :is(button[class*="text-token-text-primary"], span[class*="items-baseline"], .sr-only) {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
 }
 
 html[data-gptskins-theme][data-gptskins-finance-page="true"] main {
