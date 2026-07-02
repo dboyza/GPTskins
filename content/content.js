@@ -747,6 +747,13 @@ html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, [role="button"]):is(.btn-danger, [data-testid*="delete" i], [aria-label*="delete" i]) {
+  background: #ff002a !important;
+  background-color: #ff002a !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] select,
 html[data-gptskins-theme] [aria-modal="true"] select,
 html[data-gptskins-theme] [role="menu"],
