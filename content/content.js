@@ -851,7 +851,9 @@ html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, 
   background: #ff002a !important;
   background-color: #ff002a !important;
   border-color: transparent !important;
+  box-shadow: none !important;
   color: #ffffff !important;
+  outline: 0 !important;
 }
 
 html[data-gptskins-theme] [data-radix-menu-content] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
