@@ -747,13 +747,6 @@ html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, [role="button"]):is(.btn-danger, [data-testid*="delete" i], [aria-label*="delete" i]) {
-  background: #ff002a !important;
-  background-color: #ff002a !important;
-  border-color: transparent !important;
-  color: #ffffff !important;
-}
-
 html[data-gptskins-theme] [role="dialog"] select,
 html[data-gptskins-theme] [aria-modal="true"] select,
 html[data-gptskins-theme] [role="menu"],
@@ -852,6 +845,13 @@ html[data-gptskins-theme] :is([role="menuitem"].__menu-item, [role="menuitem"][d
 html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, [role="button"]):is(.btn-danger, [data-testid*="delete" i], [aria-label*="delete" i]) {
+  background: #ff002a !important;
+  background-color: #ff002a !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
 }
 
 html[data-gptskins-theme] [data-radix-menu-content] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
