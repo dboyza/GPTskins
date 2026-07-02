@@ -999,7 +999,7 @@ html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, di
   opacity: 0.45 !important;
 }
 
-html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="bg-token-text-primary"], [class~="bg-white"], [data-active="true"], [data-state="active"]) {
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]):is([class~="bg-token-text-primary"], [class~="bg-white"], [data-active="true"], [data-state="active"]) {
   background-color: var(--gptskins-accent) !important;
   opacity: 1 !important;
 }
