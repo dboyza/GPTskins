@@ -1809,6 +1809,9 @@ html[data-gptskins-font] body * {
       if (item.closest("[data-testid='composer'], form[class*='composer'], [class*='group/composer']")) {
         return;
       }
+      if (item.closest("[data-sidebar-item], nav, aside, [data-testid='history-panel'], [data-testid='left-sidebar']")) {
+        return;
+      }
 
       const rect = item.getBoundingClientRect();
       const width = Math.max(rect.width, item.clientWidth, item.offsetWidth);
