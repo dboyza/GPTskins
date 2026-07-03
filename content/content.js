@@ -1504,6 +1504,15 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   background-image: none !important;
   color: var(--gptskins-text) !important;
 }
+
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"],
+html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"], textarea, [class*="bg-token-bg-primary"]) {
+  background: var(--gptskins-surfaceStrong) !important;
+  background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border-color: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
+  color: var(--gptskins-text) !important;
+}
 `;
   }
 
