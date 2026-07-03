@@ -191,6 +191,27 @@
       })
     },
     {
+      id: "clodhopper",
+      name: "Clodhopper",
+      description: "A muddy little sonnet.",
+      dark: true,
+      swatches: ["#1f1712", "#32251c", "#d97745"],
+      colors: colors({
+        background: "#1f1712",
+        surface: "#241b15",
+        surfaceStrong: "#32251c",
+        sidebar: "#17110d",
+        text: "#f3e9dc",
+        mutedText: "#bfae9b",
+        border: "#4a3a2d",
+        accent: "#d97745",
+        accentText: "#1f120a",
+        userBubble: "#3a291f",
+        composer: "#2b211a",
+        shadow: "rgba(0, 0, 0, 0.36)"
+      })
+    },
+    {
       id: "dracula",
       name: "Dracula",
       description: "Purple dark.",
