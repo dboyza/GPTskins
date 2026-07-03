@@ -1506,8 +1506,13 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 }
 
 html[data-gptskins-theme] [data-testid="writing-block-container"] {
-  background: var(--gptskins-surfaceStrong) !important;
-  background-color: var(--gptskins-surfaceStrong) !important;
+  --gptskins-writing-block-surface: color-mix(in srgb, var(--gptskins-surfaceStrong) 55%, var(--gptskins-surface)) !important;
+  --oai-wb-surface-primary: var(--gptskins-writing-block-surface) !important;
+  --oai-wb-surface-secondary: var(--gptskins-writing-block-surface) !important;
+  --oai-wb-text-primary: var(--gptskins-text) !important;
+  --oai-wb-divider: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
+  background: var(--gptskins-writing-block-surface) !important;
+  background-color: var(--gptskins-writing-block-surface) !important;
   background-image: none !important;
   border-color: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
   color: var(--gptskins-text) !important;
