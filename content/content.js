@@ -1499,8 +1499,8 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="writing-block-editor"][class*="markdown"],
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [class*="ProseMirror"][class*="markdown"],
 html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block-container"][data-testid="writing-block-container"] [contenteditable="true"][class*="ProseMirror"] {
-  background: var(--gptskins-surface) !important;
-  background-color: var(--gptskins-surface) !important;
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   color: var(--gptskins-text) !important;
 }
@@ -1518,7 +1518,7 @@ html[data-gptskins-theme] [data-testid="writing-block-container"] {
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] [data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"], textarea, [class*="bg-token-bg-primary"], [class*="dark:bg-"]) {
+html[data-gptskins-theme] [data-testid="writing-block-container"][data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"], textarea, [class*="bg-token-bg-primary"], [class*="dark:bg-"]) {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
