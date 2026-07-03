@@ -505,7 +505,7 @@ html[data-gptskins-theme] main .artifacts-surface-library-selectable-row:is(:hov
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] main .artifacts-surface-library-selectable-row:is(:hover, :focus-within, [data-state="open"])::before {
+html[data-gptskins-theme] main .artifacts-surface-library-selectable-row::before {
   background: color-mix(in srgb, var(--gptskins-text) 7%, var(--gptskins-surface)) !important;
   background-color: color-mix(in srgb, var(--gptskins-text) 7%, var(--gptskins-surface)) !important;
   background-image: none !important;
