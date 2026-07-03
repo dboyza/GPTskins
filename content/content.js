@@ -1237,9 +1237,9 @@ html[data-gptskins-theme] [data-gptskins-code-block] {
   border: 1px solid var(--code-block-border) !important;
   border-radius: 12px !important;
   box-shadow: none !important;
-  clip-path: inset(0 round 12px) !important;
+  clip-path: none !important;
   outline: 0 !important;
-  overflow: hidden !important;
+  overflow: clip !important;
 }
 
 html[data-gptskins-theme] [data-gptskins-code-frame] {
@@ -1247,9 +1247,9 @@ html[data-gptskins-theme] [data-gptskins-code-frame] {
   border: 0 !important;
   border-radius: 12px !important;
   box-shadow: none !important;
-  clip-path: inset(0 round 12px) !important;
+  clip-path: none !important;
   outline: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   padding: 0 !important;
 }
 
@@ -1259,7 +1259,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[data-gptskins-code-fram
   border-radius: 12px !important;
   box-shadow: none !important;
   outline: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   padding: 0 !important;
 }
 
@@ -1287,8 +1287,6 @@ html[data-gptskins-theme] [data-gptskins-code-header] {
   border-radius: 0 !important;
   box-shadow: none !important;
   color: var(--gptskins-text) !important;
-  position: relative !important;
-  top: auto !important;
   z-index: 1 !important;
 }
 
@@ -1473,7 +1471,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   border-color: var(--code-block-border) !important;
   border-radius: 12px !important;
   box-shadow: none !important;
-  overflow: hidden !important;
+  overflow: clip !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"]:has([class*="border-token-border-light"][class*="rounded"]),
