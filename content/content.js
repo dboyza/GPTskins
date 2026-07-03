@@ -837,6 +837,10 @@ html[data-gptskins-theme] [class*="bg-token-bg-tooltip"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] :is([role="tooltip"] [class*="bg-token-bg-tooltip"], [class*="bg-token-bg-tooltip"]) :is(div, span, p, svg) {
+  color: var(--gptskins-text) !important;
+}
+
 html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
