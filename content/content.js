@@ -505,6 +505,12 @@ html[data-gptskins-theme] main .artifacts-surface-library-selectable-row:is(:hov
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] main .artifacts-surface-library-selectable-row:is(:hover, :focus-within, [data-state="open"])::before {
+  background: color-mix(in srgb, var(--gptskins-text) 7%, var(--gptskins-surface)) !important;
+  background-color: color-mix(in srgb, var(--gptskins-text) 7%, var(--gptskins-surface)) !important;
+  background-image: none !important;
+}
+
 html[data-gptskins-theme][data-gptskins-finance-page="true"] main {
   --main-surface-primary: var(--gptskins-background) !important;
   --main-surface-secondary: var(--gptskins-surface) !important;
