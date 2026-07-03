@@ -1555,16 +1555,56 @@ html[data-gptskins-font] body * {
     }, 180);
   }
 
+  function captureScrollPositions() {
+    const seen = new Set();
+    const snapshots = [];
+    const add = (item) => {
+      if (!item || seen.has(item) || item.scrollHeight <= item.clientHeight + 1 || item.scrollTop <= 0) {
+        return;
+      }
+
+      seen.add(item);
+      snapshots.push({
+        item,
+        top: item.scrollTop,
+        bottom: item.scrollHeight - item.clientHeight - item.scrollTop
+      });
+    };
+
+    add(document.scrollingElement);
+    add(document.documentElement);
+    add(document.body);
+    document.querySelectorAll("main, [role='main'], [class*='overflow-y-auto'], [class*='overflow-auto'], [class*='scroll']").forEach(add);
+
+    return () => {
+      snapshots.forEach(({ item, top, bottom }) => {
+        const maxTop = item.scrollHeight - item.clientHeight;
+        item.scrollTop = bottom <= 2 ? maxTop : Math.min(top, maxTop);
+      });
+    };
+  }
+
+  function restoreScrollPosition(restore) {
+    restore();
+    requestAnimationFrame(() => {
+      restore();
+      requestAnimationFrame(restore);
+    });
+  }
+
   function applyTheme(themeId) {
     const theme = themeApi.getTheme(themeId || "default");
     selectedThemeId = theme.id;
+    const restoreScroll = captureScrollPositions();
     if (shouldBypassThemeForUrl()) {
       removeTheme();
+      restoreScrollPosition(restoreScroll);
       return;
     }
 
     if (theme.id === "default") {
       removeTheme();
+      restoreScrollPosition(restoreScroll);
       return;
     }
 
@@ -1580,6 +1620,7 @@ html[data-gptskins-font] body * {
     root.setAttribute("data-gptskins-theme", theme.id);
     startPageMarkerObserver();
     schedulePageMarker();
+    restoreScrollPosition(restoreScroll);
   }
 
   function applyFont(fontId) {
