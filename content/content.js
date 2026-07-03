@@ -1233,8 +1233,8 @@ html[data-gptskins-theme] [data-testid="writing-block-container"] button[aria-la
 }
 
 html[data-gptskins-theme] [data-gptskins-code-block] {
-  background: transparent !important;
-  border: 0 !important;
+  background: var(--code-block-bg) !important;
+  border: 1px solid var(--code-block-border) !important;
   border-radius: 12px !important;
   box-shadow: none !important;
   clip-path: inset(0 round 12px) !important;
@@ -1282,11 +1282,10 @@ html[data-gptskins-theme] [data-gptskins-code-block] :is([class*="border"], [cla
 }
 
 html[data-gptskins-theme] [data-gptskins-code-header] {
-  background: var(--code-block-header) !important;
+  background: transparent !important;
   background-image: none !important;
-  border: 1px solid var(--code-block-border) !important;
-  border-bottom: 0 !important;
-  border-radius: 12px 12px 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
   color: var(--gptskins-text) !important;
   position: relative !important;
@@ -1296,9 +1295,9 @@ html[data-gptskins-theme] [data-gptskins-code-header] {
 
 html[data-gptskins-theme] [data-gptskins-code-header] > [class*="bg-token-bg-elevated-secondary"],
 html[data-gptskins-theme] [data-message-author-role] pre [class*="select-none"][class*="sticky"] > [class*="bg-token-bg-elevated-secondary"] {
-  background: var(--code-block-header) !important;
+  background: transparent !important;
   background-image: none !important;
-  border-radius: 12px 12px 0 0 !important;
+  border-radius: 0 !important;
   overflow: hidden !important;
 }
 
@@ -1327,13 +1326,13 @@ html[data-gptskins-theme] [data-gptskins-code-header] :is(button, [role="button"
 }
 
 html[data-gptskins-theme] [data-gptskins-code-body] {
-  background: var(--code-block-bg) !important;
+  background: transparent !important;
   background-image: none !important;
-  border: 1px solid var(--code-block-border) !important;
+  border: 0 !important;
   border-top: 0 !important;
-  border-radius: 0 0 12px 12px !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
-  clip-path: inset(0 round 0 0 12px 12px) !important;
+  clip-path: none !important;
   margin: 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
@@ -1680,7 +1679,7 @@ html[data-gptskins-font] body * {
 
   function schedulePageMarker() {
     clearTimeout(pageMarkerTimer);
-    pageMarkerTimer = setTimeout(syncPageMarker, 150);
+    pageMarkerTimer = setTimeout(syncPageMarker, 0);
   }
 
   function ensurePageMarkerEventListeners() {
