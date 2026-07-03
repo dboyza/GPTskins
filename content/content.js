@@ -1258,7 +1258,6 @@ html[data-gptskins-theme] [data-message-author-role] pre[data-gptskins-code-fram
   border: 0 !important;
   border-radius: 12px !important;
   box-shadow: none !important;
-  margin: 0 !important;
   outline: 0 !important;
   overflow: hidden !important;
   padding: 0 !important;
