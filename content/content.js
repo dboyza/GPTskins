@@ -434,6 +434,13 @@ html[data-gptskins-theme] [data-testid="artifacts-surface-top-controls"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] main:has(input[placeholder*="Search apps" i]) > :is(div, header)[class*="h-header-height"][class*="bg-surface-primary"] {
+  background: var(--gptskins-background) !important;
+  background-color: var(--gptskins-background) !important;
+  background-image: none !important;
+  color: var(--gptskins-text) !important;
+}
+
 html[data-gptskins-theme] main:has(input[aria-label="Search GPTs"], input[placeholder*="Search GPTs" i]) :is(div, section)[class*="bg-token-bg-primary"][class*="dark:bg-token-bg-secondary-surface"][class*="sticky"] {
   background: transparent !important;
   background-color: transparent !important;
