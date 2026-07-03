@@ -1505,10 +1505,17 @@ html[data-gptskins-theme] [data-message-author-role] [data-testid="writing-block
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] [data-testid="writing-block-container"],
-html[data-gptskins-theme] [data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"], textarea, [class*="bg-token-bg-primary"], [class*="dark:bg-"]) {
+html[data-gptskins-theme] [data-testid="writing-block-container"] {
   background: var(--gptskins-surfaceStrong) !important;
   background-color: var(--gptskins-surfaceStrong) !important;
+  background-image: none !important;
+  border-color: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="writing-block-container"] :is([data-testid="writing-block-header-sticky-container"], [data-testid="writing-block-header-surface"], [class*="writing-block-editor"], [class*="ProseMirror"], [contenteditable="true"], textarea, [class*="bg-token-bg-primary"], [class*="dark:bg-"]) {
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   border-color: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
   color: var(--gptskins-text) !important;
