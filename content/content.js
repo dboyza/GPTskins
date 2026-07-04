@@ -133,8 +133,8 @@ ${cssVariables(theme)}
 
 html[data-gptskins-theme]::selection,
 html[data-gptskins-theme] *::selection {
-  background-color: #0a84ff !important;
-  color: #ffffff !important;
+  background-color: var(--gptskins-accent) !important;
+  color: var(--gptskins-accentText) !important;
 }
 
 html[data-gptskins-switching],
