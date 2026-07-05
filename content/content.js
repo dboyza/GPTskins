@@ -398,7 +398,7 @@ html[data-gptskins-theme] input::placeholder {
   color: var(--gptskins-mutedText) !important;
 }
 
-html[data-gptskins-theme] main :is(button, a, [role="button"]):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
+html[data-gptskins-theme] main :is(button, a, [role="button"]):not(.btn-primary):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
   color: inherit !important;
 }
 
