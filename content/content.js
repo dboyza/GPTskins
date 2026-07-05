@@ -1520,6 +1520,15 @@ html[data-gptskins-theme] [data-testid="writing-block-container"][data-testid="w
   border-color: color-mix(in srgb, var(--gptskins-border) 55%, transparent) !important;
   color: var(--gptskins-text) !important;
 }
+
+html.dark[data-gptskins-theme] main button.btn-primary {
+  --text-primary: var(--interactive-label-primary-default, #0d0d0d) !important;
+  color: var(--interactive-label-primary-default, #0d0d0d) !important;
+}
+
+html.dark[data-gptskins-theme] main button.btn-primary :is(div, span, svg) {
+  color: inherit !important;
+}
 `;
   }
 
