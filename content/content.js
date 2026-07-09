@@ -1062,7 +1062,7 @@ html[data-gptskins-theme] :not(pre) > code {
   background-color: var(--gptskins-surfaceStrong) !important;
   border: 1px solid var(--gptskins-border) !important;
   border-radius: 6px !important;
-  padding: 0.1em 0.35em !important;
+  padding: 0.1em calc(0.3rem - 1px) !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] pre:not(.cm-content),
