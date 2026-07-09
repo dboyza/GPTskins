@@ -1449,7 +1449,7 @@ html[data-gptskins-theme] [data-gptskins-plan-layer]::after {
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] [data-message-author-role] pre [class*="border-token-border-light"] {
+html[data-gptskins-theme] [data-message-author-role] pre [class*="border-token-border-light"]:not([data-gptskins-code-block]) {
   border: 0 !important;
   box-shadow: none !important;
   outline: 0 !important;
