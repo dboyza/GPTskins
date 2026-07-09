@@ -62,7 +62,7 @@
         mutedText: "#b4b4b4",
         border: "#444444",
         accent: "#8ab4f8",
-        accentText: "#ffffff",
+        accentText: "#101521",
         userBubble: "#303030"
       })
     },
@@ -245,7 +245,7 @@
         mutedText: "#58685e",
         border: "#c9c0a6",
         accent: "#3f8f63",
-        accentText: "#ffffff",
+        accentText: "#050805",
         userBubble: "#dcebd9",
         assistantBubble: "#fffaf0",
         composer: "#fffdf6",
@@ -312,7 +312,7 @@
         mutedText: "#665c54",
         border: "#d5c4a1",
         accent: "#b57614",
-        accentText: "#fff7d6",
+        accentText: "#1d1304",
         userBubble: "#ead8a1",
         assistantBubble: "#fff7d6",
         composer: "#f4e6b7",
@@ -334,7 +334,7 @@
         mutedText: "#8b949e",
         border: "#30363d",
         accent: "#2f81f7",
-        accentText: "#ffffff",
+        accentText: "#0d1117",
         userBubble: "#1f2d3d",
         composer: "#161b22"
       })
@@ -590,7 +590,7 @@
         mutedText: "#797593",
         border: "#dfdad9",
         accent: "#b4637a",
-        accentText: "#ffffff",
+        accentText: "#090509",
         userBubble: "#f4dce4",
         assistantBubble: "#fffaf3",
         composer: "#f7efe8",
@@ -715,7 +715,7 @@
         mutedText: "#6172b0",
         border: "#c4c8d4",
         accent: "#2e7de9",
-        accentText: "#ffffff",
+        accentText: "#050914",
         userBubble: "#d5e4ff",
         assistantBubble: "#f2f3f7",
         composer: "#eaebf0",

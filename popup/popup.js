@@ -109,7 +109,12 @@
     updatePressedStates();
 
     chrome.storage.sync.set({ [themeApi.storageKey]: selectedThemeId }, () => {
-      sendToActiveTab({ type: "GPTSKINS_APPLY_THEME", themeId: selectedThemeId }, "Theme applied.", "Saved. Open ChatGPT to see this theme.");
+      const saveFailed = Boolean(chrome.runtime.lastError);
+      sendToActiveTab(
+        { type: "GPTSKINS_APPLY_THEME", themeId: selectedThemeId },
+        saveFailed ? "Theme applied, but couldn't save it." : "Theme applied.",
+        saveFailed ? "Couldn't save theme. Try again." : "Saved. Open ChatGPT to see this theme."
+      );
     });
   }
 
@@ -118,7 +123,12 @@
     updatePressedStates();
 
     chrome.storage.sync.set({ [themeApi.fontStorageKey]: selectedFontId }, () => {
-      sendToActiveTab({ type: "GPTSKINS_APPLY_FONT", fontId: selectedFontId }, "Font applied.", "Saved. Open ChatGPT to see this font.");
+      const saveFailed = Boolean(chrome.runtime.lastError);
+      sendToActiveTab(
+        { type: "GPTSKINS_APPLY_FONT", fontId: selectedFontId },
+        saveFailed ? "Font applied, but couldn't save it." : "Font applied.",
+        saveFailed ? "Couldn't save font. Try again." : "Saved. Open ChatGPT to see this font."
+      );
     });
   }
 

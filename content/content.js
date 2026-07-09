@@ -70,6 +70,7 @@
 
   function removeTheme() {
     clearTimeout(themeSwitchTimer);
+    stopPageMarkerObserver();
     root.removeAttribute("data-gptskins-switching");
     root.removeAttribute("data-gptskins-theme");
     root.removeAttribute("data-gptskins-plan-page");
@@ -879,6 +880,10 @@ html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, 
   outline: 0 !important;
 }
 
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, [role="button"]):is(.btn-danger, [data-testid*="delete" i], [aria-label*="delete" i]) :is(div, span, svg) {
+  color: inherit !important;
+}
+
 html[data-gptskins-theme] [data-radix-menu-content] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
 html[data-gptskins-theme] [data-radix-menu-content] [data-radix-collection-item]:is(:hover, :focus, :focus-visible, [data-highlighted]),
 html[data-gptskins-theme] [data-radix-popper-content-wrapper] [role="menu"] .__menu-item:is(:hover, :focus, :focus-visible, [data-highlighted]),
@@ -1108,9 +1113,7 @@ html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section)
 }
 
 html[data-gptskins-theme] [data-message-author-role] pre,
-html[data-gptskins-theme] [data-message-author-role] pre *,
-html[data-gptskins-theme] [data-message-author-role] code,
-html[data-gptskins-theme] [data-message-author-role] code * {
+html[data-gptskins-theme] [data-message-author-role] code {
   color: var(--gptskins-text) !important;
 }
 
@@ -1688,6 +1691,10 @@ html[data-gptskins-font] body * {
   let pageMarkerEventListenersAdded = false;
 
   function isPlanPage() {
+    if (location.hash === "#pricing") {
+      return true;
+    }
+
     const pageText = document.body ? document.body.innerText : "";
     const hasPlanHeading = pageText.includes("Choose your plan");
     const hasPlanAction =
@@ -1699,7 +1706,7 @@ html[data-gptskins-font] body * {
       document.querySelector('[aria-label*="Personal" i], [aria-label*="Business" i], [aria-label*="plan" i] [role="radio"]')
     );
 
-    return hasPlanHeading && (hasPlanAction || hasPlanToggle || location.hash === "#pricing");
+    return hasPlanHeading && (hasPlanAction || hasPlanToggle);
   }
 
   function isFinancePage() {
@@ -1762,6 +1769,23 @@ html[data-gptskins-font] body * {
     }
   }
 
+  function stopPageMarkerObserver() {
+    clearTimeout(pageMarkerTimer);
+    if (pageMarkerObserver) {
+      pageMarkerObserver.disconnect();
+      pageMarkerObserver = null;
+    }
+    if (bodyReadyObserver) {
+      bodyReadyObserver.disconnect();
+      bodyReadyObserver = null;
+    }
+    if (pageMarkerEventListenersAdded) {
+      document.removeEventListener("scroll", schedulePageMarker);
+      window.removeEventListener("resize", schedulePageMarker);
+      pageMarkerEventListenersAdded = false;
+    }
+  }
+
   function normalizedText(item) {
     return (item.textContent || "").replace(/\s+/g, " ").trim();
   }
@@ -1816,10 +1840,14 @@ html[data-gptskins-font] body * {
     const interactiveItems = Array.from(document.querySelectorAll(planControlSelector));
     const toggleSets = [
       { labels: ["5x", "20x"], fallbackActive: (text) => (/\$\s*200\b/.test(text) ? "20x" : "") },
-      { labels: ["Personal", "Business"], fallbackActive: () => "Personal" }
+      {
+        labels: ["Personal", "Business"],
+        fallbackActive: (_text, planCard) =>
+          Array.from(planCard.querySelectorAll("h1, h2, h3, h4")).some((heading) => normalizedText(heading) === "Business") ? "Business" : "Personal"
+      }
     ];
     const toggleOptions = interactiveItems.filter((item) =>
-      toggleSets.some((set) => set.labels.some((label) => normalizedText(item).toLowerCase() === label.toLowerCase()))
+      item.matches("[role='radio']") || toggleSets.some((set) => set.labels.some((label) => normalizedText(item).toLowerCase() === label.toLowerCase()))
     );
     const toggleGroups = new Set();
 
@@ -1832,6 +1860,12 @@ html[data-gptskins-font] body * {
 
       if (selected) {
         item.setAttribute("data-gptskins-plan-active", "true");
+      }
+
+      const radioGroup = item.matches("[role='radio']") ? item.closest("[role='radiogroup'], [role='group']") : null;
+      if (radioGroup && radioGroup.querySelectorAll("[role='radio']").length > 1) {
+        toggleGroups.add(radioGroup);
+        return;
       }
 
       for (let node = item.parentElement, depth = 0; node && depth < 4; node = node.parentElement, depth += 1) {
@@ -1862,7 +1896,7 @@ html[data-gptskins-font] body * {
           }
         }
         const planText = normalizedText(planCard);
-        const activeLabel = toggleSet ? toggleSet.fallbackActive(planText) : "";
+        const activeLabel = toggleSet ? toggleSet.fallbackActive(planText, planCard) : "";
         options.forEach((item) => {
           if (activeLabel && normalizedText(item) === activeLabel) {
             item.setAttribute("data-gptskins-plan-active", "true");
@@ -1873,7 +1907,9 @@ html[data-gptskins-font] body * {
 
     interactiveItems.forEach((item) => {
       const text = normalizedText(item);
-      if (!/^(Upgrade to|Switch to|Get|Continue|Start)/i.test(text) || /^(5x|20x)$/i.test(text)) {
+      const rect = item.getBoundingClientRect();
+      const isWideAction = !item.hasAttribute("data-gptskins-plan-toggle-option") && rect.width >= 160 && rect.height >= 32;
+      if ((!/^(Upgrade to|Switch to|Get|Continue|Start)/i.test(text) && !isWideAction) || /^(5x|20x)$/i.test(text)) {
         return;
       }
 
@@ -2095,7 +2131,6 @@ html[data-gptskins-font] body * {
   });
 
   startRouteThemeObserver();
-  startPageMarkerObserver();
 
   loadStoredSettings();
 })();
