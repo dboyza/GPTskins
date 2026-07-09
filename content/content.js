@@ -120,8 +120,9 @@ ${cssVariables(theme)}
   --composer-surface-secondary: var(--gptskins-surfaceStrong) !important;
   --gptskins-menuHover: color-mix(in srgb, var(--gptskins-text) 12%, var(--gptskins-composer)) !important;
   --code-block-bg: var(--gptskins-surfaceStrong) !important;
-  --code-block-header: color-mix(in srgb, var(--gptskins-surfaceStrong) 82%, var(--gptskins-background)) !important;
+  --code-block-header: var(--code-block-bg) !important;
   --code-block-border: var(--gptskins-border) !important;
+  --code-block-radius: 24px;
   --text-primary: var(--gptskins-text) !important;
   --text-secondary: var(--gptskins-mutedText) !important;
   --text-tertiary: var(--gptskins-mutedText) !important;
@@ -1078,7 +1079,7 @@ html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section)
 html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) {
   background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   overflow: hidden !important;
 }
@@ -1163,7 +1164,7 @@ html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section)
   background-color: var(--code-block-bg) !important;
   background-image: none !important;
   border: 1px solid var(--code-block-border) !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   overflow: hidden !important;
 }
@@ -1237,7 +1238,7 @@ html[data-gptskins-theme] [data-testid="writing-block-container"] button[aria-la
 html[data-gptskins-theme] [data-gptskins-code-block] {
   background: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   clip-path: none !important;
   outline: 0 !important;
@@ -1247,7 +1248,7 @@ html[data-gptskins-theme] [data-gptskins-code-block] {
 html[data-gptskins-theme] [data-gptskins-code-frame] {
   background: transparent !important;
   border: 0 !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   clip-path: none !important;
   outline: 0 !important;
@@ -1258,7 +1259,7 @@ html[data-gptskins-theme] [data-gptskins-code-frame] {
 html[data-gptskins-theme] [data-message-author-role] pre[data-gptskins-code-frame] {
   background: transparent !important;
   border: 0 !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   outline: 0 !important;
   overflow: visible !important;
@@ -1283,7 +1284,7 @@ html[data-gptskins-theme] [data-gptskins-code-block] :is([class*="border"], [cla
 }
 
 html[data-gptskins-theme] [data-gptskins-code-header] {
-  background: transparent !important;
+  background: var(--code-block-bg) !important;
   background-image: none !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -1293,6 +1294,7 @@ html[data-gptskins-theme] [data-gptskins-code-header] {
 }
 
 html[data-gptskins-theme] [data-gptskins-code-header] > [class*="bg-token-bg-elevated-secondary"],
+html[data-gptskins-theme] [data-gptskins-code-header] > [class*="code-block-surface"],
 html[data-gptskins-theme] [data-message-author-role] pre [class*="select-none"][class*="sticky"] > [class*="bg-token-bg-elevated-secondary"] {
   background: transparent !important;
   background-image: none !important;
@@ -1340,9 +1342,9 @@ html[data-gptskins-theme] [data-gptskins-code-body] {
 html[data-gptskins-theme] [data-gptskins-code-body-shell] {
   background: transparent !important;
   border: 0 !important;
-  border-radius: 0 0 12px 12px !important;
+  border-radius: 0 0 var(--code-block-radius) var(--code-block-radius) !important;
   box-shadow: none !important;
-  clip-path: inset(0 round 0 0 12px 12px) !important;
+  clip-path: inset(0 round 0 0 var(--code-block-radius) var(--code-block-radius)) !important;
   outline: 0 !important;
   overflow: hidden !important;
 }
@@ -1401,7 +1403,14 @@ html[data-gptskins-theme] [data-message-author-role] :is(.pe-11.pt-3, [class*="o
   background-color: var(--code-block-bg) !important;
   background-image: none !important;
   border-color: var(--code-block-border) !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
+  overflow: clip !important;
+}
+
+html[data-gptskins-theme] [data-message-author-role] [class*="overflow-clip"]:has(.cm-editor) > :first-child {
+  background: var(--code-block-bg) !important;
+  background-image: none !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] .pe-11.pt-3 .cm-editor[class*="cm-"] {
@@ -1455,14 +1464,14 @@ html[data-gptskins-theme] [data-message-author-role] pre [class*="sticky"] > [cl
 html[data-gptskins-theme] [data-message-author-role] pre [class*="select-none"] [class*="bg-token-bg-elevated-secondary"] {
   background: var(--code-block-header) !important;
   background-image: none !important;
-  border-radius: 12px 12px 0 0 !important;
+  border-radius: var(--code-block-radius) var(--code-block-radius) 0 0 !important;
   overflow: hidden !important;
 }
 
 html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visible"][class*="px-0"] [class*="select-none"][class*="sticky"] {
   background: var(--code-block-header) !important;
   background-image: none !important;
-  border-radius: 12px 12px 0 0 !important;
+  border-radius: var(--code-block-radius) var(--code-block-radius) 0 0 !important;
   overflow: hidden !important;
 }
 
@@ -1471,7 +1480,7 @@ html[data-gptskins-theme] [data-message-author-role] pre[class*="overflow-visibl
   background: var(--code-block-bg) !important;
   background-image: none !important;
   border-color: var(--code-block-border) !important;
-  border-radius: 12px !important;
+  border-radius: var(--code-block-radius) !important;
   box-shadow: none !important;
   overflow: clip !important;
 }
