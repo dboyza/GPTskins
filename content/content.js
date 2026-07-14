@@ -165,6 +165,10 @@ html[data-gptskins-theme] [class*="bg-token-message-surface"] {
   color: var(--gptskins-text) !important;
 }
 
+html[data-gptskins-theme] [class*="shadow-[0_0_8px_8px_var(--main-surface-primary)]"] {
+  --main-surface-primary: var(--gptskins-background) !important;
+}
+
 html[data-gptskins-theme] [data-testid="stage-thread-flyout"] {
   --main-surface-primary: var(--gptskins-surface) !important;
   --main-surface-secondary: var(--gptskins-surface) !important;
