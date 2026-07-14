@@ -198,6 +198,10 @@ html[data-gptskins-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
   background-image: none !important;
 }
 
+html[data-gptskins-theme] #page-header [class*="pointer-events-none"] > .translucent-surface {
+  --main-surface-primary: var(--gptskins-background) !important;
+}
+
 html[data-gptskins-theme] [class*="thread-bottom-container"]:has(:is(form[class*="composer"], [data-testid="composer"], [class*="group/composer"], [class*="composer"])) {
   background: linear-gradient(
     to bottom,
