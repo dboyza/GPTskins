@@ -1,92 +1,63 @@
-# GPTskins
+<p align="center">
+  <img src="icons/logo.svg" width="80" height="80" alt="GPTskins logo">
+</p>
+<h1 align="center">GPTskins</h1>
+<p align="center"><strong>A new look for ChatGPT.</strong><br>Editor-inspired themes and local fonts, one click away.</p>
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#preview">Preview</a> ·
+  <a href="docs/testing.md">Testing guide</a> ·
+  <a href="https://github.com/dboyza/GPTskins/issues">Report an issue</a>
+</p>
+<p align="center"><strong>34 themes</strong> &nbsp; / &nbsp; <strong>4 font choices</strong> &nbsp; / &nbsp; <strong>No build step</strong></p>
 
-GPTskins is a completely free, open source, and dependency-free Manifest V3 browser extension that adds 34 custom themes and simple font switching to ChatGPT.
+## Install
 
-Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub Dark, Tokyo Day, and Xcode Dark, or choose a different local font style.
+For Chrome or Edge:
+
+```sh
+git clone https://github.com/dboyza/GPTskins.git
+```
+
+Or use **Code → Download ZIP** above and extract it.
+
+1. Open `chrome://extensions` or `edge://extensions` and enable **Developer mode**.
+2. Click **Load unpacked** and select the `GPTskins` folder containing `manifest.json`.
+3. Open [ChatGPT](https://chatgpt.com), pin GPTskins from the browser's extensions menu, and click its icon.
+4. Pick a theme or font to see it applied immediately.
+
+No Node.js, separate extension account, or build command is needed to install the extension.
+After updating the files, reload GPTskins on the extensions page and refresh ChatGPT.
 
 ## Preview
 
+Click a thumbnail to view it at full size.
+
 <table>
   <tr>
-    <td><strong>OG</strong><br><img src="docs/screenshots/og-theme.png" width="1000" alt="GPTskins OG ChatGPT theme preview"></td>
-    <td><strong>Midnight</strong><br><img src="docs/screenshots/midnight-theme.png" width="1000" alt="GPTskins Midnight theme preview"></td>
-  </tr>
-  <tr>
-    <td><strong>One Dark</strong><br><img src="docs/screenshots/one-dark-theme.png" width="1000" alt="GPTskins One Dark theme preview"></td>
-    <td><strong>Dracula</strong><br><img src="docs/screenshots/dracula-theme.png" width="1000" alt="GPTskins Dracula theme preview"></td>
+    <td align="center"><a href="docs/screenshots/theme-picker.png"><img src="docs/screenshots/theme-picker.png" width="195" alt="GPTskins theme picker with search, dark and light filters, and palette previews"></a><br><strong>Find your theme</strong></td>
+    <td align="center"><a href="docs/screenshots/font-picker.png"><img src="docs/screenshots/font-picker.png" width="195" alt="GPTskins font picker showing Default, Verdana, Georgia, and Mono samples"></a><br><strong>Choose your type</strong></td>
   </tr>
 </table>
 
-## Features
+<a href="docs/screenshots/og-explore.png"><img src="docs/screenshots/og-explore.png" width="420" alt="The current ChatGPT Explore GPTs page using GPTskins OG charcoal theme"></a>
 
-- Popup-only style picker with Theme and Font panels.
-- Adds 34 custom themes while preserving ChatGPT's Default look.
-- Built-in themes: Default, OG, Absolutely, Ayu, Ayu Light, Catppuccin, Catppuccin Latte, Codex, Dracula, Everforest, Forest, Everforest Light, Gruvbox, Gruvbox Light, GitHub Dark, Linear, Lobster, Material, Matrix, Monokai, Night Owl, Nord, One, Oscurange, Raycast, Rose Pine, Rose, Rose Pine Dawn, Sentry, Solarized, Solar, Temple, Tokyo Night, Tokyo Day, and Xcode Dark.
-- Built-in fonts: Default, Verdana, Georgia, and Mono.
-- Saved selection with `chrome.storage.sync`.
-- Automatic theme and font loading on `chatgpt.com` and `chat.openai.com`.
-- No backend, login, external API, or build step.
+*OG on ChatGPT.*
 
-## Available Themes
+## Make it your own
 
-- OG
-- Absolutely
-- Ayu
-- Ayu Light
-- Catppuccin
-- Catppuccin Latte
-- Codex
-- Dracula
-- Everforest
-- Forest
-- Everforest Light
-- Gruvbox
-- Gruvbox Light
-- GitHub Dark
-- Linear
-- Lobster
-- Material
-- Matrix
-- Monokai
-- Night Owl
-- Nord
-- One
-- Oscurange
-- Raycast
-- Rose Pine
-- Rose
-- Rose Pine Dawn
-- Sentry
-- Solarized
-- Solar
-- Temple
-- Tokyo Night
-- Tokyo Day
-- Xcode Dark
+- **Dark or light.** Choose from 34 palettes, including Catppuccin, GitHub Dark, Nord, Rose Pine, and Tokyo Night.
+- **Search and switch.** Filter the picker by name or description, then apply a style without leaving your chat.
+- **Mix theme and font.** Keep the native font or choose Verdana, Georgia, or Mono independently of your colors.
+- **Keep your preferences.** Choices are saved through browser sync storage and restored when ChatGPT loads.
+- **Return to native.** Select Default to remove custom colors; reset the font separately.
 
-## Available Fonts
+GPTskins is a free Manifest V3 extension with no backend, external API, or runtime dependencies.
+It runs on `chatgpt.com` and `chat.openai.com`.
 
-- Default
-- Verdana
-- Georgia
-- Mono
+## Development
 
-## Load in Chrome or Edge
-
-1. Clone or download the extension to a folder on your computer.
-
-   ```
-   git clone https://github.com/dboyza/GPTskins.git
-   ```
-
-   You can also use GitHub's **Code** > **Download ZIP** option and unzip it anywhere you like.
-2. Open `chrome://extensions` or `edge://extensions`.
-3. Enable **Developer mode**.
-4. Choose **Load unpacked**.
-5. Select the folder you cloned or unzipped.
-6. Open ChatGPT, click the GPTskins toolbar icon, and pick a theme or font.
-
-## Regression tests
+With Node.js 22 or newer, run from the repository root:
 
 ```sh
 npm ci
@@ -94,14 +65,9 @@ npx playwright install chromium
 npm test
 ```
 
-Use `npm run test:full` to include screenshot comparisons, and `npm run test:report` to inspect results.
-See [the testing guide](docs/testing.md) for coverage, focused runs, baseline review, and the live ChatGPT update workflow.
-Testing dependencies are development-only; the extension still has no build step or runtime dependencies.
+Use `npm run test:full` to include screenshot comparisons; the checked-in baselines are for macOS.
+See the [testing guide](docs/testing.md) for platform setup, reports, and baseline review.
 
-## Project Layout
-
-- `manifest.json` defines the Manifest V3 extension.
-- `shared/themes.js` contains the built-in theme and font definitions.
-- `content/content.js` applies the selected theme and font on ChatGPT pages.
-- `popup/` contains the extension popup UI.
-- `icons/` contains the editable SVG logo and rendered extension icons.
+Spotted a regression after a ChatGPT update?
+[Open an issue](https://github.com/dboyza/GPTskins/issues) with the theme, affected screen, and a screenshot with private content removed.
+The [live audit workflow](docs/live-audit.md) explains how to reproduce it and add lasting regression coverage.
