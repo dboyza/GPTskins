@@ -11,6 +11,11 @@
 - When screenshots and headless Chrome disagree, use the visible Chrome window with remote debugging and inspect computed styles from the live DOM.
 - ChatGPT markup changes often. Prefer stable hooks like `data-testid`, `role`, `aria-*`, and our `data-gptskins-*` tags over brittle Tailwind class chains.
 - After content script edits, reload the unpacked extension and refresh ChatGPT before judging visuals.
+- Current ChatGPT declares native surface tokens on `body` as well as `html`; override both inheritance boundaries, including plan-page exceptions.
+- ChatGPT sets inline `color-scheme` on `html`; the selected theme's declaration needs `!important`.
+- The Chat/Work switch exposes `data-tpp-toggle-value` and `data-tpp-toggle-highlight`; its native track can use a hardcoded dark background.
+- Citation chips expose `data-testid="webpage-citation-pill"` and can retain hardcoded dark paint.
+- CodeMirror syntax classes are generated; scope overrides of its stable color tokens to message `.cm-editor` elements and use `getCodeColors()` to preserve readable syntax hues.
 
 ## Known Surfaces
 - Default is a pass-through theme. Its popup swatches should stay simple black/white, but do not make Default inject CSS unless Dylan explicitly asks.
@@ -61,4 +66,5 @@
 - For visual fixes, verify computed styles on the exact live element, not just screenshots.
 - Button color probes may need a short wait because ChatGPT uses transition classes; immediate computed styles can show the old color.
 - Minimum checks before committing: `node --check content/content.js` and `git -c safe.directory=C:/Users/Dylan/Documents/extension diff --check`.
+- Run `node --test tests/*.test.js` for palette, syntax-color, and popup-message regressions.
 - Commit finished work; do not push unless Dylan asks.

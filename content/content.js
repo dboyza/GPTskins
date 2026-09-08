@@ -101,6 +101,12 @@
     style.textContent = `
 html[data-gptskins-theme] {
 ${cssVariables(theme)}
+  color-scheme: ${themeApi.darkThemeIds.has(theme.id) ? "dark" : "light"} !important;
+}
+
+/* ChatGPT also declares native tokens on body, below the root inheritance boundary. */
+html[data-gptskins-theme],
+html[data-gptskins-theme] body {
   --main-surface-primary: var(--gptskins-background) !important;
   --main-surface-secondary: var(--gptskins-surface) !important;
   --main-surface-tertiary: var(--gptskins-surfaceStrong) !important;
@@ -110,6 +116,8 @@ ${cssVariables(theme)}
   --bg-primary: var(--gptskins-surface) !important;
   --bg-secondary: var(--gptskins-surfaceStrong) !important;
   --bg-tertiary: var(--gptskins-surfaceStrong) !important;
+  --bg-elevated-primary: var(--gptskins-surface) !important;
+  --bg-elevated-secondary: var(--gptskins-surfaceStrong) !important;
   --sidebar-surface-primary: var(--gptskins-sidebar) !important;
   --sidebar-surface-secondary: var(--gptskins-sidebarHover) !important;
   --sidebar-surface-tertiary: var(--gptskins-sidebarHover) !important;
@@ -126,11 +134,47 @@ ${cssVariables(theme)}
   --text-primary: var(--gptskins-text) !important;
   --text-secondary: var(--gptskins-mutedText) !important;
   --text-tertiary: var(--gptskins-mutedText) !important;
+  --icon-primary: var(--gptskins-text) !important;
+  --icon-secondary: var(--gptskins-mutedText) !important;
+  --icon-tertiary: var(--gptskins-mutedText) !important;
   --border-light: var(--gptskins-border) !important;
   --border-medium: var(--gptskins-border) !important;
   --border-heavy: var(--gptskins-border) !important;
   --sharp-edge-bottom-shadow: none !important;
-  color-scheme: ${themeApi.darkThemeIds.has(theme.id) ? "dark" : "light"};
+}
+
+html[data-gptskins-theme] [role="radiogroup"]:has([data-tpp-toggle-value]) > .pointer-events-none {
+  background: var(--gptskins-surfaceStrong) !important;
+}
+
+html[data-gptskins-theme] [data-tpp-toggle-highlight] > div {
+  background: var(--gptskins-surface) !important;
+  border-color: var(--gptskins-border) !important;
+  box-shadow: 0 1px 4px var(--gptskins-shadow) !important;
+}
+
+html[data-gptskins-theme] [data-tpp-toggle-value][aria-checked="true"] {
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] #composer-submit-button:is(:disabled, [aria-disabled="true"]) {
+  background: var(--gptskins-surfaceStrong) !important;
+  color: var(--gptskins-mutedText) !important;
+  opacity: 1 !important;
+}
+
+html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a {
+  background: var(--gptskins-surfaceStrong) !important;
+  color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a:is(:hover, :focus-visible) {
+  background: var(--gptskins-menuHover) !important;
+}
+
+/* CodeMirror generates class names, but its syntax colors use stable palette tokens. */
+html[data-gptskins-theme] [data-message-author-role] .cm-editor {
+${Object.entries(themeApi.getCodeColors(theme)).map(([token, color]) => `  --${token}: ${color} !important;`).join("\n")}
 }
 
 html[data-gptskins-theme]::selection,
@@ -241,7 +285,8 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] [class*="thread-bottom
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme][data-gptskins-plan-page="true"] {
+html[data-gptskins-theme][data-gptskins-plan-page="true"],
+html[data-gptskins-theme][data-gptskins-plan-page="true"] body {
   --bg-primary: var(--gptskins-surface) !important;
   --bg-elevated-secondary: var(--gptskins-surface) !important;
 }
@@ -2129,12 +2174,14 @@ html[data-gptskins-font] body * {
     });
   }
 
-  chrome.runtime.onMessage.addListener((message) => {
+  chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (message && message.type === "GPTSKINS_APPLY_THEME") {
       applyTheme(message.themeId);
+      sendResponse({ ok: true });
     }
     if (message && message.type === "GPTSKINS_APPLY_FONT") {
       applyFont(message.fontId);
+      sendResponse({ ok: true });
     }
   });
 

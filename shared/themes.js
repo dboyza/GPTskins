@@ -115,10 +115,10 @@
         surfaceStrong: "#f3f4f5",
         sidebar: "#f4f5f6",
         sidebarText: "#5c6773",
-        sidebarMuted: "#8a9199",
+        sidebarMuted: "#666b71",
         sidebarHover: "#e9ecef",
         text: "#5c6773",
-        mutedText: "#7d8790",
+        mutedText: "#676f77",
         border: "#d9dde1",
         accent: "#ffaa33",
         accentText: "#241400",
@@ -158,10 +158,10 @@
         surfaceStrong: "#e6e9ef",
         sidebar: "#e6e9ef",
         sidebarText: "#4c4f69",
-        sidebarMuted: "#7c7f93",
+        sidebarMuted: "#606372",
         sidebarHover: "#dce0e8",
         text: "#4c4f69",
-        mutedText: "#6c6f85",
+        mutedText: "#5e6174",
         border: "#ccd0da",
         accent: "#8839ef",
         accentText: "#ffffff",
@@ -221,7 +221,7 @@
         surfaceStrong: "#3a464c",
         sidebar: "#252d33",
         text: "#d3c6aa",
-        mutedText: "#a7b09a",
+        mutedText: "#b5bcaa",
         border: "#4f5b58",
         accent: "#a7c080",
         accentText: "#17210f",
@@ -242,7 +242,7 @@
         sidebarMuted: "#b8cbbf",
         sidebarHover: "#1a3529",
         text: "#18231d",
-        mutedText: "#58685e",
+        mutedText: "#57675d",
         border: "#c9c0a6",
         accent: "#3f8f63",
         accentText: "#050805",
@@ -262,11 +262,11 @@
         surface: "#fff9e8",
         surfaceStrong: "#efebd4",
         sidebar: "#ede6cf",
-        sidebarText: "#5c6a72",
-        sidebarMuted: "#829181",
+        sidebarText: "#55636a",
+        sidebarMuted: "#596359",
         sidebarHover: "#e0dcc7",
         text: "#5c6a72",
-        mutedText: "#708073",
+        mutedText: "#5f6c61",
         border: "#d3c6aa",
         accent: "#8da101",
         accentText: "#202500",
@@ -306,7 +306,7 @@
         surfaceStrong: "#ebdbb2",
         sidebar: "#ebdbb2",
         sidebarText: "#3c3836",
-        sidebarMuted: "#7c6f64",
+        sidebarMuted: "#5b5149",
         sidebarHover: "#d5c4a1",
         text: "#3c3836",
         mutedText: "#665c54",
@@ -485,7 +485,7 @@
         surfaceStrong: "#21252b",
         sidebar: "#21252b",
         text: "#abb2bf",
-        mutedText: "#8b93a1",
+        mutedText: "#9198a5",
         border: "#3b4048",
         accent: "#61afef",
         accentText: "#0b1118",
@@ -542,7 +542,7 @@
         surfaceStrong: "#26233a",
         sidebar: "#15131e",
         text: "#e0def4",
-        mutedText: "#908caa",
+        mutedText: "#9d99b4",
         border: "#403d52",
         accent: "#ebbcba",
         accentText: "#21151b",
@@ -584,10 +584,10 @@
         surfaceStrong: "#f2e9e1",
         sidebar: "#f2e9e1",
         sidebarText: "#575279",
-        sidebarMuted: "#797593",
+        sidebarMuted: "#65617a",
         sidebarHover: "#e8dfd8",
         text: "#575279",
-        mutedText: "#797593",
+        mutedText: "#66627b",
         border: "#dfdad9",
         accent: "#b4637a",
         accentText: "#090509",
@@ -628,7 +628,7 @@
         surfaceStrong: "#0c4653",
         sidebar: "#00212a",
         text: "#eee8d5",
-        mutedText: "#93a1a1",
+        mutedText: "#a7b3b3",
         border: "#25545f",
         accent: "#b58900",
         accentText: "#161100",
@@ -708,11 +708,11 @@
         surface: "#f2f3f7",
         surfaceStrong: "#d5d6db",
         sidebar: "#dfe0e5",
-        sidebarText: "#3760bf",
-        sidebarMuted: "#6172b0",
+        sidebarText: "#3156ac",
+        sidebarMuted: "#4b5889",
         sidebarHover: "#cfd1d8",
-        text: "#3760bf",
-        mutedText: "#6172b0",
+        text: "#3359b2",
+        mutedText: "#4e5b8d",
         border: "#c4c8d4",
         accent: "#2e7de9",
         accentText: "#050914",
@@ -786,6 +786,61 @@
     return fonts.find((font) => font.id === id) || fonts[0];
   }
 
+  const codeColorSeeds = {
+    "red-200": "#ff8d90",
+    "orange-200": "#fbbf91",
+    "yellow-200": "#f9dc78",
+    "green-200": "#8edbb0",
+    "blue-200": "#93b9ff",
+    "pink-200": "#f3a5d0",
+    "purple-200": "#c6adff"
+  };
+
+  function colorChannels(hex) {
+    return [1, 3, 5].map((start) => Number.parseInt(hex.slice(start, start + 2), 16));
+  }
+
+  function luminance(channels) {
+    const linear = channels.map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    });
+    return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+  }
+
+  function getCodeColors(themeOrId) {
+    const theme = typeof themeOrId === "string" ? getTheme(themeOrId) : themeOrId;
+    if (!theme || theme.id === "default") return {};
+
+    const backgrounds = ["surface", "surfaceStrong", "composer"]
+      .map((key) => luminance(colorChannels(theme.colors[key])));
+    const textLuminance = luminance(colorChannels(theme.colors.text));
+    const target = textLuminance > backgrounds[0] ? 255 : 0;
+    const isReadable = (channels) => {
+      const foreground = luminance(channels);
+      return backgrounds.every((background) => (
+        (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05) >= 4.5
+      ));
+    };
+
+    return Object.fromEntries(Object.entries(codeColorSeeds).map(([token, seed]) => {
+      const channels = colorChannels(seed);
+      if (isReadable(channels)) return [token, seed];
+
+      // Mixing with black or white keeps each syntax hue while changing its contrast.
+      const mix = (amount) => channels.map((channel) => Math.round(channel + (target - channel) * amount));
+      let low = 0;
+      let high = 1;
+      for (let step = 0; step < 16; step += 1) {
+        const middle = (low + high) / 2;
+        if (isReadable(mix(middle))) high = middle;
+        else low = middle;
+      }
+      const color = `#${mix(high).map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
+      return [token, color];
+    }));
+  }
+
   globalThis.GPTskinsThemes = {
     storageKey: "gptskins.theme",
     fontStorageKey: "gptskins.font",
@@ -793,6 +848,7 @@
     fonts,
     darkThemeIds,
     getTheme,
-    getFont
+    getFont,
+    getCodeColors
   };
 })();
