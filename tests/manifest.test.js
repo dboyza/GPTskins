@@ -42,3 +42,30 @@ test("theme and font catalogs are internally complete and identifiers fall back 
     }
   }
 });
+
+test("bundled fonts contain licensed TTF faces and are exposed only to supported ChatGPT hosts", () => {
+  const bundled = api.fonts.filter((font) => font.faces?.length);
+  assert.deepEqual(bundled.map((font) => font.id).sort(), ["fira-code", "jetbrains-mono", "space-mono"]);
+  assert.deepEqual(manifest.web_accessible_resources, [{ resources: ["fonts/*/*.ttf"], matches: manifest.host_permissions }]);
+  const declared = [];
+  for (const font of bundled) {
+    assert.match(font.family, /^GPTskins /);
+    assert.ok(font.stack.includes(`"${font.family}"`));
+    assert.match(fs.readFileSync(path.join(root, "fonts", font.id, "OFL.txt"), "utf8"), /SIL OPEN FONT LICENSE Version 1\.1/);
+    const variants = new Set();
+    for (const face of font.faces) {
+      assert.equal(path.posix.dirname(face.path), `fonts/${font.id}`);
+      assert.equal(path.posix.extname(face.path), ".ttf");
+      assert.match(face.weight, /^(?:[1-9]00)(?: [1-9]00)?$/);
+      assert.ok(["normal", "italic"].includes(face.style));
+      assert.ok(!variants.has(`${face.weight}/${face.style}`), `${font.id} has duplicate face descriptors`);
+      variants.add(`${face.weight}/${face.style}`);
+      const bytes = fs.readFileSync(path.join(root, face.path));
+      assert.equal(bytes.readUInt32BE(0), 0x00010000, `${face.path} must be a TrueType font, not a download error page`);
+      declared.push(face.path);
+    }
+  }
+  const packaged = fs.readdirSync(path.join(root, "fonts"), { recursive: true })
+    .filter((file) => file.endsWith(".ttf")).map((file) => `fonts/${file.split(path.sep).join("/")}`);
+  assert.deepEqual(declared.sort(), packaged.sort(), "Every packaged font must be declared exactly once");
+});

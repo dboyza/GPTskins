@@ -1629,7 +1629,7 @@ html.dark[data-gptskins-theme] main button.btn-primary :is(div, span, svg) {
       document.documentElement.appendChild(style);
     }
 
-    style.textContent = `
+    style.textContent = `${themeApi.getFontFaceCSS(font, (path) => chrome.runtime.getURL(path))}
 html[data-gptskins-font] {
   --gptskins-font-family: ${font.stack};
 }

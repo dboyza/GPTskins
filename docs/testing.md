@@ -26,7 +26,7 @@ On Linux, install browser system libraries with `npx playwright install --with-d
 | `npm run test:full` | Everything above plus screenshot comparisons against reviewed baselines |
 | `npm run test:unit` | Fast manifest, palette, syntax, control contrast, messaging, and live-report checks |
 | `npm run test:browser` | All captured surfaces and behavioral tests at desktop, tablet, and mobile sizes |
-| `npm run test:extension` | Load a temporary unpacked extension and exercise real Chrome storage and content injection |
+| `npm run test:extension` | Load a temporary unpacked extension and exercise real Chrome storage, content injection, and bundled font loading |
 | `npm run test:headed` | Watch the local browser tests |
 | `npm run test:ui` | Interactive test selection and debugging |
 | `npm run test:report` | Open the latest browser HTML report |
@@ -47,6 +47,7 @@ npm run test:visual -- --project=desktop --grep 'ayu-light'
 Tests have zero automatic retries so flaky behavior stays visible.
 Use `--repeat-each=3` when investigating suspected flakiness.
 Set `GPTSKINS_TEST_PORT` if another service occupies port 8766.
+For concurrent runs, also pass distinct `--output` directories and use `--reporter=line` to avoid competing for report artifacts.
 
 ## Coverage
 
@@ -70,7 +71,7 @@ Browser projects use 1440 × 1000, 834 × 1112, and 390 × 844 CSS pixels.
 | Live audit tooling | Read-only collection, redaction, missing/partial coverage, schema validation and strict reporting |
 
 Browser API mocks are used for deterministic error handling and fast exhaustive loops.
-The separate extension test covers actual extension loading, storage, and content-script injection in a temporary profile.
+The separate extension test covers actual extension loading, storage, content-script injection, and packaged font faces in a temporary profile.
 Its temporary manifest gets only a test key so the popup URL is deterministic; production files remain unchanged.
 
 ## Screenshot baselines

@@ -5,7 +5,7 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const port = Number(process.env.GPTSKINS_TEST_PORT || 8766);
-const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml" };
+const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml", ".ttf": "font/ttf" };
 
 const server = http.createServer(async (request, response) => {
   try {
@@ -16,7 +16,7 @@ const server = http.createServer(async (request, response) => {
     }
     const file = path.resolve(root, `.${pathname === "/" ? "/tests/fixtures/theme-surfaces.html" : pathname}`);
     const relative = path.relative(root, file);
-    if (relative.startsWith("..") || path.isAbsolute(relative) || relative.split(path.sep).some((part) => part.startsWith(".")) || !/^(tests|content|shared|popup|icons)[/\\]/.test(relative)) {
+    if (relative.startsWith("..") || path.isAbsolute(relative) || relative.split(path.sep).some((part) => part.startsWith(".")) || !/^(tests|content|shared|popup|icons|fonts)[/\\]/.test(relative)) {
       response.writeHead(403);
       return response.end("Forbidden");
     }

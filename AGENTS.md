@@ -8,6 +8,8 @@
 - The popup uses an explicit 390px width/min-width and a fixed 600px shell with an independently scrolling collection; keep search, filters, and status visible.
 - Avoid viewport-relative popup widths or `max-height: 100vh`: Chrome can initially size the popup narrowly, or briefly short, causing viewport-dependent dimensions to lock it into that initial size.
 - `icons/logo.svg` is the logo source; keep the 16/32/48/128px toolbar PNGs aligned with it.
+- Coding fonts are bundled in `fonts/` with unchanged OFL notices; use catalog `faces` and `getFontFaceCSS()` for both popup and content styles.
+- Include `fonts/` in release ZIPs; font resources must remain scoped to the two ChatGPT hosts.
 - No build step. Validate content script syntax with `node --check content/content.js`.
 
 ## ChatGPT Theming Gotchas
@@ -79,6 +81,7 @@
 - Button color probes may need a short wait because ChatGPT uses transition classes; immediate computed styles can show the old color.
 - Minimum checks before committing: `node --check content/content.js` and `git -c safe.directory=C:/Users/Dylan/Documents/extension diff --check`.
 - Run `npm test` for syntax, logic, all-theme browser coverage at three viewports, and actual unpacked-extension integration in a disposable profile.
+- Concurrent Playwright runs need separate server ports and output directories; each run clears its output directory.
 - Run `npm run test:full` to include platform-specific screenshot baselines; inspect diffs before deliberately updating them.
 - Use `docs/testing.md` and `docs/live-audit.md` after upstream website changes; missing live surfaces are coverage gaps, never passes.
 - New visual regressions need a sanitized browser fixture with a failing observable assertion before the fix; keep production extension dependencies unchanged.

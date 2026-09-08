@@ -21,7 +21,7 @@ const test = base.extend({
       const production = path.resolve(__dirname, "../..");
       const extensionPath = path.join(temporary, "extension");
       await fs.mkdir(extensionPath);
-      for (const directory of ["content", "shared", "popup", "icons"]) {
+      for (const directory of ["content", "shared", "popup", "icons", "fonts"]) {
         await fs.cp(path.join(production, directory), path.join(extensionPath, directory), { recursive: true });
       }
       const manifest = JSON.parse(await fs.readFile(path.join(production, "manifest.json"), "utf8"));
@@ -111,6 +111,52 @@ test("the real unpacked extension injects, synchronizes, persists and cleans up"
   await expect(chat.locator("html")).toHaveAttribute("data-gptskins-theme", "ayu-light");
   await expect(chat.locator("html")).toHaveCSS("color-scheme", "light");
   await popup.getByRole("button", { name: "Font", exact: true }).click();
+  const bundledFonts = await popup.evaluate(() => globalThis.GPTskinsThemes.fonts
+    .filter((font) => font.faces?.length)
+    .map(({ id, family, faces }) => ({ id, family, faces })));
+  expect(bundledFonts.map((font) => font.id).sort()).toEqual(["fira-code", "jetbrains-mono", "space-mono"]);
+  const verifyBundledFont = async (page, font) => {
+    const loaded = await page.evaluate(async ({ font, extensionId }) => {
+      const results = [];
+      for (const face of font.faces) {
+        const weight = String(face.weight).split(" ")[0];
+        const matches = await document.fonts.load(`${face.style} ${weight} 16px "${font.family}"`, "const answer = 42; !== =>");
+        const definition = [...document.styleSheets].flatMap((sheet) => [...sheet.cssRules]).find((rule) =>
+          rule.type === CSSRule.FONT_FACE_RULE &&
+          rule.style.fontFamily.replace(/^['"]|['"]$/g, "") === font.family &&
+          rule.style.fontWeight === face.weight && rule.style.fontStyle === face.style);
+        results.push({
+          family: font.family,
+          style: face.style,
+          matches: matches.map((match) => ({ family: match.family.replace(/^['"]|['"]$/g, ""), style: match.style, status: match.status })),
+          source: definition?.style.getPropertyValue("src"),
+          expectedSource: `url("chrome-extension://${extensionId}/${face.path}") format("truetype")`
+        });
+      }
+      return results;
+    }, { font, extensionId });
+    for (const face of loaded) {
+      expect(face.matches, `${font.id}: the real font must load instead of falling back`).not.toHaveLength(0);
+      expect(face.matches).toContainEqual({ family: face.family, style: face.style, status: "loaded" });
+      expect(face.source, `${font.id}: the loaded face must use only its packaged extension file`).toBe(face.expectedSource);
+    }
+  };
+  for (const font of bundledFonts) {
+    await verifyBundledFont(popup, font);
+    await popup.locator(`[data-font-id="${font.id}"]`).click();
+    await expect(chat.locator("html")).toHaveAttribute("data-gptskins-font", font.id);
+    await expect(chat.locator("#message")).toHaveCSS("font-family", new RegExp(font.family));
+    await verifyBundledFont(chat, font);
+  }
+  await popup.locator('[data-font-id="space-mono"]').click();
+  await chat.reload();
+  await expect(chat.locator("html")).toHaveAttribute("data-gptskins-font", "space-mono");
+  await verifyBundledFont(chat, bundledFonts.find((font) => font.id === "space-mono"));
+  const fontLegacy = await context.newPage();
+  await fontLegacy.goto("https://chat.openai.com/");
+  await expect(fontLegacy.locator("html")).toHaveAttribute("data-gptskins-font", "space-mono");
+  await verifyBundledFont(fontLegacy, bundledFonts.find((font) => font.id === "space-mono"));
+  await fontLegacy.close();
   await popup.locator('[data-font-id="georgia"]').click();
   await expect(chat.locator("#message")).toHaveCSS("font-family", /Georgia/);
   await chat.reload();

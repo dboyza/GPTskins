@@ -1,0 +1,2 @@
+# Preserve whitespace in original third-party license notices.
+fonts/*/OFL.txt -whitespace

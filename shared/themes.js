@@ -759,6 +759,40 @@
       stack: ""
     },
     {
+      id: "jetbrains-mono",
+      name: "JetBrains Mono",
+      description: "Sharp, readable code.",
+      family: "GPTskins JetBrains Mono",
+      stack: '"GPTskins JetBrains Mono", ui-monospace, monospace',
+      faces: [
+        { path: "fonts/jetbrains-mono/JetBrainsMono[wght].ttf", weight: "100 800", style: "normal" },
+        { path: "fonts/jetbrains-mono/JetBrainsMono-Italic[wght].ttf", weight: "100 800", style: "italic" }
+      ]
+    },
+    {
+      id: "fira-code",
+      name: "Fira Code",
+      description: "Code with ligatures.",
+      family: "GPTskins Fira Code",
+      stack: '"GPTskins Fira Code", ui-monospace, monospace',
+      faces: [
+        { path: "fonts/fira-code/FiraCode[wght].ttf", weight: "300 700", style: "normal" }
+      ]
+    },
+    {
+      id: "space-mono",
+      name: "Space Mono",
+      description: "Retro, geometric mono.",
+      family: "GPTskins Space Mono",
+      stack: '"GPTskins Space Mono", ui-monospace, monospace',
+      faces: [
+        { path: "fonts/space-mono/SpaceMono-Regular.ttf", weight: "400", style: "normal" },
+        { path: "fonts/space-mono/SpaceMono-Bold.ttf", weight: "700", style: "normal" },
+        { path: "fonts/space-mono/SpaceMono-Italic.ttf", weight: "400", style: "italic" },
+        { path: "fonts/space-mono/SpaceMono-BoldItalic.ttf", weight: "700", style: "italic" }
+      ]
+    },
+    {
       id: "verdana",
       name: "Verdana",
       description: "Wide and readable.",
@@ -785,6 +819,17 @@
 
   function getFont(id) {
     return fonts.find((font) => font.id === id) || fonts[0];
+  }
+
+  function getFontFaceCSS(font, resolveURL) {
+    return (font.faces || []).map((face) => `
+@font-face {
+  font-family: "${font.family}";
+  src: url("${resolveURL(face.path)}") format("truetype");
+  font-weight: ${face.weight};
+  font-style: ${face.style};
+  font-display: swap;
+}`).join("\n");
   }
 
   const codeColorSeeds = {
@@ -859,6 +904,7 @@
     darkThemeIds,
     getTheme,
     getFont,
+    getFontFaceCSS,
     getCodeColors
   };
 })();

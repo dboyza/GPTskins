@@ -2,14 +2,14 @@
   <img src="icons/logo.svg" width="80" height="80" alt="GPTskins logo">
 </p>
 <h1 align="center">GPTskins</h1>
-<p align="center"><strong>A new look for ChatGPT.</strong><br>Editor-inspired themes and local fonts, one click away.</p>
+<p align="center"><strong>A new look for ChatGPT.</strong><br>Editor-inspired themes and fonts, one click away.</p>
 <p align="center">
   <a href="#install">Install</a> ·
   <a href="#preview">Preview</a> ·
   <a href="docs/testing.md">Testing guide</a> ·
   <a href="https://github.com/dboyza/GPTskins/issues">Report an issue</a>
 </p>
-<p align="center"><strong>34 themes</strong> &nbsp; / &nbsp; <strong>4 font choices</strong> &nbsp; / &nbsp; <strong>No build step</strong></p>
+<p align="center"><strong>34 themes</strong> &nbsp; / &nbsp; <strong>7 font choices</strong> &nbsp; / &nbsp; <strong>No build step</strong></p>
 
 ## Install
 
@@ -36,7 +36,7 @@ Click a thumbnail to view it at full size.
 <table>
   <tr>
     <td align="center"><a href="docs/screenshots/theme-picker.png"><img src="docs/screenshots/theme-picker.png" width="195" alt="GPTskins theme picker with search, dark and light filters, and palette previews"></a><br><strong>Find your theme</strong></td>
-    <td align="center"><a href="docs/screenshots/font-picker.png"><img src="docs/screenshots/font-picker.png" width="195" alt="GPTskins font picker showing Default, Verdana, Georgia, and Mono samples"></a><br><strong>Choose your type</strong></td>
+    <td align="center"><a href="docs/screenshots/font-picker.png"><img src="docs/screenshots/font-picker.png" width="195" alt="GPTskins font picker with bundled coding-font previews"></a><br><strong>Choose your type</strong></td>
   </tr>
 </table>
 
@@ -48,12 +48,14 @@ Click a thumbnail to view it at full size.
 
 - **Dark or light.** Choose from 34 palettes, including Catppuccin, GitHub Dark, Nord, Rose Pine, and Tokyo Night.
 - **Search and switch.** Filter the picker by name or description, then apply a style without leaving your chat.
-- **Mix theme and font.** Keep the native font or choose Verdana, Georgia, or Mono independently of your colors.
+- **Mix theme and font.** Try JetBrains Mono, Fira Code, or Space Mono, alongside Default, Verdana, Georgia, and Mono.
+  The three coding fonts are bundled and work without installing fonts or contacting a font service.
 - **Keep your preferences.** Choices are saved through browser sync storage and restored when ChatGPT loads.
 - **Return to native.** Select Default to remove custom colors; reset the font separately.
 
 GPTskins is a free Manifest V3 extension with no backend, external API, or runtime dependencies.
 It runs on `chatgpt.com` and `chat.openai.com`.
+Bundled fonts are distributed under the SIL Open Font License; see [font sources and licenses](fonts/README.md).
 
 ## Development
 

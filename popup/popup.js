@@ -2,6 +2,9 @@
   "use strict";
 
   const themeApi = globalThis.GPTskinsThemes;
+  const fontFaces = document.createElement("style");
+  fontFaces.textContent = themeApi.fonts.map((font) => themeApi.getFontFaceCSS(font, (path) => chrome.runtime.getURL(path))).join("\n");
+  document.head.appendChild(fontFaces);
   const list = document.getElementById("theme-list");
   const fontList = document.getElementById("font-panel");
   const themePanel = document.getElementById("theme-panel");

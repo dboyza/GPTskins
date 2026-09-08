@@ -8,7 +8,7 @@ async function installChromeMock(page, options = {}) {
     let values = saved ? JSON.parse(saved) : { ...config.stored };
     const listeners = { message: [], storage: [] };
     const calls = { writes: [], queries: [], messages: [], reads: [] };
-    const runtime = { onMessage: { addListener: (listener) => listeners.message.push(listener) } };
+    const runtime = { getURL: (path) => new URL(`/${path}`, location.origin).href, onMessage: { addListener: (listener) => listeners.message.push(listener) } };
     function callbackWithError(callback, error, value) {
       queueMicrotask(() => {
         if (error) runtime.lastError = { message: error };
