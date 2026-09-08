@@ -149,6 +149,15 @@ test("long collections scroll inside the popup while controls and feedback stay 
   expect(await page.locator(".collection").evaluate((node) => node.scrollTop)).toBeGreaterThan(0);
   expect(await page.locator(".popup-header").boundingBox()).toEqual(headerBefore);
   expect(await page.locator(".popup-footer").boundingBox()).toEqual(footerBefore);
-  expect(await page.locator("body").boundingBox()).toMatchObject({ width: 420, height: 600 });
+  expect(await page.locator("body").boundingBox()).toMatchObject({ width: 390, height: 600 });
   await expect(page.getByRole("status")).toHaveText("Theme applied.");
+});
+
+test("popup requests its full height even when Chrome starts with a short viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 280 });
+  await installChromeMock(page);
+  await page.goto("/popup/popup.html");
+  await expect(page.getByRole("status")).toHaveText("Pick a theme for ChatGPT.");
+  expect(await page.locator(".popup-shell").evaluate((node) => node.getBoundingClientRect().height)).toBe(600);
+  expect(await page.locator(".collection").evaluate((node) => node.clientHeight)).toBeGreaterThan(300);
 });

@@ -10,8 +10,9 @@
 }
 * { box-sizing: border-box; }
 body {
-  width: 420px;
-  min-width: 420px;
+  width: 390px;
+  min-width: 390px;
+  min-height: 600px;
   margin: 0;
   background: var(--background);
   color: var(--text);
@@ -20,7 +21,7 @@ body {
 button, input { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
-.popup-shell { display: flex; flex-direction: column; height: 600px; max-height: 100vh; padding: 0 20px; }
+.popup-shell { display: flex; flex-direction: column; height: 600px; padding: 0 20px; }
 .popup-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 750; letter-spacing: -.6px; }
 .brand img { display: block; }
