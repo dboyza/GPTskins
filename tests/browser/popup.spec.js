@@ -8,6 +8,7 @@ async function openPopup(page, options) {
   await installChromeMock(page, options);
   await page.goto("/popup/popup.html");
   await expect(page.getByRole("status")).toHaveText("Pick a theme for ChatGPT.");
+  await expect(page.locator(".brand img")).toHaveJSProperty("naturalWidth", 128);
 }
 
 async function expectState(page, key, value, message, status) {
@@ -116,5 +117,38 @@ test("a storage read error still opens a usable Default popup", async ({ page })
   await openPopup(page, { getError: "Storage is unavailable" });
   await expect(page.locator('[data-theme-id="default"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator('[data-theme-id="og"]').click();
+  await expect(page.getByRole("status")).toHaveText("Theme applied.");
+});
+
+test("search filters choices, clears with Escape, and recovers from no matches", async ({ page }) => {
+  await openPopup(page);
+  const search = page.getByRole("searchbox", { name: "Search themes" });
+  await search.fill("catppuccin");
+  await expect(page.locator('[data-theme-id]:visible')).toHaveCount(1);
+  await page.locator('[data-theme-id="catppuccin"]').click();
+  await expect(page.getByRole("status")).toHaveText("Theme applied.");
+  await search.fill("no-such-theme");
+  await expect(page.locator("#empty-state")).toBeVisible();
+  await expect(page.locator("#result-count")).toHaveText("0 themes");
+  await search.press("Escape");
+  await expect(search).toHaveValue("");
+  await expect(page.locator("#empty-state")).toBeHidden();
+  await expect(page.locator('[data-theme-id="catppuccin"]')).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Font", exact: true }).click();
+  await page.getByRole("searchbox", { name: "Search fonts" }).fill("georgia");
+  await expect(page.locator('[data-font-id]:visible')).toHaveCount(1);
+  await page.locator('[data-font-id="georgia"]').click();
+  await expect(page.locator("#current-selection")).toHaveText("Catppuccin / Georgia");
+});
+
+test("long collections scroll inside the popup while controls and feedback stay visible", async ({ page }) => {
+  await openPopup(page);
+  const headerBefore = await page.locator(".popup-header").boundingBox();
+  const footerBefore = await page.locator(".popup-footer").boundingBox();
+  await page.locator('[data-theme-id]').last().click();
+  expect(await page.locator(".collection").evaluate((node) => node.scrollTop)).toBeGreaterThan(0);
+  expect(await page.locator(".popup-header").boundingBox()).toEqual(headerBefore);
+  expect(await page.locator(".popup-footer").boundingBox()).toEqual(footerBefore);
+  expect(await page.locator("body").boundingBox()).toMatchObject({ height: 600 });
   await expect(page.getByRole("status")).toHaveText("Theme applied.");
 });

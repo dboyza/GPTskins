@@ -9,6 +9,7 @@ for (const panel of ["Dark", "Light", "Font"]) {
     await installChromeMock(page);
     await page.goto("/popup/popup.html");
     await page.getByRole("button", { name: panel, exact: true }).click();
+    await expect(page.locator(".brand img")).toHaveJSProperty("naturalWidth", 128);
     await expect(page.locator("body")).toHaveScreenshot(`popup-${panel.toLowerCase()}.png`);
   });
 }

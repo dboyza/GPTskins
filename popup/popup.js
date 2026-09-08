@@ -5,6 +5,12 @@
   const list = document.getElementById("theme-list");
   const fontList = document.getElementById("font-panel");
   const themePanel = document.getElementById("theme-panel");
+  const search = document.getElementById("style-search");
+  const count = document.getElementById("result-count");
+  const emptyState = document.getElementById("empty-state");
+  const selection = document.getElementById("current-selection");
+  const collection = document.querySelector(".collection");
+  const themeFilter = document.querySelector(".theme-filter");
   const status = document.getElementById("status");
   const styleButtons = Array.from(document.querySelectorAll("[data-style-mode]"));
   const filterButtons = Array.from(document.querySelectorAll("[data-theme-mode]"));
@@ -64,13 +70,19 @@
     description.className = "font-description";
     description.textContent = font.description;
 
-    button.append(name, description);
+    const preview = document.createElement("span");
+    preview.className = "font-preview";
+    preview.textContent = "Aa";
+    preview.setAttribute("aria-hidden", "true");
+    preview.style.fontFamily = font.stack || "inherit";
+    button.append(preview, name, description);
     button.addEventListener("click", () => selectFont(font.id));
 
     return button;
   }
 
   function updatePressedStates() {
+    selection.textContent = `${themeApi.getTheme(selectedThemeId).name} / ${themeApi.getFont(selectedFontId).name}`;
     document.querySelectorAll(".theme-button").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.themeId === selectedThemeId));
     });
@@ -139,17 +151,46 @@
   function renderThemes() {
     list.replaceChildren(...themeApi.themes.filter(isVisibleTheme).map(renderThemeButton));
     updatePressedStates();
+    filterResults();
   }
 
   function renderFonts() {
     fontList.replaceChildren(...themeApi.fonts.map(renderFontButton));
     updatePressedStates();
+    filterResults();
   }
+
+  function filterResults() {
+    const query = search.value.trim().toLocaleLowerCase();
+    const buttons = Array.from((styleMode === "theme" ? list : fontList).children);
+    let visible = 0;
+    buttons.forEach((button) => {
+      button.hidden = !button.textContent.toLocaleLowerCase().includes(query);
+      if (!button.hidden) visible += 1;
+    });
+    count.textContent = `${visible} ${styleMode === "theme" ? "themes" : "fonts"}`;
+    emptyState.hidden = visible !== 0;
+    collection.scrollTop = 0;
+  }
+
+  search.addEventListener("input", filterResults);
+  search.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && search.value) {
+      event.preventDefault();
+      search.value = "";
+      filterResults();
+    }
+  });
 
   function showPanel(mode) {
     styleMode = mode;
+    search.value = "";
+    search.placeholder = styleMode === "theme" ? "Find your theme" : "Find your font";
+    search.setAttribute("aria-label", styleMode === "theme" ? "Search themes" : "Search fonts");
+    themeFilter.hidden = styleMode !== "theme";
     themePanel.hidden = styleMode !== "theme";
     fontList.hidden = styleMode !== "font";
+    filterResults();
     status.textContent = styleMode === "theme" ? "Pick a theme for ChatGPT." : "Pick a font for ChatGPT.";
     updatePressedStates();
   }

@@ -104,4 +104,4 @@ Testing dependencies are development-only; the extension still has no build step
 - `shared/themes.js` contains the built-in theme and font definitions.
 - `content/content.js` applies the selected theme and font on ChatGPT pages.
 - `popup/` contains the extension popup UI.
-- `icons/` contains generated extension icons.
+- `icons/` contains the editable SVG logo and rendered extension icons.

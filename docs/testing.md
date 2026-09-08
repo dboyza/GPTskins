@@ -57,7 +57,7 @@ Browser projects use 1440 × 1000, 834 × 1112, and 390 × 844 CSS pixels.
 | --- | --- |
 | Manifest and packaging | Referenced files exist, MV3, document-start injection, host permissions and script order |
 | Palettes | Text and syntax contrast, switch-track contrast, valid IDs, dark/light classification and fallback |
-| Popup | Every theme/font, light/dark filters, pressed states, keyboard selection, saved choices, success and error feedback |
+| Popup | Every theme/font, light/dark filters, search and empty states, pressed states, keyboard selection, saved choices, fixed controls while scrolling, logo loading, success and error feedback |
 | Runtime | Startup before body, every theme/font combination, storage changes/removals, message acknowledgment, independent cleanup, repeated switching, preserved scroll |
 | Navigation | Marketing bypass routes, app routes, trailing slash/query/hash, back/forward, retained selections and legacy hostname |
 | Surface inheritance | Native dark descendant resets, body tokens, local popover tokens, layered important rules |

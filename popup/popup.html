@@ -9,31 +9,32 @@
   <body>
     <main class="popup-shell">
       <header class="popup-header">
-        <div>
-          <p class="eyebrow">GPTskins</p>
-          <h1>Choose a style</h1>
-        </div>
-        <img src="../icons/icon-48.png" alt="" width="40" height="40">
+        <div class="brand"><img src="../icons/logo.svg" alt="" width="32" height="32"><span>GPT<span class="brand-light">skins</span></span></div>
+        <span class="edition">YOUR CHATGPT, RESTYLED</span>
       </header>
-
+      <div class="intro"><h1>Make it yours.</h1><p>A fresh perspective for every conversation.</p></div>
       <div class="style-filter" role="group" aria-label="Style type">
-        <button type="button" class="filter-button" data-style-mode="theme" aria-pressed="true" aria-controls="theme-panel">Theme</button>
-        <button type="button" class="filter-button" data-style-mode="font" aria-pressed="false" aria-controls="font-panel">Font</button>
+        <button type="button" class="filter-button" data-style-mode="theme" aria-pressed="true" aria-controls="theme-panel"><span aria-hidden="true" class="theme-symbol">◐</span> Theme</button>
+        <button type="button" class="filter-button" data-style-mode="font" aria-pressed="false" aria-controls="font-panel"><span aria-hidden="true" class="font-symbol">Aa</span> Font</button>
       </div>
-
-      <section class="theme-panel" id="theme-panel" aria-label="Themes">
+      <div class="search-field">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="style-search" type="search" aria-label="Search themes" placeholder="Find your theme" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="collection-toolbar">
         <div class="theme-filter" role="group" aria-label="Theme type">
           <button type="button" class="filter-button" data-theme-mode="dark" aria-pressed="true">Dark</button>
           <button type="button" class="filter-button" data-theme-mode="light" aria-pressed="false">Light</button>
         </div>
-        <div class="theme-list" id="theme-list"></div>
-      </section>
-
-      <section class="font-list" id="font-panel" aria-label="Fonts" hidden></section>
-
-      <p class="status" id="status" role="status" aria-live="polite"></p>
+        <span id="result-count" class="result-count" aria-live="polite" aria-atomic="true"></span>
+      </div>
+      <div class="collection" tabindex="-1">
+        <section class="theme-panel" id="theme-panel" aria-label="Themes"><div class="theme-list" id="theme-list"></div></section>
+        <section class="font-list" id="font-panel" aria-label="Fonts" hidden></section>
+        <p id="empty-state" class="empty-state" hidden>No matches.<span>Try a different name or category.</span></p>
+      </div>
+      <footer class="popup-footer"><div class="current-style"><span class="current-dot" aria-hidden="true"></span><span id="current-selection">Default</span></div><p class="status" id="status" role="status" aria-live="polite"></p></footer>
     </main>
-
     <script src="../shared/themes.js"></script>
     <script src="popup.js"></script>
   </body>
