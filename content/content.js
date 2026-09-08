@@ -994,6 +994,18 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] :is([role="group"], di
   box-shadow: 0 2px 8px var(--gptskins-shadow) !important;
 }
 
+/* Current pricing sliders paint the track on the radio group itself. */
+html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle][role="radiogroup"][class~="bg-token-main-surface-tertiary"] {
+  background: color-mix(in srgb, var(--gptskins-mutedText) 16%, var(--gptskins-surface)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle][role="radiogroup"][class~="bg-token-main-surface-tertiary"] .pointer-events-none [class~="bg-token-bg-primary"].absolute.inset-0 {
+  background: var(--gptskins-surface) !important;
+  box-shadow: none !important;
+}
+
 html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle-option] {
   background: transparent !important;
   background-color: transparent !important;

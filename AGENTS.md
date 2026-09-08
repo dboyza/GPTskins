@@ -51,6 +51,7 @@
 - Plan-page detection cannot rely only on a one-time body text scan. Content scripts may run at `document_start` before `document.body` exists, so start observation from `document.documentElement`, attach the body observer when available, and use heading/action signals such as `Switch to Plus`, `Upgrade to Pro`, `ChatGPT Enterprise`, or subscription links.
 - When scanning plan layers for black paint, inspect `::before` and `::after` computed styles as well as the element background and shadow; the visible strip may be pseudo-element paint.
 - Plan-page pricing controls need their own tags. The generic dialog/main button rules can erase the Personal/Business and 5x/20x segmented-control tracks plus the disabled `Upgrade to Pro` pill, so tag them with `data-gptskins-plan-toggle`, `data-gptskins-plan-toggle-option`, and `data-gptskins-plan-cta` instead of broadening all dialog button styles.
+- Current pricing sliders paint `bg-token-main-surface-tertiary` on the tagged radiogroup itself, not an outer `role="group"`; preserve that track and theme the nested pointer-events-none selection layer.
 - Explicit inactive ARIA states must override stale plan-active fallback tags; test radio changes without unrelated child-list mutations.
 - Native enabled state and explicit `aria-disabled="false"` must also override stale disabled fallback tags.
 - Disabled pricing actions use primary text over a 20% muted-text/surface mix so their labels remain legible.

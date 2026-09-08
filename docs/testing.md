@@ -65,7 +65,7 @@ Browser projects use 1440 × 1000, 834 × 1112, and 390 × 844 CSS pixels.
 | Sidebar and menus | Section headers, trailing controls and pseudo-elements, account state, icon stroke, hover/focus, transparent portal wrappers and rounded menus |
 | Messages | Plain code, nested rounded cards, transparent shells, CodeMirror borders and horizontal scrolling, stale header tags, dynamic insertion |
 | Rich content | Writing/edit surfaces, markdown tables and icons, chart labels/grid and preserved legend colors |
-| Settings and pricing | Switch state/geometry, selected voice dot, highlighted pricing gradient, enabled/disabled pricing actions |
+| Settings and pricing | Switch state/geometry, selected voice dot, highlighted pricing gradient, enabled/disabled pricing actions, nested slider tracks and moving selection layers |
 | Default | Native surfaces restored, injected styles/tags removed, independent font reset |
 | Live audit tooling | Read-only collection, redaction, missing/partial coverage, schema validation and strict reporting |
 
