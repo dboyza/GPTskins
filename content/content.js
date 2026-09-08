@@ -143,6 +143,16 @@ html[data-gptskins-theme] body {
   --sharp-edge-bottom-shadow: none !important;
 }
 
+/* Native dark mode resets this token on every descendant, breaking inheritance. */
+html[data-gptskins-theme] body * {
+  --main-surface-primary: inherit !important;
+}
+
+html[data-gptskins-theme] [data-pricing-column-content][data-pricing-column-treatment="highlight"] {
+  background: linear-gradient(206.72deg, var(--gptskins-surfaceStrong) 2.34%, var(--gptskins-surface) 92.37%) !important;
+  outline-color: var(--gptskins-border) !important;
+}
+
 html[data-gptskins-theme] [role="radiogroup"]:has([data-tpp-toggle-value]) > .pointer-events-none {
   background: var(--gptskins-surfaceStrong) !important;
 }
@@ -163,13 +173,16 @@ html[data-gptskins-theme] #composer-submit-button:is(:disabled, [aria-disabled="
   opacity: 1 !important;
 }
 
-html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a {
-  background: var(--gptskins-surfaceStrong) !important;
-  color: var(--gptskins-text) !important;
-}
+/* Layered native !important utilities outrank unlayered !important rules. */
+@layer utilities {
+  html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a {
+    background: var(--gptskins-surfaceStrong) !important;
+    color: var(--gptskins-text) !important;
+  }
 
-html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a:is(:hover, :focus-visible) {
-  background: var(--gptskins-menuHover) !important;
+  html[data-gptskins-theme] [data-testid="webpage-citation-pill"] a:is(:hover, :focus-visible) {
+    background: var(--gptskins-menuHover) !important;
+  }
 }
 
 /* CodeMirror generates class names, but its syntax colors use stable palette tokens. */
@@ -1041,25 +1054,21 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-ct
 
 html[data-gptskins-theme] [role="dialog"] [role="switch"],
 html[data-gptskins-theme] [aria-modal="true"] [role="switch"] {
-  background-color: var(--gptskins-composer) !important;
-  border: 1px solid var(--gptskins-border) !important;
+  background: var(--gptskins-mutedText) !important;
+  border-color: var(--gptskins-mutedText) !important;
   box-shadow: none !important;
 }
 
-html[data-gptskins-theme] [role="switch"][aria-checked="true"],
-html[data-gptskins-theme] button[role="switch"][aria-checked="true"] {
-  background-color: color-mix(in srgb, var(--gptskins-accent) 28%, var(--gptskins-composer)) !important;
-  border-color: var(--gptskins-accent) !important;
+html[data-gptskins-theme] [role="dialog"] [role="switch"][aria-checked="true"],
+html[data-gptskins-theme] [aria-modal="true"] [role="switch"][aria-checked="true"] {
+  background: var(--gptskins-switchTrackChecked) !important;
+  border-color: var(--gptskins-switchTrackChecked) !important;
 }
 
-html[data-gptskins-theme] [role="dialog"] [role="switch"] :is(span, div),
-html[data-gptskins-theme] [aria-modal="true"] [role="switch"] :is(span, div),
-html[data-gptskins-theme] [role="dialog"] [role="switch"]::before,
-html[data-gptskins-theme] [role="dialog"] [role="switch"]::after,
-html[data-gptskins-theme] [aria-modal="true"] [role="switch"]::before,
-html[data-gptskins-theme] [aria-modal="true"] [role="switch"]::after {
+html[data-gptskins-theme] [role="dialog"] [role="switch"] > :is(span, div)[data-state],
+html[data-gptskins-theme] [aria-modal="true"] [role="switch"] > :is(span, div)[data-state] {
   background-color: var(--gptskins-surface) !important;
-  border-color: var(--gptskins-border) !important;
+  border-color: var(--gptskins-surface) !important;
 }
 
 html[data-gptskins-theme] [role="dialog"] :is(button, span)[class*="dot"],
@@ -1084,14 +1093,14 @@ html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[aria-label*="pag
   opacity: 1 !important;
 }
 
-html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]) {
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) button[role="radio"][class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]) {
   background-color: var(--gptskins-mutedText) !important;
   border-color: transparent !important;
   opacity: 0.45 !important;
 }
 
-html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(span, div, button)[class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]):is([class~="bg-token-text-primary"], [class~="bg-white"], [data-active="true"], [data-state="active"]) {
-  background-color: var(--gptskins-accent) !important;
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) button[role="radio"][class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"])[aria-checked="true"] {
+  background-color: var(--gptskins-text) !important;
   opacity: 1 !important;
 }
 

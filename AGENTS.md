@@ -12,9 +12,10 @@
 - ChatGPT markup changes often. Prefer stable hooks like `data-testid`, `role`, `aria-*`, and our `data-gptskins-*` tags over brittle Tailwind class chains.
 - After content script edits, reload the unpacked extension and refresh ChatGPT before judging visuals.
 - Current ChatGPT declares native surface tokens on `body` as well as `html`; override both inheritance boundaries, including plan-page exceptions.
+- Native `html.dark :not(:where(.light, .light *))` resets `--main-surface-primary` on descendants; restore inheritance for that token while preserving more specific local popover overrides.
 - ChatGPT sets inline `color-scheme` on `html`; the selected theme's declaration needs `!important`.
 - The Chat/Work switch exposes `data-tpp-toggle-value` and `data-tpp-toggle-highlight`; its native track can use a hardcoded dark background.
-- Citation chips expose `data-testid="webpage-citation-pill"` and can retain hardcoded dark paint.
+- Citation chips expose `data-testid="webpage-citation-pill"`; their native `@layer utilities` important paint beats unlayered important declarations, so use the same layer with higher specificity.
 - CodeMirror syntax classes are generated; scope overrides of its stable color tokens to message `.cm-editor` elements and use `getCodeColors()` to preserve readable syntax hues.
 
 ## Known Surfaces
@@ -47,6 +48,9 @@
 - When scanning plan layers for black paint, inspect `::before` and `::after` computed styles as well as the element background and shadow; the visible strip may be pseudo-element paint.
 - Plan-page pricing controls need their own tags. The generic dialog/main button rules can erase the Personal/Business and 5x/20x segmented-control tracks plus the disabled `Upgrade to Pro` pill, so tag them with `data-gptskins-plan-toggle`, `data-gptskins-plan-toggle-option`, and `data-gptskins-plan-cta` instead of broadening all dialog button styles.
 - Settings and voice UI live under `[role="dialog"]` or `[aria-modal="true"]`; switches and carousel dots need explicit contrast checks in light and dark themes.
+- Switch tracks use the derived `switchTrackChecked` palette color for 3:1 contrast; preserve native geometry and the direct Radix thumb.
+- Voice dots are small `button[role="radio"][aria-checked]` controls; never recolor arbitrary rounded spans/divs, which include chart legends.
+- Highlighted pricing cards expose `data-pricing-column-content` and `data-pricing-column-treatment="highlight"`; theme their gradient as well as foreground text.
 - Sidebar `Pinned`/`Recents` headers should not get hover pills. Keep section-header controls and `data-trailing-button` / `__menu-item-trailing-btn` icon actions transparent; include `[class*="sidebar"]` because the live sidebar may not be a `nav`/`aside`.
 - Keep the sidebar trailing-button transparent rule after the generic `main :is(button, a, [role="button"]):hover` rule, otherwise the later main hover rule repaints the square.
 - If `data-trailing-button` computes transparent but the hover square remains, clear the direct flex wrapper `:has(> [data-trailing-button])` and trailing-button pseudo-elements too.
@@ -66,5 +70,6 @@
 - For visual fixes, verify computed styles on the exact live element, not just screenshots.
 - Button color probes may need a short wait because ChatGPT uses transition classes; immediate computed styles can show the old color.
 - Minimum checks before committing: `node --check content/content.js` and `git -c safe.directory=C:/Users/Dylan/Documents/extension diff --check`.
-- Run `node --test tests/*.test.js` for palette, syntax-color, and popup-message regressions.
+- Run `node --test tests/*.test.js` for palette, syntax-color, switch contrast, and popup-message regressions.
+- Serve the repository locally and open `tests/fixtures/theme-surfaces.html`; its Run all themes button checks the actual content script against captured native cascade cases and Default cleanup.
 - Commit finished work; do not push unless Dylan asks.

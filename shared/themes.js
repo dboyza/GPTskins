@@ -19,7 +19,7 @@
     composer,
     shadow
   }) {
-    return {
+    const palette = {
       background,
       surface,
       surfaceStrong: surfaceStrong || surface,
@@ -37,6 +37,7 @@
       composer: composer || surfaceStrong || surface,
       shadow: shadow || "rgba(0, 0, 0, 0.32)"
     };
+    return { ...palette, switchTrackChecked: getSwitchTrack(palette) };
   }
 
   const themes = [
@@ -808,6 +809,35 @@
     return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
   }
 
+  function ensureContrast(seed, backgrounds, target, minimum) {
+    const isReadable = (channels) => {
+      const foreground = luminance(channels);
+      return backgrounds.every((background) => (
+        (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05) >= minimum
+      ));
+    };
+    const channels = colorChannels(seed);
+    if (isReadable(channels)) return seed;
+
+    // Mixing with black or white keeps the hue while changing its contrast.
+    const mix = (amount) => channels.map((channel) => Math.round(channel + (target - channel) * amount));
+    let low = 0;
+    let high = 1;
+    for (let step = 0; step < 16; step += 1) {
+      const middle = (low + high) / 2;
+      if (isReadable(mix(middle))) high = middle;
+      else low = middle;
+    }
+    return `#${mix(high).map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
+  }
+
+  function getSwitchTrack(palette) {
+    const backgrounds = ["background", "surface", "surfaceStrong", "composer"]
+      .map((key) => luminance(colorChannels(palette[key])));
+    const target = luminance(colorChannels(palette.text)) > backgrounds[0] ? 255 : 0;
+    return ensureContrast(palette.accent, backgrounds, target, 3);
+  }
+
   function getCodeColors(themeOrId) {
     const theme = typeof themeOrId === "string" ? getTheme(themeOrId) : themeOrId;
     if (!theme || theme.id === "default") return {};
@@ -816,29 +846,9 @@
       .map((key) => luminance(colorChannels(theme.colors[key])));
     const textLuminance = luminance(colorChannels(theme.colors.text));
     const target = textLuminance > backgrounds[0] ? 255 : 0;
-    const isReadable = (channels) => {
-      const foreground = luminance(channels);
-      return backgrounds.every((background) => (
-        (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05) >= 4.5
-      ));
-    };
-
-    return Object.fromEntries(Object.entries(codeColorSeeds).map(([token, seed]) => {
-      const channels = colorChannels(seed);
-      if (isReadable(channels)) return [token, seed];
-
-      // Mixing with black or white keeps each syntax hue while changing its contrast.
-      const mix = (amount) => channels.map((channel) => Math.round(channel + (target - channel) * amount));
-      let low = 0;
-      let high = 1;
-      for (let step = 0; step < 16; step += 1) {
-        const middle = (low + high) / 2;
-        if (isReadable(mix(middle))) high = middle;
-        else low = middle;
-      }
-      const color = `#${mix(high).map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
-      return [token, color];
-    }));
+    return Object.fromEntries(Object.entries(codeColorSeeds).map(([token, seed]) => (
+      [token, ensureContrast(seed, backgrounds, target, 4.5)]
+    )));
   }
 
   globalThis.GPTskinsThemes = {

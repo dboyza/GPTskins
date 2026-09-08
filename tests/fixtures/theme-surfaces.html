@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en" class="dark" style="color-scheme: dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPTskins native surface regression fixture</title>
+  <style>
+    /* Reproduces the live ChatGPT descendant token declaration. */
+    @layer base {
+      html.dark, html.dark :not(:where(.light, .light *)) {
+        --main-surface-primary: #000;
+      }
+    }
+    @layer utilities {
+      [data-testid="webpage-citation-pill"] a { background-color: #333 !important; color: #ddd !important; }
+    }
+    :root {
+      --text-primary: #f5f5f5;
+      --text-secondary: #aaa;
+      --yellow-200: #fce8a1;
+      font-family: system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #212121; color: var(--text-primary); }
+    .fixture-controls, main { max-width: 1000px; margin: auto; padding: 20px; }
+    .fixture-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    select, #run-all-themes { padding: 8px; font: inherit; }
+    h1 { margin: 0 0 16px; font-size: 24px; }
+    h2 { margin: 0 0 12px; font-size: 16px; }
+    .fixture-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .fixture-panel { border: 1px solid #777; border-radius: 16px; padding: 20px; }
+    .bg-surface-primary { background-color: var(--main-surface-primary); }
+    .fixture-work-list { padding: 16px; border-radius: 12px; }
+    .fixture-work-list ul { margin: 0; padding: 0; list-style: none; }
+    .fixture-work-list li + li { margin-top: 12px; }
+    .fixture-toolbar {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--main-surface-primary) 80%, transparent);
+    }
+    .stage-thread-flyout { --stage-thread-flyout-surface: #38304a; --main-surface-primary: var(--stage-thread-flyout-surface); }
+    #local-popover { padding: 16px; border-radius: 12px; }
+    [role="radiogroup"] { position: relative; display: flex; isolation: isolate; width: 220px; padding: 4px; margin-bottom: 20px; }
+    [role="radiogroup"] > .pointer-events-none { position: absolute; inset: 0; z-index: -2; border-radius: 24px; background: #000; }
+    [data-tpp-toggle-highlight] { position: absolute; inset: 4px 50% 4px 4px; z-index: -1; }
+    [data-tpp-toggle-highlight] > div { height: 100%; border-radius: 20px; border: 1px solid #444; background: #333; }
+    [data-tpp-toggle-value] { width: 50%; padding: 8px; border: 0; background: transparent; color: #bbb; font: inherit; }
+    [data-tpp-toggle-value][aria-checked="true"] { color: #fff; }
+    #composer-submit-button { width: 44px; height: 44px; border: 0; border-radius: 50%; background: #000; color: #fff; opacity: .35; }
+    [data-testid="webpage-citation-pill"] a { display: inline-block; padding: 4px 10px; border-radius: 12px; background: #333; color: #ddd; text-decoration: none; }
+    .cm-editor { margin-top: 16px; background: #333; border: 1px solid #555; }
+    .cm-content { padding: 12px; font-family: monospace; }
+    .fixture-syntax { color: var(--yellow-200); }
+    .fixture-settings-row { display: flex; align-items: center; gap: 16px; margin: 12px 0; }
+    .fixture-switch { width: 36px; height: 20px; padding: 2px; border: 0; border-radius: 999px; background: #555; }
+    .fixture-switch[aria-checked="true"] { background: #0285ff; }
+    .fixture-switch > span { display: block; width: 16px; height: 16px; border-radius: 999px; background: #fff; transform: translateX(0); }
+    .fixture-switch > span[data-state="checked"] { transform: translateX(16px); }
+    .rounded-full { border-radius: 999px; }
+    .h-2 { height: 8px; }
+    .w-2 { width: 8px; }
+    .fixture-radio { padding: 0; border: 0; background: #777; opacity: .5; }
+    .fixture-radio[aria-checked="true"] { background: #fff; opacity: 1; }
+    .fixture-legend-blue { display: inline-block; background: #3b82f6; }
+    .fixture-legend-purple { display: inline-block; background: #a855f7; }
+    [data-pricing-column-content][data-pricing-column-treatment="highlight"] {
+      background: linear-gradient(206.72deg, #274b72 2.34%, #212121 92.37%);
+      outline: 1px solid #496885;
+    }
+    #expected-palette, #test-report { display: block; margin-top: 20px; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px monospace; }
+    @media (max-width: 700px) { .fixture-grid { grid-template-columns: 1fr; } }
+  </style>
+  <script src="../../shared/themes.js"></script>
+  <script>
+    // Only the extension APIs consumed by content.js are mocked.
+    // All palette generation, theme application and surface tagging remain real.
+    const fixtureMessageListeners = [];
+    globalThis.chrome = {
+      runtime: { onMessage: { addListener(listener) { fixtureMessageListeners.push(listener); } } },
+      storage: {
+        sync: { get(_keys, callback) { callback({}); } },
+        onChanged: { addListener() {} }
+      }
+    };
+  </script>
+</head>
+<body>
+  <header class="fixture-controls">
+    <label for="theme-select">Theme</label>
+    <select id="theme-select" aria-label="Theme"></select>
+    <button id="run-all-themes" type="button">Run all themes</button>
+    <output id="message-status" aria-live="polite">Waiting for theme selection</output>
+  </header>
+  <main>
+    <h1>Native surface regression fixture</h1>
+    <p>This fixture validates the captured CSS cascade and selected controls, alongside the actual-site visual audit.</p>
+    <div class="fixture-grid">
+      <section class="fixture-panel">
+        <h2>Nested Work panel</h2>
+        <div><div><div id="work-panel" class="fixture-work-list bg-surface-primary">
+          <ul><li>Build a presentation</li><li>Research a topic</li><li>Create a spreadsheet</li></ul>
+        </div></div></div>
+        <div id="composer-toolbar" class="fixture-toolbar">Composer toolbar with translucent native surface token</div>
+      </section>
+      <section class="fixture-panel">
+        <h2>Local popover token boundary</h2>
+        <div id="local-popover" data-testid="stage-thread-flyout" class="stage-thread-flyout bg-surface-primary">Local surface token boundary
+          <div id="local-popover-child" class="bg-surface-primary">Nested popover surface</div>
+        </div>
+      </section>
+      <section class="fixture-panel">
+        <h2>Chat/Work and disabled send</h2>
+        <div role="radiogroup" aria-label="Chat or Work">
+          <div id="toggle-track" class="pointer-events-none"></div>
+          <div data-tpp-toggle-highlight><div id="toggle-highlight"></div></div>
+          <button type="button" role="radio" aria-checked="true" data-tpp-toggle-value="chat">Chat</button>
+          <button type="button" role="radio" aria-checked="false" data-tpp-toggle-value="work">Work</button>
+        </div>
+        <button id="composer-submit-button" class="composer-submit" data-testid="send-button" aria-label="Send message" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m-6 6 6-6 6 6" /></svg>
+        </button>
+      </section>
+      <section class="fixture-panel" data-message-author-role="assistant">
+        <h2>Citation and CodeMirror syntax</h2>
+        <span data-testid="webpage-citation-pill"><a id="citation-link" href="#citation-example">Example source</a></span>
+        <div class="cm-editor"><div class="cm-scroller"><div class="cm-content"><span id="syntax-yellow" class="fixture-syntax">example_function</span>(42)</div></div></div>
+      </section>
+      <section class="fixture-panel" role="dialog" aria-labelledby="fixture-settings-title">
+        <h2 id="fixture-settings-title">Settings controls and chart legends</h2>
+        <div class="fixture-settings-row">
+          <button id="switch-checked" type="button" class="fixture-switch" role="switch" aria-label="Enabled setting" aria-checked="true"><span id="thumb-checked" data-state="checked"></span></button>
+          <button id="switch-unchecked" type="button" class="fixture-switch" role="switch" aria-label="Disabled setting" aria-checked="false"><span id="thumb-unchecked" data-state="unchecked"></span></button>
+        </div>
+        <div class="fixture-settings-row" role="radiogroup" aria-label="Voice choices">
+          <button id="radio-checked" type="button" class="fixture-radio rounded-full h-2 w-2" role="radio" aria-label="First voice" aria-checked="true"></button>
+          <button id="radio-unchecked" type="button" class="fixture-radio rounded-full h-2 w-2" role="radio" aria-label="Second voice" aria-checked="false"></button>
+        </div>
+        <div class="fixture-settings-row"><span id="legend-blue" class="fixture-legend-blue rounded-full h-2 w-2"></span>Blue series <span id="legend-purple" class="fixture-legend-purple rounded-full h-2 w-2"></span>Purple series</div>
+      </section>
+      <section id="pricing-highlight" class="fixture-panel" data-pricing-column-content data-pricing-column-treatment="highlight">
+        <h2>Highlighted card</h2>
+        <p>Both gradient stops and the outline must follow the selected palette.</p>
+      </section>
+    </div>
+    <output id="test-status" aria-live="polite">Regression checks have not run.</output>
+    <details id="test-details"><summary>Regression report</summary><output id="test-report"></output></details>
+    <details><summary>Expected palette</summary><output id="expected-palette" aria-label="Expected palette"></output></details>
+  </main>
+  <script src="../../content/content.js"></script>
+  <script>
+    const fixtureThemeSelect = document.getElementById("theme-select");
+    for (const theme of GPTskinsThemes.themes) {
+      const option = document.createElement("option");
+      option.value = theme.id;
+      option.textContent = theme.name;
+      fixtureThemeSelect.appendChild(option);
+    }
+
+    function updateFixtureTheme() {
+      const theme = GPTskinsThemes.getTheme(fixtureThemeSelect.value);
+      let acknowledged = false;
+      for (const listener of fixtureMessageListeners) {
+        listener({ type: "GPTSKINS_APPLY_THEME", themeId: theme.id }, {}, (response) => {
+          acknowledged = response.ok === true;
+        });
+      }
+      const status = document.getElementById("message-status");
+      status.dataset.acknowledged = String(acknowledged);
+      status.textContent = acknowledged ? `${theme.name}: theme applied` : `${theme.name}: missing acknowledgment`;
+      const native = theme.id === "default";
+      document.getElementById("expected-palette").textContent = JSON.stringify({
+        themeId: theme.id,
+        native,
+        colors: theme.colors,
+        probes: {
+          "work-panel.backgroundColor": native ? "#000000" : theme.colors.background,
+          "composer-toolbar.backgroundColor": `color-mix(in srgb, ${native ? "#000000" : theme.colors.background} 80%, transparent)`,
+          "local-popover.backgroundColor": native ? "#38304a" : theme.colors.surface,
+          "local-popover-child.backgroundColor": native ? "#000000" : theme.colors.surface,
+          "toggle-track.backgroundColor": native ? "#000000" : theme.colors.surfaceStrong,
+          "toggle-highlight.backgroundColor": native ? "#333333" : theme.colors.surface,
+          "composer-submit-button.backgroundColor": native ? "#000000" : theme.colors.surfaceStrong,
+          "composer-submit-button.color": native ? "#ffffff" : theme.colors.mutedText,
+          "citation-link.backgroundColor": native ? "#333333" : theme.colors.surfaceStrong,
+          "citation-link.color": native ? "#dddddd" : theme.colors.text,
+          "syntax-yellow.color": native ? "#fce8a1" : GPTskinsThemes.getCodeColors(theme)["yellow-200"],
+          "switch-checked.backgroundColor": native ? "#0285ff" : theme.colors.switchTrackChecked,
+          "switch-unchecked.backgroundColor": native ? "#555555" : theme.colors.mutedText,
+          "thumb-checked.backgroundColor": native ? "#ffffff" : theme.colors.surface,
+          "thumb-unchecked.backgroundColor": native ? "#ffffff" : theme.colors.surface,
+          "radio-checked.backgroundColor": native ? "#ffffff" : theme.colors.text,
+          "radio-unchecked.backgroundColor": native ? "#777777" : theme.colors.mutedText,
+          "legend-blue.backgroundColor": "#3b82f6",
+          "legend-purple.backgroundColor": "#a855f7",
+          "pricing-highlight.outlineColor": native ? "#496885" : theme.colors.border
+        }
+      }, null, 2);
+    }
+
+    // Compare channels directly so rgb() and color(srgb) serialization agree.
+    // Alpha is checked independently, including the translucent toolbar.
+    function colorChannels(value) {
+      const hex = value.match(/^#([\da-f]{6})$/i);
+      if (hex) return [0, 2, 4].map((offset) => parseInt(hex[1].slice(offset, offset + 2), 16) / 255).concat(1);
+      const srgb = value.match(/^color\(srgb\s+([^)]*)\)$/);
+      if (srgb) {
+        const [rgb, alpha = "1"] = srgb[1].split("/");
+        return rgb.trim().split(/\s+/).map(Number).concat(Number(alpha.trim()));
+      }
+      const rgb = value.match(/^rgba?\(([^)]*)\)$/);
+      if (rgb) {
+        const parts = rgb[1].trim().split(/[,\s/]+/).map(Number);
+        return parts.slice(0, 3).map((channel) => channel / 255).concat(parts[3] ?? 1);
+      }
+      throw new Error(`Unsupported color serialization: ${value}`);
+    }
+
+    function checkFixtureTheme() {
+      const expected = JSON.parse(document.getElementById("expected-palette").textContent);
+      const result = { themeId: expected.themeId, checks: 0, failures: [] };
+      function check(probe, passed, actual, wanted) {
+        result.checks += 1;
+        if (!passed) result.failures.push({ probe, actual, expected: wanted });
+      }
+      for (const [probe, wanted] of Object.entries(expected.probes)) {
+        const [id, property] = probe.split(".");
+        const actual = getComputedStyle(document.getElementById(id))[property];
+        const actualChannels = colorChannels(actual);
+        const wantedChannels = id === "composer-toolbar"
+          ? colorChannels(expected.native ? "#000000" : expected.colors.background).slice(0, 3).concat(0.8)
+          : colorChannels(wanted);
+        check(probe, actualChannels.every((channel, index) => Math.abs(channel - wantedChannels[index]) < 0.001), actual, wanted);
+      }
+      const localToken = getComputedStyle(document.getElementById("local-popover")).getPropertyValue("--main-surface-primary").trim();
+      const wantedToken = expected.native ? "#38304a" : expected.colors.surface;
+      check("local-popover token", colorChannels(localToken).every((channel, index) => Math.abs(channel - colorChannels(wantedToken)[index]) < 0.001), localToken, wantedToken);
+      const root = document.documentElement;
+      const scheme = getComputedStyle(root).colorScheme;
+      const wantedScheme = expected.native || GPTskinsThemes.darkThemeIds.has(expected.themeId) ? "dark" : "light";
+      check("color-scheme", scheme === wantedScheme, scheme, wantedScheme);
+      const opacity = getComputedStyle(document.getElementById("composer-submit-button")).opacity;
+      check("disabled send opacity", Number(opacity) === (expected.native ? 0.35 : 1), opacity, expected.native ? "0.35" : "1");
+      const geometry = {
+        "switch-checked": { width: "36px", height: "20px", padding: "2px", borderWidth: "0px", opacity: "1" },
+        "switch-unchecked": { width: "36px", height: "20px", padding: "2px", borderWidth: "0px", opacity: "1" },
+        "thumb-checked": { width: "16px", height: "16px", transform: "matrix(1, 0, 0, 1, 16, 0)" },
+        "thumb-unchecked": { width: "16px", height: "16px", transform: "matrix(1, 0, 0, 1, 0, 0)" },
+        "radio-checked": { width: "8px", height: "8px", opacity: "1" },
+        "radio-unchecked": { width: "8px", height: "8px", opacity: expected.native ? "0.5" : "0.45" },
+        "legend-blue": { width: "8px", height: "8px", opacity: "1" },
+        "legend-purple": { width: "8px", height: "8px", opacity: "1" }
+      };
+      for (const [id, properties] of Object.entries(geometry)) {
+        const actualStyle = getComputedStyle(document.getElementById(id));
+        for (const [property, wanted] of Object.entries(properties)) {
+          check(`${id}.${property}`, actualStyle[property] === wanted, actualStyle[property], wanted);
+        }
+      }
+      const gradient = getComputedStyle(document.getElementById("pricing-highlight")).backgroundImage;
+      const gradientStops = (gradient.match(/rgba?\([^)]*\)|color\(srgb[^)]*\)/g) || []).map(colorChannels);
+      const wantedStops = (expected.native ? ["#274b72", "#212121"] : [expected.colors.surfaceStrong, expected.colors.surface]).map(colorChannels);
+      check("pricing-highlight gradient stops", gradient.startsWith("linear-gradient(") && gradientStops.length === 2 && gradientStops.every((stop, index) => stop.every((channel, channelIndex) => Math.abs(channel - wantedStops[index][channelIndex]) < 0.001)), gradient, wantedStops);
+      check("message acknowledgment", document.getElementById("message-status").dataset.acknowledged === "true", document.getElementById("message-status").dataset.acknowledged, "true");
+      check("theme marker", root.getAttribute("data-gptskins-theme") === (expected.native ? null : expected.themeId), root.getAttribute("data-gptskins-theme"), expected.native ? null : expected.themeId);
+      if (expected.native) {
+        check("Default removes injected style", document.getElementById("gptskins-style") === null, Boolean(document.getElementById("gptskins-style")), false);
+        const staleTags = [...document.querySelectorAll("*")].flatMap((element) => [...element.attributes].filter((attribute) => attribute.name.startsWith("data-gptskins-")).map((attribute) => `${element.tagName}.${attribute.name}`));
+        check("Default removes theme surface tags", staleTags.length === 0, staleTags, []);
+      }
+      return result;
+    }
+
+    document.getElementById("run-all-themes").addEventListener("click", async () => {
+      const button = document.getElementById("run-all-themes");
+      const status = document.getElementById("test-status");
+      const previousTheme = fixtureThemeSelect.value;
+      const results = [];
+      button.disabled = true;
+      fixtureThemeSelect.disabled = true;
+      status.dataset.state = "running";
+      try {
+        // Return to Default after the final palette to verify complete cleanup.
+        const sequence = GPTskinsThemes.themes.concat(GPTskinsThemes.getTheme("default"));
+        for (const [index, theme] of sequence.entries()) {
+          status.textContent = `Checking ${theme.name} (${index + 1}/${sequence.length})...`;
+          fixtureThemeSelect.value = theme.id;
+          updateFixtureTheme();
+          // The real content script suppresses transitions for 180ms.
+          await new Promise((resolve) => setTimeout(resolve, 250));
+          results.push(checkFixtureTheme());
+        }
+        const checks = results.reduce((sum, result) => sum + result.checks, 0);
+        const failures = results.reduce((sum, result) => sum + result.failures.length, 0);
+        status.dataset.state = failures ? "failed" : "passed";
+        status.textContent = `${GPTskinsThemes.themes.length} themes and Default cleanup: ${checks} checks, ${failures} failures.`;
+        document.getElementById("test-report").textContent = JSON.stringify({ checks, failures, results }, null, 2);
+        document.getElementById("test-details").open = failures > 0;
+      } catch (error) {
+        status.dataset.state = "failed";
+        status.textContent = `Regression runner failed: ${error.message}`;
+        document.getElementById("test-report").textContent = JSON.stringify({ error: error.message, results }, null, 2);
+        document.getElementById("test-details").open = true;
+      } finally {
+        fixtureThemeSelect.value = previousTheme;
+        updateFixtureTheme();
+        button.disabled = false;
+        fixtureThemeSelect.disabled = false;
+      }
+    });
+
+    fixtureThemeSelect.addEventListener("change", updateFixtureTheme);
+    updateFixtureTheme();
+  </script>
+</body>
+</html>
