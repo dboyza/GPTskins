@@ -1,5 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <clipPath id="bubble">
+      <path d="M21 12H43C49.627 12 55 17.373 55 24V34C55 40.627 49.627 46 43 46H26L13 54V43C10.5 40.8 9 37.6 9 34V24C9 17.373 14.373 12 21 12Z"/>
+    </clipPath>
+  </defs>
   <rect x=".5" y=".5" width="63" height="63" rx="17.5" fill="#101716" stroke="#2C3C34"/>
-  <path d="M39 14H28C19.163 14 12 21.163 12 30V36C12 44.837 19.163 52 28 52H36C44.837 52 52 44.837 52 36V28H36L28 36H44C44 40.418 40.418 44 36 44H28C23.582 44 20 40.418 20 36V30C20 25.582 23.582 22 28 22H31L39 14Z" fill="#9BE6C3"/>
-  <path d="M44 12H52V20L42 30H34L44 20V12Z" fill="#C3B1F5"/>
+  <g clip-path="url(#bubble)">
+    <path fill="#9BE6C3" d="M8 11H33V55H8Z"/>
+    <path fill="#243B31" d="M33 11H56V55H33Z"/>
+    <path d="M21 25H33M21 34H33" stroke="#14251D" stroke-width="4"/>
+    <path d="M33 25H44M33 34H39" stroke="#C5F3DD" stroke-width="4"/>
+  </g>
+  <path d="M21 12H43C49.627 12 55 17.373 55 24V34C55 40.627 49.627 46 43 46H26L13 54V43C10.5 40.8 9 37.6 9 34V24C9 17.373 14.373 12 21 12Z" stroke="#9BE6C3" stroke-width="2" stroke-linejoin="round"/>
 </svg>
