@@ -466,7 +466,7 @@ html[data-gptskins-theme] input::placeholder {
   color: var(--gptskins-mutedText) !important;
 }
 
-html[data-gptskins-theme] main :is(button, a, [role="button"]):not(.btn-primary):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
+html[data-gptskins-theme] main :is(button, a, [role="button"]):not(.btn-primary):not([data-gptskins-plan-toggle-option]):not([class*="composer-submit"]):not([data-testid*="send" i]):not([aria-label*="send" i]):not([aria-label*="submit" i]):not([aria-label*="voice" i]) {
   color: inherit !important;
 }
 
@@ -1011,7 +1011,7 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-to
 }
 
 html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle-option]:is([aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [data-state="active"], [data-state="checked"], [data-selected="true"], [data-active="true"]),
-html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle-option][data-gptskins-plan-active="true"] {
+html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-toggle-option][data-gptskins-plan-active="true"]:not([aria-pressed="false"], [aria-selected="false"], [aria-checked="false"], [data-state="inactive"], [data-state="unchecked"], [data-state="unselected"], [data-selected="false"], [data-active="false"]) {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -1037,13 +1037,13 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-to
   }
 
   html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta]:is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"]),
-  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta][data-gptskins-plan-disabled="true"] {
-    background: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
-    background-color: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
+  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta][data-gptskins-plan-disabled="true"]:not(:enabled):not([aria-disabled="false"], [data-disabled="false"]) {
+    background: color-mix(in srgb, var(--gptskins-mutedText) 20%, var(--gptskins-surface)) !important;
+    background-color: color-mix(in srgb, var(--gptskins-mutedText) 20%, var(--gptskins-surface)) !important;
     background-image: none !important;
     border-color: transparent !important;
     box-shadow: none !important;
-    color: color-mix(in srgb, var(--gptskins-text) 42%, var(--gptskins-surface)) !important;
+    color: var(--gptskins-text) !important;
     cursor: not-allowed !important;
     opacity: 1 !important;
   }
@@ -1139,8 +1139,8 @@ html[data-gptskins-theme] [data-message-author-role] .markdown pre:not(.cm-conte
   overflow: auto !important;
 }
 
-html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)),
-html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)),
+html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)):not([data-gptskins-code-body-shell]),
+html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)):not([data-gptskins-code-body-shell]),
 html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) {
   background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;

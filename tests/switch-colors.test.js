@@ -11,7 +11,11 @@ function channels(hex) {
 }
 
 function luminance(hex) {
-  const [red, green, blue] = channels(hex).map((channel) => channel / 255)
+  return channelLuminance(channels(hex));
+}
+
+function channelLuminance(rgb) {
+  const [red, green, blue] = rgb.map((channel) => channel / 255)
     .map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
   return red * 0.2126 + green * 0.7152 + blue * 0.0722;
 }
@@ -41,6 +45,11 @@ for (const theme of themes.filter((item) => item.id !== "default")) {
   const checked = channels(theme.colors.switchTrackChecked);
   const largestChannelChange = Math.max(...checked.map((channel, index) => Math.abs(channel - unchecked[index])));
   assert.ok(largestChannelChange >= 24, `${theme.id} checked and unchecked tracks are too similar`);
+
+  // Our 3:1 design target keeps disabled labels visible against their pills.
+  const disabledBackground = channels(theme.colors.mutedText).map((value, index) => value * 0.2 + channels(theme.colors.surface)[index] * 0.8);
+  const [light, dark] = [luminance(theme.colors.text), channelLuminance(disabledBackground)].sort((a, b) => b - a);
+  assert.ok((light + 0.05) / (dark + 0.05) >= 3, `${theme.id} disabled plan label must remain readable`);
 }
 
 console.log(`Checked switch colors across ${themes.length - 1} GPTskins theme palettes.`);

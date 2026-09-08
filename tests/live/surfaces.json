@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Manual live-site coverage checklist. A scenario is reviewed only after its required surfaces are visible and its checks are inspected. Missing selectors or unavailable features mean NOT_COVERED.",
+  "themes": "Every id in shared/themes.js, including Default. Use both native ChatGPT appearances for Default. Review light and dark custom themes against both native appearances when appearance-specific markup differs.",
+  "viewports": [
+    { "name": "desktop", "width": 1440, "height": 1000 },
+    { "name": "compact-desktop", "width": 1024, "height": 768 },
+    { "name": "narrow", "width": 390, "height": 844 }
+  ],
+  "interactionStates": ["idle", "hover", "keyboard-focus", "selected", "disabled", "open", "closed", "scrolled"],
+  "scenarios": [
+    { "id": "chat-home", "required": ["page", "sidebar", "composer", "composer-input", "composer-submit"], "checks": ["empty and typed composer", "enabled native account accent", "sidebar expanded and collapsed", "keyboard focus", "composer toolbar and attachment menu"] },
+    { "id": "work-home", "required": ["page", "mode-switch", "mode-track", "mode-option", "work-panel"], "checks": ["Chat and Work selection", "suggested apps panel", "panel child backgrounds", "track and selected segment contrast"] },
+    { "id": "suggestions", "required": ["composer", "suggestions"], "checks": ["autocomplete open", "row hover", "keyboard selection", "overflow clipping"] },
+    { "id": "sidebar", "required": ["sidebar", "sidebar-section", "sidebar-action", "account"], "checks": ["Pinned and Recents hover", "trailing actions and their parent wrappers", "fill-based icon weight", "account highlight after closing menu"] },
+    { "id": "profile-and-submenus", "required": ["menu", "menu-item", "portal"], "checks": ["profile menu", "nested submenu corners", "row hover and focus", "transparent outer portal"] },
+    { "id": "conversation", "required": ["user-message", "assistant-message", "composer", "thread-bottom"], "checks": ["headings, paragraphs, lists, links and horizontal rules", "native user accent", "message action hover", "scroll-to-bottom control", "long conversation scroll", "streaming response and stop control"] },
+    { "id": "code", "required": ["code-frame", "code-header", "code-body"], "checks": ["plain pre and nested rounded cards", "sticky headers", "long line horizontal scroll", "copy control", "no extra rectangular background", "no stale heading tags after switching themes"] },
+    { "id": "codemirror", "required": ["code-editor", "code-scroll", "code-syntax"], "checks": ["syntax contrast", "horizontal scrollbar", "no extra inner border", "font changes", "editing and draft snippets"] },
+    { "id": "tables", "required": ["table", "table-cell"], "checks": ["header and body contrast", "row dividers", "copy icon", "wide table horizontal scroll"] },
+    { "id": "citations", "required": ["citation"], "checks": ["light theme background", "hover", "focus", "source popover"] },
+    { "id": "charts", "required": ["chart", "chart-label", "chart-line"], "checks": ["axis label fill", "grid strokes", "legend colors preserved", "tooltip", "financial chart tabs"] },
+    { "id": "writing", "required": ["writing-block", "writing-editor", "writing-edit"], "checks": ["matching outer and inner paint", "Edit button states", "editable content selection", "expanded canvas if available"] },
+    { "id": "settings", "required": ["dialog", "dialog-tab", "switch"], "checks": ["every available settings category", "selected versus idle navigation", "switch checked and unchecked contrast", "thumb geometry", "dropdowns", "keyboard focus", "do not change account preferences merely for coverage"] },
+    { "id": "voice", "required": ["dialog", "voice-dot"], "checks": ["selected and unselected carousel dots", "voice card surfaces", "preview control", "do not start microphone or a voice conversation merely for coverage"] },
+    { "id": "pricing", "required": ["dialog", "plan-card", "plan-toggle", "plan-option", "plan-cta"], "checks": ["Personal and Business", "5x and 20x", "highlighted card gradient", "disabled and active CTA contrast", "bottom and pseudo-element dark bands", "never purchase or change subscription for testing"] },
+    { "id": "library", "required": ["page"], "checks": ["header", "content cards", "filter menu", "empty state", "detail dialog", "selectors for cards must be captured when encountered"] },
+    { "id": "projects", "required": ["page"], "checks": ["project cards and detail", "new-project dialog without submitting", "menus", "empty state", "selectors for cards must be captured when encountered"] },
+    { "id": "other-available-features", "required": ["page"], "checks": ["search", "GPT directory and GPT details", "apps or connectors", "image result and preview", "attachments", "share-dialog preview without publishing", "error and loading states", "record unavailable account-gated surfaces as NOT_COVERED"] },
+    { "id": "theme-lifecycle", "required": ["page"], "checks": ["every theme", "Default cleanup", "page reload persistence", "client-side navigation", "font switching and restoration", "newly inserted content", "theme changes while menus or dialogs are open", "normal zoom and 200 percent zoom"] }
+  ]
+}

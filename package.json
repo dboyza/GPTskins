@@ -1,0 +1,27 @@
+{
+  "name": "gptskins",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development checks for the dependency-free GPTskins extension",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "npm run test:unit && npm run test:browser && npm run test:extension",
+    "test:unit": "node tests/run-unit.js",
+    "test:browser": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:visual": "playwright test --config=playwright.visual.config.js",
+    "test:visual:update": "playwright test --config=playwright.visual.config.js --update-snapshots",
+    "test:report": "playwright show-report artifacts/report",
+    "test:serve": "node tests/server.js",
+    "test:full": "npm test && npm run test:visual",
+    "test:live-report": "node tests/live/report.js",
+    "test:extension": "playwright test --config=playwright.extension.config.js",
+    "test:visual:report": "playwright show-report artifacts/visual-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" class="dark" style="color-scheme:dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GPTskins content surface regression gallery</title>
+  <style>
+    /* Small native baselines model known ChatGPT structures without shipping its assets. */
+    :root { --main-surface-primary:#000; --text-primary:#eee; --text-secondary:#999; font-family:Arial,sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:#eee; background:#212121; }
+    header, main, aside { padding:16px; }
+    main { max-width:1100px; margin:auto; }
+    h1 { font-size:24px; } h2 { font-size:18px; }
+    button, select { font:inherit; padding:8px 12px; }
+    button, a { cursor:pointer; }
+    .gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+    .sample { min-width:0; padding:16px; border:1px solid #666; border-radius:16px; }
+    .sample > :last-child { margin-bottom:0; }
+    .sidebar { background:#171717; }
+    .sidebar a { display:block; padding:10px; color:#eee; text-decoration:none; border-radius:8px; }
+    .sidebar button { color:#eee; border:0; background:transparent; }
+    .sidebar-expando-section-header { display:flex; align-items:center; justify-content:space-between; }
+    .sidebar-expando-section-header:hover, [data-trailing-button]:hover, .trailing-wrap:hover { background:#383838; }
+    [data-trailing-button]::before { content:''; position:absolute; inset:0; background:#333; }
+    [data-trailing-button] { position:relative; }
+    [data-trailing-button] svg { position:relative; }
+    [data-testid="accounts-profile-button"][data-state="open"] { background:#444; }
+    svg { vertical-align:middle; }
+    [data-radix-popper-content-wrapper] { background:#333; box-shadow:0 0 8px #000; }
+    [role="menu"] { background:#303030; border-radius:8px; padding:6px; }
+    [role="menuitem"] { display:block; width:100%; border:0; background:transparent; color:#eee; text-align:left; border-radius:6px; }
+    [role="menuitem"]:hover, [role="menuitem"]:focus { background:#444; }
+    [data-testid="writing-block-container"] { border:1px solid #666; border-radius:12px; overflow:hidden; background:#333; }
+    [data-testid="writing-block-header-surface"] { display:flex; padding:12px; justify-content:space-between; align-items:center; background:#333; }
+    .writing-block-editor, .ProseMirror { padding:12px; background:#333; }
+    [data-testid="writing-block-header-magic-edit-button"] { background:#000; color:#fff; border:1px solid #444; border-radius:8px; }
+    table { border-collapse:collapse; width:100%; }
+    th, td { border:1px solid #eee; padding:8px; color:#eee; }
+    th span { opacity:.3; color:#eee; }
+    .recharts-wrapper { margin-top:16px; }
+    .recharts-text { fill:#aaa; opacity:.5; }
+    .recharts-cartesian-grid line { stroke:#eee; opacity:.5; }
+    .legend { display:flex; gap:8px; align-items:center; }
+    .legend span { width:8px; height:8px; display:inline-block; border-radius:999px; }
+    .code-case { min-width:0; margin-top:16px; }
+    .code-case pre { margin:0; }
+    .rounded { border-radius:12px; }
+    .overflow-clip { overflow:clip; }
+    .overflow-visible { overflow:visible; }
+    .bg-token-bg-elevated-secondary { background:#303030; }
+    .border-token-border-light { border:1px solid #444; }
+    .code-heading { padding:10px; white-space:normal; }
+    .code-heading button { float:right; }
+    .body-wrap { min-width:0; }
+    .code-case code { display:block; padding:14px; white-space:pre; width:max-content; min-width:100%; }
+    .cm-editor { border:1px solid #888; border-radius:8px; background:#333; }
+    .cm-scroller { overflow-x:auto; }
+    .cm-content { width:max-content; min-width:100%; padding:14px; white-space:pre; font-family:monospace; background:#333; }
+    form { position:relative; min-width:0; padding:12px; border:1px solid #777; border-radius:20px; }
+    #prompt-textarea { min-height:50px; }
+    #composer-submit-button { width:44px; height:44px; border:0; border-radius:50%; color:white; background:#8e44ff; }
+    .top-full { margin-top:12px; }
+    .bg-surface-primary { background:#000; padding:12px; border-radius:12px; }
+    .divide-token-border-light { margin:0; padding:0; list-style:none; }
+    .divide-token-border-light li + li { border-top:1px solid #333; }
+    .divide-token-border-light li { padding:8px; }
+    #insertion-zone { margin-top:24px; }
+    @media(max-width:700px) { .gallery { grid-template-columns:1fr; } main { padding:12px; } }
+  </style>
+  <script src="../../shared/themes.js"></script>
+  <script>
+    // Exercise the production listener; only Chrome's transport/storage are substituted.
+    const contentListeners=[];
+    globalThis.chrome={runtime:{onMessage:{addListener(fn){contentListeners.push(fn);}}},storage:{sync:{get(_keys,done){done({});}},onChanged:{addListener(){}}}};
+    globalThis.applyFixtureTheme=(themeId)=>new Promise((resolve,reject)=>{
+      const listener=contentListeners[0];
+      if(!listener) return reject(new Error('Content script has not registered'));
+      listener({type:'GPTSKINS_APPLY_THEME',themeId},{},(response)=>response?.ok?resolve():reject(new Error('Theme application not acknowledged')));
+    });
+  </script>
+</head>
+<body>
+  <header><label for="theme-select">Theme</label> <select id="theme-select"></select><output id="status"></output></header>
+  <main>
+    <h1>Content surface regression gallery</h1>
+    <p>Representative ChatGPT markup for repeatable regression checks, with synthetic content.</p>
+    <div class="gallery">
+      <aside class="sample sidebar" data-testid="left-sidebar">
+        <h2>Sidebar</h2>
+        <div class="sidebar-expando-section-header group/sidebar-expando-section-header" id="sidebar-heading">
+          <button aria-expanded="true">Recents</button>
+          <span class="trailing-wrap" id="trailing-wrap"><button id="trailing-button" data-trailing-button aria-label="Recent options"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2"/></svg></button></span>
+        </div>
+        <a id="library-link" href="/library"><svg id="sidebar-fill-icon" width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M2 2h16v16H2z"/></svg><span>Library</span></a>
+        <a id="new-chat-link" href="/"><svg id="sidebar-stroke-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20"><path d="M10 2v16M2 10h16"/></svg><span>New chat</span></a>
+        <button id="account-button" data-testid="accounts-profile-button" data-state="open">Sample account</button>
+      </aside>
+      <section class="sample"><h2>Profile portal</h2>
+        <div id="portal-wrapper" data-radix-popper-content-wrapper>
+          <div id="profile-menu" role="menu" data-radix-menu-content>
+            <button id="settings-menu-row" role="menuitem" data-radix-collection-item data-testid="settings-menu-item" class="__menu-item">Settings</button>
+            <button id="profile-menu-row" role="menuitem" data-radix-collection-item class="__menu-item">Personalization</button>
+          </div>
+        </div>
+      </section>
+      <section class="sample" data-message-author-role="assistant"><h2>Writing block</h2>
+        <div id="writing-card" data-testid="writing-block-container">
+          <div id="writing-header" data-testid="writing-block-header-surface"><span>Draft</span><button id="writing-edit" data-testid="writing-block-header-magic-edit-button" aria-label="Edit"><svg width="16" height="16" fill="none" stroke="currentColor"><path d="M2 14L14 2"/></svg><span>Edit</span></button></div>
+          <div id="writing-editor" class="writing-block-editor markdown"><div id="writing-content" class="ProseMirror markdown" contenteditable="true"><p>A synthetic draft with a consistent painted surface.</p></div></div>
+        </div>
+      </section>
+      <section class="sample" data-message-author-role="assistant"><h2>Tables and charts</h2>
+        <div><table><thead><tr><th id="table-heading"><span id="table-heading-text">Metric</span></th><th>Value</th></tr></thead><tbody><tr><td id="table-cell">Example</td><td>42</td></tr></tbody></table><button id="table-copy" aria-label="Copy table"><svg width="16" height="16" stroke="currentColor" fill="none"><rect x="2" y="2" width="12" height="12"/></svg></button></div>
+        <div class="recharts-wrapper"><svg width="240" height="100" viewBox="0 0 240 100"><g class="recharts-cartesian-grid"><line id="chart-grid" x1="20" x2="220" y1="40" y2="40"/></g><text id="chart-label" class="recharts-text" x="20" y="80">Example axis</text><path id="chart-series" stroke="#3b82f6" fill="none" d="M20 60L80 40L140 50L220 20"/></svg><div class="legend"><span id="chart-legend" class="rounded-full h-2 w-2" style="background:#3b82f6"></span>Series</div></div>
+      </section>
+      <section class="sample" data-message-author-role="assistant"><h2>Plain code card</h2>
+        <div class="markdown"><div id="plain-frame" class="code-case rounded"><div id="plain-card" class="group/code"><div id="plain-heading" class="code-heading">JavaScript <button>Copy</button></div><div id="plain-shell" class="body-wrap"><pre id="plain-body"><code>const example = "a deliberately long code line that must remain readable by horizontal scrolling without widening the page or adding a second rectangular border";</code></pre></div></div></div></div>
+      </section>
+      <section class="sample" data-message-author-role="assistant"><h2>Inner rounded code card</h2>
+        <div class="markdown code-case"><pre id="nested-frame" class="overflow-visible px-0"><div id="nested-card" class="border-token-border-light rounded overflow-clip"><div class="bg-token-bg-elevated-secondary"><div id="nested-heading" class="select-none sticky code-heading"><div class="bg-token-bg-elevated-secondary">Python <button>Copy</button></div></div><div id="nested-body" class="relative"><code>example = "a long code sample that must scroll horizontally inside this rounded code card without painting a rectangular background behind the rounded corners"</code></div></div></div></pre></div>
+      </section>
+      <section class="sample" data-message-author-role="assistant"><h2>CodeMirror snippet</h2>
+        <div id="cm-shell" class="code-case overflow-clip rounded bg-token-bg-elevated-secondary"><div class="code-heading">Email draft</div><div class="pe-11 pt-3"><div id="cm-editor" class="cm-editor cm-theme"><div id="cm-scroller" class="cm-scroller"><div id="cm-content" class="cm-content">A long editable snippet preserves its scroll owner and never gains an extra rounded inner outline, even when the text runs beyond the edge of this card.</div></div></div></div></div>
+      </section>
+      <section class="sample"><h2>Composer and suggestions</h2>
+        <form class="group/composer" data-testid="composer" onsubmit="return false"><div id="prompt-textarea" contenteditable="true" role="textbox" aria-label="Message">A draft ready to send</div><button id="composer-submit-button" data-testid="send-button" aria-label="Send message"><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M9 18V6l-4 4-2-2 7-7 7 7-2 2-4-4v12z"/></svg></button><div class="top-full"><div id="suggestion-panel" class="bg-surface-primary"><ul class="divide-token-border-light"><li>Suggested synthetic task</li><li>Another synthetic task</li></ul></div></div></form>
+      </section>
+    </div>
+    <section id="insertion-zone" data-message-author-role="assistant" aria-label="Dynamic content"></section>
+  </main>
+  <script src="../../content/content.js"></script>
+  <script>
+    const themeSelect=document.getElementById('theme-select');
+    for(const theme of GPTskinsThemes.themes) themeSelect.add(new Option(theme.name,theme.id));
+    themeSelect.addEventListener('change',async()=>{await applyFixtureTheme(themeSelect.value);document.getElementById('status').textContent='Theme applied';});
+  </script>
+</body>
+</html>

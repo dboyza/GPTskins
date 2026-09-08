@@ -86,6 +86,18 @@ Switch ChatGPT into popular editor-inspired themes like Catppuccin Latte, GitHub
 5. Select the folder you cloned or unzipped.
 6. Open ChatGPT, click the GPTskins toolbar icon, and pick a theme or font.
 
+## Regression tests
+
+```sh
+npm ci
+npx playwright install chromium
+npm test
+```
+
+Use `npm run test:full` to include screenshot comparisons, and `npm run test:report` to inspect results.
+See [the testing guide](docs/testing.md) for coverage, focused runs, baseline review, and the live ChatGPT update workflow.
+Testing dependencies are development-only; the extension still has no build step or runtime dependencies.
+
 ## Project Layout
 
 - `manifest.json` defines the Manifest V3 extension.

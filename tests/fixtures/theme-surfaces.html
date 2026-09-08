@@ -278,10 +278,10 @@
           const disabled = button.disabled;
           const actual = getComputedStyle(button);
           const wantedBackground = expected.native ? colorChannels("#0285ff") : disabled
-            ? mix(expected.colors.mutedText, expected.colors.surface, 0.46)
+            ? mix(expected.colors.mutedText, expected.colors.surface, 0.2)
             : colorChannels(expected.colors.accent);
           const wantedForeground = expected.native ? colorChannels("#ffffff") : disabled
-            ? mix(expected.colors.text, expected.colors.surface, 0.42)
+            ? colorChannels(expected.colors.text)
             : colorChannels(expected.colors.accentText);
           for (const [property, channels] of [["backgroundColor", wantedBackground], ["color", wantedForeground]]) {
             check(`${button.id}.${property}`, colorChannels(actual[property]).every((channel, index) => Math.abs(channel - channels[index]) < 0.001), actual[property], channels);

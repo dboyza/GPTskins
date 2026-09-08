@@ -29,6 +29,7 @@
 - The desired shape is the whole code card, not just the header/body. For `pre.overflow-visible.px-0` blocks, round the inner `border-token-border-light ... rounded` / `overflow-clip ... rounded` card itself.
 - If the rounded card is nested below a wrapper inside `pre`, make the outer `pre.overflow-visible.px-0:has(...)` transparent; otherwise it paints a square rectangle behind the rounded card.
 - For normal code snippets, only the real `pre` should get `data-gptskins-code-body`. Parent wrappers should use `data-gptskins-code-body-shell` so they clip/clear backgrounds without drawing a second rectangular border around the rounded snippet.
+- Exclude tagged code-body shells from broad `.markdown :has(> pre)` frame paint selectors; their higher specificity otherwise restores an inner border.
 - Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as GPTskins code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
 - CodeMirror email/message snippets should not draw their own inner rounded border. Keep `.cm-editor`, `.cm-scroller`, and `.cm-content` transparent, borderless, radiusless, and outline-free; the outer shell owns the shape.
 - If CodeMirror still shows an inner line, hide the `.pe-11.pt-3 .cm-editor[class*="cm-"]` `border-color` and `outline-color`; do not change snippet layout.
@@ -47,6 +48,9 @@
 - Plan-page detection cannot rely only on a one-time body text scan. Content scripts may run at `document_start` before `document.body` exists, so start observation from `document.documentElement`, attach the body observer when available, and use heading/action signals such as `Switch to Plus`, `Upgrade to Pro`, `ChatGPT Enterprise`, or subscription links.
 - When scanning plan layers for black paint, inspect `::before` and `::after` computed styles as well as the element background and shadow; the visible strip may be pseudo-element paint.
 - Plan-page pricing controls need their own tags. The generic dialog/main button rules can erase the Personal/Business and 5x/20x segmented-control tracks plus the disabled `Upgrade to Pro` pill, so tag them with `data-gptskins-plan-toggle`, `data-gptskins-plan-toggle-option`, and `data-gptskins-plan-cta` instead of broadening all dialog button styles.
+- Explicit inactive ARIA states must override stale plan-active fallback tags; test radio changes without unrelated child-list mutations.
+- Native enabled state and explicit `aria-disabled="false"` must also override stale disabled fallback tags.
+- Disabled pricing actions use primary text over a 20% muted-text/surface mix so their labels remain legible.
 - Settings and voice UI live under `[role="dialog"]` or `[aria-modal="true"]`; switches and carousel dots need explicit contrast checks in light and dark themes.
 - Switch tracks use the derived `switchTrackChecked` palette color for 3:1 contrast; preserve native geometry and the direct Radix thumb.
 - Voice dots are small `button[role="radio"][aria-checked]` controls; never recolor arbitrary rounded spans/divs, which include chart legends.
@@ -70,6 +74,8 @@
 - For visual fixes, verify computed styles on the exact live element, not just screenshots.
 - Button color probes may need a short wait because ChatGPT uses transition classes; immediate computed styles can show the old color.
 - Minimum checks before committing: `node --check content/content.js` and `git -c safe.directory=C:/Users/Dylan/Documents/extension diff --check`.
-- Run `node --test tests/*.test.js` for palette, syntax-color, switch contrast, and popup-message regressions.
-- Serve the repository locally and open `tests/fixtures/theme-surfaces.html`; its Run all themes button checks the actual content script against captured native cascade cases and Default cleanup.
+- Run `npm test` for syntax, logic, all-theme browser coverage at three viewports, and actual unpacked-extension integration in a disposable profile.
+- Run `npm run test:full` to include platform-specific screenshot baselines; inspect diffs before deliberately updating them.
+- Use `docs/testing.md` and `docs/live-audit.md` after upstream website changes; missing live surfaces are coverage gaps, never passes.
+- New visual regressions need a sanitized browser fixture with a failing observable assertion before the fix; keep production extension dependencies unchanged.
 - Commit finished work; do not push unless Dylan asks.

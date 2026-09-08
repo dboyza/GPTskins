@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="dark" style="color-scheme:dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GPTskins pricing regression scene</title>
+  <style>
+    @layer utilities { .bg-token-accent-blue\! { background-color:#0285ff!important; color:#fff!important; } }
+    :root { font-family:Arial,sans-serif; --bg-primary:#000; --bg-elevated-secondary:#303030; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:#eee; background:#212121; --bg-primary:#000; --bg-elevated-secondary:#303030; }
+    header { padding:16px; }
+    select, button { font:inherit; }
+    select { padding:8px; }
+    main { max-width:1100px; margin:0 auto; padding:24px; }
+    h1 { margin:0 0 12px; font-size:30px; }
+    h2 { font-size:22px; }
+    .intro { text-align:center; }
+    .bg-token-bg-primary { background:var(--bg-primary); }
+    .pricing-panel { padding:28px; border-radius:20px; }
+    .toggle-track { position:relative; display:block; width:264px; margin:24px auto; border:1px solid #555; border-radius:999px; padding:4px; background:#333; }
+    .toggle-position { position:relative; }
+    .toggle-highlight { position:absolute; width:50%; height:100%; border-radius:999px; pointer-events:none; }
+    .absolute { position:absolute; }
+    .inset-0 { inset:0; }
+    .toggle-highlight > div { border-radius:999px; background:#555; }
+    [role="radiogroup"] { position:relative; display:flex; background:transparent; }
+    [role="radio"] { z-index:1; width:50%; border:0; background:transparent; border-radius:999px; padding:10px; color:#aaa; cursor:pointer; }
+    [role="radio"][aria-checked="true"] { color:#fff; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:24px; }
+    [data-pricing-column-content] { min-width:0; padding:20px; border:1px solid #555; border-radius:16px; background:var(--main-surface-primary,#212121); }
+    [data-pricing-column-content][data-pricing-column-treatment="highlight"] { background:linear-gradient(206.72deg,#274b72 2.34%,#212121 92.37%); outline:1px solid #496885; }
+    .price { font-size:30px; font-weight:600; }
+    .price small { font-size:14px; }
+    .plan-action { display:block; width:100%; min-height:44px; padding:10px 14px; border:0; border-radius:999px; cursor:pointer; }
+    .plan-action:disabled { opacity:.5; cursor:not-allowed; }
+    .capacity { width:100%; margin:14px 0; }
+    .thread-bottom-container { position:relative; margin-top:24px; padding:18px; background:#000; }
+    .thread-bottom-container::after { content:''; position:absolute; inset:0; background:#000; box-shadow:0 0 10px #000; }
+    .thread-bottom-container > p { position:relative; z-index:1; margin:0; }
+    #status { display:block; padding:12px; }
+    @media(max-width:850px) { .cards { grid-template-columns:1fr; } main { padding:12px; } .pricing-panel { padding:18px; } }
+  </style>
+  <script src="../../shared/themes.js"></script>
+  <script>
+    // Load production code before body exists, matching the extension's document_start lifecycle.
+    const initialFixtureTheme = new URLSearchParams(location.search).get('theme') || 'default';
+    const fixtureListeners=[];
+    globalThis.chrome={runtime:{onMessage:{addListener(fn){fixtureListeners.push(fn);}}},storage:{sync:{get(_keys,done){done({[GPTskinsThemes.storageKey]:initialFixtureTheme});}},onChanged:{addListener(){}}}};
+    globalThis.setFixtureTheme=(themeId)=>new Promise((resolve,reject)=>fixtureListeners[0]({type:'GPTSKINS_APPLY_THEME',themeId},{},response=>response?.ok?resolve():reject(new Error('Theme acknowledgment missing'))));
+    globalThis.fixtureInitialBodyPresent=Boolean(document.body);
+  </script>
+  <script src="../../content/content.js"></script>
+</head>
+<body>
+  <header><label for="theme-select">Theme</label> <select id="theme-select"></select><output id="status">Synthetic pricing scene. No purchases or account actions.</output></header>
+  <main>
+    <section id="pricing-panel" class="pricing-panel bg-token-bg-primary bg-token-bg-elevated-secondary!" role="dialog" aria-labelledby="plan-heading">
+      <div class="intro"><h1 id="plan-heading">Choose your plan</h1><p>Representative pricing controls with synthetic amounts and content.</p></div>
+      <div id="audience-track" class="toggle-track" role="group" aria-label="Plan audience">
+        <div class="toggle-position"><div class="toggle-highlight"><div id="audience-highlight" class="bg-token-bg-primary absolute inset-0"></div></div><div id="audience-toggle" role="radiogroup" aria-label="Personal or Business"><button id="personal-option" role="radio" aria-checked="true">Personal</button><button id="business-option" role="radio" aria-checked="false">Business</button></div></div>
+      </div>
+      <div class="cards">
+        <section id="plus-plan" class="bg-token-main-surface-primary dark:bg-transparent" data-pricing-column-content><h2>Plus</h2><p class="price">$20 <small>/ month</small></p><p>Example plan description.</p><button id="plus-action" class="plan-action bg-token-accent-blue!" data-testid="select-plan-button-plus-upgrade"><span>Switch to Plus</span></button></section>
+        <section id="highlighted-plan" data-pricing-column-content data-pricing-column-treatment="highlight"><h2>Pro</h2><p class="price">$200 <small>/ month</small></p>
+          <div id="capacity-track" class="toggle-track capacity" role="group" aria-label="Plan capacity"><div class="toggle-position"><div class="toggle-highlight"><div id="capacity-highlight" class="bg-token-bg-primary absolute inset-0"></div></div><div id="capacity-toggle" role="radiogroup" aria-label="Usage multiplier"><button id="five-option" role="radio" aria-checked="true">5x</button><button id="twenty-option" role="radio" aria-checked="false">20x</button></div></div></div>
+          <button id="pro-action" class="plan-action bg-token-accent-blue!" data-testid="select-plan-button-pro-upgrade" disabled><span>Upgrade to Pro</span></button>
+        </section>
+        <section id="team-plan" class="bg-token-main-surface-primary dark:bg-transparent" data-pricing-column-content><h2>Team example</h2><p class="price">$25 <small>/ month</small></p><p>Example plan description.</p><button id="team-action" class="plan-action bg-token-accent-blue!" aria-disabled="true"><span>Get team access</span></button></section>
+      </div>
+      <div id="plan-footer" class="thread-bottom-container"><p>Illustrative pricing only. This fixture never submits a purchase.</p></div>
+    </section>
+  </main>
+  <script>
+    const themeSelect=document.getElementById('theme-select');
+    for(const theme of GPTskinsThemes.themes) themeSelect.add(new Option(theme.name,theme.id));
+    themeSelect.value=initialFixtureTheme;
+    themeSelect.addEventListener('change',async()=>{await setFixtureTheme(themeSelect.value);document.getElementById('status').textContent='Theme applied';});
+    document.querySelectorAll('[role="radio"]').forEach(button=>button.addEventListener('click',()=>{
+      const group=button.closest('[role="radiogroup"]');
+      group.querySelectorAll('[role="radio"]').forEach(option=>option.setAttribute('aria-checked',String(option===button)));
+      group.parentElement.querySelector('.toggle-highlight').style.transform=button===group.lastElementChild?'translateX(100%)':'';
+    }));
+  </script>
+</body>
+</html>
