@@ -7,6 +7,9 @@
     "node": ">=22"
   },
   "scripts": {
+    "package": "node scripts/package.js",
+    "store:graphics": "node scripts/store-graphics.js",
+    "test:release": "node scripts/test-release.js",
     "test": "npm run test:unit && npm run test:browser && npm run test:extension",
     "test:unit": "node tests/run-unit.js",
     "test:browser": "playwright test",

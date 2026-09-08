@@ -10,8 +10,8 @@ module.exports = defineConfig({
   workers: 1,
   timeout: 60000,
   expect: { timeout: 10000 },
-  outputDir: "artifacts/extension-results",
-  reporter: [["list"], ["html", { outputFolder: "artifacts/extension-report", open: "never" }]],
+  outputDir: process.env.GPTSKINS_RELEASE_PATH ? "artifacts/release-results" : "artifacts/extension-results",
+  reporter: [["list"], ["html", { outputFolder: process.env.GPTSKINS_RELEASE_PATH ? "artifacts/release-report" : "artifacts/extension-report", open: "never" }]],
   use: { headless: true },
   projects: [{ name: "unpacked-chromium" }]
 });

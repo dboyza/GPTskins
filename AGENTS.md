@@ -8,6 +8,8 @@
 - The popup uses an explicit 390px width/min-width and a fixed 600px shell with an independently scrolling collection; keep search, filters, and status visible.
 - Avoid viewport-relative popup widths or `max-height: 100vh`: Chrome can initially size the popup narrowly, or briefly short, causing viewport-dependent dimensions to lock it into that initial size.
 - `icons/logo.svg` is the logo source; keep the 16/32/48/128px toolbar PNGs aligned with it.
+- `npm run store:graphics` rebuilds store artwork and the padded 128px manifest icon; review the generated PNGs before packaging.
+- `npm run test:release` builds and tests the exact ZIP with an unchanged manifest; keep release contents limited to runtime assets and font licenses.
 - Coding fonts are bundled in `fonts/` with unchanged OFL notices; use catalog `faces` and `getFontFaceCSS()` for both popup and content styles.
 - Include `fonts/` in release ZIPs; font resources must remain scoped to the two ChatGPT hosts.
 - Custom fonts normalize cap height against the native body family using `font-size-adjust`; preserve CSS font sizes and line heights, and never calibrate against a previously applied custom font.

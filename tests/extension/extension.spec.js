@@ -4,7 +4,6 @@ const { test: base, expect, chromium } = require("@playwright/test");
 const fs = require("node:fs/promises");
 const os = require("node:os");
 const path = require("node:path");
-const { createHash, generateKeyPairSync } = require("node:crypto");
 
 const nativeDocument = (gated = false) => `<!doctype html><html class="dark" style="color-scheme:dark"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,22 +17,13 @@ const test = base.extend({
     let context;
     let releaseParser = () => {};
     try {
-      const production = path.resolve(__dirname, "../..");
+      const production = process.env.GPTSKINS_RELEASE_PATH || path.resolve(__dirname, "../..");
       const extensionPath = path.join(temporary, "extension");
       await fs.mkdir(extensionPath);
       for (const directory of ["content", "shared", "popup", "icons", "fonts"]) {
         await fs.cp(path.join(production, directory), path.join(extensionPath, directory), { recursive: true });
       }
-      const manifest = JSON.parse(await fs.readFile(path.join(production, "manifest.json"), "utf8"));
-      // Only the disposable copy receives a key, so no production identity changes.
-      // Chromium's ID algorithm: SHA256(public DER), first16 bytes, hex alphabet a-p.
-      // https://github.com/chromium/chromium/blob/main/components/crx_file/id_util.cc
-      const { publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
-      const der = publicKey.export({ type: "spki", format: "der" });
-      manifest.key = der.toString("base64");
-      const extensionId = createHash("sha256").update(der).digest("hex").slice(0, 32)
-        .replace(/[0-9a-f]/g, (digit) => String.fromCharCode(97 + Number.parseInt(digit, 16)));
-      await fs.writeFile(path.join(extensionPath, "manifest.json"), JSON.stringify(manifest));
+      await fs.copyFile(path.join(production, "manifest.json"), path.join(extensionPath, "manifest.json"));
       // Official persistent-context extension loading, using bundled Chromium.
       // https://playwright.dev/docs/chrome-extensions
       context = await chromium.launchPersistentContext(path.join(temporary, "profile"), {
@@ -43,6 +33,14 @@ const test = base.extend({
         serviceWorkers: "block",
         args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`]
       });
+      // Discover Chromium's real identity without altering the release manifest.
+      const manager = await context.newPage();
+      await manager.goto("chrome://extensions/");
+      const installed = manager.locator("extensions-item").filter({ hasText: "GPTskins" });
+      await expect(installed).toHaveCount(1);
+      const extensionId = await installed.getAttribute("id");
+      expect(extensionId).toMatch(/^[a-p]{32}$/);
+      await manager.close();
       const errors = [];
       context.on("page", (page) => page.on("pageerror", (error) => errors.push(error.message)));
       await context.tracing.start({ screenshots: true, snapshots: true });
@@ -110,6 +108,11 @@ test("the real unpacked extension injects, synchronizes, persists and cleans up"
   await popup.locator('[data-theme-id="ayu-light"]').click();
   await expect(chat.locator("html")).toHaveAttribute("data-gptskins-theme", "ayu-light");
   await expect(chat.locator("html")).toHaveCSS("color-scheme", "light");
+  // Keep ChatGPT active as it is when Chrome opens the action popup.
+  // Programmatic activation avoids turning the popup's test tab into the active tab.
+  await chat.bringToFront();
+  await popup.evaluate(() => document.querySelector('[data-theme-id="ayu-light"]').click());
+  await expect(popup.getByRole("status")).toHaveText("Theme applied.");
   await popup.getByRole("button", { name: "Font", exact: true }).click();
   const bundledFonts = await popup.evaluate(() => globalThis.GPTskinsThemes.fonts
     .filter((font) => font.faces?.length)
@@ -181,6 +184,14 @@ test("the real unpacked extension injects, synchronizes, persists and cleans up"
   await unrelated.goto("https://example.com/");
   await expect(unrelated.locator("#gptskins-style")).toHaveCount(0);
   await expect(unrelated.locator("html")).not.toHaveAttribute("data-gptskins-theme");
+  await unrelated.bringToFront();
+  expect(await popup.evaluate(async () => {
+    const [active] = await chrome.tabs.query({ active: true, currentWindow: true });
+    return active.url;
+  })).toBeUndefined();
+  await popup.evaluate(() => document.querySelector('[data-theme-id="ayu-light"]').click());
+  await expect(popup.getByRole("status")).toHaveText("Saved. Open ChatGPT to see this theme.");
+  expect(await popup.evaluate(() => chrome.storage.sync.get("gptskins.theme"))).toEqual({ "gptskins.theme": "ayu-light" });
 
   await popup.bringToFront();
   await popup.locator('[data-theme-mode="dark"]').click();

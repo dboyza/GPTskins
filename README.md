@@ -7,6 +7,8 @@
   <a href="#install">Install</a> ·
   <a href="#preview">Preview</a> ·
   <a href="docs/testing.md">Testing guide</a> ·
+  <a href="docs/releasing.md">Release guide</a> ·
+  <a href="PRIVACY.md">Privacy</a> ·
   <a href="https://github.com/dboyza/GPTskins/issues">Report an issue</a>
 </p>
 <p align="center"><strong>34 themes</strong> &nbsp; / &nbsp; <strong>7 font choices</strong> &nbsp; / &nbsp; <strong>No build step</strong></p>

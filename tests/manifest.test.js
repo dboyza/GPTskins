@@ -12,7 +12,7 @@ const api = globalThis.GPTskinsThemes;
 test("manifest loads existing assets and applies themes at document_start", () => {
   assert.equal(manifest.manifest_version, 3);
   assert.match(manifest.version, /^\d+\.\d+\.\d+(?:\.\d+)?$/);
-  assert.deepEqual(manifest.permissions.slice().sort(), ["activeTab", "storage"]);
+  assert.deepEqual(manifest.permissions, ["storage"]);
   const scripts = manifest.content_scripts;
   assert.equal(scripts.length, 1);
   assert.deepEqual(scripts[0].js, ["shared/themes.js", "content/content.js"]);
