@@ -5,7 +5,8 @@
 - Use `GPTskins`, `GPTSKINS`, and `gptskins` for APIs, message types, storage keys, attributes, and CSS variables.
 - Keep README screenshots in `docs/screenshots/` and display them as small HTML thumbnails.
 - Keep changes surgical. Prefer one targeted selector or tag over broad CSS guesses.
-- The popup uses a fixed 600px shell with an independently scrolling collection; keep search, filters, and status visible.
+- The popup uses an explicit 420px width/min-width and a fixed 600px shell with an independently scrolling collection; keep search, filters, and status visible.
+- Avoid viewport-relative popup widths: Chrome can initially size the popup narrowly, causing a responsive width rule to lock it into that narrow viewport.
 - `icons/logo.svg` is the logo source; keep the 16/32/48/128px toolbar PNGs aligned with it.
 - No build step. Validate content script syntax with `node --check content/content.js`.
 

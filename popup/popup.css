@@ -10,7 +10,8 @@
 }
 * { box-sizing: border-box; }
 body {
-  width: 360px;
+  width: 420px;
+  min-width: 420px;
   margin: 0;
   background: var(--background);
   color: var(--text);
@@ -20,14 +21,10 @@ button, input { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 .popup-shell { display: flex; flex-direction: column; height: 600px; max-height: 100vh; padding: 0 20px; }
-.popup-header { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; gap: 12px; }
+.popup-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 750; letter-spacing: -.6px; }
 .brand img { display: block; }
 .brand-light { font-weight: 450; }
-.edition { max-width: 100px; color: var(--muted); font-size: 8px; letter-spacing: 1.4px; line-height: 1.6; text-align: right; }
-.intro { padding: 22px 0 18px; }
-h1 { margin: 0; font-size: 27px; font-weight: 600; letter-spacing: -1px; line-height: 1.2; }
-.intro p { margin: 6px 0 0; font-size: 11px; color: var(--muted); }
 .style-filter { display: grid; grid-template-columns: 1fr 1fr; padding: 3px; gap: 3px; border-radius: 10px; background: #090b0c; border: 1px solid #242927; }
 .filter-button { border: 0; color: var(--muted); background: transparent; cursor: pointer; font-weight: 550; }
 .style-filter .filter-button { min-height: 35px; border-radius: 7px; display: flex; justify-content: center; align-items: center; gap: 8px; }
@@ -68,4 +65,3 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .current-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .status { min-height: 15px; margin: 4px 0 0 12px; color: var(--muted); font-size: 10px; }
 @media (prefers-reduced-motion: no-preference) { button { transition: background-color .14s, border-color .14s, color .14s; } }
-@media (max-width: 359px) { body { width: 100vw; } .popup-shell { padding: 0 14px; } }
