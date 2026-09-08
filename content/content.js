@@ -1025,31 +1025,34 @@ html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-to
   opacity: 1 !important;
 }
 
-html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta] {
-  background: var(--gptskins-accent) !important;
-  background-color: var(--gptskins-accent) !important;
-  background-image: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  color: var(--gptskins-accentText) !important;
-  opacity: 1 !important;
-}
+@layer utilities {
+  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta] {
+    background: var(--gptskins-accent) !important;
+    background-color: var(--gptskins-accent) !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    color: var(--gptskins-accentText) !important;
+    opacity: 1 !important;
+  }
 
-html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta]:is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"]),
-html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta][data-gptskins-plan-disabled="true"] {
-  background: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
-  background-color: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
-  background-image: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  color: color-mix(in srgb, var(--gptskins-text) 42%, var(--gptskins-surface)) !important;
-  cursor: not-allowed !important;
-  opacity: 1 !important;
-}
+  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta]:is(:disabled, [disabled], [aria-disabled="true"], [data-disabled="true"]),
+  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta][data-gptskins-plan-disabled="true"] {
+    background: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
+    background-color: color-mix(in srgb, var(--gptskins-mutedText) 46%, var(--gptskins-surface)) !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    color: color-mix(in srgb, var(--gptskins-text) 42%, var(--gptskins-surface)) !important;
+    cursor: not-allowed !important;
+    opacity: 1 !important;
+  }
 
-html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta] :is(span, div) {
-  color: inherit !important;
-  opacity: 1 !important;
+  html[data-gptskins-theme][data-gptskins-plan-page="true"] [data-gptskins-plan-cta] :is(span, div) {
+    color: inherit !important;
+    opacity: 1 !important;
+  }
+
 }
 
 html[data-gptskins-theme] [role="dialog"] [role="switch"],

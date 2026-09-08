@@ -3,7 +3,8 @@
 Status: in progress, 2026-09-07.
 Tested the real signed-in ChatGPT website in visible Chrome at 1800 x 987 CSS pixels.
 The black-box inheritance fix has been verified after an extension reload.
-The final citation, settings-control, and pricing-card fixes pass the browser fixture but still need an extension reload and live verification.
+Citation chips, settings switches, voice dots, chart legends, and the pricing-card gradient have also been verified on the live site after the updated script loaded.
+The final pricing action-button cascade fix still needs an extension reload and live verification.
 
 ## Reproduced regressions and prepared fixes
 
@@ -21,6 +22,7 @@ The final citation, settings-control, and pricing-card fixes pass the browser fi
 | Settings switches | Ayu Light checked tracks are pale orange with white thumbs and inadequate contrast. | Derive a checked track with at least 3:1 contrast; preserve native thumb geometry. |
 | Voice and chart indicators | Every voice dot has the same muted paint and 0.45 opacity; chart legend dots are also recolored. | Restrict size-based rules to radio buttons and honor `aria-checked`. |
 | Highlighted pricing card | Pro retains a dark blue gradient beneath dark themed text in Ayu Light. | Theme the highlighted card's gradient and outline through its pricing data attributes. |
+| Pricing action button | The Pro action retains a layered important blue background beneath themed dark text. | Put the existing plan-action rules in the native `utilities` layer. |
 
 ## Coverage so far
 
@@ -30,22 +32,23 @@ The final citation, settings-control, and pricing-card fixes pass the browser fi
 - Ayu Light: Work home, profile menu, General and Voice settings, Library and its filters, Projects and New Project dialog, conversation text, links, citations, code cards, and composer controls.
 - Additional Ayu Light inspection: Notifications, Personalization, Usage, Analytics, Cloud browser, Storage, and pricing.
 - Live reload verification: Work suggestion rectangle, Library header, Chat/Work track, disabled Send, native color scheme, readable CodeMirror yellow, and successful theme popup feedback.
+- Final Ayu Light live checks: citation background `rgb(243, 244, 245)`; checked switch track `rgb(191, 128, 38)` with white thumb; selected voice dot at full opacity versus 0.45 for others; original distinct chart legend colors; pricing gradient from `rgb(243, 244, 245)` to white.
 - Verdana: live application and existing CodeMirror layout; restored Default font afterward.
 - Code cards inspected had rounded frames and accessible code content at the desktop width tested.
 - Automated checks cover 578 palette text/background pairs, 714 syntax-color/background pairs, and 340 switch contrast pairs across 34 custom themes.
 - The runtime-message test reproduces the missing acknowledgment and verifies the fix.
-- The browser fixture passed 1,948 computed-style, geometry, acknowledgment, and cleanup checks across all 35 themes plus a final return to Default.
+- The browser fixture passed 2,164 computed-style, geometry, acknowledgment, and cleanup checks across all 35 themes plus a final return to Default.
 
 ## Repeatable regression checks
 
 Run `node --test tests/*.test.js` and `node --check content/content.js`.
 Serve the repository with `python3 -m http.server 8765 --bind 127.0.0.1`, open `http://127.0.0.1:8765/tests/fixtures/theme-surfaces.html` in Chrome, and click **Run all themes**.
 The fixture loads the actual shared palette and content script with a minimal extension messaging shim.
-It captures native descendant token resets, layered important citations, local popover tokens, mode controls, disabled Send, CodeMirror syntax, settings switches, voice radios, unrelated legend dots, and pricing gradients.
+It captures native descendant token resets, layered important citations, local popover tokens, mode controls, disabled Send, CodeMirror syntax, settings switches, voice radios, unrelated legend dots, pricing gradients, and layered pricing action buttons.
 
 ## Remaining verification
 
-Reload the unpacked extension and refresh ChatGPT to verify final citation paint, switch contrast, voice selection, chart legends, and highlighted pricing cards on the exact live elements.
+Reload the unpacked extension and refresh ChatGPT to verify the final Pro action-button background and foreground on the exact live element.
 Broader coverage remains for responsive layouts, remaining settings and menus, writing blocks, long code overflow, tables, streaming, and the full cross-product of themes and site surfaces.
 The automated color checks do not establish whole-site visual correctness.
 No claim of complete pixel-level coverage has been made.

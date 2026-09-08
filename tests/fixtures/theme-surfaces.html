@@ -13,6 +13,7 @@
     }
     @layer utilities {
       [data-testid="webpage-citation-pill"] a { background-color: #333 !important; color: #ddd !important; }
+      .bg-token-accent-blue\! { background-color: #0285ff !important; }
     }
     :root {
       --text-primary: #f5f5f5;
@@ -68,6 +69,8 @@
       background: linear-gradient(206.72deg, #274b72 2.34%, #212121 92.37%);
       outline: 1px solid #496885;
     }
+    .fixture-plan-action { padding: 10px 16px; border: 0; border-radius: 999px; color: #fff; }
+    .fixture-plan-action:disabled { opacity: .5; }
     #expected-palette, #test-report { display: block; margin-top: 20px; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px monospace; }
     @media (max-width: 700px) { .fixture-grid { grid-template-columns: 1fr; } }
   </style>
@@ -141,6 +144,8 @@
       <section id="pricing-highlight" class="fixture-panel" data-pricing-column-content data-pricing-column-treatment="highlight">
         <h2>Highlighted card</h2>
         <p>Both gradient stops and the outline must follow the selected palette.</p>
+        <button id="plan-action-enabled" type="button" data-testid="select-plan-button-pro-upgrade" class="fixture-plan-action bg-token-accent-blue!">Enabled action</button>
+        <button id="plan-action-disabled" type="button" class="fixture-plan-action bg-token-accent-blue!" disabled>Disabled action</button>
       </section>
     </div>
     <output id="test-status" aria-live="polite">Regression checks have not run.</output>
@@ -261,6 +266,34 @@
       const gradientStops = (gradient.match(/rgba?\([^)]*\)|color\(srgb[^)]*\)/g) || []).map(colorChannels);
       const wantedStops = (expected.native ? ["#274b72", "#212121"] : [expected.colors.surfaceStrong, expected.colors.surface]).map(colorChannels);
       check("pricing-highlight gradient stops", gradient.startsWith("linear-gradient(") && gradientStops.length === 2 && gradientStops.every((stop, index) => stop.every((channel, channelIndex) => Math.abs(channel - wantedStops[index][channelIndex]) < 0.001)), gradient, wantedStops);
+      // Exercise plan-only rules synchronously, then restore tags before the
+      // general theme assertions or production mutation observers run.
+      const originalPlanMarker = root.getAttribute("data-gptskins-plan-page");
+      const planActions = [document.getElementById("plan-action-enabled"), document.getElementById("plan-action-disabled")];
+      try {
+        root.setAttribute("data-gptskins-plan-page", "true");
+        for (const button of planActions) button.setAttribute("data-gptskins-plan-cta", "true");
+        const mix = (foreground, background, amount) => colorChannels(foreground).map((channel, index) => channel * amount + colorChannels(background)[index] * (1 - amount));
+        for (const button of planActions) {
+          const disabled = button.disabled;
+          const actual = getComputedStyle(button);
+          const wantedBackground = expected.native ? colorChannels("#0285ff") : disabled
+            ? mix(expected.colors.mutedText, expected.colors.surface, 0.46)
+            : colorChannels(expected.colors.accent);
+          const wantedForeground = expected.native ? colorChannels("#ffffff") : disabled
+            ? mix(expected.colors.text, expected.colors.surface, 0.42)
+            : colorChannels(expected.colors.accentText);
+          for (const [property, channels] of [["backgroundColor", wantedBackground], ["color", wantedForeground]]) {
+            check(`${button.id}.${property}`, colorChannels(actual[property]).every((channel, index) => Math.abs(channel - channels[index]) < 0.001), actual[property], channels);
+          }
+          const wantedOpacity = expected.native && disabled ? "0.5" : "1";
+          check(`${button.id}.opacity`, actual.opacity === wantedOpacity, actual.opacity, wantedOpacity);
+        }
+      } finally {
+        for (const button of planActions) button.removeAttribute("data-gptskins-plan-cta");
+        if (originalPlanMarker === null) root.removeAttribute("data-gptskins-plan-page");
+        else root.setAttribute("data-gptskins-plan-page", originalPlanMarker);
+      }
       check("message acknowledgment", document.getElementById("message-status").dataset.acknowledged === "true", document.getElementById("message-status").dataset.acknowledged, "true");
       check("theme marker", root.getAttribute("data-gptskins-theme") === (expected.native ? null : expected.themeId), root.getAttribute("data-gptskins-theme"), expected.native ? null : expected.themeId);
       if (expected.native) {
