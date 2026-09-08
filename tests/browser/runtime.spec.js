@@ -166,3 +166,60 @@ test("theme changes preserve a scrolled conversation position", async ({ page })
     }
   }
 });
+
+const sizingBody = `<main>
+<p id="size-14" data-font-sample style="font-size:14px;line-height:20px">Native-sized <span>nested <strong>text</strong></span></p>
+<p id="size-16" data-font-sample style="font-size:16px;line-height:24px">Conversation <span>nested <em>text</em></span></p>
+<h1 id="size-24" data-font-sample style="font-size:24px;line-height:28px;font-weight:400">Heading <span>nested <strong>text</strong></span></h1>
+</main>`;
+
+async function fontSizing(page) {
+  return page.evaluate(async () => {
+    await document.fonts.ready;
+    return Array.from(document.querySelectorAll('[data-font-sample], [data-font-sample] *')).map((element) => {
+      const style = getComputedStyle(element);
+      const probe = document.createElement('span');
+      probe.style.cssText = 'position:fixed;visibility:hidden;display:inline-block;height:100cap;width:0;padding:0;border:0;margin:0';
+      element.append(probe);
+      const capHeight = probe.getBoundingClientRect().height / 100;
+      probe.remove();
+      return { size: style.fontSize, lineHeight: style.lineHeight, capHeight, adjustment: style.fontSizeAdjust };
+    });
+  });
+}
+
+function expectNativeSizing(actual, native) {
+  expect(actual).toHaveLength(native.length);
+  actual.forEach((sample, index) => {
+    expect(sample.size).toBe(native[index].size);
+    expect(sample.lineHeight).toBe(native[index].lineHeight);
+    // Compare visible cap metrics, not CSS font-size alone, which already matched before the fix.
+    expect(Math.abs(sample.capHeight - native[index].capHeight)).toBeLessThan(0.1);
+    expect(sample.adjustment).toMatch(/^cap-height /);
+  });
+}
+
+test('custom fonts match native cap height without compounding nested text or resizing headings', async ({ page }) => {
+  await openRuntime(page, {}, sizingBody);
+  const native = await fontSizing(page);
+  const fonts = await page.evaluate(() => GPTskinsThemes.fonts.filter(({ stack }) => stack).map(({ id }) => id));
+  // A second cycle catches accidental calibration against the previous custom font.
+  for (const fontId of [...fonts, ...fonts.slice().reverse()]) {
+    await message(page, { type: 'GPTSKINS_APPLY_FONT', fontId });
+    expectNativeSizing(await fontSizing(page), native);
+  }
+  await message(page, { type: 'GPTSKINS_APPLY_FONT', fontId: 'default' });
+  await expect(page.locator('#gptskins-font-style')).toHaveCount(0);
+  await expect(page.locator('html')).not.toHaveAttribute('data-gptskins-font');
+  expect(await fontSizing(page)).toEqual(native);
+});
+
+for (const fontId of ['jetbrains-mono', 'fira-code', 'space-mono', 'verdana', 'georgia', 'mono']) {
+  test(`stored ${fontId} normalizes after document_start before-body initialization`, async ({ page }) => {
+    await openRuntime(page, { stored: { 'gptskins.font': fontId } }, sizingBody);
+    expect(await page.evaluate(() => GPTskinsBeforeBody.body)).toBe(false);
+    const custom = await fontSizing(page);
+    await message(page, { type: 'GPTSKINS_APPLY_FONT', fontId: 'default' });
+    expectNativeSizing(custom, await fontSizing(page));
+  });
+}

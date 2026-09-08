@@ -10,6 +10,7 @@
 - `icons/logo.svg` is the logo source; keep the 16/32/48/128px toolbar PNGs aligned with it.
 - Coding fonts are bundled in `fonts/` with unchanged OFL notices; use catalog `faces` and `getFontFaceCSS()` for both popup and content styles.
 - Include `fonts/` in release ZIPs; font resources must remain scoped to the two ChatGPT hosts.
+- Custom fonts normalize cap height against the native body family using `font-size-adjust`; preserve CSS font sizes and line heights, and never calibrate against a previously applied custom font.
 - No build step. Validate content script syntax with `node --check content/content.js`.
 
 ## ChatGPT Theming Gotchas

@@ -1621,7 +1621,28 @@ html.dark[data-gptskins-theme] main button.btn-primary :is(div, span, svg) {
 `;
   }
 
+  function nativeCapHeight() {
+    if (!document.body || !CSS.supports("font-size-adjust", "cap-height 0.7")) return null;
+
+    // Read the site's own family, including after switching between custom fonts.
+    // Cap height stays stable when native fonts use optical sizing for headings.
+    const currentStyle = document.getElementById(fontStyleId);
+    const wasDisabled = currentStyle?.disabled;
+    if (currentStyle) currentStyle.disabled = true;
+    const family = getComputedStyle(document.body).fontFamily;
+    if (currentStyle) currentStyle.disabled = wasDisabled;
+
+    const probe = document.createElement("span");
+    probe.style.cssText = "all: initial !important; position: fixed !important; visibility: hidden !important; pointer-events: none !important; width: 100cap !important; font-size: 100px !important; font-size-adjust: none !important;";
+    probe.style.setProperty("font-family", family, "important");
+    root.appendChild(probe);
+    const ratio = probe.getBoundingClientRect().width / 10000;
+    probe.remove();
+    return Number.isFinite(ratio) && ratio > 0 ? ratio : null;
+  }
+
   function ensureFontStyle(font) {
+    const capHeight = nativeCapHeight();
     let style = document.getElementById(fontStyleId);
     if (!style) {
       style = document.createElement("style");
@@ -1637,6 +1658,7 @@ html[data-gptskins-font] {
 html[data-gptskins-font] body,
 html[data-gptskins-font] body * {
   font-family: var(--gptskins-font-family) !important;
+  ${capHeight ? `font-size-adjust: cap-height ${capHeight} !important;` : ""}
 }
 `;
   }
@@ -2219,6 +2241,11 @@ html[data-gptskins-font] body * {
   });
 
   startRouteThemeObserver();
+
+  // Stored preferences can arrive at document_start, before native body styles exist.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => applyFont(selectedFontId), { once: true });
+  }
 
   loadStoredSettings();
 })();
