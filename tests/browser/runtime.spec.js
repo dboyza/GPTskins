@@ -179,9 +179,12 @@ async function fontSizing(page) {
     return Array.from(document.querySelectorAll('[data-font-sample], [data-font-sample] *')).map((element) => {
       const style = getComputedStyle(element);
       const probe = document.createElement('span');
-      probe.style.cssText = 'position:fixed;visibility:hidden;display:inline-block;height:100cap;width:0;padding:0;border:0;margin:0';
+      // Fonts without an explicit cap-height metric (including Linux UI fallbacks)
+      // derive it from a hinted glyph, rounded to whole pixels at small sizes.
+      // Measure proportions at high resolution, then scale to the element's size.
+      probe.style.cssText = 'position:fixed;visibility:hidden;display:inline-block;height:100cap;width:0;padding:0;border:0;margin:0;font-size:1000px';
       element.append(probe);
-      const capHeight = probe.getBoundingClientRect().height / 100;
+      const capHeight = probe.getBoundingClientRect().height / 100 * parseFloat(style.fontSize) / 1000;
       probe.remove();
       return { size: style.fontSize, lineHeight: style.lineHeight, capHeight, adjustment: style.fontSizeAdjust };
     });
@@ -193,7 +196,7 @@ function expectNativeSizing(actual, native) {
   actual.forEach((sample, index) => {
     expect(sample.size).toBe(native[index].size);
     expect(sample.lineHeight).toBe(native[index].lineHeight);
-    // Compare visible cap metrics, not CSS font-size alone, which already matched before the fix.
+    // Compare cap proportions, not CSS font-size alone, which matched before the fix.
     expect(Math.abs(sample.capHeight - native[index].capHeight)).toBeLessThan(0.1);
     expect(sample.adjustment).toMatch(/^cap-height /);
   });
