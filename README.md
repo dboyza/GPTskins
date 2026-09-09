@@ -61,6 +61,28 @@ Bundled fonts are distributed under the SIL Open Font License; see [font sources
 
 ## Development
 
+### Repository layout
+
+```text
+GPTskins/
+├── manifest.json       Extension metadata, permissions, and entry points
+├── content/            ChatGPT styling and page-surface detection
+├── shared/             Theme palettes, font catalog, and shared helpers
+├── popup/              Theme and font picker UI
+├── fonts/              Bundled coding fonts and their licenses
+├── icons/              SVG logo and toolbar icons
+├── scripts/            Release packaging, verification, and store artwork
+├── tests/              Unit, browser, extension, visual, and live-audit tests
+├── docs/               Testing, release, and store-listing guides
+│   ├── screenshots/    README screenshots
+│   └── store/          Store graphics and editable artwork source
+├── .github/workflows/  CI configuration
+├── PRIVACY.md          Extension privacy policy
+└── artifacts/          Generated packages and test reports (gitignored)
+```
+
+### Run the tests
+
 With Node.js 22 or newer, run from the repository root:
 
 ```sh
