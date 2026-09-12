@@ -923,8 +923,8 @@ html[data-gptskins-theme] :is([role="tooltip"] [class*="bg-token-bg-tooltip"], [
 
 html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"]):hover,
 html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"]):hover,
-html[data-gptskins-theme] [role="dialog"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
-html[data-gptskins-theme] [aria-modal="true"] :is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
+html[data-gptskins-theme] [role="dialog"] :is(button, [role="button"], [role="tab"], [role="radio"]):is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
+html[data-gptskins-theme] [aria-modal="true"] :is(button, [role="button"], [role="tab"], [role="radio"]):is([aria-selected="true"], [data-state="active"], [data-state="checked"]),
 html[data-gptskins-theme] [role="menu"] [role="menuitem"]:hover,
 html[data-gptskins-theme] [role="listbox"] [role="option"]:hover,
 html[data-gptskins-theme] [role="menu"] :is(button, a, [role="button"]):hover,
@@ -936,6 +936,29 @@ html[data-gptskins-theme] :is([role="menuitem"].__menu-item, [role="menuitem"][d
 html[data-gptskins-theme] :is([class*="suggest" i], [data-testid*="suggest" i], [class*="autocomplete" i], [data-testid*="autocomplete" i]) :is(div, button, [role="option"]):hover {
   background-color: var(--gptskins-surfaceStrong) !important;
   color: var(--gptskins-text) !important;
+}
+
+/* Usage meters and actions have semantic paint of their own inside settings. */
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) [role="tabpanel"][id$="-Usage"] .bg-token-bg-tertiary {
+  background-color: var(--gptskins-surfaceStrong) !important;
+}
+
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) [role="tabpanel"][id$="-Usage"] .bg-token-text-primary {
+  background-color: var(--gptskins-text) !important;
+}
+
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) [role="tabpanel"][id$="-Usage"] button.btn-secondary {
+  background-color: var(--gptskins-surfaceStrong) !important;
+  border-color: var(--gptskins-border) !important;
+}
+
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) [role="tabpanel"][id$="-Usage"] button.btn-secondary:is(:hover, :focus-visible) {
+  background-color: var(--gptskins-menuHover) !important;
+}
+
+html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) .bg-token-interactive-bg-discovery-soft-default.text-token-interactive-label-discovery-soft-default {
+  background-color: var(--interactive-bg-discovery-soft-default) !important;
+  color: var(--interactive-label-discovery-soft-default) !important;
 }
 
 html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) :is(button, [role="button"]):is(.btn-danger, [data-testid*="delete" i], [aria-label*="delete" i]) {
@@ -1084,28 +1107,6 @@ html[data-gptskins-theme] [role="dialog"] [role="switch"] > :is(span, div)[data-
 html[data-gptskins-theme] [aria-modal="true"] [role="switch"] > :is(span, div)[data-state] {
   background-color: var(--gptskins-surface) !important;
   border-color: var(--gptskins-surface) !important;
-}
-
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[class*="dot"],
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[aria-label*="slide" i],
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[aria-label*="page" i],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[class*="dot"],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[aria-label*="slide" i],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[aria-label*="page" i] {
-  background-color: var(--gptskins-mutedText) !important;
-  border-color: transparent !important;
-  color: transparent !important;
-  opacity: 0.45 !important;
-}
-
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[class*="dot"][aria-current="true"],
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[aria-label*="slide" i][aria-current="true"],
-html[data-gptskins-theme] [role="dialog"] :is(button, span)[aria-label*="page" i][aria-current="true"],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[class*="dot"][aria-current="true"],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[aria-label*="slide" i][aria-current="true"],
-html[data-gptskins-theme] [aria-modal="true"] :is(button, span)[aria-label*="page" i][aria-current="true"] {
-  background-color: var(--gptskins-accent) !important;
-  opacity: 1 !important;
 }
 
 html[data-gptskins-theme] :is([role="dialog"], [aria-modal="true"]) button[role="radio"][class~="rounded-full"]:is([class~="h-1"][class~="w-1"], [class~="h-1.5"][class~="w-1.5"], [class~="h-2"][class~="w-2"], [class~="size-1"], [class~="size-1.5"], [class~="size-2"]) {

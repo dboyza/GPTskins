@@ -61,6 +61,9 @@
 - Explicit inactive ARIA states must override stale plan-active fallback tags; test radio changes without unrelated child-list mutations.
 - Native enabled state and explicit `aria-disabled="false"` must also override stale disabled fallback tags.
 - Disabled pricing actions use primary text over a 20% muted-text/surface mix so their labels remain legible.
+- Settings tab panels also carry `data-state="active"`; restrict active paint to controls so panels and sticky headers retain matching backgrounds.
+- Usage countdowns use `decoration-dotted`; never match carousel dots with `[class*="dot"]` or broad label substrings.
+- Usage meters use `.bg-token-bg-tertiary` tracks and `.bg-token-text-primary` fills; preserve distinct paint and native widths, plus `.btn-secondary` action borders inside the Usage panel.
 - Settings and voice UI live under `[role="dialog"]` or `[aria-modal="true"]`; switches and carousel dots need explicit contrast checks in light and dark themes.
 - Switch tracks use the derived `switchTrackChecked` palette color for 3:1 contrast; preserve native geometry and the direct Radix thumb.
 - Voice dots are small `button[role="radio"][aria-checked]` controls; never recolor arbitrary rounded spans/divs, which include chart legends.
