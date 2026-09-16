@@ -42,6 +42,7 @@
 - For normal code snippets, only the real `pre` should get `data-gptskins-code-body`. Parent wrappers should use `data-gptskins-code-body-shell` so they clip/clear backgrounds without drawing a second rectangular border around the rounded snippet.
 - Exclude tagged code-body shells from broad `.markdown :has(> pre)` frame paint selectors; their higher specificity otherwise restores an inner border.
 - Some draft/code examples are CodeMirror, not plain `pre`. The scroll owner is `.cm-scroller`; use forced horizontal `scroll`, not `auto`, when the visible scrollbar affordance matters. Never tag `.cm-editor` internals as GPTskins code blocks. The shell can be `.pe-11.pt-3` inside an `overflow-clip` elevated surface.
+- Read-only CodeMirror viewers use `.cm-editor > .cm-scroller > pre.cm-content`; wrapper selectors using `:has(> div > pre)` must exclude `.cm-editor` itself as well as containers with editor descendants.
 - CodeMirror email/message snippets should not draw their own inner rounded border. Keep `.cm-editor`, `.cm-scroller`, and `.cm-content` transparent, borderless, radiusless, and outline-free; the outer shell owns the shape.
 - If CodeMirror still shows an inner line, hide the `.pe-11.pt-3 .cm-editor[class*="cm-"]` `border-color` and `outline-color`; do not change snippet layout.
 - Markdown tables need explicit primary text, opaque header/cell descendants, and a stronger border mix. Light themes can leave table headers, copy icons, and row dividers on near-white ChatGPT token colors.

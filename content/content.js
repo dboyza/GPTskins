@@ -1153,7 +1153,7 @@ html[data-gptskins-theme] [data-message-author-role] .markdown pre:not(.cm-conte
 }
 
 html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)):not([data-gptskins-code-body-shell]),
-html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)):not([data-gptskins-code-body-shell]),
+html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(.cm-editor):not(:has(.cm-editor)):not(:has(> p)):not([data-gptskins-code-body-shell]),
 html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) {
   background-color: var(--code-block-bg) !important;
   border: 1px solid var(--code-block-border) !important;
@@ -1163,7 +1163,7 @@ html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidde
 }
 
 html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)) > :not(pre):first-child,
-html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)) > :not(:has(pre)):first-child,
+html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(.cm-editor):not(:has(.cm-editor)):not(:has(> p)) > :not(:has(pre)):first-child,
 html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) > :not(:is(pre, code)):first-child,
 html[data-gptskins-theme] [data-message-author-role] :is([class*="bg-black"], [class*="bg-gray-950"], [class*="bg-token-sidebar"], [class*="bg-token-main"]):has(+ :is(pre, code)) {
   background-color: var(--code-block-header) !important;
@@ -1183,7 +1183,7 @@ html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidde
 
 html[data-gptskins-theme] [data-message-author-role] :is([class*="overflow-hidden"], [class*="contain-inline-size"], [data-testid*="code"], [class*="code-block"]):has(:is(pre, code)):not(:has(.cm-editor)) pre,
 html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> pre):not(.cm-scroller):not(:has(.cm-editor)):not(:has(> p)) pre,
-html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(:has(.cm-editor)):not(:has(> p)) pre {
+html[data-gptskins-theme] [data-message-author-role] .markdown :is(div, section):has(> div > pre):not(.cm-editor):not(:has(.cm-editor)):not(:has(> p)) pre {
   background-color: var(--code-block-bg) !important;
   border: 0 !important;
   border-radius: 0 !important;

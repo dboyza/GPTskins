@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sanitized read-only CodeMirror card</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; --bg-elevated-secondary: #212121; }
+    * { box-sizing: border-box; }
+    body { margin: 20px; background: black; color: white; }
+    .markdown { max-width: 760px; }
+    pre { margin: 0; font: 14px/20px monospace; }
+    .relative { position: relative; }
+    .border { border: 1px solid #333; }
+    .rounded-3xl { border-radius: 24px; }
+    .overflow-clip { overflow: clip; }
+    .code-surface { background: var(--bg-elevated-secondary); }
+    .sticky { position: sticky; top: 0; }
+    .header-row { height: 48px; padding: 6px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .cm-editor { display: flex; flex-direction: column; min-width: 0; }
+    .cm-scroller { overflow: auto; }
+    .cm-content { padding: 0 20px 12px; margin: 0; }
+    button { color: inherit; background: transparent; border: 0; }
+  </style>
+  <script src="../../shared/themes.js"></script>
+</head>
+<body>
+  <main><article data-message-author-role="assistant"><div class="markdown">
+    <!-- Native nested pre and read-only CodeMirror structure, with synthetic content. -->
+    <pre class="overflow-visible! px-0!"><div class="relative"><div><div class="contents"><div id="card" class="border border-token-border-light rounded-3xl"><div class="relative overflow-clip rounded-3xl code-surface bg-(--code-block-surface)"><div class="select-none sticky"><div class="header-row bg-(--code-block-surface)">Bash<button aria-label="Copy">Copy</button></div></div><div class="relative"><div><div class="relative"><div id="viewer" class="cm-editor"><div class="cm-scroller"><pre class="cm-content"><code>python sample_program.py</code></pre></div></div></div></div></div></div></div></div></div></div></pre>
+  </div></article></main>
+  <script src="../../content/content.js"></script>
+</body>
+</html>
