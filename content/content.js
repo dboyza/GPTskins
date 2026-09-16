@@ -248,10 +248,10 @@ html[data-gptskins-theme] [data-testid="stage-thread-flyout"] :is([class*="bg-su
   color: var(--gptskins-text) !important;
 }
 
-html[data-gptskins-theme] header[class*="bg-token-main-surface-primary"],
-html[data-gptskins-theme] header[class*="dark:bg-token-bg-secondary-surface"] {
-  background: transparent !important;
-  background-color: transparent !important;
+/* Keep scrolled messages behind the native sticky chat header. */
+html[data-gptskins-theme] #page-header {
+  background: var(--gptskins-background) !important;
+  background-color: var(--gptskins-background) !important;
   background-image: none !important;
 }
 
@@ -336,7 +336,7 @@ html[data-gptskins-theme] [data-testid="left-sidebar"] {
 }
 
 html[data-gptskins-theme] nav :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
-html[data-gptskins-theme] aside :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
+html[data-gptskins-theme] aside :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6):not([data-testid="sources-scroll-fade-top"], [data-testid="sources-scroll-fade-bottom"]),
 html[data-gptskins-theme] [data-testid="history-panel"] :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6),
 html[data-gptskins-theme] [data-testid="left-sidebar"] :is(a, button, [role="button"], span, p, div, h1, h2, h3, h4, h5, h6) {
   color: inherit !important;

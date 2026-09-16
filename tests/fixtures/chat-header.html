@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat header scroll regression</title>
+  <style>
+    :root { --main-surface-primary: #212121; font-family: system-ui, sans-serif; }
+    body { margin: 0; background: var(--main-surface-primary); color: white; }
+    main { height: 300px; overflow: auto; }
+    header { position: sticky; top: 0; height: 56px; z-index: 10; }
+    .bg-token-main-surface-primary { background: var(--main-surface-primary); }
+    [data-testid^="sources-scroll-fade-"] { position: absolute; inset: 0; background: linear-gradient(#212121, transparent); pointer-events: none; }
+    article { height: 1000px; }
+  </style>
+  <script src="../../shared/themes.js"></script>
+</head>
+<body>
+  <!-- Synthetic reproduction of the native token-painted sticky header contract. -->
+  <main>
+    <header id="page-header" class="bg-token-main-surface-primary">Example conversation</header>
+    <article><p>Message content scrolling underneath the header</p></article>
+  </main>
+  <aside aria-label="Task progress">
+    <section>
+      <h2>Sources</h2>
+      <div style="position: relative">
+        <div aria-label="Sources list"><ul><li><button data-tpp-source-group-toggle="memory">Memory</button></li></ul></div>
+        <div aria-hidden="true" data-testid="sources-scroll-fade-top" class="from-token-bg-primary pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b to-transparent" style="opacity: 0"></div>
+        <div aria-hidden="true" data-testid="sources-scroll-fade-bottom" class="from-token-bg-primary pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-t to-transparent" style="opacity: 0"></div>
+      </div>
+    </section>
+  </aside>
+  <script src="../../content/content.js"></script>
+</body>
+</html>

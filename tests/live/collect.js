@@ -5,6 +5,9 @@
 function collectGPTskinsAudit(options = {}) {
   const definitions = [
     ['page', 'body'],
+    ['chat-header', '#page-header'],
+    ['source-toggle', '[data-tpp-source-group-toggle]'],
+    ['source-fade', '[data-testid="sources-scroll-fade-top"], [data-testid="sources-scroll-fade-bottom"]'],
     ['sidebar', '#stage-slideover-sidebar, aside, nav[aria-label], [data-testid="sidebar"]'],
     ['sidebar-section', '.sidebar-expando-section-header'],
     ['sidebar-action', '[data-trailing-button], [data-gptskins-sidebar-action]'],

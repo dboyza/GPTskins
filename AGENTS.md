@@ -28,6 +28,8 @@
 - CodeMirror syntax classes are generated; scope overrides of its stable color tokens to message `.cm-editor` elements and use `getCodeColors()` to preserve readable syntax hues.
 
 ## Known Surfaces
+- Keep `#page-header` opaque so scrolled messages stay hidden behind the chat toolbar.
+- Sources scroll fades use `data-testid="sources-scroll-fade-top"` and `sources-scroll-fade-bottom`; preserve their native inline opacity instead of forcing them visible through the broad aside text rule.
 - Default is a pass-through theme. Its popup swatches should stay simple black/white, but do not make Default inject CSS unless Dylan explicitly asks.
 - Code blocks are nested inside `pre`; the visible frame may be a parent wrapper. Use `syncSurfaceTags()` and the `data-gptskins-code-frame`, `data-gptskins-code-block`, `data-gptskins-code-header`, and `data-gptskins-code-body` attributes instead of piling on more generic code selectors.
 - Never let headings/paragraphs/hr become `data-gptskins-code-header`. Theme switches can leave stale tags, so `syncSurfaceTags()` must strip that attribute from `h1`-`h6`, `p`, and `hr`.
